@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
-import { Flame, ListPlus, Dumbbell, TrendingUp, Scale, Cake, Activity } from 'lucide-react'
+import { Flame, ListPlus, Dumbbell, TrendingUp, Scale, Cake, Activity, Calendar, BarChart3 } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Card, Button, EmptyState } from '../components/ui'
-import { calculateAge, calculateBMI, currentStreak, sessionsThisWeek, totalVolume } from '../lib/stats'
+import {
+  calculateAge,
+  calculateBMI,
+  currentStreak,
+  sessionsThisWeek,
+  sessionsToday,
+  totalVolume,
+  totalVolumeAllTime,
+} from '../lib/stats'
 import { toCm, toKg } from '../lib/units'
 
 export function Dashboard() {
@@ -12,6 +20,9 @@ export function Dashboard() {
   const streak = currentStreak(sessions)
   const thisWeek = sessionsThisWeek(sessions)
   const weeklyVolume = thisWeek.reduce((sum, s) => sum + totalVolume(s), 0)
+  const todaysSessions = sessionsToday(sessions)
+  const dailyVolume = todaysSessions.reduce((sum, s) => sum + totalVolume(s), 0)
+  const allTimeVolume = totalVolumeAllTime(sessions)
   const recentSessions = sessions.slice(0, 5)
   const exerciseById = Object.fromEntries(exercises.map((e) => [e.id, e]))
 
@@ -61,10 +72,24 @@ export function Dashboard() {
         </Card>
         <Card className="flex flex-col gap-1">
           <div className="flex items-center gap-2 text-slate-400">
+            <Calendar size={16} />
+            <span className="text-xs font-medium">Today's Volume</span>
+          </div>
+          <p className="text-2xl font-semibold text-slate-100">{dailyVolume.toLocaleString()}</p>
+        </Card>
+        <Card className="flex flex-col gap-1">
+          <div className="flex items-center gap-2 text-slate-400">
             <TrendingUp size={16} />
             <span className="text-xs font-medium">Weekly Volume</span>
           </div>
           <p className="text-2xl font-semibold text-slate-100">{weeklyVolume.toLocaleString()}</p>
+        </Card>
+        <Card className="flex flex-col gap-1">
+          <div className="flex items-center gap-2 text-slate-400">
+            <BarChart3 size={16} />
+            <span className="text-xs font-medium">Total Weight Lifted</span>
+          </div>
+          <p className="text-2xl font-semibold text-slate-100">{allTimeVolume.toLocaleString()}</p>
         </Card>
         {latestWeightEntry && (
           <Card className="flex flex-col gap-1">

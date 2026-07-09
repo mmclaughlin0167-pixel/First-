@@ -1,4 +1,4 @@
-import { differenceInCalendarDays, differenceInYears, isSameWeek, parseISO } from 'date-fns'
+import { differenceInCalendarDays, differenceInYears, isSameDay, isSameWeek, parseISO } from 'date-fns'
 import type { WorkoutSession } from '../types'
 
 export function calculateAge(birthDate: string, reference = new Date()): number {
@@ -30,6 +30,14 @@ export function totalSets(session: WorkoutSession): number {
 
 export function sessionsThisWeek(sessions: WorkoutSession[], reference = new Date()): WorkoutSession[] {
   return sessions.filter((s) => isSameWeek(parseISO(s.date), reference, { weekStartsOn: 1 }))
+}
+
+export function sessionsToday(sessions: WorkoutSession[], reference = new Date()): WorkoutSession[] {
+  return sessions.filter((s) => isSameDay(parseISO(s.date), reference))
+}
+
+export function totalVolumeAllTime(sessions: WorkoutSession[]): number {
+  return sessions.reduce((sum, s) => sum + totalVolume(s), 0)
 }
 
 export function currentStreak(sessions: WorkoutSession[], reference = new Date()): number {
