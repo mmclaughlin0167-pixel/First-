@@ -13,7 +13,7 @@ import { Plus, Trash2 } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card, EmptyState } from '../components/ui'
 import { bmiCategory, calculateAge, calculateBMI } from '../lib/stats'
-import { toCm, toKg } from '../lib/units'
+import { toCm, toIn, toKg } from '../lib/units'
 import type { BodyMeasurements } from '../types'
 
 const BMI_CATEGORY_COLOR: Record<ReturnType<typeof bmiCategory>, string> = {
@@ -61,6 +61,37 @@ export function BodyStatsPage() {
   )
 
   const age = profile.birthDate ? calculateAge(profile.birthDate) : null
+
+  const heightFeet = profile.height !== undefined ? Math.floor(profile.height / 12) : undefined
+  const heightInches =
+    profile.height !== undefined
+      ? Math.round((profile.height - Math.floor(profile.height / 12) * 12) * 10) / 10
+      : undefined
+
+  function updateHeightFeetInches(feetStr: string, inchesStr: string) {
+    if (feetStr.trim() === '' && inchesStr.trim() === '') {
+      updateProfile({ ...profile, height: undefined })
+      return
+    }
+    const feet = feetStr.trim() === '' ? 0 : Number(feetStr)
+    const inches = inchesStr.trim() === '' ? 0 : Number(inchesStr)
+    updateProfile({ ...profile, height: feet * 12 + inches })
+  }
+
+  function updateHeightUnit(newUnit: 'cm' | 'in') {
+    updateProfile({
+      ...profile,
+      heightUnit: newUnit,
+      height:
+        profile.height === undefined
+          ? undefined
+          : Math.round(
+              (newUnit === 'in'
+                ? toIn(profile.height, profile.heightUnit)
+                : toCm(profile.height, profile.heightUnit)) * 10,
+            ) / 10,
+    })
+  }
 
   const latestWeightEntry = bodyLogs.find((e) => e.weight !== undefined)
   const currentBMI =
@@ -137,28 +168,54 @@ export function BodyStatsPage() {
           <div>
             <label className="mb-1 block text-xs font-medium text-slate-400">Height</label>
             <div className="flex gap-2">
-              <input
-                type="number"
-                min={0}
-                step={0.1}
-                value={profile.height ?? ''}
-                onChange={(e) =>
-                  updateProfile({
-                    ...profile,
-                    height: e.target.value.trim() === '' ? undefined : Number(e.target.value),
-                  })
-                }
-                placeholder="Height"
-                className="w-28 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
-              />
+              {profile.heightUnit === 'in' ? (
+                <>
+                  <input
+                    type="number"
+                    min={0}
+                    step={1}
+                    value={heightFeet ?? ''}
+                    onChange={(e) =>
+                      updateHeightFeetInches(e.target.value, String(heightInches ?? ''))
+                    }
+                    placeholder="ft"
+                    className="w-16 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                  />
+                  <input
+                    type="number"
+                    min={0}
+                    max={11.9}
+                    step={0.1}
+                    value={heightInches ?? ''}
+                    onChange={(e) =>
+                      updateHeightFeetInches(String(heightFeet ?? ''), e.target.value)
+                    }
+                    placeholder="in"
+                    className="w-20 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                  />
+                </>
+              ) : (
+                <input
+                  type="number"
+                  min={0}
+                  step={0.1}
+                  value={profile.height ?? ''}
+                  onChange={(e) =>
+                    updateProfile({
+                      ...profile,
+                      height: e.target.value.trim() === '' ? undefined : Number(e.target.value),
+                    })
+                  }
+                  placeholder="Height"
+                  className="w-28 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                />
+              )}
               <select
                 value={profile.heightUnit}
-                onChange={(e) =>
-                  updateProfile({ ...profile, heightUnit: e.target.value as 'cm' | 'in' })
-                }
+                onChange={(e) => updateHeightUnit(e.target.value as 'cm' | 'in')}
                 className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
               >
-                <option value="in">in</option>
+                <option value="in">ft/in</option>
                 <option value="cm">cm</option>
               </select>
             </div>

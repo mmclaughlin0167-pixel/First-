@@ -8,3 +8,7 @@ export function toKg(value: number, unit: 'lb' | 'kg'): number {
 export function toCm(value: number, unit: 'in' | 'cm'): number {
   return unit === 'cm' ? value : value / IN_PER_CM
 }
+
+export function toIn(value: number, unit: 'in' | 'cm'): number {
+  return unit === 'in' ? value : value * IN_PER_CM
+}
