@@ -20,7 +20,7 @@ const NAV_ITEMS = [
 
 export function Layout() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col md:flex-row pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
       <aside className="md:w-60 md:min-h-screen border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/60 backdrop-blur">
         <div className="flex items-center gap-2 px-5 py-5">
           <div className="rounded-lg bg-emerald-500/20 p-2 text-emerald-400">
