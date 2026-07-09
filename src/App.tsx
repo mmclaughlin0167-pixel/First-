@@ -8,10 +8,13 @@ import { ExercisesPage } from './pages/ExercisesPage'
 import { BodyStatsPage } from './pages/BodyStatsPage'
 import { WorkoutDataProvider } from './store/WorkoutDataContext'
 
+const base = import.meta.env.BASE_URL
+const basename = base === '/' ? undefined : base.replace(/\/$/, '')
+
 function App() {
   return (
     <WorkoutDataProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Dashboard />} />

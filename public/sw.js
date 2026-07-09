@@ -1,7 +1,8 @@
 const CACHE_NAME = 'ironlog-v1'
+const BASE = new URL('.', self.location).pathname
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(['/', '/index.html'])))
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll([BASE, `${BASE}index.html`])))
   self.skipWaiting()
 })
 
@@ -20,7 +21,7 @@ self.addEventListener('fetch', (event) => {
 
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request).catch(() => caches.match('/index.html')),
+      fetch(request).catch(() => caches.match(`${BASE}index.html`)),
     )
     return
   }
