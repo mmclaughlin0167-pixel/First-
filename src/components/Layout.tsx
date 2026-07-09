@@ -1,11 +1,20 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import { Dumbbell, LayoutDashboard, ListPlus, History, TrendingUp, ListChecks } from 'lucide-react'
+import {
+  Dumbbell,
+  LayoutDashboard,
+  ListPlus,
+  History,
+  TrendingUp,
+  ListChecks,
+  Ruler,
+} from 'lucide-react'
 
 const NAV_ITEMS = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/log', label: 'Log Workout', icon: ListPlus, end: false },
   { to: '/history', label: 'History', icon: History, end: false },
   { to: '/progress', label: 'Progress', icon: TrendingUp, end: false },
+  { to: '/body-stats', label: 'Body Stats', icon: Ruler, end: false },
   { to: '/exercises', label: 'Exercises', icon: ListChecks, end: false },
 ]
 

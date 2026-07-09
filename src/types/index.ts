@@ -37,3 +37,29 @@ export interface WorkoutSession {
   durationMinutes?: number
   notes?: string
 }
+
+export interface BodyProfile {
+  birthDate?: string // ISO date string
+  height?: number
+  heightUnit: 'cm' | 'in'
+}
+
+export interface BodyMeasurements {
+  chest?: number
+  waist?: number
+  hips?: number
+  biceps?: number
+  thighs?: number
+  calves?: number
+  neck?: number
+  shoulders?: number
+}
+
+export interface BodyLogEntry {
+  id: string
+  date: string // ISO date string
+  weight?: number
+  weightUnit: 'lb' | 'kg'
+  measurementUnit: 'in' | 'cm'
+  measurements: BodyMeasurements
+}

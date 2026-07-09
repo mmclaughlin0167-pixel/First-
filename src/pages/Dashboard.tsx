@@ -1,18 +1,21 @@
 import { Link } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
-import { Flame, ListPlus, Dumbbell, TrendingUp } from 'lucide-react'
+import { Flame, ListPlus, Dumbbell, TrendingUp, Scale, Cake } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Card, Button, EmptyState } from '../components/ui'
-import { currentStreak, sessionsThisWeek, totalVolume } from '../lib/stats'
+import { calculateAge, currentStreak, sessionsThisWeek, totalVolume } from '../lib/stats'
 
 export function Dashboard() {
-  const { sessions, exercises } = useWorkoutData()
+  const { sessions, exercises, profile, bodyLogs } = useWorkoutData()
 
   const streak = currentStreak(sessions)
   const thisWeek = sessionsThisWeek(sessions)
   const weeklyVolume = thisWeek.reduce((sum, s) => sum + totalVolume(s), 0)
   const recentSessions = sessions.slice(0, 5)
   const exerciseById = Object.fromEntries(exercises.map((e) => [e.id, e]))
+
+  const latestWeightEntry = bodyLogs.find((e) => e.weight !== undefined)
+  const age = profile.birthDate ? calculateAge(profile.birthDate) : null
 
   return (
     <div className="flex flex-col gap-6">
@@ -55,6 +58,27 @@ export function Dashboard() {
           </div>
           <p className="text-2xl font-semibold text-slate-100">{weeklyVolume.toLocaleString()}</p>
         </Card>
+        {latestWeightEntry && (
+          <Card className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 text-slate-400">
+              <Scale size={16} />
+              <span className="text-xs font-medium">Latest Weight</span>
+            </div>
+            <p className="text-2xl font-semibold text-slate-100">
+              {latestWeightEntry.weight}
+              {latestWeightEntry.weightUnit}
+            </p>
+          </Card>
+        )}
+        {age !== null && (
+          <Card className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 text-slate-400">
+              <Cake size={16} />
+              <span className="text-xs font-medium">Age</span>
+            </div>
+            <p className="text-2xl font-semibold text-slate-100">{age}</p>
+          </Card>
+        )}
       </div>
 
       <div>

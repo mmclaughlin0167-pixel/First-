@@ -1,5 +1,9 @@
-import { differenceInCalendarDays, isSameWeek, parseISO } from 'date-fns'
+import { differenceInCalendarDays, differenceInYears, isSameWeek, parseISO } from 'date-fns'
 import type { WorkoutSession } from '../types'
+
+export function calculateAge(birthDate: string, reference = new Date()): number {
+  return differenceInYears(reference, parseISO(birthDate))
+}
 
 export function totalVolume(session: WorkoutSession): number {
   return session.exercises.reduce(

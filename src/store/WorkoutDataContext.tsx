@@ -1,8 +1,10 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react'
 import { v4 as uuid } from 'uuid'
-import type { Exercise, WorkoutSession } from '../types'
+import type { BodyLogEntry, BodyProfile, Exercise, WorkoutSession } from '../types'
 import { DEFAULT_EXERCISES } from '../lib/defaultExercises'
 import { useLocalStorageState } from './useLocalStorageState'
+
+const DEFAULT_PROFILE: BodyProfile = { heightUnit: 'in' }
 
 interface WorkoutDataContextValue {
   exercises: Exercise[]
@@ -12,6 +14,11 @@ interface WorkoutDataContextValue {
   addSession: (session: Omit<WorkoutSession, 'id'>) => WorkoutSession
   updateSession: (session: WorkoutSession) => void
   deleteSession: (id: string) => void
+  profile: BodyProfile
+  updateProfile: (profile: BodyProfile) => void
+  bodyLogs: BodyLogEntry[]
+  addBodyLog: (entry: Omit<BodyLogEntry, 'id'>) => BodyLogEntry
+  deleteBodyLog: (id: string) => void
 }
 
 const WorkoutDataContext = createContext<WorkoutDataContextValue | null>(null)
@@ -23,6 +30,14 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
   )
   const [sessions, setSessions] = useLocalStorageState<WorkoutSession[]>(
     'workout-tracker:sessions',
+    [],
+  )
+  const [profile, setProfile] = useLocalStorageState<BodyProfile>(
+    'workout-tracker:profile',
+    DEFAULT_PROFILE,
+  )
+  const [bodyLogs, setBodyLogs] = useLocalStorageState<BodyLogEntry[]>(
+    'workout-tracker:body-logs',
     [],
   )
 
@@ -51,8 +66,21 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
       deleteSession: (id) => {
         setSessions((prev) => prev.filter((s) => s.id !== id))
       },
+      profile,
+      updateProfile: (next) => setProfile(next),
+      bodyLogs,
+      addBodyLog: (entry) => {
+        const newEntry: BodyLogEntry = { ...entry, id: uuid() }
+        setBodyLogs((prev) =>
+          [...prev, newEntry].sort((a, b) => b.date.localeCompare(a.date)),
+        )
+        return newEntry
+      },
+      deleteBodyLog: (id) => {
+        setBodyLogs((prev) => prev.filter((e) => e.id !== id))
+      },
     }),
-    [exercises, sessions, setExercises, setSessions],
+    [exercises, sessions, setExercises, setSessions, profile, setProfile, bodyLogs, setBodyLogs],
   )
 
   return <WorkoutDataContext.Provider value={value}>{children}</WorkoutDataContext.Provider>
