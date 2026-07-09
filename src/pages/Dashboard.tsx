@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
-import { Flame, ListPlus, Dumbbell, TrendingUp, Scale, Cake } from 'lucide-react'
+import { Flame, ListPlus, Dumbbell, TrendingUp, Scale, Cake, Activity } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Card, Button, EmptyState } from '../components/ui'
-import { calculateAge, currentStreak, sessionsThisWeek, totalVolume } from '../lib/stats'
+import { calculateAge, calculateBMI, currentStreak, sessionsThisWeek, totalVolume } from '../lib/stats'
+import { toCm, toKg } from '../lib/units'
 
 export function Dashboard() {
   const { sessions, exercises, profile, bodyLogs } = useWorkoutData()
@@ -16,6 +17,13 @@ export function Dashboard() {
 
   const latestWeightEntry = bodyLogs.find((e) => e.weight !== undefined)
   const age = profile.birthDate ? calculateAge(profile.birthDate) : null
+  const bmi =
+    latestWeightEntry?.weight !== undefined && profile.height !== undefined
+      ? calculateBMI(
+          toKg(latestWeightEntry.weight, latestWeightEntry.weightUnit),
+          toCm(profile.height, profile.heightUnit),
+        )
+      : null
 
   return (
     <div className="flex flex-col gap-6">
@@ -77,6 +85,15 @@ export function Dashboard() {
               <span className="text-xs font-medium">Age</span>
             </div>
             <p className="text-2xl font-semibold text-slate-100">{age}</p>
+          </Card>
+        )}
+        {bmi !== null && (
+          <Card className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 text-slate-400">
+              <Activity size={16} />
+              <span className="text-xs font-medium">BMI</span>
+            </div>
+            <p className="text-2xl font-semibold text-slate-100">{bmi.toFixed(1)}</p>
           </Card>
         )}
       </div>

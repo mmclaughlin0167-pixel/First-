@@ -12,11 +12,29 @@ import {
 import { Plus, Trash2 } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card, EmptyState } from '../components/ui'
-import { calculateAge } from '../lib/stats'
+import { bmiCategory, calculateAge, calculateBMI } from '../lib/stats'
+import { toCm, toKg } from '../lib/units'
 import type { BodyMeasurements } from '../types'
+
+const BMI_CATEGORY_COLOR: Record<ReturnType<typeof bmiCategory>, string> = {
+  Underweight: 'text-sky-400',
+  Normal: 'text-emerald-400',
+  Overweight: 'text-amber-400',
+  Obese: 'text-red-400',
+}
 
 function todayISO() {
   return new Date().toISOString().slice(0, 10)
+}
+
+function computeBMI(
+  weight: number,
+  weightUnit: 'lb' | 'kg',
+  height: number | undefined,
+  heightUnit: 'in' | 'cm',
+): number | undefined {
+  if (height === undefined) return undefined
+  return calculateBMI(toKg(weight, weightUnit), toCm(height, heightUnit))
 }
 
 const MEASUREMENT_FIELDS: { key: keyof BodyMeasurements; label: string }[] = [
@@ -38,20 +56,40 @@ export function BodyStatsPage() {
   const [weightUnit, setWeightUnit] = useState<'lb' | 'kg'>('lb')
   const [measurementUnit, setMeasurementUnit] = useState<'in' | 'cm'>(profile.heightUnit)
   const [measurements, setMeasurements] = useState<BodyMeasurements>({})
-  const [chartMetric, setChartMetric] = useState<keyof BodyMeasurements | 'weight'>('weight')
+  const [chartMetric, setChartMetric] = useState<keyof BodyMeasurements | 'weight' | 'bmi'>(
+    'weight',
+  )
 
   const age = profile.birthDate ? calculateAge(profile.birthDate) : null
+
+  const latestWeightEntry = bodyLogs.find((e) => e.weight !== undefined)
+  const currentBMI =
+    latestWeightEntry?.weight !== undefined
+      ? computeBMI(latestWeightEntry.weight, latestWeightEntry.weightUnit, profile.height, profile.heightUnit)
+      : undefined
 
   const chartData = useMemo(() => {
     return [...bodyLogs]
       .sort((a, b) => a.date.localeCompare(b.date))
-      .map((entry) => ({
-        date: entry.date,
-        label: format(parseISO(entry.date), 'MMM d'),
-        value: chartMetric === 'weight' ? entry.weight : entry.measurements[chartMetric],
-      }))
+      .map((entry) => {
+        let value: number | undefined
+        if (chartMetric === 'weight') value = entry.weight
+        else if (chartMetric === 'bmi') {
+          value =
+            entry.weight !== undefined
+              ? computeBMI(entry.weight, entry.weightUnit, profile.height, profile.heightUnit)
+              : undefined
+        } else {
+          value = entry.measurements[chartMetric]
+        }
+        return {
+          date: entry.date,
+          label: format(parseISO(entry.date), 'MMM d'),
+          value,
+        }
+      })
       .filter((point) => point.value !== undefined && point.value !== null)
-  }, [bodyLogs, chartMetric])
+  }, [bodyLogs, chartMetric, profile.height, profile.heightUnit])
 
   function handleAddEntry(e: React.FormEvent) {
     e.preventDefault()
@@ -130,7 +168,21 @@ export function BodyStatsPage() {
               Age: <span className="font-semibold text-emerald-400">{age}</span>
             </div>
           )}
+          {currentBMI !== undefined && (
+            <div className="rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-200">
+              BMI: <span className="font-semibold text-slate-100">{currentBMI.toFixed(1)}</span>{' '}
+              <span className={`font-semibold ${BMI_CATEGORY_COLOR[bmiCategory(currentBMI)]}`}>
+                {bmiCategory(currentBMI)}
+              </span>
+            </div>
+          )}
         </div>
+        {profile.height !== undefined && currentBMI === undefined && (
+          <p className="mt-2 text-xs text-slate-500">Log a weight entry below to see your BMI.</p>
+        )}
+        {profile.height === undefined && (
+          <p className="mt-2 text-xs text-slate-500">Add your height to see your BMI.</p>
+        )}
       </Card>
 
       <Card>
@@ -219,21 +271,25 @@ export function BodyStatsPage() {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
               <h3 className="text-sm font-semibold text-slate-300">Trend</h3>
               <div className="flex flex-wrap gap-2">
-                {(['weight', ...MEASUREMENT_FIELDS.map((f) => f.key)] as const).map((metric) => (
-                  <button
-                    key={metric}
-                    onClick={() => setChartMetric(metric)}
-                    className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                      chartMetric === metric
-                        ? 'bg-emerald-500 text-slate-950'
-                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                    }`}
-                  >
-                    {metric === 'weight'
-                      ? 'Weight'
-                      : MEASUREMENT_FIELDS.find((f) => f.key === metric)?.label}
-                  </button>
-                ))}
+                {(['weight', 'bmi', ...MEASUREMENT_FIELDS.map((f) => f.key)] as const).map(
+                  (metric) => (
+                    <button
+                      key={metric}
+                      onClick={() => setChartMetric(metric)}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                        chartMetric === metric
+                          ? 'bg-emerald-500 text-slate-950'
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      }`}
+                    >
+                      {metric === 'weight'
+                        ? 'Weight'
+                        : metric === 'bmi'
+                          ? 'BMI'
+                          : MEASUREMENT_FIELDS.find((f) => f.key === metric)?.label}
+                    </button>
+                  ),
+                )}
               </div>
             </div>
             <div className="h-64 w-full">
@@ -259,6 +315,10 @@ export function BodyStatsPage() {
               )
                 .map(({ key, label }) => `${label} ${entry.measurements[key]}${entry.measurementUnit}`)
                 .join(' · ')
+              const bmi =
+                entry.weight !== undefined
+                  ? computeBMI(entry.weight, entry.weightUnit, profile.height, profile.heightUnit)
+                  : undefined
               return (
                 <Card key={entry.id} className="flex items-center justify-between">
                   <div>
@@ -268,6 +328,11 @@ export function BodyStatsPage() {
                         <span className="ml-2 text-emerald-400">
                           {entry.weight}
                           {entry.weightUnit}
+                        </span>
+                      )}
+                      {bmi !== undefined && (
+                        <span className="ml-2 text-xs font-normal text-slate-400">
+                          BMI {bmi.toFixed(1)}
                         </span>
                       )}
                     </p>
