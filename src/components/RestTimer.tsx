@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Minus, Pause, Play, Plus, RotateCcw } from 'lucide-react'
 import { Card, Button } from './ui'
 import { formatDuration } from '../lib/time'
@@ -6,10 +6,6 @@ import { formatDuration } from '../lib/time'
 const PRESETS = [30, 60, 90, 120]
 const MIN_DURATION = 5
 const ADJUST_STEP = 15
-
-export interface RestTimerHandle {
-  start: () => void
-}
 
 function playBeep() {
   try {
@@ -31,10 +27,14 @@ function playBeep() {
   }
 }
 
-export const RestTimer = forwardRef<RestTimerHandle>(function RestTimer(_props, ref) {
+interface RestTimerProps {
+  autoStart?: boolean
+}
+
+export function RestTimer({ autoStart = false }: RestTimerProps) {
   const [duration, setDuration] = useState(60)
   const [remaining, setRemaining] = useState(60)
-  const [running, setRunning] = useState(false)
+  const [running, setRunning] = useState(autoStart)
   const intervalRef = useRef<number | null>(null)
 
   useEffect(() => {
@@ -54,17 +54,6 @@ export const RestTimer = forwardRef<RestTimerHandle>(function RestTimer(_props, 
       if (intervalRef.current !== null) window.clearInterval(intervalRef.current)
     }
   }, [running])
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      start: () => {
-        setRemaining(duration)
-        setRunning(true)
-      },
-    }),
-    [duration],
-  )
 
   function setPreset(seconds: number) {
     setDuration(seconds)
@@ -91,7 +80,7 @@ export const RestTimer = forwardRef<RestTimerHandle>(function RestTimer(_props, 
   }
 
   return (
-    <Card>
+    <Card className="bg-emerald-500/5 ring-1 ring-emerald-500/30">
       <div className="mb-3 flex items-center justify-between">
         <h3 className="text-sm font-semibold text-slate-300">Rest Timer</h3>
         <div className="flex gap-1">
@@ -143,4 +132,4 @@ export const RestTimer = forwardRef<RestTimerHandle>(function RestTimer(_props, 
       </div>
     </Card>
   )
-})
+}

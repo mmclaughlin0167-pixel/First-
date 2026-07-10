@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import { Plus, Trash2, Check, CheckCircle2, Circle, Pause, Play, Timer } from 'lucide-react'
+import { Plus, Trash2, Check, Pause, Play, Timer } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card } from '../components/ui'
-import { RestTimer, type RestTimerHandle } from '../components/RestTimer'
+import { RestTimer } from '../components/RestTimer'
 import { formatDuration } from '../lib/time'
 import type { SetEntry, WorkoutExercise } from '../types'
 
@@ -24,7 +24,7 @@ export function LogWorkout() {
   const [elapsedSec, setElapsedSec] = useState(0)
   const [timerRunning, setTimerRunning] = useState(true)
   const intervalRef = useRef<number | null>(null)
-  const restTimerRef = useRef<RestTimerHandle>(null)
+  const [activeRestSetId, setActiveRestSetId] = useState<string | null>(null)
 
   useEffect(() => {
     if (!timerRunning) return
@@ -99,7 +99,11 @@ export function LogWorkout() {
       ),
     )
 
-    if (nextCompleted) restTimerRef.current?.start()
+    if (nextCompleted) {
+      setActiveRestSetId(setId)
+    } else if (activeRestSetId === setId) {
+      setActiveRestSetId(null)
+    }
   }
 
   function removeSet(exerciseEntryId: string, setId: string) {
@@ -145,8 +149,6 @@ export function LogWorkout() {
           </button>
         </div>
       </div>
-
-      <RestTimer ref={restTimerRef} />
 
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
@@ -220,65 +222,69 @@ export function LogWorkout() {
                     <span>Reps</span>
                     <span>Weight</span>
                     <span>Unit</span>
-                    <span></span>
+                    <span>Done</span>
                     <span></span>
                   </div>
                   {entry.sets.map((set, idx) => (
-                    <div
-                      key={set.id}
-                      className={`grid grid-cols-[2rem_1fr_1fr_4rem_2.25rem_2rem] items-center gap-2 rounded-lg transition-colors ${
-                        set.completed ? 'bg-emerald-500/5' : ''
-                      }`}
-                    >
-                      <span className="text-sm text-slate-400">{idx + 1}</span>
-                      <input
-                        type="number"
-                        min={0}
-                        value={set.reps}
-                        onChange={(e) =>
-                          updateSet(entry.id, set.id, { reps: Number(e.target.value) })
-                        }
-                        className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
-                      />
-                      <input
-                        type="number"
-                        min={0}
-                        step={0.5}
-                        value={set.weight}
-                        onChange={(e) =>
-                          updateSet(entry.id, set.id, { weight: Number(e.target.value) })
-                        }
-                        className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
-                      />
-                      <select
-                        value={set.unit}
-                        onChange={(e) =>
-                          updateSet(entry.id, set.id, { unit: e.target.value as 'lb' | 'kg' })
-                        }
-                        className="rounded-lg border border-slate-700 bg-slate-950 px-1 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
-                      >
-                        <option value="lb">lb</option>
-                        <option value="kg">kg</option>
-                      </select>
-                      <button
-                        onClick={() => toggleSetComplete(entry.id, set.id)}
-                        className={`flex items-center justify-center rounded-lg p-1.5 ${
-                          set.completed
-                            ? 'text-emerald-400 hover:bg-emerald-500/10'
-                            : 'text-slate-500 hover:bg-slate-800 hover:text-slate-100'
+                    <Fragment key={set.id}>
+                      <div
+                        className={`grid grid-cols-[2rem_1fr_1fr_4rem_2.25rem_2rem] items-center gap-2 rounded-lg transition-colors ${
+                          set.completed ? 'bg-emerald-500/5' : ''
                         }`}
-                        aria-label={set.completed ? 'Mark set incomplete' : 'Mark set complete and start rest timer'}
-                        title={set.completed ? 'Completed' : 'Mark complete — starts rest timer'}
                       >
-                        {set.completed ? <CheckCircle2 size={18} /> : <Circle size={18} />}
-                      </button>
-                      <button
-                        onClick={() => removeSet(entry.id, set.id)}
-                        className="rounded-lg p-1.5 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
+                        <span className="text-sm text-slate-400">{idx + 1}</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={set.reps}
+                          onChange={(e) =>
+                            updateSet(entry.id, set.id, { reps: Number(e.target.value) })
+                          }
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                        />
+                        <input
+                          type="number"
+                          min={0}
+                          step={0.5}
+                          value={set.weight}
+                          onChange={(e) =>
+                            updateSet(entry.id, set.id, { weight: Number(e.target.value) })
+                          }
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                        />
+                        <select
+                          value={set.unit}
+                          onChange={(e) =>
+                            updateSet(entry.id, set.id, { unit: e.target.value as 'lb' | 'kg' })
+                          }
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-1 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                        >
+                          <option value="lb">lb</option>
+                          <option value="kg">kg</option>
+                        </select>
+                        <div className="flex items-center justify-center">
+                          <input
+                            type="checkbox"
+                            checked={!!set.completed}
+                            onChange={() => toggleSetComplete(entry.id, set.id)}
+                            className="h-5 w-5 cursor-pointer rounded accent-emerald-500"
+                            aria-label={
+                              set.completed
+                                ? 'Mark set incomplete'
+                                : 'Mark set complete and start rest timer'
+                            }
+                            title={set.completed ? 'Completed' : 'Mark complete — starts rest timer'}
+                          />
+                        </div>
+                        <button
+                          onClick={() => removeSet(entry.id, set.id)}
+                          className="rounded-lg p-1.5 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                      {activeRestSetId === set.id && <RestTimer autoStart />}
+                    </Fragment>
                   ))}
                 </div>
 
