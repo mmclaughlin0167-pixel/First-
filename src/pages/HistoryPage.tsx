@@ -54,6 +54,9 @@ export function HistoryPage() {
                       {format(parseISO(session.date), 'EEE, MMM d yyyy')} &middot;{' '}
                       {session.exercises.length} exercise{session.exercises.length === 1 ? '' : 's'} &middot;{' '}
                       {totalSets(session)} sets &middot; {totalVolume(session).toLocaleString()} vol
+                      {session.durationMinutes !== undefined && session.durationMinutes > 0 && (
+                        <> &middot; {session.durationMinutes} min</>
+                      )}
                     </p>
                   </div>
                 </button>

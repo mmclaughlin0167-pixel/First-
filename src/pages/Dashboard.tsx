@@ -1,7 +1,20 @@
 import { Link } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
-import { Flame, ListPlus, Dumbbell, TrendingUp, Scale, Cake, Activity, Calendar, BarChart3 } from 'lucide-react'
+import {
+  Flame,
+  ListPlus,
+  Dumbbell,
+  TrendingUp,
+  Scale,
+  Cake,
+  Activity,
+  Calendar,
+  BarChart3,
+  Sparkles,
+  X,
+} from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
+import { useProgressRecap } from '../hooks/useProgressRecap'
 import { Card, Button, EmptyState } from '../components/ui'
 import {
   calculateAge,
@@ -14,8 +27,11 @@ import {
 } from '../lib/stats'
 import { toCm, toKg } from '../lib/units'
 
+const PERIOD_LABEL = { week: 'Weekly', month: 'Monthly', quarter: 'Quarterly' } as const
+
 export function Dashboard() {
   const { sessions, exercises, profile, bodyLogs } = useWorkoutData()
+  const { pendingRecaps, dismissRecap } = useProgressRecap()
 
   const streak = currentStreak(sessions)
   const thisWeek = sessionsThisWeek(sessions)
@@ -47,6 +63,39 @@ export function Dashboard() {
           <Button icon={<ListPlus size={16} />}>Log Workout</Button>
         </Link>
       </div>
+
+      {pendingRecaps.length > 0 && (
+        <div className="flex flex-col gap-3">
+          {pendingRecaps.map(({ period, stats }) => (
+            <Card key={period} className="flex items-center justify-between bg-emerald-500/5 ring-1 ring-emerald-500/30">
+              <div className="flex items-center gap-3">
+                <div className="rounded-lg bg-emerald-500/15 p-2 text-emerald-400">
+                  <Sparkles size={18} />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-100">Your {PERIOD_LABEL[period]} Recap</p>
+                  <p className="text-xs text-slate-400">
+                    {stats.workoutCount} workout{stats.workoutCount === 1 ? '' : 's'} &middot;{' '}
+                    {stats.totalWeight.toLocaleString()} lifted &middot; {stats.totalSets} set
+                    {stats.totalSets === 1 ? '' : 's'}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Link to="/reports" className="text-xs font-semibold text-emerald-400 hover:underline">
+                  View Details
+                </Link>
+                <button
+                  onClick={() => dismissRecap(period)}
+                  className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-800 hover:text-slate-100"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Card className="flex flex-col gap-1">

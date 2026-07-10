@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import { Plus, Trash2, Check } from 'lucide-react'
+import { Plus, Trash2, Check, Pause, Play, Timer } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card } from '../components/ui'
+import { RestTimer } from '../components/RestTimer'
+import { formatDuration } from '../lib/time'
 import type { SetEntry, WorkoutExercise } from '../types'
 
 function todayISO() {
@@ -18,6 +20,18 @@ export function LogWorkout() {
   const [date, setDate] = useState(todayISO())
   const [selectedExerciseId, setSelectedExerciseId] = useState(exercises[0]?.id ?? '')
   const [entries, setEntries] = useState<WorkoutExercise[]>([])
+
+  const [elapsedSec, setElapsedSec] = useState(0)
+  const [timerRunning, setTimerRunning] = useState(true)
+  const intervalRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (!timerRunning) return
+    intervalRef.current = window.setInterval(() => setElapsedSec((s) => s + 1), 1000)
+    return () => {
+      if (intervalRef.current !== null) window.clearInterval(intervalRef.current)
+    }
+  }, [timerRunning])
 
   function addExerciseToWorkout() {
     if (!selectedExerciseId) return
@@ -81,6 +95,7 @@ export function LogWorkout() {
       name: workoutName.trim() || 'Workout',
       date,
       exercises: entries,
+      durationMinutes: Math.round(elapsedSec / 60),
     })
     navigate('/history')
   }
@@ -90,10 +105,27 @@ export function LogWorkout() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h2 className="text-2xl font-semibold text-slate-100">Log Workout</h2>
-        <p className="text-sm text-slate-400">Record today's session, set by set.</p>
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold text-slate-100">Log Workout</h2>
+          <p className="text-sm text-slate-400">Record today's session, set by set.</p>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-slate-900/60 px-4 py-2 ring-1 ring-slate-800">
+          <Timer size={18} className="text-emerald-400" />
+          <span className="text-lg font-semibold tabular-nums text-slate-100">
+            {formatDuration(elapsedSec)}
+          </span>
+          <button
+            onClick={() => setTimerRunning((r) => !r)}
+            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+            aria-label={timerRunning ? 'Pause workout timer' : 'Resume workout timer'}
+          >
+            {timerRunning ? <Pause size={16} /> : <Play size={16} />}
+          </button>
+        </div>
       </div>
+
+      <RestTimer />
 
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">

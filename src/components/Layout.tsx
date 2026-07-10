@@ -7,6 +7,7 @@ import {
   TrendingUp,
   ListChecks,
   Ruler,
+  PieChart,
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -14,8 +15,9 @@ const NAV_ITEMS = [
   { to: '/log', label: 'Log Workout', shortLabel: 'Log', icon: ListPlus, end: false },
   { to: '/history', label: 'History', shortLabel: 'History', icon: History, end: false },
   { to: '/progress', label: 'Progress', shortLabel: 'Progress', icon: TrendingUp, end: false },
+  { to: '/reports', label: 'Reports', shortLabel: 'Reports', icon: PieChart, end: false },
   { to: '/body-stats', label: 'Body Stats', shortLabel: 'Body', icon: Ruler, end: false },
-  { to: '/exercises', label: 'Exercises', shortLabel: 'Exercises', icon: ListChecks, end: false },
+  { to: '/exercises', label: 'Exercises', shortLabel: 'Moves', icon: ListChecks, end: false },
 ]
 
 export function Layout() {

@@ -6,6 +6,7 @@ import { HistoryPage } from './pages/HistoryPage'
 import { ProgressPage } from './pages/ProgressPage'
 import { ExercisesPage } from './pages/ExercisesPage'
 import { BodyStatsPage } from './pages/BodyStatsPage'
+import { ReportsPage } from './pages/ReportsPage'
 import { WorkoutDataProvider } from './store/WorkoutDataContext'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="log" element={<LogWorkout />} />
             <Route path="history" element={<HistoryPage />} />
             <Route path="progress" element={<ProgressPage />} />
+            <Route path="reports" element={<ReportsPage />} />
             <Route path="body-stats" element={<BodyStatsPage />} />
             <Route path="exercises" element={<ExercisesPage />} />
           </Route>
