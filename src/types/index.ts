@@ -20,6 +20,7 @@ export interface SetEntry {
   reps: number
   weight: number
   unit: 'lb' | 'kg'
+  completed?: boolean
 }
 
 export interface WorkoutExercise {

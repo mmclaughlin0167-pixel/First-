@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { Minus, Pause, Play, Plus, RotateCcw } from 'lucide-react'
 import { Card, Button } from './ui'
 import { formatDuration } from '../lib/time'
@@ -6,6 +6,10 @@ import { formatDuration } from '../lib/time'
 const PRESETS = [30, 60, 90, 120]
 const MIN_DURATION = 5
 const ADJUST_STEP = 15
+
+export interface RestTimerHandle {
+  start: () => void
+}
 
 function playBeep() {
   try {
@@ -27,7 +31,7 @@ function playBeep() {
   }
 }
 
-export function RestTimer() {
+export const RestTimer = forwardRef<RestTimerHandle>(function RestTimer(_props, ref) {
   const [duration, setDuration] = useState(60)
   const [remaining, setRemaining] = useState(60)
   const [running, setRunning] = useState(false)
@@ -50,6 +54,17 @@ export function RestTimer() {
       if (intervalRef.current !== null) window.clearInterval(intervalRef.current)
     }
   }, [running])
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      start: () => {
+        setRemaining(duration)
+        setRunning(true)
+      },
+    }),
+    [duration],
+  )
 
   function setPreset(seconds: number) {
     setDuration(seconds)
@@ -128,4 +143,4 @@ export function RestTimer() {
       </div>
     </Card>
   )
-}
+})

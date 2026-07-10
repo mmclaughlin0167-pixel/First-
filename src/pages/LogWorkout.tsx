@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import { Plus, Trash2, Check, Pause, Play, Timer } from 'lucide-react'
+import { Plus, Trash2, Check, CheckCircle2, Circle, Pause, Play, Timer } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card } from '../components/ui'
-import { RestTimer } from '../components/RestTimer'
+import { RestTimer, type RestTimerHandle } from '../components/RestTimer'
 import { formatDuration } from '../lib/time'
 import type { SetEntry, WorkoutExercise } from '../types'
 
@@ -24,6 +24,7 @@ export function LogWorkout() {
   const [elapsedSec, setElapsedSec] = useState(0)
   const [timerRunning, setTimerRunning] = useState(true)
   const intervalRef = useRef<number | null>(null)
+  const restTimerRef = useRef<RestTimerHandle>(null)
 
   useEffect(() => {
     if (!timerRunning) return
@@ -81,6 +82,26 @@ export function LogWorkout() {
     )
   }
 
+  function toggleSetComplete(exerciseEntryId: string, setId: string) {
+    const currentSet = entries
+      .find((e) => e.id === exerciseEntryId)
+      ?.sets.find((s) => s.id === setId)
+    const nextCompleted = !currentSet?.completed
+
+    setEntries((prev) =>
+      prev.map((e) =>
+        e.id === exerciseEntryId
+          ? {
+              ...e,
+              sets: e.sets.map((s) => (s.id === setId ? { ...s, completed: nextCompleted } : s)),
+            }
+          : e,
+      ),
+    )
+
+    if (nextCompleted) restTimerRef.current?.start()
+  }
+
   function removeSet(exerciseEntryId: string, setId: string) {
     setEntries((prev) =>
       prev.map((e) =>
@@ -125,7 +146,7 @@ export function LogWorkout() {
         </div>
       </div>
 
-      <RestTimer />
+      <RestTimer ref={restTimerRef} />
 
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
@@ -194,17 +215,20 @@ export function LogWorkout() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="grid grid-cols-[2rem_1fr_1fr_4rem_2rem] gap-2 px-1 text-xs font-medium text-slate-500">
+                  <div className="grid grid-cols-[2rem_1fr_1fr_4rem_2.25rem_2rem] gap-2 px-1 text-xs font-medium text-slate-500">
                     <span>#</span>
                     <span>Reps</span>
                     <span>Weight</span>
                     <span>Unit</span>
                     <span></span>
+                    <span></span>
                   </div>
                   {entry.sets.map((set, idx) => (
                     <div
                       key={set.id}
-                      className="grid grid-cols-[2rem_1fr_1fr_4rem_2rem] items-center gap-2"
+                      className={`grid grid-cols-[2rem_1fr_1fr_4rem_2.25rem_2rem] items-center gap-2 rounded-lg transition-colors ${
+                        set.completed ? 'bg-emerald-500/5' : ''
+                      }`}
                     >
                       <span className="text-sm text-slate-400">{idx + 1}</span>
                       <input
@@ -236,6 +260,18 @@ export function LogWorkout() {
                         <option value="lb">lb</option>
                         <option value="kg">kg</option>
                       </select>
+                      <button
+                        onClick={() => toggleSetComplete(entry.id, set.id)}
+                        className={`flex items-center justify-center rounded-lg p-1.5 ${
+                          set.completed
+                            ? 'text-emerald-400 hover:bg-emerald-500/10'
+                            : 'text-slate-500 hover:bg-slate-800 hover:text-slate-100'
+                        }`}
+                        aria-label={set.completed ? 'Mark set incomplete' : 'Mark set complete and start rest timer'}
+                        title={set.completed ? 'Completed' : 'Mark complete — starts rest timer'}
+                      >
+                        {set.completed ? <CheckCircle2 size={18} /> : <Circle size={18} />}
+                      </button>
                       <button
                         onClick={() => removeSet(entry.id, set.id)}
                         className="rounded-lg p-1.5 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
