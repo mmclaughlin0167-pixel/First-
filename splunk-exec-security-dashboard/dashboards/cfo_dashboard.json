@@ -1,0 +1,506 @@
+{
+  "title": "CFO \u2014 Cyber Financial Exposure & Security ROI",
+  "description": "Links security posture directly to the P&L: fraud loss as a share of revenue, security spend vs. estimated loss avoided (ROI), regulatory fine exposure, and cyber insurance cost. Drill down: KPI -> Channel/Business Unit -> Flagged Transaction -> Raw Record.",
+  "visualizations": {
+    "viz_ds_net_loss": {
+      "type": "splunk.singlevalue",
+      "title": "Net Fraud Loss",
+      "dataSources": {
+        "primary": "ds_net_loss"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "$",
+        "unitPosition": "before"
+      }
+    },
+    "viz_ds_loss_bps": {
+      "type": "splunk.singlevalue",
+      "title": "Fraud Loss Rate",
+      "dataSources": {
+        "primary": "ds_loss_bps"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "bps",
+        "unitPosition": "after"
+      }
+    },
+    "viz_ds_fraud_pct_revenue": {
+      "type": "splunk.singlevalue",
+      "title": "Fraud Loss as % of Revenue",
+      "dataSources": {
+        "primary": "ds_fraud_pct_revenue"
+      },
+      "options": {
+        "numberPrecision": "0.00",
+        "unit": "%",
+        "unitPosition": "after",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          0.1,
+          0.3
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_open_findings": {
+      "type": "splunk.singlevalue",
+      "title": "Regulatory Fine Exposure (Open Findings)",
+      "dataSources": {
+        "primary": "ds_open_findings"
+      },
+      "options": {
+        "numberPrecision": "0"
+      }
+    },
+    "viz_ds_spend": {
+      "type": "splunk.singlevalue",
+      "title": "Security Spend (period)",
+      "dataSources": {
+        "primary": "ds_spend"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "$",
+        "unitPosition": "before"
+      }
+    },
+    "viz_ds_roi": {
+      "type": "splunk.singlevalue",
+      "title": "Security ROI (loss avoided / spend)",
+      "dataSources": {
+        "primary": "ds_roi"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "x",
+        "unitPosition": "after",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          1,
+          2
+        ],
+        "rangeColors": [
+          "#dc4e41",
+          "#f8be34",
+          "#53a051"
+        ]
+      }
+    },
+    "viz_loss_trend": {
+      "type": "splunk.column",
+      "title": "Fraud Loss vs. Recoveries by Month",
+      "dataSources": {
+        "primary": "ds_loss_trend"
+      },
+      "options": {
+        "stackMode": "stacked"
+      }
+    },
+    "viz_spend_roi_cat": {
+      "type": "splunk.bar",
+      "title": "Security Spend vs. Estimated Loss Avoided by Category",
+      "dataSources": {
+        "primary": "ds_spend_roi_cat"
+      },
+      "options": {}
+    },
+    "viz_financial_trend": {
+      "type": "splunk.line",
+      "title": "Revenue, Net Income & IT Budget by Quarter (financial-KPI baseline)",
+      "dataSources": {
+        "primary": "ds_financial_trend"
+      },
+      "options": {}
+    },
+    "viz_channel": {
+      "type": "splunk.pie",
+      "title": "Fraud Loss by Channel (click a slice to drill in)",
+      "dataSources": {
+        "primary": "ds_channel"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_channel",
+                "key": "row.channel"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_fraud_type": {
+      "type": "splunk.bar",
+      "title": "Fraud Loss by Fraud Type (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_fraud_type"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_fraud_type",
+                "key": "row.fraud_type"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_raw_txn": {
+      "type": "splunk.table",
+      "title": "Flagged Transactions \u2014 Channel: $sel_channel$ $sel_fraud_type$ (deepest drill)",
+      "dataSources": {
+        "primary": "ds_raw_txn"
+      },
+      "options": {}
+    },
+    "viz_note": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "**Drill-down path:** Fraud Loss / ROI tiles (top row) -> Channel or Fraud Type breakdown (click a slice/bar) -> individual flagged transaction (bottom table). Each `transaction_id` corresponds to the SOC alert / incident record that first flagged it (cross-reference via `business_unit` and `date` on the CIO dashboard). Every panel above respects the Time Range picker (transactions filtered on their own date, spend/ROI filtered on each quarter's start date) except the quarterly financial baseline, which intentionally always shows full history for context."
+      }
+    }
+  },
+  "dataSources": {
+    "ds_net_loss": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Net Fraud Loss"
+    },
+    "ds_loss_bps": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval net_loss=if(is_fraud=\"Y\", loss_amount_usd-recovered_amount_usd, 0) | stats sum(net_loss) as loss sum(amount_usd) as volume | eval bps=round((loss/volume)*10000,1) | table bps",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Fraud Loss Rate (bps)"
+    },
+    "ds_fraud_pct_revenue": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as loss | appendcols [ | inputlookup company_financials.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | stats sum(revenue_usd) as revenue ] | eval pct_of_revenue=round((loss/revenue)*100,3) | table pct_of_revenue",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Fraud Loss as % of Revenue"
+    },
+    "ds_open_findings": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup compliance_findings.csv | eval _tf=strptime(date, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where status!=\"Remediated\" | stats count as open_findings",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Open Regulatory Findings"
+    },
+    "ds_spend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_spend.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as actual_spend",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Security Spend"
+    },
+    "ds_roi": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_spend.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as spend sum(estimated_loss_avoided_usd) as avoided | eval roi_x=round(avoided/spend,1) | table roi_x",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Security ROI"
+    },
+    "ds_loss_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats sum(loss_amount_usd) as gross_loss sum(recovered_amount_usd) as recovered by month | sort month",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Fraud Loss Trend"
+    },
+    "ds_spend_roi_cat": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_spend.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as actual_spend sum(estimated_loss_avoided_usd) as loss_avoided by category | sort -loss_avoided",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Spend vs. Loss Avoided by Category"
+    },
+    "ds_financial_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup company_financials.csv | table quarter, revenue_usd, net_income_usd, it_budget_usd, cyber_insurance_premium_usd | sort quarter"
+      },
+      "name": "Revenue / Net Income / IT Budget Trend (full history, not time-picker scoped)"
+    },
+    "ds_channel": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by channel | sort -net_loss",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Fraud Loss by Channel"
+    },
+    "ds_fraud_type": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by fraud_type | sort -net_loss",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Fraud Loss by Fraud Type"
+    },
+    "ds_raw_txn": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where is_fraud=\"Y\" AND channel=\"$sel_channel$\" AND (fraud_type=\"$sel_fraud_type$\" OR \"$sel_fraud_type$\"=\"\") | sort -date | table transaction_id, date, business_unit, channel, fraud_type, detection_method, amount_usd, loss_amount_usd, recovered_amount_usd, status",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Raw Flagged Transactions"
+    }
+  },
+  "inputs": {
+    "input_time": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "tok_time",
+        "defaultValue": "-12mon@mon,now"
+      }
+    },
+    "input_bu": {
+      "type": "input.dropdown",
+      "title": "Business Unit",
+      "options": {
+        "token": "tok_bu",
+        "defaultValue": "*",
+        "items": [
+          {
+            "label": "All Business Units",
+            "value": "*"
+          },
+          {
+            "label": "Retail Banking",
+            "value": "Retail Banking"
+          },
+          {
+            "label": "Commercial Banking",
+            "value": "Commercial Banking"
+          },
+          {
+            "label": "Wealth Management",
+            "value": "Wealth Management"
+          },
+          {
+            "label": "Payments & Cards",
+            "value": "Payments & Cards"
+          },
+          {
+            "label": "Mortgage & Lending",
+            "value": "Mortgage & Lending"
+          },
+          {
+            "label": "Digital Banking",
+            "value": "Digital Banking"
+          },
+          {
+            "label": "Corporate IT & Infrastructure",
+            "value": "Corporate IT & Infrastructure"
+          }
+        ]
+      }
+    }
+  },
+  "layout": {
+    "type": "grid",
+    "options": {
+      "width": 1440,
+      "height": 1538
+    },
+    "structure": [
+      {
+        "item": "viz_ds_net_loss",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_loss_bps",
+        "type": "block",
+        "position": {
+          "x": 242,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_fraud_pct_revenue",
+        "type": "block",
+        "position": {
+          "x": 484,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_open_findings",
+        "type": "block",
+        "position": {
+          "x": 726,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_spend",
+        "type": "block",
+        "position": {
+          "x": 968,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_roi",
+        "type": "block",
+        "position": {
+          "x": 1210,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_loss_trend",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 160,
+          "w": 710,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_spend_roi_cat",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 160,
+          "w": 718,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_financial_trend",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 452,
+          "w": 1440,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_channel",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 744,
+          "w": 710,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_fraud_type",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 744,
+          "w": 718,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_raw_txn",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1056,
+          "w": 1440,
+          "h": 320
+        },
+        "visibility": "$sel_channel$"
+      },
+      {
+        "item": "viz_note",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1388,
+          "w": 1440,
+          "h": 110
+        }
+      }
+    ],
+    "globalInputs": [
+      "input_time",
+      "input_bu"
+    ]
+  }
+}

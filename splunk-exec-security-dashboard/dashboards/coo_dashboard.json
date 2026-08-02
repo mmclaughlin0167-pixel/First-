@@ -1,0 +1,563 @@
+{
+  "title": "COO \u2014 Operational Resilience & Incident Response",
+  "description": "Links security operations to business continuity and cost: system availability vs. SLA, detection/response speed, incident backlog, and third-party operational risk. Drill down: KPI -> Business Unit -> System -> Outage/Incident Event.",
+  "visualizations": {
+    "viz_ds_avg_uptime": {
+      "type": "splunk.singlevalue",
+      "title": "Avg. Availability vs. SLA",
+      "dataSources": {
+        "primary": "ds_avg_uptime"
+      },
+      "options": {
+        "numberPrecision": "0.000",
+        "unit": "%",
+        "unitPosition": "after",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          99,
+          99.8
+        ],
+        "rangeColors": [
+          "#dc4e41",
+          "#f8be34",
+          "#53a051"
+        ]
+      }
+    },
+    "viz_ds_cust_outages": {
+      "type": "splunk.singlevalue",
+      "title": "Customer-Impacting Outages",
+      "dataSources": {
+        "primary": "ds_cust_outages"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          5,
+          15
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_mttd": {
+      "type": "splunk.singlevalue",
+      "title": "Mean Time to Detect (hrs)",
+      "dataSources": {
+        "primary": "ds_mttd"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "hrs",
+        "unitPosition": "after"
+      }
+    },
+    "viz_ds_mttr": {
+      "type": "splunk.singlevalue",
+      "title": "Mean Time to Respond (hrs)",
+      "dataSources": {
+        "primary": "ds_mttr"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "hrs",
+        "unitPosition": "after"
+      }
+    },
+    "viz_ds_backlog": {
+      "type": "splunk.singlevalue",
+      "title": "Open Incident Backlog",
+      "dataSources": {
+        "primary": "ds_backlog"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          10,
+          25
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_outage_cost": {
+      "type": "splunk.singlevalue",
+      "title": "Est. Revenue at Risk from Downtime",
+      "dataSources": {
+        "primary": "ds_outage_cost"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "$",
+        "unitPosition": "before"
+      }
+    },
+    "viz_uptime_trend": {
+      "type": "splunk.line",
+      "title": "Weekly Availability vs. SLA Target",
+      "dataSources": {
+        "primary": "ds_uptime_trend"
+      },
+      "options": {}
+    },
+    "viz_backlog_trend": {
+      "type": "splunk.column",
+      "title": "Incident Backlog by Severity Over Time",
+      "dataSources": {
+        "primary": "ds_backlog_trend"
+      },
+      "options": {
+        "stackMode": "stacked"
+      }
+    },
+    "viz_downtime_bu": {
+      "type": "splunk.bar",
+      "title": "Downtime Minutes by Business Unit (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_downtime_bu"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_bu",
+                "key": "row.business_unit"
+              },
+              {
+                "token": "sel_sys",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_vendor_ops": {
+      "type": "splunk.table",
+      "title": "Third-Party / Vendor Operational Risk",
+      "dataSources": {
+        "primary": "ds_vendor_ops"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_bu",
+                "key": "row.business_unit"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_sys_downtime": {
+      "type": "splunk.bar",
+      "title": "Systems in $sel_bu$ by Downtime (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_sys_downtime"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_sys",
+                "key": "row.system"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_outage_weeks": {
+      "type": "splunk.table",
+      "title": "Outage Weeks \u2014 $sel_bu$ $sel_sys$",
+      "dataSources": {
+        "primary": "ds_outage_weeks"
+      },
+      "options": {}
+    },
+    "viz_related_incidents": {
+      "type": "splunk.table",
+      "title": "Related Security Incidents \u2014 $sel_bu$ $sel_sys$ (deepest drill)",
+      "dataSources": {
+        "primary": "ds_related_incidents"
+      },
+      "options": {}
+    },
+    "viz_note": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "**Drill-down path:** Availability / MTTD-MTTR tiles (top row) -> Business Unit downtime (click a bar) -> System within that unit (click a bar) -> raw outage weeks and the incident records that caused them (bottom tables). `system` and `business_unit` join directly to the CIO dashboard's SOC alert and vulnerability data for full technical root-cause detail. Every panel above respects the Time Range picker (derived from each row's own week/date), except the vendor operational risk table, which is a point-in-time snapshot."
+      }
+    }
+  },
+  "dataSources": {
+    "ds_avg_uptime": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(uptime_pct) as avg_uptime | eval avg_uptime=round(avg_uptime,3)",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Average Availability"
+    },
+    "ds_cust_outages": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND customer_impact=\"Y\" | stats count as outages",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Customer-Impacting Outages"
+    },
+    "ds_mttd": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(mttd_hours) as mttd | eval mttd=round(mttd,1)",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Mean Time to Detect"
+    },
+    "ds_mttr": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(mttr_hours) as mttr | eval mttr=round(mttr,1)",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Mean Time to Respond"
+    },
+    "ds_backlog": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status!=\"Resolved\" | stats count as backlog",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Open Incident Backlog"
+    },
+    "ds_outage_cost": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where customer_impact=\"Y\" | stats sum(downtime_minutes) as downtime_minutes | eval estimated_revenue_at_risk=round(downtime_minutes*1850,0) | table estimated_revenue_at_risk",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Estimated Revenue at Risk from Downtime"
+    },
+    "ds_uptime_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(uptime_pct) as avg_uptime avg(sla_target_pct) as sla_target by week_start | sort week_start",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Weekly Availability Trend"
+    },
+    "ds_backlog_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats count by month, severity",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Incident Backlog Trend"
+    },
+    "ds_downtime_bu": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(downtime_minutes) as downtime_minutes count(eval(customer_impact=\"Y\")) as customer_impacting_events by business_unit | sort -downtime_minutes",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Downtime by Business Unit"
+    },
+    "ds_vendor_ops": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vendor_risk.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | sort -sla_breach_count | table vendor_name, business_unit, criticality, sla_breach_count, incident_count, risk_score | head 8"
+      },
+      "name": "Vendor Operational Risk"
+    },
+    "ds_sys_downtime": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" | stats sum(downtime_minutes) as downtime_minutes avg(uptime_pct) as avg_uptime by system | sort -downtime_minutes",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Systems by Downtime"
+    },
+    "ds_outage_weeks": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") AND outage_cause!=\"\" | sort -week_start | table week_start, system, uptime_pct, sla_target_pct, downtime_minutes, outage_cause, customer_impact",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Raw Outage Weeks"
+    },
+    "ds_related_incidents": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -date | table incident_id, date, severity, category, mttd_hours, mttr_hours, status, root_cause",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Related Security Incidents"
+    }
+  },
+  "inputs": {
+    "input_time": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "tok_time",
+        "defaultValue": "-12mon@mon,now"
+      }
+    },
+    "input_bu": {
+      "type": "input.dropdown",
+      "title": "Business Unit",
+      "options": {
+        "token": "tok_bu",
+        "defaultValue": "*",
+        "items": [
+          {
+            "label": "All Business Units",
+            "value": "*"
+          },
+          {
+            "label": "Retail Banking",
+            "value": "Retail Banking"
+          },
+          {
+            "label": "Commercial Banking",
+            "value": "Commercial Banking"
+          },
+          {
+            "label": "Wealth Management",
+            "value": "Wealth Management"
+          },
+          {
+            "label": "Payments & Cards",
+            "value": "Payments & Cards"
+          },
+          {
+            "label": "Mortgage & Lending",
+            "value": "Mortgage & Lending"
+          },
+          {
+            "label": "Digital Banking",
+            "value": "Digital Banking"
+          },
+          {
+            "label": "Corporate IT & Infrastructure",
+            "value": "Corporate IT & Infrastructure"
+          }
+        ]
+      }
+    }
+  },
+  "layout": {
+    "type": "grid",
+    "options": {
+      "width": 1440,
+      "height": 1558
+    },
+    "structure": [
+      {
+        "item": "viz_ds_avg_uptime",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_cust_outages",
+        "type": "block",
+        "position": {
+          "x": 242,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_mttd",
+        "type": "block",
+        "position": {
+          "x": 484,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_mttr",
+        "type": "block",
+        "position": {
+          "x": 726,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_backlog",
+        "type": "block",
+        "position": {
+          "x": 968,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_outage_cost",
+        "type": "block",
+        "position": {
+          "x": 1210,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_uptime_trend",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 160,
+          "w": 710,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_backlog_trend",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 160,
+          "w": 718,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_downtime_bu",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 452,
+          "w": 710,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_vendor_ops",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 452,
+          "w": 718,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_sys_downtime",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 764,
+          "w": 1440,
+          "h": 300
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_outage_weeks",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1076,
+          "w": 710,
+          "h": 320
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_related_incidents",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 1076,
+          "w": 718,
+          "h": 320
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_note",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1408,
+          "w": 1440,
+          "h": 110
+        }
+      }
+    ],
+    "globalInputs": [
+      "input_time",
+      "input_bu"
+    ]
+  }
+}

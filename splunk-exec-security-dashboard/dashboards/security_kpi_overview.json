@@ -1,0 +1,217 @@
+{
+  "title": "Executive Security KPI Program \u2014 Overview",
+  "description": "Landing page for the executive security KPI program. Every persona dashboard is built on the same 9-table data model, so a KPI on any one of them can be traced down to the same raw event, and every dashboard ties cyber posture back to revenue, net income, or IT budget.",
+  "visualizations": {
+    "viz_ds_impact_12mo": {
+      "type": "splunk.singlevalue",
+      "title": "Financial Impact of Security Incidents (selected period)",
+      "dataSources": {
+        "primary": "ds_impact_12mo"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "$",
+        "unitPosition": "before"
+      }
+    },
+    "viz_ds_fraud_12mo": {
+      "type": "splunk.singlevalue",
+      "title": "Net Fraud Loss (selected period)",
+      "dataSources": {
+        "primary": "ds_fraud_12mo"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "$",
+        "unitPosition": "before"
+      }
+    },
+    "viz_ds_uptime_12mo": {
+      "type": "splunk.singlevalue",
+      "title": "Avg. Customer-Facing System Availability",
+      "dataSources": {
+        "primary": "ds_uptime_12mo"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "%",
+        "unitPosition": "after"
+      }
+    },
+    "viz_ds_vulns_12mo": {
+      "type": "splunk.singlevalue",
+      "title": "Open Critical/High Vulnerabilities",
+      "dataSources": {
+        "primary": "ds_vulns_12mo"
+      },
+      "options": {
+        "numberPrecision": "0"
+      }
+    },
+    "viz_cyber_cost_pct_rev": {
+      "type": "splunk.table",
+      "title": "Total Cyber Cost (incidents + fraud) as % of Revenue, Selected Period \u2014 the single number that ties this whole program to the P&L",
+      "dataSources": {
+        "primary": "ds_cyber_cost_pct_rev"
+      },
+      "options": {}
+    },
+    "viz_personas": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "## Persona Dashboards\n\n| CEO | CFO | COO | CIO |\n|---|---|---|---|\n| Enterprise Cyber Risk & Resilience | Cyber Financial Exposure & Security ROI | Operational Resilience & Incident Response | Security Operations & Technical Risk Posture |\n| Risk score, material incidents, customer trust, regulatory standing, cyber cost as % of revenue | Fraud loss, spend vs. loss avoided, regulatory fine exposure, revenue/net-income baseline | Availability vs. SLA, MTTD/MTTR, incident backlog, vendor ops risk, revenue at risk from downtime | Vulnerability management, SOC triage, patch compliance, MITRE ATT&CK, spend as % of IT budget |\n| [Open CEO Dashboard](ceo_dashboard) | [Open CFO Dashboard](cfo_dashboard) | [Open COO Dashboard](coo_dashboard) | [Open CIO Dashboard](cio_dashboard) |\n"
+      }
+    },
+    "viz_howto": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "### How the drill-down works across all four dashboards\n\n1. **Board KPI** \u2014 a single aggregated number (risk score, fraud loss, availability %, open vulnerabilities), several of which are already expressed as a share of revenue, net income, or IT budget.\n2. **Business Unit** \u2014 click the KPI's breakdown chart to filter to one of 7 business units.\n3. **System / Channel / Asset** \u2014 click again to narrow to the specific application, channel, or vendor.\n4. **Event record** \u2014 the underlying incident, flagged transaction, vulnerability scan, or SOC alert row.\n5. **Cross-dashboard join** \u2014 `business_unit` and `system` are shared keys across all 9 datasets, so a CEO-level incident can be traced to the CIO's SOC alert and vulnerability scan that caused it, or the CFO's fraud loss it produced \u2014 and `company_financials.csv` ties the whole chain back to revenue, net income, and IT budget. Every KPI here reacts to the Time Range picker above (each row's own date is filtered explicitly, since `inputlookup` results have no `_time` field for Splunk to auto-filter), except the point-in-time open-vulnerability count."
+      }
+    }
+  },
+  "dataSources": {
+    "ds_impact_12mo": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | stats sum(financial_impact_usd) as total_impact",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Financial Impact (selected period)"
+    },
+    "ds_fraud_12mo": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Net Fraud Loss (selected period)"
+    },
+    "ds_uptime_12mo": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | stats avg(uptime_pct) as avg_uptime | eval avg_uptime=round(avg_uptime,3)",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Avg Availability (selected period)"
+    },
+    "ds_vulns_12mo": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vulnerability_scans.csv | where (severity=\"Critical\" OR severity=\"High\") AND patch_status!=\"Patched\" | stats count as open_vulns"
+      },
+      "name": "Open Critical/High Vulns (current, not time-picker scoped)"
+    },
+    "ds_cyber_cost_pct_rev": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | stats sum(financial_impact_usd) as impact | appendcols [ | inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as fraud_loss ] | appendcols [ | inputlookup company_financials.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | stats sum(revenue_usd) as revenue ] | eval total_cyber_cost=impact+fraud_loss, pct_of_revenue=round((total_cyber_cost/revenue)*100,2) | table total_cyber_cost, pct_of_revenue",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Total Cyber Cost as % of Revenue"
+    }
+  },
+  "inputs": {
+    "input_time": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "tok_time",
+        "defaultValue": "-12mon@mon,now"
+      }
+    }
+  },
+  "layout": {
+    "type": "grid",
+    "options": {
+      "width": 1440,
+      "height": 894
+    },
+    "structure": [
+      {
+        "item": "viz_ds_impact_12mo",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "w": 351,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_fraud_12mo",
+        "type": "block",
+        "position": {
+          "x": 363,
+          "y": 0,
+          "w": 351,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_uptime_12mo",
+        "type": "block",
+        "position": {
+          "x": 726,
+          "y": 0,
+          "w": 351,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_vulns_12mo",
+        "type": "block",
+        "position": {
+          "x": 1089,
+          "y": 0,
+          "w": 351,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_cyber_cost_pct_rev",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 160,
+          "w": 1440,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_personas",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 322,
+          "w": 1440,
+          "h": 260
+        }
+      },
+      {
+        "item": "viz_howto",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 594,
+          "w": 1440,
+          "h": 260
+        }
+      }
+    ],
+    "globalInputs": [
+      "input_time"
+    ]
+  }
+}

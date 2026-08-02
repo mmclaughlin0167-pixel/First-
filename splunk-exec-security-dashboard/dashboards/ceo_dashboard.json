@@ -1,0 +1,565 @@
+{
+  "title": "CEO \u2014 Enterprise Cyber Risk & Resilience",
+  "description": "Board-level view linking cyber risk posture to enterprise strategy and financial performance: risk score, material incidents, customer trust, regulatory standing, and cyber cost as a share of revenue. Drill down: KPI -> Business Unit -> System -> Event.",
+  "visualizations": {
+    "viz_ds_risk_score": {
+      "type": "splunk.singlevalue",
+      "title": "Enterprise Cyber Risk Score (0-100)",
+      "dataSources": {
+        "primary": "ds_risk_score"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          35,
+          65
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_material": {
+      "type": "splunk.singlevalue",
+      "title": "Material Incidents (Critical+High)",
+      "dataSources": {
+        "primary": "ds_material"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          5,
+          15
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_customers": {
+      "type": "splunk.singlevalue",
+      "title": "Customers Impacted",
+      "dataSources": {
+        "primary": "ds_customers"
+      },
+      "options": {
+        "numberPrecision": "0"
+      }
+    },
+    "viz_ds_impact": {
+      "type": "splunk.singlevalue",
+      "title": "Total Financial Impact",
+      "dataSources": {
+        "primary": "ds_impact"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "unit": "$",
+        "unitPosition": "before"
+      }
+    },
+    "viz_ds_cost_pct_revenue": {
+      "type": "splunk.singlevalue",
+      "title": "Cyber Cost as % of Revenue",
+      "dataSources": {
+        "primary": "ds_cost_pct_revenue"
+      },
+      "options": {
+        "numberPrecision": "0.00",
+        "unit": "%",
+        "unitPosition": "after",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          1,
+          3
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_overdue": {
+      "type": "splunk.singlevalue",
+      "title": "Overdue Regulatory Findings",
+      "dataSources": {
+        "primary": "ds_overdue"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          1,
+          5
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_trend": {
+      "type": "splunk.column",
+      "title": "Financial Impact & Material Incidents by Month",
+      "dataSources": {
+        "primary": "ds_trend"
+      },
+      "options": {}
+    },
+    "viz_revenue_trend": {
+      "type": "splunk.line",
+      "title": "Cyber Cost as % of Revenue by Quarter (financial-KPI linkage)",
+      "dataSources": {
+        "primary": "ds_revenue_trend"
+      },
+      "options": {}
+    },
+    "viz_regfindings": {
+      "type": "splunk.bar",
+      "title": "Regulatory Standing by Framework (Open Findings)",
+      "dataSources": {
+        "primary": "ds_regfindings"
+      },
+      "options": {
+        "stackMode": "stacked"
+      }
+    },
+    "viz_bu_heatmap": {
+      "type": "splunk.bar",
+      "title": "Risk Heatmap by Business Unit (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_bu_heatmap"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_bu",
+                "key": "row.business_unit"
+              },
+              {
+                "token": "sel_sys",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_vendor_top": {
+      "type": "splunk.table",
+      "title": "Top Third-Party / Vendor Risk Exposure",
+      "dataSources": {
+        "primary": "ds_vendor_top"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_bu",
+                "key": "row.business_unit"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_bu_systems": {
+      "type": "splunk.bar",
+      "title": "Systems in $sel_bu$ Ranked by Risk (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_bu_systems"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_sys",
+                "key": "row.system"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_raw_incidents": {
+      "type": "splunk.table",
+      "title": "Underlying Security Events for $sel_bu$ $sel_sys$ (deepest drill)",
+      "dataSources": {
+        "primary": "ds_raw_incidents"
+      },
+      "options": {}
+    },
+    "viz_note": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "**Drill-down path:** Enterprise Risk Score / Cyber Cost % of Revenue (top row) -> Business Unit heatmap (click a bar) -> System within that unit (click a bar) -> individual incident record (bottom table). The same `incident_id` traces directly to the SOC alert and vulnerability that caused it on the CIO dashboard, and to the fraud loss it produced on the CFO dashboard. Every panel above respects the Time Range picker (derived from each row's own date, since `inputlookup` results aren't auto-filtered by it) except the quarterly revenue trend, which intentionally always shows full history for context."
+      }
+    }
+  },
+  "dataSources": {
+    "ds_risk_score": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/25), 1) | table risk_score",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Enterprise Cyber Risk Score"
+    },
+    "ds_material": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND (severity=\"Critical\" OR severity=\"High\") | stats count as material_incidents",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Material Incidents"
+    },
+    "ds_customers": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(customers_affected) as customers_affected",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Customers Impacted"
+    },
+    "ds_impact": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(financial_impact_usd) as total_impact",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Financial Impact"
+    },
+    "ds_cost_pct_revenue": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(financial_impact_usd) as impact | appendcols [ | inputlookup company_financials.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | stats sum(revenue_usd) as revenue ] | eval pct_of_revenue=round((impact/revenue)*100,3) | table pct_of_revenue",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Cyber Incident Cost as % of Revenue"
+    },
+    "ds_overdue": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup compliance_findings.csv | eval _tf=strptime(date, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status=\"Overdue\" | stats count as overdue_findings",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Overdue Regulatory Findings"
+    },
+    "ds_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats sum(financial_impact_usd) as financial_impact count(eval(severity=\"Critical\" OR severity=\"High\")) as material_incidents by month | sort month",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Risk Trend"
+    },
+    "ds_revenue_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup company_financials.csv | join type=left quarter [ | inputlookup security_incidents.csv | eval quarter=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y\")+\"Q\"+tostring(ceil(tonumber(strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%m\"))/3)) | stats sum(financial_impact_usd) as cyber_cost by quarter ] | eval cyber_cost=coalesce(cyber_cost,0), pct_of_revenue=round((cyber_cost/revenue_usd)*100,3) | table quarter, revenue_usd, cyber_cost, pct_of_revenue | sort quarter"
+      },
+      "name": "Cyber Cost vs. Revenue by Quarter (full history, not time-picker scoped)"
+    },
+    "ds_regfindings": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup compliance_findings.csv | eval _tf=strptime(date, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status!=\"Remediated\" | chart count by framework, severity",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Regulatory Findings by Framework"
+    },
+    "ds_bu_heatmap": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by business_unit | sort -risk_weight",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Risk Heatmap by Business Unit"
+    },
+    "ds_vendor_top": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vendor_risk.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | sort -risk_score | table vendor_name, business_unit, criticality, risk_score, open_findings, incident_count | head 8"
+      },
+      "name": "Top Vendor Risk"
+    },
+    "ds_bu_systems": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by system | sort -risk_weight",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Systems in Selected Business Unit"
+    },
+    "ds_raw_incidents": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -date | table incident_id, date, severity, category, system, mitre_tactic, financial_impact_usd, records_exposed, regulatory_notification_required, status, root_cause",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Raw Incident Records"
+    }
+  },
+  "inputs": {
+    "input_time": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "tok_time",
+        "defaultValue": "-12mon@mon,now"
+      }
+    },
+    "input_bu": {
+      "type": "input.dropdown",
+      "title": "Business Unit",
+      "options": {
+        "token": "tok_bu",
+        "defaultValue": "*",
+        "items": [
+          {
+            "label": "All Business Units",
+            "value": "*"
+          },
+          {
+            "label": "Retail Banking",
+            "value": "Retail Banking"
+          },
+          {
+            "label": "Commercial Banking",
+            "value": "Commercial Banking"
+          },
+          {
+            "label": "Wealth Management",
+            "value": "Wealth Management"
+          },
+          {
+            "label": "Payments & Cards",
+            "value": "Payments & Cards"
+          },
+          {
+            "label": "Mortgage & Lending",
+            "value": "Mortgage & Lending"
+          },
+          {
+            "label": "Digital Banking",
+            "value": "Digital Banking"
+          },
+          {
+            "label": "Corporate IT & Infrastructure",
+            "value": "Corporate IT & Infrastructure"
+          }
+        ]
+      }
+    }
+  },
+  "layout": {
+    "type": "grid",
+    "options": {
+      "width": 1440,
+      "height": 1850
+    },
+    "structure": [
+      {
+        "item": "viz_ds_risk_score",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_material",
+        "type": "block",
+        "position": {
+          "x": 242,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_customers",
+        "type": "block",
+        "position": {
+          "x": 484,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_impact",
+        "type": "block",
+        "position": {
+          "x": 726,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_cost_pct_revenue",
+        "type": "block",
+        "position": {
+          "x": 968,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_overdue",
+        "type": "block",
+        "position": {
+          "x": 1210,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_trend",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 160,
+          "w": 710,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_revenue_trend",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 160,
+          "w": 718,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_regfindings",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 452,
+          "w": 1440,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_bu_heatmap",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 744,
+          "w": 710,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_vendor_top",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 744,
+          "w": 718,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_bu_systems",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1056,
+          "w": 1440,
+          "h": 300
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_raw_incidents",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1368,
+          "w": 1440,
+          "h": 320
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_note",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1700,
+          "w": 1440,
+          "h": 110
+        }
+      }
+    ],
+    "globalInputs": [
+      "input_time",
+      "input_bu"
+    ]
+  }
+}

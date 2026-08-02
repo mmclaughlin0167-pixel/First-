@@ -1,0 +1,2101 @@
+week_start,business_unit,system,uptime_pct,downtime_minutes,sla_target_pct,outage_cause,customer_impact
+2024-08-01,Retail Banking,Core Banking System,99.656,34.7,99.95,,N
+2024-08-01,Retail Banking,Teller Platform,99.769,23.3,99.5,,N
+2024-08-01,Retail Banking,ATM Network,99.654,34.9,99.9,,N
+2024-08-01,Commercial Banking,Commercial Loan Platform,99.612,39.1,99.5,,N
+2024-08-01,Commercial Banking,Treasury Management System,99.644,35.9,99.5,,N
+2024-08-01,Wealth Management,Wealth Management Platform,99.946,5.4,99.5,,N
+2024-08-01,Wealth Management,Trading Platform,99.661,34.2,99.5,,N
+2024-08-01,Payments & Cards,Payment Gateway,99.985,1.5,99.95,,N
+2024-08-01,Payments & Cards,Card Issuance System,99.715,28.7,99.5,,N
+2024-08-01,Payments & Cards,Wire Transfer System,99.809,19.3,99.9,,N
+2024-08-01,Mortgage & Lending,Loan Origination System,99.684,31.9,99.5,,N
+2024-08-01,Mortgage & Lending,Document Management System,99.629,37.4,99.5,,N
+2024-08-01,Digital Banking,Online Banking Portal,99.91,9.1,99.9,,N
+2024-08-01,Digital Banking,Mobile Banking App,97.297,272.5,99.9,Maintenance Overrun,Y
+2024-08-01,Digital Banking,Customer API Gateway,99.963,3.7,99.9,,N
+2024-08-01,Corporate IT & Infrastructure,Active Directory,99.984,1.6,99.5,,N
+2024-08-01,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.898,10.3,99.5,,N
+2024-08-01,Corporate IT & Infrastructure,Data Warehouse,99.973,2.7,99.5,,N
+2024-08-01,Corporate IT & Infrastructure,Email & Collaboration (O365),99.925,7.6,99.5,,N
+2024-08-01,Corporate IT & Infrastructure,Endpoint Fleet,99.779,22.3,99.5,,N
+2024-08-08,Retail Banking,Core Banking System,99.642,36.1,99.95,,N
+2024-08-08,Retail Banking,Teller Platform,99.672,33.1,99.5,,N
+2024-08-08,Retail Banking,ATM Network,99.329,67.6,99.9,Security Incident - Containment,Y
+2024-08-08,Commercial Banking,Commercial Loan Platform,99.892,10.9,99.5,,N
+2024-08-08,Commercial Banking,Treasury Management System,99.833,16.8,99.5,,N
+2024-08-08,Wealth Management,Wealth Management Platform,99.756,24.6,99.5,,N
+2024-08-08,Wealth Management,Trading Platform,99.971,2.9,99.5,,N
+2024-08-08,Payments & Cards,Payment Gateway,99.942,5.8,99.95,,N
+2024-08-08,Payments & Cards,Card Issuance System,99.636,36.7,99.5,,N
+2024-08-08,Payments & Cards,Wire Transfer System,99.875,12.6,99.9,,N
+2024-08-08,Mortgage & Lending,Loan Origination System,99.77,23.2,99.5,,N
+2024-08-08,Mortgage & Lending,Document Management System,99.628,37.5,99.5,,N
+2024-08-08,Digital Banking,Online Banking Portal,99.85,15.1,99.9,,N
+2024-08-08,Digital Banking,Mobile Banking App,99.972,2.8,99.9,,N
+2024-08-08,Digital Banking,Customer API Gateway,99.836,16.5,99.9,,N
+2024-08-08,Corporate IT & Infrastructure,Active Directory,99.982,1.8,99.5,,N
+2024-08-08,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.666,33.7,99.5,,N
+2024-08-08,Corporate IT & Infrastructure,Data Warehouse,99.649,35.4,99.5,,N
+2024-08-08,Corporate IT & Infrastructure,Email & Collaboration (O365),99.211,79.5,99.5,Network Failure,N
+2024-08-08,Corporate IT & Infrastructure,Endpoint Fleet,99.632,37.1,99.5,,N
+2024-08-15,Retail Banking,Core Banking System,99.724,27.8,99.95,,N
+2024-08-15,Retail Banking,Teller Platform,99.833,16.8,99.5,,N
+2024-08-15,Retail Banking,ATM Network,99.892,10.9,99.9,,N
+2024-08-15,Commercial Banking,Commercial Loan Platform,99.703,29.9,99.5,,N
+2024-08-15,Commercial Banking,Treasury Management System,99.85,15.1,99.5,,N
+2024-08-15,Wealth Management,Wealth Management Platform,99.813,18.8,99.5,,N
+2024-08-15,Wealth Management,Trading Platform,99.863,13.8,99.5,,N
+2024-08-15,Payments & Cards,Payment Gateway,99.916,8.5,99.95,,N
+2024-08-15,Payments & Cards,Card Issuance System,99.67,33.3,99.5,,N
+2024-08-15,Payments & Cards,Wire Transfer System,99.614,38.9,99.9,,N
+2024-08-15,Mortgage & Lending,Loan Origination System,99.833,16.8,99.5,,N
+2024-08-15,Mortgage & Lending,Document Management System,99.724,27.8,99.5,,N
+2024-08-15,Digital Banking,Online Banking Portal,99.667,33.6,99.9,,N
+2024-08-15,Digital Banking,Mobile Banking App,99.739,26.3,99.9,,N
+2024-08-15,Digital Banking,Customer API Gateway,99.972,2.8,99.9,,N
+2024-08-15,Corporate IT & Infrastructure,Active Directory,99.866,13.5,99.5,,N
+2024-08-15,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.814,18.7,99.5,,N
+2024-08-15,Corporate IT & Infrastructure,Data Warehouse,99.968,3.2,99.5,,N
+2024-08-15,Corporate IT & Infrastructure,Email & Collaboration (O365),99.631,37.2,99.5,,N
+2024-08-15,Corporate IT & Infrastructure,Endpoint Fleet,99.829,17.2,99.5,,N
+2024-08-22,Retail Banking,Core Banking System,99.985,1.5,99.95,,N
+2024-08-22,Retail Banking,Teller Platform,99.766,23.6,99.5,,N
+2024-08-22,Retail Banking,ATM Network,99.777,22.5,99.9,,N
+2024-08-22,Commercial Banking,Commercial Loan Platform,96.518,351.0,99.5,DDoS Attack,N
+2024-08-22,Commercial Banking,Treasury Management System,98.684,132.7,99.5,Security Incident - Containment,N
+2024-08-22,Wealth Management,Wealth Management Platform,99.794,20.8,99.5,,N
+2024-08-22,Wealth Management,Trading Platform,99.767,23.5,99.5,,N
+2024-08-22,Payments & Cards,Payment Gateway,99.898,10.3,99.95,,N
+2024-08-22,Payments & Cards,Card Issuance System,99.659,34.4,99.5,,N
+2024-08-22,Payments & Cards,Wire Transfer System,99.926,7.5,99.9,,N
+2024-08-22,Mortgage & Lending,Loan Origination System,96.834,319.1,99.5,DDoS Attack,N
+2024-08-22,Mortgage & Lending,Document Management System,99.972,2.8,99.5,,N
+2024-08-22,Digital Banking,Online Banking Portal,99.766,23.6,99.9,,N
+2024-08-22,Digital Banking,Mobile Banking App,99.975,2.5,99.9,,N
+2024-08-22,Digital Banking,Customer API Gateway,99.985,1.5,99.9,,N
+2024-08-22,Corporate IT & Infrastructure,Active Directory,99.642,36.1,99.5,,N
+2024-08-22,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.953,4.7,99.5,,N
+2024-08-22,Corporate IT & Infrastructure,Data Warehouse,99.856,14.5,99.5,,N
+2024-08-22,Corporate IT & Infrastructure,Email & Collaboration (O365),97.923,209.4,99.5,Hardware Failure,N
+2024-08-22,Corporate IT & Infrastructure,Endpoint Fleet,99.932,6.9,99.5,,N
+2024-08-29,Retail Banking,Core Banking System,99.607,39.6,99.95,,N
+2024-08-29,Retail Banking,Teller Platform,99.959,4.1,99.5,,N
+2024-08-29,Retail Banking,ATM Network,99.866,13.5,99.9,,N
+2024-08-29,Commercial Banking,Commercial Loan Platform,99.954,4.6,99.5,,N
+2024-08-29,Commercial Banking,Treasury Management System,99.99,1.0,99.5,,N
+2024-08-29,Wealth Management,Wealth Management Platform,99.62,38.3,99.5,,N
+2024-08-29,Wealth Management,Trading Platform,99.873,12.8,99.5,,N
+2024-08-29,Payments & Cards,Payment Gateway,99.765,23.7,99.95,,N
+2024-08-29,Payments & Cards,Card Issuance System,99.92,8.1,99.5,,N
+2024-08-29,Payments & Cards,Wire Transfer System,99.694,30.8,99.9,,N
+2024-08-29,Mortgage & Lending,Loan Origination System,99.827,17.4,99.5,,N
+2024-08-29,Mortgage & Lending,Document Management System,99.951,4.9,99.5,,N
+2024-08-29,Digital Banking,Online Banking Portal,99.879,12.2,99.9,,N
+2024-08-29,Digital Banking,Mobile Banking App,99.771,23.1,99.9,,N
+2024-08-29,Digital Banking,Customer API Gateway,99.816,18.5,99.9,,N
+2024-08-29,Corporate IT & Infrastructure,Active Directory,99.644,35.9,99.5,,N
+2024-08-29,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.886,11.5,99.5,,N
+2024-08-29,Corporate IT & Infrastructure,Data Warehouse,99.948,5.2,99.5,,N
+2024-08-29,Corporate IT & Infrastructure,Email & Collaboration (O365),99.831,17.0,99.5,,N
+2024-08-29,Corporate IT & Infrastructure,Endpoint Fleet,99.697,30.5,99.5,,N
+2024-09-05,Retail Banking,Core Banking System,99.952,4.8,99.95,,N
+2024-09-05,Retail Banking,Teller Platform,99.71,29.2,99.5,,N
+2024-09-05,Retail Banking,ATM Network,99.962,3.8,99.9,,N
+2024-09-05,Commercial Banking,Commercial Loan Platform,99.919,8.2,99.5,,N
+2024-09-05,Commercial Banking,Treasury Management System,99.787,21.5,99.5,,N
+2024-09-05,Wealth Management,Wealth Management Platform,99.763,23.9,99.5,,N
+2024-09-05,Wealth Management,Trading Platform,99.65,35.3,99.5,,N
+2024-09-05,Payments & Cards,Payment Gateway,99.785,21.7,99.95,,N
+2024-09-05,Payments & Cards,Card Issuance System,99.637,36.6,99.5,,N
+2024-09-05,Payments & Cards,Wire Transfer System,98.163,185.2,99.9,Hardware Failure,Y
+2024-09-05,Mortgage & Lending,Loan Origination System,99.919,8.2,99.5,,N
+2024-09-05,Mortgage & Lending,Document Management System,99.821,18.0,99.5,,N
+2024-09-05,Digital Banking,Online Banking Portal,99.761,24.1,99.9,,N
+2024-09-05,Digital Banking,Mobile Banking App,99.96,4.0,99.9,,N
+2024-09-05,Digital Banking,Customer API Gateway,99.646,35.7,99.9,,N
+2024-09-05,Corporate IT & Infrastructure,Active Directory,99.981,1.9,99.5,,N
+2024-09-05,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.827,17.4,99.5,,N
+2024-09-05,Corporate IT & Infrastructure,Data Warehouse,99.628,37.5,99.5,,N
+2024-09-05,Corporate IT & Infrastructure,Email & Collaboration (O365),99.767,23.5,99.5,,N
+2024-09-05,Corporate IT & Infrastructure,Endpoint Fleet,99.786,21.6,99.5,,N
+2024-09-12,Retail Banking,Core Banking System,99.991,0.9,99.95,,N
+2024-09-12,Retail Banking,Teller Platform,99.864,13.7,99.5,,N
+2024-09-12,Retail Banking,ATM Network,99.88,12.1,99.9,,N
+2024-09-12,Commercial Banking,Commercial Loan Platform,99.859,14.2,99.5,,N
+2024-09-12,Commercial Banking,Treasury Management System,99.794,20.8,99.5,,N
+2024-09-12,Wealth Management,Wealth Management Platform,99.836,16.5,99.5,,N
+2024-09-12,Wealth Management,Trading Platform,99.759,24.3,99.5,,N
+2024-09-12,Payments & Cards,Payment Gateway,99.845,15.6,99.95,,N
+2024-09-12,Payments & Cards,Card Issuance System,99.663,34.0,99.5,,N
+2024-09-12,Payments & Cards,Wire Transfer System,99.744,25.8,99.9,,N
+2024-09-12,Mortgage & Lending,Loan Origination System,99.619,38.4,99.5,,N
+2024-09-12,Mortgage & Lending,Document Management System,99.989,1.1,99.5,,N
+2024-09-12,Digital Banking,Online Banking Portal,99.85,15.1,99.9,,N
+2024-09-12,Digital Banking,Mobile Banking App,99.673,33.0,99.9,,N
+2024-09-12,Digital Banking,Customer API Gateway,99.709,29.3,99.9,,N
+2024-09-12,Corporate IT & Infrastructure,Active Directory,99.773,22.9,99.5,,N
+2024-09-12,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.633,37.0,99.5,,N
+2024-09-12,Corporate IT & Infrastructure,Data Warehouse,99.06,94.8,99.5,Security Incident - Containment,N
+2024-09-12,Corporate IT & Infrastructure,Email & Collaboration (O365),97.849,216.8,99.5,Maintenance Overrun,N
+2024-09-12,Corporate IT & Infrastructure,Endpoint Fleet,99.957,4.3,99.5,,N
+2024-09-19,Retail Banking,Core Banking System,99.623,38.0,99.95,,N
+2024-09-19,Retail Banking,Teller Platform,99.887,11.4,99.5,,N
+2024-09-19,Retail Banking,ATM Network,99.832,16.9,99.9,,N
+2024-09-19,Commercial Banking,Commercial Loan Platform,99.843,15.8,99.5,,N
+2024-09-19,Commercial Banking,Treasury Management System,99.968,3.2,99.5,,N
+2024-09-19,Wealth Management,Wealth Management Platform,99.863,13.8,99.5,,N
+2024-09-19,Wealth Management,Trading Platform,99.73,27.2,99.5,,N
+2024-09-19,Payments & Cards,Payment Gateway,99.756,24.6,99.95,,N
+2024-09-19,Payments & Cards,Card Issuance System,99.848,15.3,99.5,,N
+2024-09-19,Payments & Cards,Wire Transfer System,99.931,7.0,99.9,,N
+2024-09-19,Mortgage & Lending,Loan Origination System,99.889,11.2,99.5,,N
+2024-09-19,Mortgage & Lending,Document Management System,97.052,297.2,99.5,Third-Party Outage,N
+2024-09-19,Digital Banking,Online Banking Portal,99.679,32.4,99.9,,N
+2024-09-19,Digital Banking,Mobile Banking App,99.873,12.8,99.9,,N
+2024-09-19,Digital Banking,Customer API Gateway,99.791,21.1,99.9,,N
+2024-09-19,Corporate IT & Infrastructure,Active Directory,99.614,38.9,99.5,,N
+2024-09-19,Corporate IT & Infrastructure,Cloud Workloads (AWS),96.685,334.2,99.5,Security Incident - Containment,N
+2024-09-19,Corporate IT & Infrastructure,Data Warehouse,99.884,11.7,99.5,,N
+2024-09-19,Corporate IT & Infrastructure,Email & Collaboration (O365),99.916,8.5,99.5,,N
+2024-09-19,Corporate IT & Infrastructure,Endpoint Fleet,99.95,5.0,99.5,,N
+2024-09-26,Retail Banking,Core Banking System,99.908,9.3,99.95,,N
+2024-09-26,Retail Banking,Teller Platform,99.764,23.8,99.5,,N
+2024-09-26,Retail Banking,ATM Network,99.935,6.6,99.9,,N
+2024-09-26,Commercial Banking,Commercial Loan Platform,99.706,29.6,99.5,,N
+2024-09-26,Commercial Banking,Treasury Management System,99.742,26.0,99.5,,N
+2024-09-26,Wealth Management,Wealth Management Platform,99.74,26.2,99.5,,N
+2024-09-26,Wealth Management,Trading Platform,99.625,37.8,99.5,,N
+2024-09-26,Payments & Cards,Payment Gateway,96.894,313.1,99.95,Third-Party Outage,Y
+2024-09-26,Payments & Cards,Card Issuance System,99.982,1.8,99.5,,N
+2024-09-26,Payments & Cards,Wire Transfer System,99.777,22.5,99.9,,N
+2024-09-26,Mortgage & Lending,Loan Origination System,99.673,33.0,99.5,,N
+2024-09-26,Mortgage & Lending,Document Management System,99.974,2.6,99.5,,N
+2024-09-26,Digital Banking,Online Banking Portal,99.838,16.3,99.9,,N
+2024-09-26,Digital Banking,Mobile Banking App,99.398,60.7,99.9,Software Bug / Deployment Issue,Y
+2024-09-26,Digital Banking,Customer API Gateway,99.639,36.4,99.9,,N
+2024-09-26,Corporate IT & Infrastructure,Active Directory,99.681,32.2,99.5,,N
+2024-09-26,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.798,20.4,99.5,,N
+2024-09-26,Corporate IT & Infrastructure,Data Warehouse,99.781,22.1,99.5,,N
+2024-09-26,Corporate IT & Infrastructure,Email & Collaboration (O365),98.434,157.9,99.5,Maintenance Overrun,N
+2024-09-26,Corporate IT & Infrastructure,Endpoint Fleet,99.821,18.0,99.5,,N
+2024-10-03,Retail Banking,Core Banking System,99.974,2.6,99.95,,N
+2024-10-03,Retail Banking,Teller Platform,99.943,5.7,99.5,,N
+2024-10-03,Retail Banking,ATM Network,99.927,7.4,99.9,,N
+2024-10-03,Commercial Banking,Commercial Loan Platform,99.664,33.9,99.5,,N
+2024-10-03,Commercial Banking,Treasury Management System,99.939,6.1,99.5,,N
+2024-10-03,Wealth Management,Wealth Management Platform,99.812,19.0,99.5,,N
+2024-10-03,Wealth Management,Trading Platform,99.89,11.1,99.5,,N
+2024-10-03,Payments & Cards,Payment Gateway,99.71,29.2,99.95,,N
+2024-10-03,Payments & Cards,Card Issuance System,99.655,34.8,99.5,,N
+2024-10-03,Payments & Cards,Wire Transfer System,98.012,200.4,99.9,Security Incident - Containment,Y
+2024-10-03,Mortgage & Lending,Loan Origination System,99.888,11.3,99.5,,N
+2024-10-03,Mortgage & Lending,Document Management System,99.952,4.8,99.5,,N
+2024-10-03,Digital Banking,Online Banking Portal,99.713,28.9,99.9,,N
+2024-10-03,Digital Banking,Mobile Banking App,99.642,36.1,99.9,,N
+2024-10-03,Digital Banking,Customer API Gateway,99.725,27.7,99.9,,N
+2024-10-03,Corporate IT & Infrastructure,Active Directory,96.638,338.9,99.5,Network Failure,N
+2024-10-03,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.699,30.3,99.5,,N
+2024-10-03,Corporate IT & Infrastructure,Data Warehouse,99.723,27.9,99.5,,N
+2024-10-03,Corporate IT & Infrastructure,Email & Collaboration (O365),99.876,12.5,99.5,,N
+2024-10-03,Corporate IT & Infrastructure,Endpoint Fleet,99.043,96.5,99.5,Software Bug / Deployment Issue,N
+2024-10-10,Retail Banking,Core Banking System,97.781,223.7,99.95,Third-Party Outage,Y
+2024-10-10,Retail Banking,Teller Platform,99.704,29.8,99.5,,N
+2024-10-10,Retail Banking,ATM Network,99.639,36.4,99.9,,N
+2024-10-10,Commercial Banking,Commercial Loan Platform,99.804,19.8,99.5,,N
+2024-10-10,Commercial Banking,Treasury Management System,99.827,17.4,99.5,,N
+2024-10-10,Wealth Management,Wealth Management Platform,99.645,35.8,99.5,,N
+2024-10-10,Wealth Management,Trading Platform,99.771,23.1,99.5,,N
+2024-10-10,Payments & Cards,Payment Gateway,99.884,11.7,99.95,,N
+2024-10-10,Payments & Cards,Card Issuance System,98.828,118.1,99.5,Software Bug / Deployment Issue,N
+2024-10-10,Payments & Cards,Wire Transfer System,99.629,37.4,99.9,,N
+2024-10-10,Mortgage & Lending,Loan Origination System,99.945,5.5,99.5,,N
+2024-10-10,Mortgage & Lending,Document Management System,99.719,28.3,99.5,,N
+2024-10-10,Digital Banking,Online Banking Portal,99.823,17.8,99.9,,N
+2024-10-10,Digital Banking,Mobile Banking App,99.766,23.6,99.9,,N
+2024-10-10,Digital Banking,Customer API Gateway,99.789,21.3,99.9,,N
+2024-10-10,Corporate IT & Infrastructure,Active Directory,99.756,24.6,99.5,,N
+2024-10-10,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.966,3.4,99.5,,N
+2024-10-10,Corporate IT & Infrastructure,Data Warehouse,99.785,21.7,99.5,,N
+2024-10-10,Corporate IT & Infrastructure,Email & Collaboration (O365),99.906,9.5,99.5,,N
+2024-10-10,Corporate IT & Infrastructure,Endpoint Fleet,99.937,6.4,99.5,,N
+2024-10-17,Retail Banking,Core Banking System,99.859,14.2,99.95,,N
+2024-10-17,Retail Banking,Teller Platform,99.977,2.3,99.5,,N
+2024-10-17,Retail Banking,ATM Network,99.914,8.7,99.9,,N
+2024-10-17,Commercial Banking,Commercial Loan Platform,99.622,38.1,99.5,,N
+2024-10-17,Commercial Banking,Treasury Management System,99.86,14.1,99.5,,N
+2024-10-17,Wealth Management,Wealth Management Platform,99.757,24.5,99.5,,N
+2024-10-17,Wealth Management,Trading Platform,99.8,20.2,99.5,,N
+2024-10-17,Payments & Cards,Payment Gateway,99.746,25.6,99.95,,N
+2024-10-17,Payments & Cards,Card Issuance System,99.755,24.7,99.5,,N
+2024-10-17,Payments & Cards,Wire Transfer System,99.746,25.6,99.9,,N
+2024-10-17,Mortgage & Lending,Loan Origination System,99.784,21.8,99.5,,N
+2024-10-17,Mortgage & Lending,Document Management System,99.634,36.9,99.5,,N
+2024-10-17,Digital Banking,Online Banking Portal,99.715,28.7,99.9,,N
+2024-10-17,Digital Banking,Mobile Banking App,99.725,27.7,99.9,,N
+2024-10-17,Digital Banking,Customer API Gateway,99.71,29.2,99.9,,N
+2024-10-17,Corporate IT & Infrastructure,Active Directory,99.981,1.9,99.5,,N
+2024-10-17,Corporate IT & Infrastructure,Cloud Workloads (AWS),100.0,0.0,99.5,,N
+2024-10-17,Corporate IT & Infrastructure,Data Warehouse,99.666,33.7,99.5,,N
+2024-10-17,Corporate IT & Infrastructure,Email & Collaboration (O365),99.949,5.1,99.5,,N
+2024-10-17,Corporate IT & Infrastructure,Endpoint Fleet,99.754,24.8,99.5,,N
+2024-10-24,Retail Banking,Core Banking System,99.8,20.2,99.95,,N
+2024-10-24,Retail Banking,Teller Platform,99.694,30.8,99.5,,N
+2024-10-24,Retail Banking,ATM Network,99.658,34.5,99.9,,N
+2024-10-24,Commercial Banking,Commercial Loan Platform,99.883,11.8,99.5,,N
+2024-10-24,Commercial Banking,Treasury Management System,99.602,40.1,99.5,,N
+2024-10-24,Wealth Management,Wealth Management Platform,99.717,28.5,99.5,,N
+2024-10-24,Wealth Management,Trading Platform,99.869,13.2,99.5,,N
+2024-10-24,Payments & Cards,Payment Gateway,99.613,39.0,99.95,,N
+2024-10-24,Payments & Cards,Card Issuance System,99.925,7.6,99.5,,N
+2024-10-24,Payments & Cards,Wire Transfer System,99.947,5.3,99.9,,N
+2024-10-24,Mortgage & Lending,Loan Origination System,98.576,143.5,99.5,Security Incident - Containment,N
+2024-10-24,Mortgage & Lending,Document Management System,99.849,15.2,99.5,,N
+2024-10-24,Digital Banking,Online Banking Portal,99.913,8.8,99.9,,N
+2024-10-24,Digital Banking,Mobile Banking App,99.842,15.9,99.9,,N
+2024-10-24,Digital Banking,Customer API Gateway,98.816,119.3,99.9,Security Incident - Containment,Y
+2024-10-24,Corporate IT & Infrastructure,Active Directory,99.973,2.7,99.5,,N
+2024-10-24,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.796,20.6,99.5,,N
+2024-10-24,Corporate IT & Infrastructure,Data Warehouse,99.629,37.4,99.5,,N
+2024-10-24,Corporate IT & Infrastructure,Email & Collaboration (O365),99.665,33.8,99.5,,N
+2024-10-24,Corporate IT & Infrastructure,Endpoint Fleet,99.606,39.7,99.5,,N
+2024-10-31,Retail Banking,Core Banking System,99.983,1.7,99.95,,N
+2024-10-31,Retail Banking,Teller Platform,99.77,23.2,99.5,,N
+2024-10-31,Retail Banking,ATM Network,99.931,7.0,99.9,,N
+2024-10-31,Commercial Banking,Commercial Loan Platform,99.722,28.0,99.5,,N
+2024-10-31,Commercial Banking,Treasury Management System,99.936,6.5,99.5,,N
+2024-10-31,Wealth Management,Wealth Management Platform,99.91,9.1,99.5,,N
+2024-10-31,Wealth Management,Trading Platform,99.678,32.5,99.5,,N
+2024-10-31,Payments & Cards,Payment Gateway,99.803,19.9,99.95,,N
+2024-10-31,Payments & Cards,Card Issuance System,99.937,6.4,99.5,,N
+2024-10-31,Payments & Cards,Wire Transfer System,99.833,16.8,99.9,,N
+2024-10-31,Mortgage & Lending,Loan Origination System,99.825,17.6,99.5,,N
+2024-10-31,Mortgage & Lending,Document Management System,99.632,37.1,99.5,,N
+2024-10-31,Digital Banking,Online Banking Portal,99.633,37.0,99.9,,N
+2024-10-31,Digital Banking,Mobile Banking App,97.164,285.9,99.9,Third-Party Outage,Y
+2024-10-31,Digital Banking,Customer API Gateway,99.919,8.2,99.9,,N
+2024-10-31,Corporate IT & Infrastructure,Active Directory,99.882,11.9,99.5,,N
+2024-10-31,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.644,35.9,99.5,,N
+2024-10-31,Corporate IT & Infrastructure,Data Warehouse,99.982,1.8,99.5,,N
+2024-10-31,Corporate IT & Infrastructure,Email & Collaboration (O365),99.989,1.1,99.5,,N
+2024-10-31,Corporate IT & Infrastructure,Endpoint Fleet,99.627,37.6,99.5,,N
+2024-11-07,Retail Banking,Core Banking System,99.752,25.0,99.95,,N
+2024-11-07,Retail Banking,Teller Platform,99.708,29.4,99.5,,N
+2024-11-07,Retail Banking,ATM Network,99.818,18.3,99.9,,N
+2024-11-07,Commercial Banking,Commercial Loan Platform,99.876,12.5,99.5,,N
+2024-11-07,Commercial Banking,Treasury Management System,99.616,38.7,99.5,,N
+2024-11-07,Wealth Management,Wealth Management Platform,99.973,2.7,99.5,,N
+2024-11-07,Wealth Management,Trading Platform,99.964,3.6,99.5,,N
+2024-11-07,Payments & Cards,Payment Gateway,99.655,34.8,99.95,,N
+2024-11-07,Payments & Cards,Card Issuance System,98.607,140.4,99.5,DDoS Attack,N
+2024-11-07,Payments & Cards,Wire Transfer System,99.742,26.0,99.9,,N
+2024-11-07,Mortgage & Lending,Loan Origination System,99.92,8.1,99.5,,N
+2024-11-07,Mortgage & Lending,Document Management System,99.983,1.7,99.5,,N
+2024-11-07,Digital Banking,Online Banking Portal,99.761,24.1,99.9,,N
+2024-11-07,Digital Banking,Mobile Banking App,99.688,31.4,99.9,,N
+2024-11-07,Digital Banking,Customer API Gateway,99.79,21.2,99.9,,N
+2024-11-07,Corporate IT & Infrastructure,Active Directory,99.985,1.5,99.5,,N
+2024-11-07,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.822,17.9,99.5,,N
+2024-11-07,Corporate IT & Infrastructure,Data Warehouse,99.773,22.9,99.5,,N
+2024-11-07,Corporate IT & Infrastructure,Email & Collaboration (O365),99.894,10.7,99.5,,N
+2024-11-07,Corporate IT & Infrastructure,Endpoint Fleet,99.8,20.2,99.5,,N
+2024-11-14,Retail Banking,Core Banking System,99.73,27.2,99.95,,N
+2024-11-14,Retail Banking,Teller Platform,99.97,3.0,99.5,,N
+2024-11-14,Retail Banking,ATM Network,99.651,35.2,99.9,,N
+2024-11-14,Commercial Banking,Commercial Loan Platform,99.651,35.2,99.5,,N
+2024-11-14,Commercial Banking,Treasury Management System,99.927,7.4,99.5,,N
+2024-11-14,Wealth Management,Wealth Management Platform,99.788,21.4,99.5,,N
+2024-11-14,Wealth Management,Trading Platform,99.706,29.6,99.5,,N
+2024-11-14,Payments & Cards,Payment Gateway,99.989,1.1,99.95,,N
+2024-11-14,Payments & Cards,Card Issuance System,99.794,20.8,99.5,,N
+2024-11-14,Payments & Cards,Wire Transfer System,99.876,12.5,99.9,,N
+2024-11-14,Mortgage & Lending,Loan Origination System,99.943,5.7,99.5,,N
+2024-11-14,Mortgage & Lending,Document Management System,99.937,6.4,99.5,,N
+2024-11-14,Digital Banking,Online Banking Portal,99.964,3.6,99.9,,N
+2024-11-14,Digital Banking,Mobile Banking App,99.822,17.9,99.9,,N
+2024-11-14,Digital Banking,Customer API Gateway,99.892,10.9,99.9,,N
+2024-11-14,Corporate IT & Infrastructure,Active Directory,99.838,16.3,99.5,,N
+2024-11-14,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.887,11.4,99.5,,N
+2024-11-14,Corporate IT & Infrastructure,Data Warehouse,99.825,17.6,99.5,,N
+2024-11-14,Corporate IT & Infrastructure,Email & Collaboration (O365),99.955,4.5,99.5,,N
+2024-11-14,Corporate IT & Infrastructure,Endpoint Fleet,99.686,31.7,99.5,,N
+2024-11-21,Retail Banking,Core Banking System,99.962,3.8,99.95,,N
+2024-11-21,Retail Banking,Teller Platform,99.647,35.6,99.5,,N
+2024-11-21,Retail Banking,ATM Network,99.138,86.9,99.9,DDoS Attack,Y
+2024-11-21,Commercial Banking,Commercial Loan Platform,99.756,24.6,99.5,,N
+2024-11-21,Commercial Banking,Treasury Management System,99.835,16.6,99.5,,N
+2024-11-21,Wealth Management,Wealth Management Platform,96.892,313.3,99.5,Maintenance Overrun,N
+2024-11-21,Wealth Management,Trading Platform,99.795,20.7,99.5,,N
+2024-11-21,Payments & Cards,Payment Gateway,99.965,3.5,99.95,,N
+2024-11-21,Payments & Cards,Card Issuance System,99.827,17.4,99.5,,N
+2024-11-21,Payments & Cards,Wire Transfer System,99.685,31.8,99.9,,N
+2024-11-21,Mortgage & Lending,Loan Origination System,99.886,11.5,99.5,,N
+2024-11-21,Mortgage & Lending,Document Management System,99.691,31.1,99.5,,N
+2024-11-21,Digital Banking,Online Banking Portal,99.769,23.3,99.9,,N
+2024-11-21,Digital Banking,Mobile Banking App,99.723,27.9,99.9,,N
+2024-11-21,Digital Banking,Customer API Gateway,99.774,22.8,99.9,,N
+2024-11-21,Corporate IT & Infrastructure,Active Directory,99.78,22.2,99.5,,N
+2024-11-21,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.635,36.8,99.5,,N
+2024-11-21,Corporate IT & Infrastructure,Data Warehouse,99.928,7.3,99.5,,N
+2024-11-21,Corporate IT & Infrastructure,Email & Collaboration (O365),99.655,34.8,99.5,,N
+2024-11-21,Corporate IT & Infrastructure,Endpoint Fleet,99.87,13.1,99.5,,N
+2024-11-28,Retail Banking,Core Banking System,99.615,38.8,99.95,,N
+2024-11-28,Retail Banking,Teller Platform,99.629,37.4,99.5,,N
+2024-11-28,Retail Banking,ATM Network,99.899,10.2,99.9,,N
+2024-11-28,Commercial Banking,Commercial Loan Platform,99.89,11.1,99.5,,N
+2024-11-28,Commercial Banking,Treasury Management System,99.704,29.8,99.5,,N
+2024-11-28,Wealth Management,Wealth Management Platform,99.945,5.5,99.5,,N
+2024-11-28,Wealth Management,Trading Platform,99.774,22.8,99.5,,N
+2024-11-28,Payments & Cards,Payment Gateway,99.754,24.8,99.95,,N
+2024-11-28,Payments & Cards,Card Issuance System,99.647,35.6,99.5,,N
+2024-11-28,Payments & Cards,Wire Transfer System,96.568,345.9,99.9,Third-Party Outage,Y
+2024-11-28,Mortgage & Lending,Loan Origination System,99.911,9.0,99.5,,N
+2024-11-28,Mortgage & Lending,Document Management System,99.845,15.6,99.5,,N
+2024-11-28,Digital Banking,Online Banking Portal,99.657,34.6,99.9,,N
+2024-11-28,Digital Banking,Mobile Banking App,99.647,35.6,99.9,,N
+2024-11-28,Digital Banking,Customer API Gateway,99.742,26.0,99.9,,N
+2024-11-28,Corporate IT & Infrastructure,Active Directory,99.84,16.1,99.5,,N
+2024-11-28,Corporate IT & Infrastructure,Cloud Workloads (AWS),98.406,160.7,99.5,Network Failure,N
+2024-11-28,Corporate IT & Infrastructure,Data Warehouse,99.761,24.1,99.5,,N
+2024-11-28,Corporate IT & Infrastructure,Email & Collaboration (O365),99.064,94.3,99.5,Maintenance Overrun,N
+2024-11-28,Corporate IT & Infrastructure,Endpoint Fleet,99.837,16.4,99.5,,N
+2024-12-05,Retail Banking,Core Banking System,99.875,12.6,99.95,,N
+2024-12-05,Retail Banking,Teller Platform,99.857,14.4,99.5,,N
+2024-12-05,Retail Banking,ATM Network,99.873,12.8,99.9,,N
+2024-12-05,Commercial Banking,Commercial Loan Platform,99.669,33.4,99.5,,N
+2024-12-05,Commercial Banking,Treasury Management System,99.729,27.3,99.5,,N
+2024-12-05,Wealth Management,Wealth Management Platform,99.895,10.6,99.5,,N
+2024-12-05,Wealth Management,Trading Platform,99.684,31.9,99.5,,N
+2024-12-05,Payments & Cards,Payment Gateway,99.888,11.3,99.95,,N
+2024-12-05,Payments & Cards,Card Issuance System,96.959,306.5,99.5,Security Incident - Containment,N
+2024-12-05,Payments & Cards,Wire Transfer System,99.756,24.6,99.9,,N
+2024-12-05,Mortgage & Lending,Loan Origination System,99.673,33.0,99.5,,N
+2024-12-05,Mortgage & Lending,Document Management System,99.75,25.2,99.5,,N
+2024-12-05,Digital Banking,Online Banking Portal,99.682,32.1,99.9,,N
+2024-12-05,Digital Banking,Mobile Banking App,99.734,26.8,99.9,,N
+2024-12-05,Digital Banking,Customer API Gateway,99.704,29.8,99.9,,N
+2024-12-05,Corporate IT & Infrastructure,Active Directory,99.793,20.9,99.5,,N
+2024-12-05,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.919,8.2,99.5,,N
+2024-12-05,Corporate IT & Infrastructure,Data Warehouse,99.607,39.6,99.5,,N
+2024-12-05,Corporate IT & Infrastructure,Email & Collaboration (O365),99.626,37.7,99.5,,N
+2024-12-05,Corporate IT & Infrastructure,Endpoint Fleet,99.751,25.1,99.5,,N
+2024-12-12,Retail Banking,Core Banking System,96.565,346.2,99.95,Third-Party Outage,Y
+2024-12-12,Retail Banking,Teller Platform,99.642,36.1,99.5,,N
+2024-12-12,Retail Banking,ATM Network,99.798,20.4,99.9,,N
+2024-12-12,Commercial Banking,Commercial Loan Platform,99.652,35.1,99.5,,N
+2024-12-12,Commercial Banking,Treasury Management System,99.853,14.8,99.5,,N
+2024-12-12,Wealth Management,Wealth Management Platform,99.709,29.3,99.5,,N
+2024-12-12,Wealth Management,Trading Platform,99.902,9.9,99.5,,N
+2024-12-12,Payments & Cards,Payment Gateway,99.935,6.6,99.95,,N
+2024-12-12,Payments & Cards,Card Issuance System,99.958,4.2,99.5,,N
+2024-12-12,Payments & Cards,Wire Transfer System,99.797,20.5,99.9,,N
+2024-12-12,Mortgage & Lending,Loan Origination System,99.722,28.0,99.5,,N
+2024-12-12,Mortgage & Lending,Document Management System,99.699,30.3,99.5,,N
+2024-12-12,Digital Banking,Online Banking Portal,99.673,33.0,99.9,,N
+2024-12-12,Digital Banking,Mobile Banking App,99.919,8.2,99.9,,N
+2024-12-12,Digital Banking,Customer API Gateway,99.724,27.8,99.9,,N
+2024-12-12,Corporate IT & Infrastructure,Active Directory,99.886,11.5,99.5,,N
+2024-12-12,Corporate IT & Infrastructure,Cloud Workloads (AWS),97.32,270.1,99.5,DDoS Attack,N
+2024-12-12,Corporate IT & Infrastructure,Data Warehouse,99.716,28.6,99.5,,N
+2024-12-12,Corporate IT & Infrastructure,Email & Collaboration (O365),99.836,16.5,99.5,,N
+2024-12-12,Corporate IT & Infrastructure,Endpoint Fleet,99.23,77.6,99.5,Third-Party Outage,N
+2024-12-19,Retail Banking,Core Banking System,98.358,165.5,99.95,Maintenance Overrun,Y
+2024-12-19,Retail Banking,Teller Platform,99.771,23.1,99.5,,N
+2024-12-19,Retail Banking,ATM Network,99.732,27.0,99.9,,N
+2024-12-19,Commercial Banking,Commercial Loan Platform,99.797,20.5,99.5,,N
+2024-12-19,Commercial Banking,Treasury Management System,99.663,34.0,99.5,,N
+2024-12-19,Wealth Management,Wealth Management Platform,99.721,28.1,99.5,,N
+2024-12-19,Wealth Management,Trading Platform,99.96,4.0,99.5,,N
+2024-12-19,Payments & Cards,Payment Gateway,99.639,36.4,99.95,,N
+2024-12-19,Payments & Cards,Card Issuance System,99.817,18.4,99.5,,N
+2024-12-19,Payments & Cards,Wire Transfer System,99.94,6.0,99.9,,N
+2024-12-19,Mortgage & Lending,Loan Origination System,99.895,10.6,99.5,,N
+2024-12-19,Mortgage & Lending,Document Management System,99.882,11.9,99.5,,N
+2024-12-19,Digital Banking,Online Banking Portal,99.985,1.5,99.9,,N
+2024-12-19,Digital Banking,Mobile Banking App,99.823,17.8,99.9,,N
+2024-12-19,Digital Banking,Customer API Gateway,99.763,23.9,99.9,,N
+2024-12-19,Corporate IT & Infrastructure,Active Directory,99.985,1.5,99.5,,N
+2024-12-19,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.647,35.6,99.5,,N
+2024-12-19,Corporate IT & Infrastructure,Data Warehouse,98.19,182.4,99.5,Network Failure,N
+2024-12-19,Corporate IT & Infrastructure,Email & Collaboration (O365),99.815,18.6,99.5,,N
+2024-12-19,Corporate IT & Infrastructure,Endpoint Fleet,99.792,21.0,99.5,,N
+2024-12-26,Retail Banking,Core Banking System,99.668,33.5,99.95,,N
+2024-12-26,Retail Banking,Teller Platform,99.803,19.9,99.5,,N
+2024-12-26,Retail Banking,ATM Network,99.605,39.8,99.9,,N
+2024-12-26,Commercial Banking,Commercial Loan Platform,99.723,27.9,99.5,,N
+2024-12-26,Commercial Banking,Treasury Management System,99.628,37.5,99.5,,N
+2024-12-26,Wealth Management,Wealth Management Platform,99.719,28.3,99.5,,N
+2024-12-26,Wealth Management,Trading Platform,99.096,91.1,99.5,Hardware Failure,N
+2024-12-26,Payments & Cards,Payment Gateway,99.816,18.5,99.95,,N
+2024-12-26,Payments & Cards,Card Issuance System,99.763,23.9,99.5,,N
+2024-12-26,Payments & Cards,Wire Transfer System,99.808,19.4,99.9,,N
+2024-12-26,Mortgage & Lending,Loan Origination System,99.693,30.9,99.5,,N
+2024-12-26,Mortgage & Lending,Document Management System,99.731,27.1,99.5,,N
+2024-12-26,Digital Banking,Online Banking Portal,99.713,28.9,99.9,,N
+2024-12-26,Digital Banking,Mobile Banking App,99.835,16.6,99.9,,N
+2024-12-26,Digital Banking,Customer API Gateway,99.838,16.3,99.9,,N
+2024-12-26,Corporate IT & Infrastructure,Active Directory,99.972,2.8,99.5,,N
+2024-12-26,Corporate IT & Infrastructure,Cloud Workloads (AWS),97.473,254.7,99.5,Maintenance Overrun,N
+2024-12-26,Corporate IT & Infrastructure,Data Warehouse,99.734,26.8,99.5,,N
+2024-12-26,Corporate IT & Infrastructure,Email & Collaboration (O365),99.686,31.7,99.5,,N
+2024-12-26,Corporate IT & Infrastructure,Endpoint Fleet,99.993,0.7,99.5,,N
+2025-01-02,Retail Banking,Core Banking System,99.945,5.5,99.95,,N
+2025-01-02,Retail Banking,Teller Platform,99.879,12.2,99.5,,N
+2025-01-02,Retail Banking,ATM Network,99.618,38.5,99.9,,N
+2025-01-02,Commercial Banking,Commercial Loan Platform,99.731,27.1,99.5,,N
+2025-01-02,Commercial Banking,Treasury Management System,99.903,9.8,99.5,,N
+2025-01-02,Wealth Management,Wealth Management Platform,99.937,6.4,99.5,,N
+2025-01-02,Wealth Management,Trading Platform,99.601,40.2,99.5,,N
+2025-01-02,Payments & Cards,Payment Gateway,99.819,18.2,99.95,,N
+2025-01-02,Payments & Cards,Card Issuance System,99.627,37.6,99.5,,N
+2025-01-02,Payments & Cards,Wire Transfer System,99.886,11.5,99.9,,N
+2025-01-02,Mortgage & Lending,Loan Origination System,99.612,39.1,99.5,,N
+2025-01-02,Mortgage & Lending,Document Management System,99.662,34.1,99.5,,N
+2025-01-02,Digital Banking,Online Banking Portal,99.636,36.7,99.9,,N
+2025-01-02,Digital Banking,Mobile Banking App,99.748,25.4,99.9,,N
+2025-01-02,Digital Banking,Customer API Gateway,99.888,11.3,99.9,,N
+2025-01-02,Corporate IT & Infrastructure,Active Directory,99.971,2.9,99.5,,N
+2025-01-02,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.955,4.5,99.5,,N
+2025-01-02,Corporate IT & Infrastructure,Data Warehouse,99.626,37.7,99.5,,N
+2025-01-02,Corporate IT & Infrastructure,Email & Collaboration (O365),99.16,84.7,99.5,DDoS Attack,N
+2025-01-02,Corporate IT & Infrastructure,Endpoint Fleet,99.814,18.7,99.5,,N
+2025-01-09,Retail Banking,Core Banking System,99.892,10.9,99.95,,N
+2025-01-09,Retail Banking,Teller Platform,99.804,19.8,99.5,,N
+2025-01-09,Retail Banking,ATM Network,99.945,5.5,99.9,,N
+2025-01-09,Commercial Banking,Commercial Loan Platform,98.479,153.3,99.5,Security Incident - Containment,N
+2025-01-09,Commercial Banking,Treasury Management System,99.662,34.1,99.5,,N
+2025-01-09,Wealth Management,Wealth Management Platform,98.54,147.2,99.5,Hardware Failure,N
+2025-01-09,Wealth Management,Trading Platform,99.896,10.5,99.5,,N
+2025-01-09,Payments & Cards,Payment Gateway,99.933,6.8,99.95,,N
+2025-01-09,Payments & Cards,Card Issuance System,99.754,24.8,99.5,,N
+2025-01-09,Payments & Cards,Wire Transfer System,99.947,5.3,99.9,,N
+2025-01-09,Mortgage & Lending,Loan Origination System,99.926,7.5,99.5,,N
+2025-01-09,Mortgage & Lending,Document Management System,99.642,36.1,99.5,,N
+2025-01-09,Digital Banking,Online Banking Portal,99.631,37.2,99.9,,N
+2025-01-09,Digital Banking,Mobile Banking App,99.813,18.8,99.9,,N
+2025-01-09,Digital Banking,Customer API Gateway,99.766,23.6,99.9,,N
+2025-01-09,Corporate IT & Infrastructure,Active Directory,99.67,33.3,99.5,,N
+2025-01-09,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.707,29.5,99.5,,N
+2025-01-09,Corporate IT & Infrastructure,Data Warehouse,99.902,9.9,99.5,,N
+2025-01-09,Corporate IT & Infrastructure,Email & Collaboration (O365),99.882,11.9,99.5,,N
+2025-01-09,Corporate IT & Infrastructure,Endpoint Fleet,99.908,9.3,99.5,,N
+2025-01-16,Retail Banking,Core Banking System,99.779,22.3,99.95,,N
+2025-01-16,Retail Banking,Teller Platform,99.974,2.6,99.5,,N
+2025-01-16,Retail Banking,ATM Network,99.739,26.3,99.9,,N
+2025-01-16,Commercial Banking,Commercial Loan Platform,99.796,20.6,99.5,,N
+2025-01-16,Commercial Banking,Treasury Management System,99.739,26.3,99.5,,N
+2025-01-16,Wealth Management,Wealth Management Platform,99.88,12.1,99.5,,N
+2025-01-16,Wealth Management,Trading Platform,99.983,1.7,99.5,,N
+2025-01-16,Payments & Cards,Payment Gateway,99.92,8.1,99.95,,N
+2025-01-16,Payments & Cards,Card Issuance System,99.613,39.0,99.5,,N
+2025-01-16,Payments & Cards,Wire Transfer System,99.816,18.5,99.9,,N
+2025-01-16,Mortgage & Lending,Loan Origination System,99.77,23.2,99.5,,N
+2025-01-16,Mortgage & Lending,Document Management System,99.838,16.3,99.5,,N
+2025-01-16,Digital Banking,Online Banking Portal,99.846,15.5,99.9,,N
+2025-01-16,Digital Banking,Mobile Banking App,99.89,11.1,99.9,,N
+2025-01-16,Digital Banking,Customer API Gateway,99.954,4.6,99.9,,N
+2025-01-16,Corporate IT & Infrastructure,Active Directory,99.637,36.6,99.5,,N
+2025-01-16,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.73,27.2,99.5,,N
+2025-01-16,Corporate IT & Infrastructure,Data Warehouse,99.961,3.9,99.5,,N
+2025-01-16,Corporate IT & Infrastructure,Email & Collaboration (O365),97.937,208.0,99.5,Maintenance Overrun,N
+2025-01-16,Corporate IT & Infrastructure,Endpoint Fleet,99.829,17.2,99.5,,N
+2025-01-23,Retail Banking,Core Banking System,99.919,8.2,99.95,,N
+2025-01-23,Retail Banking,Teller Platform,99.848,15.3,99.5,,N
+2025-01-23,Retail Banking,ATM Network,99.97,3.0,99.9,,N
+2025-01-23,Commercial Banking,Commercial Loan Platform,99.615,38.8,99.5,,N
+2025-01-23,Commercial Banking,Treasury Management System,99.798,20.4,99.5,,N
+2025-01-23,Wealth Management,Wealth Management Platform,99.731,27.1,99.5,,N
+2025-01-23,Wealth Management,Trading Platform,99.745,25.7,99.5,,N
+2025-01-23,Payments & Cards,Payment Gateway,99.732,27.0,99.95,,N
+2025-01-23,Payments & Cards,Card Issuance System,99.876,12.5,99.5,,N
+2025-01-23,Payments & Cards,Wire Transfer System,99.714,28.8,99.9,,N
+2025-01-23,Mortgage & Lending,Loan Origination System,99.958,4.2,99.5,,N
+2025-01-23,Mortgage & Lending,Document Management System,99.882,11.9,99.5,,N
+2025-01-23,Digital Banking,Online Banking Portal,97.318,270.3,99.9,Software Bug / Deployment Issue,Y
+2025-01-23,Digital Banking,Mobile Banking App,99.918,8.3,99.9,,N
+2025-01-23,Digital Banking,Customer API Gateway,99.88,12.1,99.9,,N
+2025-01-23,Corporate IT & Infrastructure,Active Directory,99.893,10.8,99.5,,N
+2025-01-23,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.648,35.5,99.5,,N
+2025-01-23,Corporate IT & Infrastructure,Data Warehouse,99.969,3.1,99.5,,N
+2025-01-23,Corporate IT & Infrastructure,Email & Collaboration (O365),97.407,261.4,99.5,Security Incident - Containment,N
+2025-01-23,Corporate IT & Infrastructure,Endpoint Fleet,99.624,37.9,99.5,,N
+2025-01-30,Retail Banking,Core Banking System,99.941,5.9,99.95,,N
+2025-01-30,Retail Banking,Teller Platform,99.756,24.6,99.5,,N
+2025-01-30,Retail Banking,ATM Network,99.762,24.0,99.9,,N
+2025-01-30,Commercial Banking,Commercial Loan Platform,99.891,11.0,99.5,,N
+2025-01-30,Commercial Banking,Treasury Management System,99.639,36.4,99.5,,N
+2025-01-30,Wealth Management,Wealth Management Platform,99.746,25.6,99.5,,N
+2025-01-30,Wealth Management,Trading Platform,99.804,19.8,99.5,,N
+2025-01-30,Payments & Cards,Payment Gateway,99.696,30.6,99.95,,N
+2025-01-30,Payments & Cards,Card Issuance System,99.252,75.4,99.5,Software Bug / Deployment Issue,N
+2025-01-30,Payments & Cards,Wire Transfer System,99.97,3.0,99.9,,N
+2025-01-30,Mortgage & Lending,Loan Origination System,99.85,15.1,99.5,,N
+2025-01-30,Mortgage & Lending,Document Management System,99.861,14.0,99.5,,N
+2025-01-30,Digital Banking,Online Banking Portal,99.778,22.4,99.9,,N
+2025-01-30,Digital Banking,Mobile Banking App,99.224,78.2,99.9,Hardware Failure,Y
+2025-01-30,Digital Banking,Customer API Gateway,96.655,337.2,99.9,Security Incident - Containment,Y
+2025-01-30,Corporate IT & Infrastructure,Active Directory,99.627,37.6,99.5,,N
+2025-01-30,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.662,34.1,99.5,,N
+2025-01-30,Corporate IT & Infrastructure,Data Warehouse,99.893,10.8,99.5,,N
+2025-01-30,Corporate IT & Infrastructure,Email & Collaboration (O365),99.67,33.3,99.5,,N
+2025-01-30,Corporate IT & Infrastructure,Endpoint Fleet,99.811,19.1,99.5,,N
+2025-02-06,Retail Banking,Core Banking System,99.737,26.5,99.95,,N
+2025-02-06,Retail Banking,Teller Platform,99.614,38.9,99.5,,N
+2025-02-06,Retail Banking,ATM Network,99.681,32.2,99.9,,N
+2025-02-06,Commercial Banking,Commercial Loan Platform,99.829,17.2,99.5,,N
+2025-02-06,Commercial Banking,Treasury Management System,99.953,4.7,99.5,,N
+2025-02-06,Wealth Management,Wealth Management Platform,99.621,38.2,99.5,,N
+2025-02-06,Wealth Management,Trading Platform,99.98,2.0,99.5,,N
+2025-02-06,Payments & Cards,Payment Gateway,99.986,1.4,99.95,,N
+2025-02-06,Payments & Cards,Card Issuance System,99.059,94.9,99.5,DDoS Attack,N
+2025-02-06,Payments & Cards,Wire Transfer System,99.986,1.4,99.9,,N
+2025-02-06,Mortgage & Lending,Loan Origination System,99.723,27.9,99.5,,N
+2025-02-06,Mortgage & Lending,Document Management System,99.712,29.0,99.5,,N
+2025-02-06,Digital Banking,Online Banking Portal,99.714,28.8,99.9,,N
+2025-02-06,Digital Banking,Mobile Banking App,99.772,23.0,99.9,,N
+2025-02-06,Digital Banking,Customer API Gateway,99.823,17.8,99.9,,N
+2025-02-06,Corporate IT & Infrastructure,Active Directory,99.826,17.5,99.5,,N
+2025-02-06,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.876,12.5,99.5,,N
+2025-02-06,Corporate IT & Infrastructure,Data Warehouse,99.76,24.2,99.5,,N
+2025-02-06,Corporate IT & Infrastructure,Email & Collaboration (O365),99.974,2.6,99.5,,N
+2025-02-06,Corporate IT & Infrastructure,Endpoint Fleet,99.966,3.4,99.5,,N
+2025-02-13,Retail Banking,Core Banking System,99.993,0.7,99.95,,N
+2025-02-13,Retail Banking,Teller Platform,96.685,334.2,99.5,Software Bug / Deployment Issue,N
+2025-02-13,Retail Banking,ATM Network,99.767,23.5,99.9,,N
+2025-02-13,Commercial Banking,Commercial Loan Platform,99.86,14.1,99.5,,N
+2025-02-13,Commercial Banking,Treasury Management System,99.62,38.3,99.5,,N
+2025-02-13,Wealth Management,Wealth Management Platform,99.719,28.3,99.5,,N
+2025-02-13,Wealth Management,Trading Platform,99.933,6.8,99.5,,N
+2025-02-13,Payments & Cards,Payment Gateway,97.355,266.6,99.95,Network Failure,Y
+2025-02-13,Payments & Cards,Card Issuance System,99.828,17.3,99.5,,N
+2025-02-13,Payments & Cards,Wire Transfer System,99.71,29.2,99.9,,N
+2025-02-13,Mortgage & Lending,Loan Origination System,99.942,5.8,99.5,,N
+2025-02-13,Mortgage & Lending,Document Management System,99.782,22.0,99.5,,N
+2025-02-13,Digital Banking,Online Banking Portal,99.905,9.6,99.9,,N
+2025-02-13,Digital Banking,Mobile Banking App,99.699,30.3,99.9,,N
+2025-02-13,Digital Banking,Customer API Gateway,99.615,38.8,99.9,,N
+2025-02-13,Corporate IT & Infrastructure,Active Directory,99.854,14.7,99.5,,N
+2025-02-13,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.662,34.1,99.5,,N
+2025-02-13,Corporate IT & Infrastructure,Data Warehouse,99.629,37.4,99.5,,N
+2025-02-13,Corporate IT & Infrastructure,Email & Collaboration (O365),99.647,35.6,99.5,,N
+2025-02-13,Corporate IT & Infrastructure,Endpoint Fleet,99.677,32.6,99.5,,N
+2025-02-20,Retail Banking,Core Banking System,99.697,30.5,99.95,,N
+2025-02-20,Retail Banking,Teller Platform,99.917,8.4,99.5,,N
+2025-02-20,Retail Banking,ATM Network,99.914,8.7,99.9,,N
+2025-02-20,Commercial Banking,Commercial Loan Platform,99.653,35.0,99.5,,N
+2025-02-20,Commercial Banking,Treasury Management System,99.917,8.4,99.5,,N
+2025-02-20,Wealth Management,Wealth Management Platform,99.85,15.1,99.5,,N
+2025-02-20,Wealth Management,Trading Platform,99.898,10.3,99.5,,N
+2025-02-20,Payments & Cards,Payment Gateway,99.768,23.4,99.95,,N
+2025-02-20,Payments & Cards,Card Issuance System,99.798,20.4,99.5,,N
+2025-02-20,Payments & Cards,Wire Transfer System,99.946,5.4,99.9,,N
+2025-02-20,Mortgage & Lending,Loan Origination System,99.746,25.6,99.5,,N
+2025-02-20,Mortgage & Lending,Document Management System,99.609,39.4,99.5,,N
+2025-02-20,Digital Banking,Online Banking Portal,99.94,6.0,99.9,,N
+2025-02-20,Digital Banking,Mobile Banking App,99.908,9.3,99.9,,N
+2025-02-20,Digital Banking,Customer API Gateway,99.908,9.3,99.9,,N
+2025-02-20,Corporate IT & Infrastructure,Active Directory,99.838,16.3,99.5,,N
+2025-02-20,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.69,31.2,99.5,,N
+2025-02-20,Corporate IT & Infrastructure,Data Warehouse,99.789,21.3,99.5,,N
+2025-02-20,Corporate IT & Infrastructure,Email & Collaboration (O365),99.903,9.8,99.5,,N
+2025-02-20,Corporate IT & Infrastructure,Endpoint Fleet,99.7,30.2,99.5,,N
+2025-02-27,Retail Banking,Core Banking System,99.796,20.6,99.95,,N
+2025-02-27,Retail Banking,Teller Platform,99.701,30.1,99.5,,N
+2025-02-27,Retail Banking,ATM Network,99.747,25.5,99.9,,N
+2025-02-27,Commercial Banking,Commercial Loan Platform,99.91,9.1,99.5,,N
+2025-02-27,Commercial Banking,Treasury Management System,96.583,344.4,99.5,DDoS Attack,N
+2025-02-27,Wealth Management,Wealth Management Platform,99.625,37.8,99.5,,N
+2025-02-27,Wealth Management,Trading Platform,99.632,37.1,99.5,,N
+2025-02-27,Payments & Cards,Payment Gateway,99.895,10.6,99.95,,N
+2025-02-27,Payments & Cards,Card Issuance System,99.632,37.1,99.5,,N
+2025-02-27,Payments & Cards,Wire Transfer System,99.71,29.2,99.9,,N
+2025-02-27,Mortgage & Lending,Loan Origination System,99.791,21.1,99.5,,N
+2025-02-27,Mortgage & Lending,Document Management System,99.737,26.5,99.5,,N
+2025-02-27,Digital Banking,Online Banking Portal,99.673,33.0,99.9,,N
+2025-02-27,Digital Banking,Mobile Banking App,99.827,17.4,99.9,,N
+2025-02-27,Digital Banking,Customer API Gateway,99.8,20.2,99.9,,N
+2025-02-27,Corporate IT & Infrastructure,Active Directory,99.673,33.0,99.5,,N
+2025-02-27,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.788,21.4,99.5,,N
+2025-02-27,Corporate IT & Infrastructure,Data Warehouse,99.868,13.3,99.5,,N
+2025-02-27,Corporate IT & Infrastructure,Email & Collaboration (O365),99.807,19.5,99.5,,N
+2025-02-27,Corporate IT & Infrastructure,Endpoint Fleet,99.93,7.1,99.5,,N
+2025-03-06,Retail Banking,Core Banking System,99.803,19.9,99.95,,N
+2025-03-06,Retail Banking,Teller Platform,99.652,35.1,99.5,,N
+2025-03-06,Retail Banking,ATM Network,99.714,28.8,99.9,,N
+2025-03-06,Commercial Banking,Commercial Loan Platform,99.646,35.7,99.5,,N
+2025-03-06,Commercial Banking,Treasury Management System,99.829,17.2,99.5,,N
+2025-03-06,Wealth Management,Wealth Management Platform,99.851,15.0,99.5,,N
+2025-03-06,Wealth Management,Trading Platform,99.623,38.0,99.5,,N
+2025-03-06,Payments & Cards,Payment Gateway,99.605,39.8,99.95,,N
+2025-03-06,Payments & Cards,Card Issuance System,99.906,9.5,99.5,,N
+2025-03-06,Payments & Cards,Wire Transfer System,99.895,10.6,99.9,,N
+2025-03-06,Mortgage & Lending,Loan Origination System,99.963,3.7,99.5,,N
+2025-03-06,Mortgage & Lending,Document Management System,99.817,18.4,99.5,,N
+2025-03-06,Digital Banking,Online Banking Portal,99.627,37.6,99.9,,N
+2025-03-06,Digital Banking,Mobile Banking App,99.98,2.0,99.9,,N
+2025-03-06,Digital Banking,Customer API Gateway,99.813,18.8,99.9,,N
+2025-03-06,Corporate IT & Infrastructure,Active Directory,99.918,8.3,99.5,,N
+2025-03-06,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.786,21.6,99.5,,N
+2025-03-06,Corporate IT & Infrastructure,Data Warehouse,99.704,29.8,99.5,,N
+2025-03-06,Corporate IT & Infrastructure,Email & Collaboration (O365),96.675,335.2,99.5,Software Bug / Deployment Issue,N
+2025-03-06,Corporate IT & Infrastructure,Endpoint Fleet,99.7,30.2,99.5,,N
+2025-03-13,Retail Banking,Core Banking System,99.982,1.8,99.95,,N
+2025-03-13,Retail Banking,Teller Platform,99.665,33.8,99.5,,N
+2025-03-13,Retail Banking,ATM Network,99.72,28.2,99.9,,N
+2025-03-13,Commercial Banking,Commercial Loan Platform,99.689,31.3,99.5,,N
+2025-03-13,Commercial Banking,Treasury Management System,99.719,28.3,99.5,,N
+2025-03-13,Wealth Management,Wealth Management Platform,99.874,12.7,99.5,,N
+2025-03-13,Wealth Management,Trading Platform,99.949,5.1,99.5,,N
+2025-03-13,Payments & Cards,Payment Gateway,99.689,31.3,99.95,,N
+2025-03-13,Payments & Cards,Card Issuance System,99.684,31.9,99.5,,N
+2025-03-13,Payments & Cards,Wire Transfer System,99.861,14.0,99.9,,N
+2025-03-13,Mortgage & Lending,Loan Origination System,99.834,16.7,99.5,,N
+2025-03-13,Mortgage & Lending,Document Management System,99.959,4.1,99.5,,N
+2025-03-13,Digital Banking,Online Banking Portal,99.728,27.4,99.9,,N
+2025-03-13,Digital Banking,Mobile Banking App,99.79,21.2,99.9,,N
+2025-03-13,Digital Banking,Customer API Gateway,99.672,33.1,99.9,,N
+2025-03-13,Corporate IT & Infrastructure,Active Directory,99.904,9.7,99.5,,N
+2025-03-13,Corporate IT & Infrastructure,Cloud Workloads (AWS),97.335,268.6,99.5,Software Bug / Deployment Issue,N
+2025-03-13,Corporate IT & Infrastructure,Data Warehouse,99.738,26.4,99.5,,N
+2025-03-13,Corporate IT & Infrastructure,Email & Collaboration (O365),99.964,3.6,99.5,,N
+2025-03-13,Corporate IT & Infrastructure,Endpoint Fleet,99.762,24.0,99.5,,N
+2025-03-20,Retail Banking,Core Banking System,99.729,27.3,99.95,,N
+2025-03-20,Retail Banking,Teller Platform,99.98,2.0,99.5,,N
+2025-03-20,Retail Banking,ATM Network,99.74,26.2,99.9,,N
+2025-03-20,Commercial Banking,Commercial Loan Platform,99.994,0.6,99.5,,N
+2025-03-20,Commercial Banking,Treasury Management System,99.894,10.7,99.5,,N
+2025-03-20,Wealth Management,Wealth Management Platform,99.812,19.0,99.5,,N
+2025-03-20,Wealth Management,Trading Platform,99.625,37.8,99.5,,N
+2025-03-20,Payments & Cards,Payment Gateway,99.789,21.3,99.95,,N
+2025-03-20,Payments & Cards,Card Issuance System,99.701,30.1,99.5,,N
+2025-03-20,Payments & Cards,Wire Transfer System,99.831,17.0,99.9,,N
+2025-03-20,Mortgage & Lending,Loan Origination System,99.988,1.2,99.5,,N
+2025-03-20,Mortgage & Lending,Document Management System,99.882,11.9,99.5,,N
+2025-03-20,Digital Banking,Online Banking Portal,99.926,7.5,99.9,,N
+2025-03-20,Digital Banking,Mobile Banking App,99.945,5.5,99.9,,N
+2025-03-20,Digital Banking,Customer API Gateway,99.689,31.3,99.9,,N
+2025-03-20,Corporate IT & Infrastructure,Active Directory,98.045,197.1,99.5,DDoS Attack,N
+2025-03-20,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.934,6.7,99.5,,N
+2025-03-20,Corporate IT & Infrastructure,Data Warehouse,99.675,32.8,99.5,,N
+2025-03-20,Corporate IT & Infrastructure,Email & Collaboration (O365),99.908,9.3,99.5,,N
+2025-03-20,Corporate IT & Infrastructure,Endpoint Fleet,99.967,3.3,99.5,,N
+2025-03-27,Retail Banking,Core Banking System,99.984,1.6,99.95,,N
+2025-03-27,Retail Banking,Teller Platform,99.768,23.4,99.5,,N
+2025-03-27,Retail Banking,ATM Network,99.637,36.6,99.9,,N
+2025-03-27,Commercial Banking,Commercial Loan Platform,99.782,22.0,99.5,,N
+2025-03-27,Commercial Banking,Treasury Management System,99.64,36.3,99.5,,N
+2025-03-27,Wealth Management,Wealth Management Platform,98.801,120.9,99.5,Maintenance Overrun,N
+2025-03-27,Wealth Management,Trading Platform,99.854,14.7,99.5,,N
+2025-03-27,Payments & Cards,Payment Gateway,99.993,0.7,99.95,,N
+2025-03-27,Payments & Cards,Card Issuance System,99.73,27.2,99.5,,N
+2025-03-27,Payments & Cards,Wire Transfer System,99.861,14.0,99.9,,N
+2025-03-27,Mortgage & Lending,Loan Origination System,99.997,0.3,99.5,,N
+2025-03-27,Mortgage & Lending,Document Management System,99.713,28.9,99.5,,N
+2025-03-27,Digital Banking,Online Banking Portal,99.95,5.0,99.9,,N
+2025-03-27,Digital Banking,Mobile Banking App,99.864,13.7,99.9,,N
+2025-03-27,Digital Banking,Customer API Gateway,99.63,37.3,99.9,,N
+2025-03-27,Corporate IT & Infrastructure,Active Directory,97.242,278.0,99.5,Software Bug / Deployment Issue,N
+2025-03-27,Corporate IT & Infrastructure,Cloud Workloads (AWS),98.772,123.8,99.5,Network Failure,N
+2025-03-27,Corporate IT & Infrastructure,Data Warehouse,99.822,17.9,99.5,,N
+2025-03-27,Corporate IT & Infrastructure,Email & Collaboration (O365),98.071,194.4,99.5,Third-Party Outage,N
+2025-03-27,Corporate IT & Infrastructure,Endpoint Fleet,99.732,27.0,99.5,,N
+2025-04-03,Retail Banking,Core Banking System,99.631,37.2,99.95,,N
+2025-04-03,Retail Banking,Teller Platform,99.849,15.2,99.5,,N
+2025-04-03,Retail Banking,ATM Network,99.751,25.1,99.9,,N
+2025-04-03,Commercial Banking,Commercial Loan Platform,99.95,5.0,99.5,,N
+2025-04-03,Commercial Banking,Treasury Management System,99.974,2.6,99.5,,N
+2025-04-03,Wealth Management,Wealth Management Platform,99.754,24.8,99.5,,N
+2025-04-03,Wealth Management,Trading Platform,99.829,17.2,99.5,,N
+2025-04-03,Payments & Cards,Payment Gateway,99.872,12.9,99.95,,N
+2025-04-03,Payments & Cards,Card Issuance System,99.744,25.8,99.5,,N
+2025-04-03,Payments & Cards,Wire Transfer System,99.825,17.6,99.9,,N
+2025-04-03,Mortgage & Lending,Loan Origination System,99.606,39.7,99.5,,N
+2025-04-03,Mortgage & Lending,Document Management System,99.823,17.8,99.5,,N
+2025-04-03,Digital Banking,Online Banking Portal,99.787,21.5,99.9,,N
+2025-04-03,Digital Banking,Mobile Banking App,99.747,25.5,99.9,,N
+2025-04-03,Digital Banking,Customer API Gateway,99.763,23.9,99.9,,N
+2025-04-03,Corporate IT & Infrastructure,Active Directory,99.848,15.3,99.5,,N
+2025-04-03,Corporate IT & Infrastructure,Cloud Workloads (AWS),97.895,212.2,99.5,Third-Party Outage,N
+2025-04-03,Corporate IT & Infrastructure,Data Warehouse,99.842,15.9,99.5,,N
+2025-04-03,Corporate IT & Infrastructure,Email & Collaboration (O365),99.684,31.9,99.5,,N
+2025-04-03,Corporate IT & Infrastructure,Endpoint Fleet,99.841,16.0,99.5,,N
+2025-04-10,Retail Banking,Core Banking System,99.767,23.5,99.95,,N
+2025-04-10,Retail Banking,Teller Platform,99.957,4.3,99.5,,N
+2025-04-10,Retail Banking,ATM Network,99.916,8.5,99.9,,N
+2025-04-10,Commercial Banking,Commercial Loan Platform,99.628,37.5,99.5,,N
+2025-04-10,Commercial Banking,Treasury Management System,99.605,39.8,99.5,,N
+2025-04-10,Wealth Management,Wealth Management Platform,99.618,38.5,99.5,,N
+2025-04-10,Wealth Management,Trading Platform,99.963,3.7,99.5,,N
+2025-04-10,Payments & Cards,Payment Gateway,99.652,35.1,99.95,,N
+2025-04-10,Payments & Cards,Card Issuance System,99.872,12.9,99.5,,N
+2025-04-10,Payments & Cards,Wire Transfer System,99.837,16.4,99.9,,N
+2025-04-10,Mortgage & Lending,Loan Origination System,99.625,37.8,99.5,,N
+2025-04-10,Mortgage & Lending,Document Management System,99.734,26.8,99.5,,N
+2025-04-10,Digital Banking,Online Banking Portal,99.929,7.2,99.9,,N
+2025-04-10,Digital Banking,Mobile Banking App,99.682,32.1,99.9,,N
+2025-04-10,Digital Banking,Customer API Gateway,97.519,250.1,99.9,Security Incident - Containment,Y
+2025-04-10,Corporate IT & Infrastructure,Active Directory,99.792,21.0,99.5,,N
+2025-04-10,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.776,22.6,99.5,,N
+2025-04-10,Corporate IT & Infrastructure,Data Warehouse,99.87,13.1,99.5,,N
+2025-04-10,Corporate IT & Infrastructure,Email & Collaboration (O365),99.956,4.4,99.5,,N
+2025-04-10,Corporate IT & Infrastructure,Endpoint Fleet,99.777,22.5,99.5,,N
+2025-04-17,Retail Banking,Core Banking System,99.975,2.5,99.95,,N
+2025-04-17,Retail Banking,Teller Platform,99.822,17.9,99.5,,N
+2025-04-17,Retail Banking,ATM Network,97.685,233.4,99.9,Hardware Failure,Y
+2025-04-17,Commercial Banking,Commercial Loan Platform,99.83,17.1,99.5,,N
+2025-04-17,Commercial Banking,Treasury Management System,99.7,30.2,99.5,,N
+2025-04-17,Wealth Management,Wealth Management Platform,99.748,25.4,99.5,,N
+2025-04-17,Wealth Management,Trading Platform,97.04,298.4,99.5,Software Bug / Deployment Issue,N
+2025-04-17,Payments & Cards,Payment Gateway,99.658,34.5,99.95,,N
+2025-04-17,Payments & Cards,Card Issuance System,99.856,14.5,99.5,,N
+2025-04-17,Payments & Cards,Wire Transfer System,99.959,4.1,99.9,,N
+2025-04-17,Mortgage & Lending,Loan Origination System,99.974,2.6,99.5,,N
+2025-04-17,Mortgage & Lending,Document Management System,99.688,31.4,99.5,,N
+2025-04-17,Digital Banking,Online Banking Portal,96.94,308.4,99.9,DDoS Attack,Y
+2025-04-17,Digital Banking,Mobile Banking App,99.87,13.1,99.9,,N
+2025-04-17,Digital Banking,Customer API Gateway,99.724,27.8,99.9,,N
+2025-04-17,Corporate IT & Infrastructure,Active Directory,99.942,5.8,99.5,,N
+2025-04-17,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.776,22.6,99.5,,N
+2025-04-17,Corporate IT & Infrastructure,Data Warehouse,99.736,26.6,99.5,,N
+2025-04-17,Corporate IT & Infrastructure,Email & Collaboration (O365),99.71,29.2,99.5,,N
+2025-04-17,Corporate IT & Infrastructure,Endpoint Fleet,99.691,31.1,99.5,,N
+2025-04-24,Retail Banking,Core Banking System,99.889,11.2,99.95,,N
+2025-04-24,Retail Banking,Teller Platform,99.929,7.2,99.5,,N
+2025-04-24,Retail Banking,ATM Network,99.81,19.2,99.9,,N
+2025-04-24,Commercial Banking,Commercial Loan Platform,99.625,37.8,99.5,,N
+2025-04-24,Commercial Banking,Treasury Management System,99.666,33.7,99.5,,N
+2025-04-24,Wealth Management,Wealth Management Platform,99.756,24.6,99.5,,N
+2025-04-24,Wealth Management,Trading Platform,99.811,19.1,99.5,,N
+2025-04-24,Payments & Cards,Payment Gateway,99.79,21.2,99.95,,N
+2025-04-24,Payments & Cards,Card Issuance System,99.931,7.0,99.5,,N
+2025-04-24,Payments & Cards,Wire Transfer System,99.926,7.5,99.9,,N
+2025-04-24,Mortgage & Lending,Loan Origination System,99.692,31.0,99.5,,N
+2025-04-24,Mortgage & Lending,Document Management System,99.851,15.0,99.5,,N
+2025-04-24,Digital Banking,Online Banking Portal,99.977,2.3,99.9,,N
+2025-04-24,Digital Banking,Mobile Banking App,99.966,3.4,99.9,,N
+2025-04-24,Digital Banking,Customer API Gateway,96.58,344.7,99.9,Network Failure,Y
+2025-04-24,Corporate IT & Infrastructure,Active Directory,99.818,18.3,99.5,,N
+2025-04-24,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.786,21.6,99.5,,N
+2025-04-24,Corporate IT & Infrastructure,Data Warehouse,99.893,10.8,99.5,,N
+2025-04-24,Corporate IT & Infrastructure,Email & Collaboration (O365),99.62,38.3,99.5,,N
+2025-04-24,Corporate IT & Infrastructure,Endpoint Fleet,99.985,1.5,99.5,,N
+2025-05-01,Retail Banking,Core Banking System,99.982,1.8,99.95,,N
+2025-05-01,Retail Banking,Teller Platform,99.7,30.2,99.5,,N
+2025-05-01,Retail Banking,ATM Network,99.645,35.8,99.9,,N
+2025-05-01,Commercial Banking,Commercial Loan Platform,99.95,5.0,99.5,,N
+2025-05-01,Commercial Banking,Treasury Management System,99.684,31.9,99.5,,N
+2025-05-01,Wealth Management,Wealth Management Platform,99.616,38.7,99.5,,N
+2025-05-01,Wealth Management,Trading Platform,99.85,15.1,99.5,,N
+2025-05-01,Payments & Cards,Payment Gateway,99.738,26.4,99.95,,N
+2025-05-01,Payments & Cards,Card Issuance System,99.772,23.0,99.5,,N
+2025-05-01,Payments & Cards,Wire Transfer System,99.69,31.2,99.9,,N
+2025-05-01,Mortgage & Lending,Loan Origination System,99.609,39.4,99.5,,N
+2025-05-01,Mortgage & Lending,Document Management System,99.848,15.3,99.5,,N
+2025-05-01,Digital Banking,Online Banking Portal,99.697,30.5,99.9,,N
+2025-05-01,Digital Banking,Mobile Banking App,99.819,18.2,99.9,,N
+2025-05-01,Digital Banking,Customer API Gateway,99.973,2.7,99.9,,N
+2025-05-01,Corporate IT & Infrastructure,Active Directory,99.965,3.5,99.5,,N
+2025-05-01,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.216,79.0,99.5,Hardware Failure,N
+2025-05-01,Corporate IT & Infrastructure,Data Warehouse,99.717,28.5,99.5,,N
+2025-05-01,Corporate IT & Infrastructure,Email & Collaboration (O365),99.991,0.9,99.5,,N
+2025-05-01,Corporate IT & Infrastructure,Endpoint Fleet,98.829,118.0,99.5,Security Incident - Containment,N
+2025-05-08,Retail Banking,Core Banking System,98.439,157.3,99.95,Maintenance Overrun,Y
+2025-05-08,Retail Banking,Teller Platform,99.876,12.5,99.5,,N
+2025-05-08,Retail Banking,ATM Network,99.323,68.2,99.9,Hardware Failure,Y
+2025-05-08,Commercial Banking,Commercial Loan Platform,99.954,4.6,99.5,,N
+2025-05-08,Commercial Banking,Treasury Management System,99.826,17.5,99.5,,N
+2025-05-08,Wealth Management,Wealth Management Platform,99.68,32.3,99.5,,N
+2025-05-08,Wealth Management,Trading Platform,97.233,278.9,99.5,Network Failure,N
+2025-05-08,Payments & Cards,Payment Gateway,99.891,11.0,99.95,,N
+2025-05-08,Payments & Cards,Card Issuance System,99.815,18.6,99.5,,N
+2025-05-08,Payments & Cards,Wire Transfer System,99.756,24.6,99.9,,N
+2025-05-08,Mortgage & Lending,Loan Origination System,99.105,90.2,99.5,Maintenance Overrun,N
+2025-05-08,Mortgage & Lending,Document Management System,99.876,12.5,99.5,,N
+2025-05-08,Digital Banking,Online Banking Portal,99.781,22.1,99.9,,N
+2025-05-08,Digital Banking,Mobile Banking App,99.703,29.9,99.9,,N
+2025-05-08,Digital Banking,Customer API Gateway,99.77,23.2,99.9,,N
+2025-05-08,Corporate IT & Infrastructure,Active Directory,99.728,27.4,99.5,,N
+2025-05-08,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.844,15.7,99.5,,N
+2025-05-08,Corporate IT & Infrastructure,Data Warehouse,99.688,31.4,99.5,,N
+2025-05-08,Corporate IT & Infrastructure,Email & Collaboration (O365),99.764,23.8,99.5,,N
+2025-05-08,Corporate IT & Infrastructure,Endpoint Fleet,99.614,38.9,99.5,,N
+2025-05-15,Retail Banking,Core Banking System,99.714,28.8,99.95,,N
+2025-05-15,Retail Banking,Teller Platform,99.809,19.3,99.5,,N
+2025-05-15,Retail Banking,ATM Network,99.745,25.7,99.9,,N
+2025-05-15,Commercial Banking,Commercial Loan Platform,99.695,30.7,99.5,,N
+2025-05-15,Commercial Banking,Treasury Management System,99.813,18.8,99.5,,N
+2025-05-15,Wealth Management,Wealth Management Platform,99.695,30.7,99.5,,N
+2025-05-15,Wealth Management,Trading Platform,99.672,33.1,99.5,,N
+2025-05-15,Payments & Cards,Payment Gateway,97.18,284.3,99.95,DDoS Attack,Y
+2025-05-15,Payments & Cards,Card Issuance System,99.872,12.9,99.5,,N
+2025-05-15,Payments & Cards,Wire Transfer System,99.947,5.3,99.9,,N
+2025-05-15,Mortgage & Lending,Loan Origination System,99.834,16.7,99.5,,N
+2025-05-15,Mortgage & Lending,Document Management System,99.89,11.1,99.5,,N
+2025-05-15,Digital Banking,Online Banking Portal,99.989,1.1,99.9,,N
+2025-05-15,Digital Banking,Mobile Banking App,99.795,20.7,99.9,,N
+2025-05-15,Digital Banking,Customer API Gateway,99.659,34.4,99.9,,N
+2025-05-15,Corporate IT & Infrastructure,Active Directory,99.854,14.7,99.5,,N
+2025-05-15,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.846,15.5,99.5,,N
+2025-05-15,Corporate IT & Infrastructure,Data Warehouse,99.608,39.5,99.5,,N
+2025-05-15,Corporate IT & Infrastructure,Email & Collaboration (O365),99.791,21.1,99.5,,N
+2025-05-15,Corporate IT & Infrastructure,Endpoint Fleet,99.614,38.9,99.5,,N
+2025-05-22,Retail Banking,Core Banking System,99.833,16.8,99.95,,N
+2025-05-22,Retail Banking,Teller Platform,99.863,13.8,99.5,,N
+2025-05-22,Retail Banking,ATM Network,99.919,8.2,99.9,,N
+2025-05-22,Commercial Banking,Commercial Loan Platform,99.309,69.7,99.5,Hardware Failure,N
+2025-05-22,Commercial Banking,Treasury Management System,99.942,5.8,99.5,,N
+2025-05-22,Wealth Management,Wealth Management Platform,99.799,20.3,99.5,,N
+2025-05-22,Wealth Management,Trading Platform,99.764,23.8,99.5,,N
+2025-05-22,Payments & Cards,Payment Gateway,99.891,11.0,99.95,,N
+2025-05-22,Payments & Cards,Card Issuance System,99.892,10.9,99.5,,N
+2025-05-22,Payments & Cards,Wire Transfer System,99.852,14.9,99.9,,N
+2025-05-22,Mortgage & Lending,Loan Origination System,99.922,7.9,99.5,,N
+2025-05-22,Mortgage & Lending,Document Management System,99.814,18.7,99.5,,N
+2025-05-22,Digital Banking,Online Banking Portal,99.938,6.2,99.9,,N
+2025-05-22,Digital Banking,Mobile Banking App,99.676,32.7,99.9,,N
+2025-05-22,Digital Banking,Customer API Gateway,99.874,12.7,99.9,,N
+2025-05-22,Corporate IT & Infrastructure,Active Directory,99.93,7.1,99.5,,N
+2025-05-22,Corporate IT & Infrastructure,Cloud Workloads (AWS),98.568,144.3,99.5,Security Incident - Containment,N
+2025-05-22,Corporate IT & Infrastructure,Data Warehouse,99.902,9.9,99.5,,N
+2025-05-22,Corporate IT & Infrastructure,Email & Collaboration (O365),99.696,30.6,99.5,,N
+2025-05-22,Corporate IT & Infrastructure,Endpoint Fleet,99.994,0.6,99.5,,N
+2025-05-29,Retail Banking,Core Banking System,99.609,39.4,99.95,,N
+2025-05-29,Retail Banking,Teller Platform,99.638,36.5,99.5,,N
+2025-05-29,Retail Banking,ATM Network,99.62,38.3,99.9,,N
+2025-05-29,Commercial Banking,Commercial Loan Platform,99.606,39.7,99.5,,N
+2025-05-29,Commercial Banking,Treasury Management System,99.664,33.9,99.5,,N
+2025-05-29,Wealth Management,Wealth Management Platform,99.629,37.4,99.5,,N
+2025-05-29,Wealth Management,Trading Platform,99.818,18.3,99.5,,N
+2025-05-29,Payments & Cards,Payment Gateway,99.931,7.0,99.95,,N
+2025-05-29,Payments & Cards,Card Issuance System,99.836,16.5,99.5,,N
+2025-05-29,Payments & Cards,Wire Transfer System,99.688,31.4,99.9,,N
+2025-05-29,Mortgage & Lending,Loan Origination System,99.703,29.9,99.5,,N
+2025-05-29,Mortgage & Lending,Document Management System,99.903,9.8,99.5,,N
+2025-05-29,Digital Banking,Online Banking Portal,99.864,13.7,99.9,,N
+2025-05-29,Digital Banking,Mobile Banking App,99.872,12.9,99.9,,N
+2025-05-29,Digital Banking,Customer API Gateway,99.97,3.0,99.9,,N
+2025-05-29,Corporate IT & Infrastructure,Active Directory,99.645,35.8,99.5,,N
+2025-05-29,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.664,33.9,99.5,,N
+2025-05-29,Corporate IT & Infrastructure,Data Warehouse,99.861,14.0,99.5,,N
+2025-05-29,Corporate IT & Infrastructure,Email & Collaboration (O365),99.933,6.8,99.5,,N
+2025-05-29,Corporate IT & Infrastructure,Endpoint Fleet,99.66,34.3,99.5,,N
+2025-06-05,Retail Banking,Core Banking System,99.953,4.7,99.95,,N
+2025-06-05,Retail Banking,Teller Platform,99.946,5.4,99.5,,N
+2025-06-05,Retail Banking,ATM Network,96.904,312.1,99.9,Software Bug / Deployment Issue,Y
+2025-06-05,Commercial Banking,Commercial Loan Platform,99.963,3.7,99.5,,N
+2025-06-05,Commercial Banking,Treasury Management System,99.648,35.5,99.5,,N
+2025-06-05,Wealth Management,Wealth Management Platform,99.95,5.0,99.5,,N
+2025-06-05,Wealth Management,Trading Platform,99.899,10.2,99.5,,N
+2025-06-05,Payments & Cards,Payment Gateway,99.713,28.9,99.95,,N
+2025-06-05,Payments & Cards,Card Issuance System,99.801,20.1,99.5,,N
+2025-06-05,Payments & Cards,Wire Transfer System,98.48,153.2,99.9,Software Bug / Deployment Issue,Y
+2025-06-05,Mortgage & Lending,Loan Origination System,99.877,12.4,99.5,,N
+2025-06-05,Mortgage & Lending,Document Management System,99.701,30.1,99.5,,N
+2025-06-05,Digital Banking,Online Banking Portal,99.639,36.4,99.9,,N
+2025-06-05,Digital Banking,Mobile Banking App,99.926,7.5,99.9,,N
+2025-06-05,Digital Banking,Customer API Gateway,99.913,8.8,99.9,,N
+2025-06-05,Corporate IT & Infrastructure,Active Directory,96.941,308.3,99.5,Maintenance Overrun,N
+2025-06-05,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.788,21.4,99.5,,N
+2025-06-05,Corporate IT & Infrastructure,Data Warehouse,99.929,7.2,99.5,,N
+2025-06-05,Corporate IT & Infrastructure,Email & Collaboration (O365),99.673,33.0,99.5,,N
+2025-06-05,Corporate IT & Infrastructure,Endpoint Fleet,99.901,10.0,99.5,,N
+2025-06-12,Retail Banking,Core Banking System,99.885,11.6,99.95,,N
+2025-06-12,Retail Banking,Teller Platform,99.776,22.6,99.5,,N
+2025-06-12,Retail Banking,ATM Network,98.099,191.6,99.9,Network Failure,Y
+2025-06-12,Commercial Banking,Commercial Loan Platform,99.947,5.3,99.5,,N
+2025-06-12,Commercial Banking,Treasury Management System,99.742,26.0,99.5,,N
+2025-06-12,Wealth Management,Wealth Management Platform,99.799,20.3,99.5,,N
+2025-06-12,Wealth Management,Trading Platform,99.924,7.7,99.5,,N
+2025-06-12,Payments & Cards,Payment Gateway,99.813,18.8,99.95,,N
+2025-06-12,Payments & Cards,Card Issuance System,99.663,34.0,99.5,,N
+2025-06-12,Payments & Cards,Wire Transfer System,99.969,3.1,99.9,,N
+2025-06-12,Mortgage & Lending,Loan Origination System,99.999,0.1,99.5,,N
+2025-06-12,Mortgage & Lending,Document Management System,99.83,17.1,99.5,,N
+2025-06-12,Digital Banking,Online Banking Portal,99.601,40.2,99.9,,N
+2025-06-12,Digital Banking,Mobile Banking App,99.789,21.3,99.9,,N
+2025-06-12,Digital Banking,Customer API Gateway,99.904,9.7,99.9,,N
+2025-06-12,Corporate IT & Infrastructure,Active Directory,99.95,5.0,99.5,,N
+2025-06-12,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.611,39.2,99.5,,N
+2025-06-12,Corporate IT & Infrastructure,Data Warehouse,99.902,9.9,99.5,,N
+2025-06-12,Corporate IT & Infrastructure,Email & Collaboration (O365),98.538,147.4,99.5,DDoS Attack,N
+2025-06-12,Corporate IT & Infrastructure,Endpoint Fleet,99.626,37.7,99.5,,N
+2025-06-19,Retail Banking,Core Banking System,99.649,35.4,99.95,,N
+2025-06-19,Retail Banking,Teller Platform,99.879,12.2,99.5,,N
+2025-06-19,Retail Banking,ATM Network,98.5,151.2,99.9,Hardware Failure,Y
+2025-06-19,Commercial Banking,Commercial Loan Platform,99.655,34.8,99.5,,N
+2025-06-19,Commercial Banking,Treasury Management System,99.965,3.5,99.5,,N
+2025-06-19,Wealth Management,Wealth Management Platform,99.976,2.4,99.5,,N
+2025-06-19,Wealth Management,Trading Platform,99.838,16.3,99.5,,N
+2025-06-19,Payments & Cards,Payment Gateway,99.61,39.3,99.95,,N
+2025-06-19,Payments & Cards,Card Issuance System,99.913,8.8,99.5,,N
+2025-06-19,Payments & Cards,Wire Transfer System,99.92,8.1,99.9,,N
+2025-06-19,Mortgage & Lending,Loan Origination System,99.991,0.9,99.5,,N
+2025-06-19,Mortgage & Lending,Document Management System,99.722,28.0,99.5,,N
+2025-06-19,Digital Banking,Online Banking Portal,99.745,25.7,99.9,,N
+2025-06-19,Digital Banking,Mobile Banking App,99.612,39.1,99.9,,N
+2025-06-19,Digital Banking,Customer API Gateway,99.72,28.2,99.9,,N
+2025-06-19,Corporate IT & Infrastructure,Active Directory,99.633,37.0,99.5,,N
+2025-06-19,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.728,27.4,99.5,,N
+2025-06-19,Corporate IT & Infrastructure,Data Warehouse,99.809,19.3,99.5,,N
+2025-06-19,Corporate IT & Infrastructure,Email & Collaboration (O365),99.701,30.1,99.5,,N
+2025-06-19,Corporate IT & Infrastructure,Endpoint Fleet,99.885,11.6,99.5,,N
+2025-06-26,Retail Banking,Core Banking System,99.835,16.6,99.95,,N
+2025-06-26,Retail Banking,Teller Platform,99.924,7.7,99.5,,N
+2025-06-26,Retail Banking,ATM Network,99.64,36.3,99.9,,N
+2025-06-26,Commercial Banking,Commercial Loan Platform,99.838,16.3,99.5,,N
+2025-06-26,Commercial Banking,Treasury Management System,99.835,16.6,99.5,,N
+2025-06-26,Wealth Management,Wealth Management Platform,99.99,1.0,99.5,,N
+2025-06-26,Wealth Management,Trading Platform,99.755,24.7,99.5,,N
+2025-06-26,Payments & Cards,Payment Gateway,99.621,38.2,99.95,,N
+2025-06-26,Payments & Cards,Card Issuance System,99.663,34.0,99.5,,N
+2025-06-26,Payments & Cards,Wire Transfer System,99.805,19.7,99.9,,N
+2025-06-26,Mortgage & Lending,Loan Origination System,99.645,35.8,99.5,,N
+2025-06-26,Mortgage & Lending,Document Management System,99.658,34.5,99.5,,N
+2025-06-26,Digital Banking,Online Banking Portal,99.683,32.0,99.9,,N
+2025-06-26,Digital Banking,Mobile Banking App,99.627,37.6,99.9,,N
+2025-06-26,Digital Banking,Customer API Gateway,99.846,15.5,99.9,,N
+2025-06-26,Corporate IT & Infrastructure,Active Directory,99.897,10.4,99.5,,N
+2025-06-26,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.673,33.0,99.5,,N
+2025-06-26,Corporate IT & Infrastructure,Data Warehouse,99.639,36.4,99.5,,N
+2025-06-26,Corporate IT & Infrastructure,Email & Collaboration (O365),99.737,26.5,99.5,,N
+2025-06-26,Corporate IT & Infrastructure,Endpoint Fleet,99.995,0.5,99.5,,N
+2025-07-03,Retail Banking,Core Banking System,99.996,0.4,99.95,,N
+2025-07-03,Retail Banking,Teller Platform,99.882,11.9,99.5,,N
+2025-07-03,Retail Banking,ATM Network,99.952,4.8,99.9,,N
+2025-07-03,Commercial Banking,Commercial Loan Platform,99.624,37.9,99.5,,N
+2025-07-03,Commercial Banking,Treasury Management System,99.755,24.7,99.5,,N
+2025-07-03,Wealth Management,Wealth Management Platform,99.671,33.2,99.5,,N
+2025-07-03,Wealth Management,Trading Platform,99.978,2.2,99.5,,N
+2025-07-03,Payments & Cards,Payment Gateway,99.804,19.8,99.95,,N
+2025-07-03,Payments & Cards,Card Issuance System,99.814,18.7,99.5,,N
+2025-07-03,Payments & Cards,Wire Transfer System,97.201,282.1,99.9,Network Failure,Y
+2025-07-03,Mortgage & Lending,Loan Origination System,99.633,37.0,99.5,,N
+2025-07-03,Mortgage & Lending,Document Management System,99.2,80.6,99.5,Maintenance Overrun,N
+2025-07-03,Digital Banking,Online Banking Portal,99.851,15.0,99.9,,N
+2025-07-03,Digital Banking,Mobile Banking App,99.71,29.2,99.9,,N
+2025-07-03,Digital Banking,Customer API Gateway,99.982,1.8,99.9,,N
+2025-07-03,Corporate IT & Infrastructure,Active Directory,99.806,19.6,99.5,,N
+2025-07-03,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.883,11.8,99.5,,N
+2025-07-03,Corporate IT & Infrastructure,Data Warehouse,99.82,18.1,99.5,,N
+2025-07-03,Corporate IT & Infrastructure,Email & Collaboration (O365),99.624,37.9,99.5,,N
+2025-07-03,Corporate IT & Infrastructure,Endpoint Fleet,99.886,11.5,99.5,,N
+2025-07-10,Retail Banking,Core Banking System,99.97,3.0,99.95,,N
+2025-07-10,Retail Banking,Teller Platform,99.653,35.0,99.5,,N
+2025-07-10,Retail Banking,ATM Network,99.797,20.5,99.9,,N
+2025-07-10,Commercial Banking,Commercial Loan Platform,99.963,3.7,99.5,,N
+2025-07-10,Commercial Banking,Treasury Management System,99.75,25.2,99.5,,N
+2025-07-10,Wealth Management,Wealth Management Platform,99.861,14.0,99.5,,N
+2025-07-10,Wealth Management,Trading Platform,99.614,38.9,99.5,,N
+2025-07-10,Payments & Cards,Payment Gateway,99.619,38.4,99.95,,N
+2025-07-10,Payments & Cards,Card Issuance System,99.694,30.8,99.5,,N
+2025-07-10,Payments & Cards,Wire Transfer System,99.924,7.7,99.9,,N
+2025-07-10,Mortgage & Lending,Loan Origination System,99.838,16.3,99.5,,N
+2025-07-10,Mortgage & Lending,Document Management System,99.773,22.9,99.5,,N
+2025-07-10,Digital Banking,Online Banking Portal,99.965,3.5,99.9,,N
+2025-07-10,Digital Banking,Mobile Banking App,99.698,30.4,99.9,,N
+2025-07-10,Digital Banking,Customer API Gateway,99.613,39.0,99.9,,N
+2025-07-10,Corporate IT & Infrastructure,Active Directory,99.796,20.6,99.5,,N
+2025-07-10,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.632,37.1,99.5,,N
+2025-07-10,Corporate IT & Infrastructure,Data Warehouse,99.829,17.2,99.5,,N
+2025-07-10,Corporate IT & Infrastructure,Email & Collaboration (O365),99.992,0.8,99.5,,N
+2025-07-10,Corporate IT & Infrastructure,Endpoint Fleet,99.957,4.3,99.5,,N
+2025-07-17,Retail Banking,Core Banking System,99.853,14.8,99.95,,N
+2025-07-17,Retail Banking,Teller Platform,99.643,36.0,99.5,,N
+2025-07-17,Retail Banking,ATM Network,99.89,11.1,99.9,,N
+2025-07-17,Commercial Banking,Commercial Loan Platform,99.677,32.6,99.5,,N
+2025-07-17,Commercial Banking,Treasury Management System,99.671,33.2,99.5,,N
+2025-07-17,Wealth Management,Wealth Management Platform,99.764,23.8,99.5,,N
+2025-07-17,Wealth Management,Trading Platform,99.955,4.5,99.5,,N
+2025-07-17,Payments & Cards,Payment Gateway,99.703,29.9,99.95,,N
+2025-07-17,Payments & Cards,Card Issuance System,99.782,22.0,99.5,,N
+2025-07-17,Payments & Cards,Wire Transfer System,98.143,187.2,99.9,Network Failure,Y
+2025-07-17,Mortgage & Lending,Loan Origination System,99.788,21.4,99.5,,N
+2025-07-17,Mortgage & Lending,Document Management System,99.781,22.1,99.5,,N
+2025-07-17,Digital Banking,Online Banking Portal,99.693,30.9,99.9,,N
+2025-07-17,Digital Banking,Mobile Banking App,99.957,4.3,99.9,,N
+2025-07-17,Digital Banking,Customer API Gateway,99.87,13.1,99.9,,N
+2025-07-17,Corporate IT & Infrastructure,Active Directory,99.746,25.6,99.5,,N
+2025-07-17,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.778,22.4,99.5,,N
+2025-07-17,Corporate IT & Infrastructure,Data Warehouse,99.778,22.4,99.5,,N
+2025-07-17,Corporate IT & Infrastructure,Email & Collaboration (O365),99.806,19.6,99.5,,N
+2025-07-17,Corporate IT & Infrastructure,Endpoint Fleet,99.935,6.6,99.5,,N
+2025-07-24,Retail Banking,Core Banking System,99.615,38.8,99.95,,N
+2025-07-24,Retail Banking,Teller Platform,99.936,6.5,99.5,,N
+2025-07-24,Retail Banking,ATM Network,99.738,26.4,99.9,,N
+2025-07-24,Commercial Banking,Commercial Loan Platform,99.9,10.1,99.5,,N
+2025-07-24,Commercial Banking,Treasury Management System,99.793,20.9,99.5,,N
+2025-07-24,Wealth Management,Wealth Management Platform,99.68,32.3,99.5,,N
+2025-07-24,Wealth Management,Trading Platform,99.682,32.1,99.5,,N
+2025-07-24,Payments & Cards,Payment Gateway,99.955,4.5,99.95,,N
+2025-07-24,Payments & Cards,Card Issuance System,99.604,39.9,99.5,,N
+2025-07-24,Payments & Cards,Wire Transfer System,99.745,25.7,99.9,,N
+2025-07-24,Mortgage & Lending,Loan Origination System,99.691,31.1,99.5,,N
+2025-07-24,Mortgage & Lending,Document Management System,99.925,7.6,99.5,,N
+2025-07-24,Digital Banking,Online Banking Portal,99.678,32.5,99.9,,N
+2025-07-24,Digital Banking,Mobile Banking App,99.822,17.9,99.9,,N
+2025-07-24,Digital Banking,Customer API Gateway,99.699,30.3,99.9,,N
+2025-07-24,Corporate IT & Infrastructure,Active Directory,99.836,16.5,99.5,,N
+2025-07-24,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.789,21.3,99.5,,N
+2025-07-24,Corporate IT & Infrastructure,Data Warehouse,97.084,293.9,99.5,Security Incident - Containment,N
+2025-07-24,Corporate IT & Infrastructure,Email & Collaboration (O365),99.876,12.5,99.5,,N
+2025-07-24,Corporate IT & Infrastructure,Endpoint Fleet,99.818,18.3,99.5,,N
+2025-07-31,Retail Banking,Core Banking System,99.835,16.6,99.95,,N
+2025-07-31,Retail Banking,Teller Platform,99.684,31.9,99.5,,N
+2025-07-31,Retail Banking,ATM Network,99.937,6.4,99.9,,N
+2025-07-31,Commercial Banking,Commercial Loan Platform,99.908,9.3,99.5,,N
+2025-07-31,Commercial Banking,Treasury Management System,99.851,15.0,99.5,,N
+2025-07-31,Wealth Management,Wealth Management Platform,99.8,20.2,99.5,,N
+2025-07-31,Wealth Management,Trading Platform,99.653,35.0,99.5,,N
+2025-07-31,Payments & Cards,Payment Gateway,99.622,38.1,99.95,,N
+2025-07-31,Payments & Cards,Card Issuance System,99.803,19.9,99.5,,N
+2025-07-31,Payments & Cards,Wire Transfer System,99.947,5.3,99.9,,N
+2025-07-31,Mortgage & Lending,Loan Origination System,99.812,19.0,99.5,,N
+2025-07-31,Mortgage & Lending,Document Management System,99.701,30.1,99.5,,N
+2025-07-31,Digital Banking,Online Banking Portal,99.984,1.6,99.9,,N
+2025-07-31,Digital Banking,Mobile Banking App,99.679,32.4,99.9,,N
+2025-07-31,Digital Banking,Customer API Gateway,99.861,14.0,99.9,,N
+2025-07-31,Corporate IT & Infrastructure,Active Directory,99.693,30.9,99.5,,N
+2025-07-31,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.641,36.2,99.5,,N
+2025-07-31,Corporate IT & Infrastructure,Data Warehouse,99.621,38.2,99.5,,N
+2025-07-31,Corporate IT & Infrastructure,Email & Collaboration (O365),99.656,34.7,99.5,,N
+2025-07-31,Corporate IT & Infrastructure,Endpoint Fleet,99.722,28.0,99.5,,N
+2025-08-07,Retail Banking,Core Banking System,97.555,246.5,99.95,Network Failure,Y
+2025-08-07,Retail Banking,Teller Platform,99.827,17.4,99.5,,N
+2025-08-07,Retail Banking,ATM Network,99.888,11.3,99.9,,N
+2025-08-07,Commercial Banking,Commercial Loan Platform,99.949,5.1,99.5,,N
+2025-08-07,Commercial Banking,Treasury Management System,99.818,18.3,99.5,,N
+2025-08-07,Wealth Management,Wealth Management Platform,99.679,32.4,99.5,,N
+2025-08-07,Wealth Management,Trading Platform,99.809,19.3,99.5,,N
+2025-08-07,Payments & Cards,Payment Gateway,99.863,13.8,99.95,,N
+2025-08-07,Payments & Cards,Card Issuance System,99.81,19.2,99.5,,N
+2025-08-07,Payments & Cards,Wire Transfer System,99.961,3.9,99.9,,N
+2025-08-07,Mortgage & Lending,Loan Origination System,99.852,14.9,99.5,,N
+2025-08-07,Mortgage & Lending,Document Management System,99.974,2.6,99.5,,N
+2025-08-07,Digital Banking,Online Banking Portal,99.736,26.6,99.9,,N
+2025-08-07,Digital Banking,Mobile Banking App,99.627,37.6,99.9,,N
+2025-08-07,Digital Banking,Customer API Gateway,99.815,18.6,99.9,,N
+2025-08-07,Corporate IT & Infrastructure,Active Directory,99.846,15.5,99.5,,N
+2025-08-07,Corporate IT & Infrastructure,Cloud Workloads (AWS),97.492,252.8,99.5,Third-Party Outage,N
+2025-08-07,Corporate IT & Infrastructure,Data Warehouse,99.72,28.2,99.5,,N
+2025-08-07,Corporate IT & Infrastructure,Email & Collaboration (O365),99.951,4.9,99.5,,N
+2025-08-07,Corporate IT & Infrastructure,Endpoint Fleet,99.621,38.2,99.5,,N
+2025-08-14,Retail Banking,Core Banking System,99.757,24.5,99.95,,N
+2025-08-14,Retail Banking,Teller Platform,99.711,29.1,99.5,,N
+2025-08-14,Retail Banking,ATM Network,99.624,37.9,99.9,,N
+2025-08-14,Commercial Banking,Commercial Loan Platform,99.812,19.0,99.5,,N
+2025-08-14,Commercial Banking,Treasury Management System,99.987,1.3,99.5,,N
+2025-08-14,Wealth Management,Wealth Management Platform,99.816,18.5,99.5,,N
+2025-08-14,Wealth Management,Trading Platform,99.644,35.9,99.5,,N
+2025-08-14,Payments & Cards,Payment Gateway,99.717,28.5,99.95,,N
+2025-08-14,Payments & Cards,Card Issuance System,99.777,22.5,99.5,,N
+2025-08-14,Payments & Cards,Wire Transfer System,99.854,14.7,99.9,,N
+2025-08-14,Mortgage & Lending,Loan Origination System,99.909,9.2,99.5,,N
+2025-08-14,Mortgage & Lending,Document Management System,99.696,30.6,99.5,,N
+2025-08-14,Digital Banking,Online Banking Portal,97.237,278.5,99.9,Third-Party Outage,Y
+2025-08-14,Digital Banking,Mobile Banking App,99.645,35.8,99.9,,N
+2025-08-14,Digital Banking,Customer API Gateway,99.68,32.3,99.9,,N
+2025-08-14,Corporate IT & Infrastructure,Active Directory,99.944,5.6,99.5,,N
+2025-08-14,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.837,16.4,99.5,,N
+2025-08-14,Corporate IT & Infrastructure,Data Warehouse,99.639,36.4,99.5,,N
+2025-08-14,Corporate IT & Infrastructure,Email & Collaboration (O365),99.826,17.5,99.5,,N
+2025-08-14,Corporate IT & Infrastructure,Endpoint Fleet,97.462,255.8,99.5,Security Incident - Containment,N
+2025-08-21,Retail Banking,Core Banking System,99.87,13.1,99.95,,N
+2025-08-21,Retail Banking,Teller Platform,99.608,39.5,99.5,,N
+2025-08-21,Retail Banking,ATM Network,97.003,302.1,99.9,Maintenance Overrun,Y
+2025-08-21,Commercial Banking,Commercial Loan Platform,97.161,286.2,99.5,Third-Party Outage,N
+2025-08-21,Commercial Banking,Treasury Management System,99.946,5.4,99.5,,N
+2025-08-21,Wealth Management,Wealth Management Platform,99.747,25.5,99.5,,N
+2025-08-21,Wealth Management,Trading Platform,99.629,37.4,99.5,,N
+2025-08-21,Payments & Cards,Payment Gateway,99.7,30.2,99.95,,N
+2025-08-21,Payments & Cards,Card Issuance System,99.63,37.3,99.5,,N
+2025-08-21,Payments & Cards,Wire Transfer System,99.879,12.2,99.9,,N
+2025-08-21,Mortgage & Lending,Loan Origination System,99.846,15.5,99.5,,N
+2025-08-21,Mortgage & Lending,Document Management System,99.627,37.6,99.5,,N
+2025-08-21,Digital Banking,Online Banking Portal,99.946,5.4,99.9,,N
+2025-08-21,Digital Banking,Mobile Banking App,99.606,39.7,99.9,,N
+2025-08-21,Digital Banking,Customer API Gateway,99.632,37.1,99.9,,N
+2025-08-21,Corporate IT & Infrastructure,Active Directory,99.729,27.3,99.5,,N
+2025-08-21,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.664,33.9,99.5,,N
+2025-08-21,Corporate IT & Infrastructure,Data Warehouse,99.97,3.0,99.5,,N
+2025-08-21,Corporate IT & Infrastructure,Email & Collaboration (O365),99.897,10.4,99.5,,N
+2025-08-21,Corporate IT & Infrastructure,Endpoint Fleet,99.855,14.6,99.5,,N
+2025-08-28,Retail Banking,Core Banking System,99.918,8.3,99.95,,N
+2025-08-28,Retail Banking,Teller Platform,99.827,17.4,99.5,,N
+2025-08-28,Retail Banking,ATM Network,99.864,13.7,99.9,,N
+2025-08-28,Commercial Banking,Commercial Loan Platform,99.989,1.1,99.5,,N
+2025-08-28,Commercial Banking,Treasury Management System,99.892,10.9,99.5,,N
+2025-08-28,Wealth Management,Wealth Management Platform,99.745,25.7,99.5,,N
+2025-08-28,Wealth Management,Trading Platform,99.937,6.4,99.5,,N
+2025-08-28,Payments & Cards,Payment Gateway,99.959,4.1,99.95,,N
+2025-08-28,Payments & Cards,Card Issuance System,99.923,7.8,99.5,,N
+2025-08-28,Payments & Cards,Wire Transfer System,99.875,12.6,99.9,,N
+2025-08-28,Mortgage & Lending,Loan Origination System,96.646,338.1,99.5,Maintenance Overrun,N
+2025-08-28,Mortgage & Lending,Document Management System,99.961,3.9,99.5,,N
+2025-08-28,Digital Banking,Online Banking Portal,99.708,29.4,99.9,,N
+2025-08-28,Digital Banking,Mobile Banking App,99.629,37.4,99.9,,N
+2025-08-28,Digital Banking,Customer API Gateway,99.867,13.4,99.9,,N
+2025-08-28,Corporate IT & Infrastructure,Active Directory,99.986,1.4,99.5,,N
+2025-08-28,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.782,22.0,99.5,,N
+2025-08-28,Corporate IT & Infrastructure,Data Warehouse,99.866,13.5,99.5,,N
+2025-08-28,Corporate IT & Infrastructure,Email & Collaboration (O365),99.7,30.2,99.5,,N
+2025-08-28,Corporate IT & Infrastructure,Endpoint Fleet,99.75,25.2,99.5,,N
+2025-09-04,Retail Banking,Core Banking System,99.83,17.1,99.95,,N
+2025-09-04,Retail Banking,Teller Platform,99.776,22.6,99.5,,N
+2025-09-04,Retail Banking,ATM Network,99.612,39.1,99.9,,N
+2025-09-04,Commercial Banking,Commercial Loan Platform,99.673,33.0,99.5,,N
+2025-09-04,Commercial Banking,Treasury Management System,99.674,32.9,99.5,,N
+2025-09-04,Wealth Management,Wealth Management Platform,99.694,30.8,99.5,,N
+2025-09-04,Wealth Management,Trading Platform,99.881,12.0,99.5,,N
+2025-09-04,Payments & Cards,Payment Gateway,99.964,3.6,99.95,,N
+2025-09-04,Payments & Cards,Card Issuance System,99.905,9.6,99.5,,N
+2025-09-04,Payments & Cards,Wire Transfer System,99.769,23.3,99.9,,N
+2025-09-04,Mortgage & Lending,Loan Origination System,99.787,21.5,99.5,,N
+2025-09-04,Mortgage & Lending,Document Management System,99.625,37.8,99.5,,N
+2025-09-04,Digital Banking,Online Banking Portal,99.819,18.2,99.9,,N
+2025-09-04,Digital Banking,Mobile Banking App,99.81,19.2,99.9,,N
+2025-09-04,Digital Banking,Customer API Gateway,99.803,19.9,99.9,,N
+2025-09-04,Corporate IT & Infrastructure,Active Directory,97.541,247.9,99.5,Software Bug / Deployment Issue,N
+2025-09-04,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.728,27.4,99.5,,N
+2025-09-04,Corporate IT & Infrastructure,Data Warehouse,99.781,22.1,99.5,,N
+2025-09-04,Corporate IT & Infrastructure,Email & Collaboration (O365),99.685,31.8,99.5,,N
+2025-09-04,Corporate IT & Infrastructure,Endpoint Fleet,99.629,37.4,99.5,,N
+2025-09-11,Retail Banking,Core Banking System,99.882,11.9,99.95,,N
+2025-09-11,Retail Banking,Teller Platform,99.984,1.6,99.5,,N
+2025-09-11,Retail Banking,ATM Network,99.735,26.7,99.9,,N
+2025-09-11,Commercial Banking,Commercial Loan Platform,99.758,24.4,99.5,,N
+2025-09-11,Commercial Banking,Treasury Management System,99.705,29.7,99.5,,N
+2025-09-11,Wealth Management,Wealth Management Platform,97.454,256.6,99.5,Security Incident - Containment,N
+2025-09-11,Wealth Management,Trading Platform,99.842,15.9,99.5,,N
+2025-09-11,Payments & Cards,Payment Gateway,99.633,37.0,99.95,,N
+2025-09-11,Payments & Cards,Card Issuance System,99.665,33.8,99.5,,N
+2025-09-11,Payments & Cards,Wire Transfer System,99.849,15.2,99.9,,N
+2025-09-11,Mortgage & Lending,Loan Origination System,99.871,13.0,99.5,,N
+2025-09-11,Mortgage & Lending,Document Management System,99.74,26.2,99.5,,N
+2025-09-11,Digital Banking,Online Banking Portal,99.762,24.0,99.9,,N
+2025-09-11,Digital Banking,Mobile Banking App,99.695,30.7,99.9,,N
+2025-09-11,Digital Banking,Customer API Gateway,99.978,2.2,99.9,,N
+2025-09-11,Corporate IT & Infrastructure,Active Directory,97.728,229.0,99.5,Maintenance Overrun,N
+2025-09-11,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.739,26.3,99.5,,N
+2025-09-11,Corporate IT & Infrastructure,Data Warehouse,99.663,34.0,99.5,,N
+2025-09-11,Corporate IT & Infrastructure,Email & Collaboration (O365),99.933,6.8,99.5,,N
+2025-09-11,Corporate IT & Infrastructure,Endpoint Fleet,99.664,33.9,99.5,,N
+2025-09-18,Retail Banking,Core Banking System,99.786,21.6,99.95,,N
+2025-09-18,Retail Banking,Teller Platform,99.705,29.7,99.5,,N
+2025-09-18,Retail Banking,ATM Network,99.993,0.7,99.9,,N
+2025-09-18,Commercial Banking,Commercial Loan Platform,99.993,0.7,99.5,,N
+2025-09-18,Commercial Banking,Treasury Management System,96.718,330.8,99.5,Third-Party Outage,N
+2025-09-18,Wealth Management,Wealth Management Platform,99.718,28.4,99.5,,N
+2025-09-18,Wealth Management,Trading Platform,98.285,172.9,99.5,DDoS Attack,N
+2025-09-18,Payments & Cards,Payment Gateway,99.938,6.2,99.95,,N
+2025-09-18,Payments & Cards,Card Issuance System,99.958,4.2,99.5,,N
+2025-09-18,Payments & Cards,Wire Transfer System,99.872,12.9,99.9,,N
+2025-09-18,Mortgage & Lending,Loan Origination System,99.729,27.3,99.5,,N
+2025-09-18,Mortgage & Lending,Document Management System,98.152,186.3,99.5,DDoS Attack,N
+2025-09-18,Digital Banking,Online Banking Portal,99.719,28.3,99.9,,N
+2025-09-18,Digital Banking,Mobile Banking App,99.723,27.9,99.9,,N
+2025-09-18,Digital Banking,Customer API Gateway,99.65,35.3,99.9,,N
+2025-09-18,Corporate IT & Infrastructure,Active Directory,99.953,4.7,99.5,,N
+2025-09-18,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.826,17.5,99.5,,N
+2025-09-18,Corporate IT & Infrastructure,Data Warehouse,99.737,26.5,99.5,,N
+2025-09-18,Corporate IT & Infrastructure,Email & Collaboration (O365),99.852,14.9,99.5,,N
+2025-09-18,Corporate IT & Infrastructure,Endpoint Fleet,99.858,14.3,99.5,,N
+2025-09-25,Retail Banking,Core Banking System,99.955,4.5,99.95,,N
+2025-09-25,Retail Banking,Teller Platform,99.905,9.6,99.5,,N
+2025-09-25,Retail Banking,ATM Network,99.808,19.4,99.9,,N
+2025-09-25,Commercial Banking,Commercial Loan Platform,99.783,21.9,99.5,,N
+2025-09-25,Commercial Banking,Treasury Management System,99.846,15.5,99.5,,N
+2025-09-25,Wealth Management,Wealth Management Platform,99.685,31.8,99.5,,N
+2025-09-25,Wealth Management,Trading Platform,99.808,19.4,99.5,,N
+2025-09-25,Payments & Cards,Payment Gateway,99.656,34.7,99.95,,N
+2025-09-25,Payments & Cards,Card Issuance System,99.604,39.9,99.5,,N
+2025-09-25,Payments & Cards,Wire Transfer System,99.624,37.9,99.9,,N
+2025-09-25,Mortgage & Lending,Loan Origination System,99.739,26.3,99.5,,N
+2025-09-25,Mortgage & Lending,Document Management System,99.739,26.3,99.5,,N
+2025-09-25,Digital Banking,Online Banking Portal,99.63,37.3,99.9,,N
+2025-09-25,Digital Banking,Mobile Banking App,99.853,14.8,99.9,,N
+2025-09-25,Digital Banking,Customer API Gateway,99.901,10.0,99.9,,N
+2025-09-25,Corporate IT & Infrastructure,Active Directory,99.783,21.9,99.5,,N
+2025-09-25,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.724,27.8,99.5,,N
+2025-09-25,Corporate IT & Infrastructure,Data Warehouse,99.371,63.4,99.5,Maintenance Overrun,N
+2025-09-25,Corporate IT & Infrastructure,Email & Collaboration (O365),99.603,40.0,99.5,,N
+2025-09-25,Corporate IT & Infrastructure,Endpoint Fleet,99.608,39.5,99.5,,N
+2025-10-02,Retail Banking,Core Banking System,99.985,1.5,99.95,,N
+2025-10-02,Retail Banking,Teller Platform,99.975,2.5,99.5,,N
+2025-10-02,Retail Banking,ATM Network,99.784,21.8,99.9,,N
+2025-10-02,Commercial Banking,Commercial Loan Platform,97.391,263.0,99.5,Third-Party Outage,N
+2025-10-02,Commercial Banking,Treasury Management System,99.849,15.2,99.5,,N
+2025-10-02,Wealth Management,Wealth Management Platform,99.981,1.9,99.5,,N
+2025-10-02,Wealth Management,Trading Platform,99.823,17.8,99.5,,N
+2025-10-02,Payments & Cards,Payment Gateway,99.734,26.8,99.95,,N
+2025-10-02,Payments & Cards,Card Issuance System,98.828,118.1,99.5,DDoS Attack,N
+2025-10-02,Payments & Cards,Wire Transfer System,98.816,119.3,99.9,DDoS Attack,Y
+2025-10-02,Mortgage & Lending,Loan Origination System,99.002,100.6,99.5,Security Incident - Containment,N
+2025-10-02,Mortgage & Lending,Document Management System,99.808,19.4,99.5,,N
+2025-10-02,Digital Banking,Online Banking Portal,99.653,35.0,99.9,,N
+2025-10-02,Digital Banking,Mobile Banking App,99.607,39.6,99.9,,N
+2025-10-02,Digital Banking,Customer API Gateway,99.768,23.4,99.9,,N
+2025-10-02,Corporate IT & Infrastructure,Active Directory,98.766,124.4,99.5,Third-Party Outage,N
+2025-10-02,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.82,18.1,99.5,,N
+2025-10-02,Corporate IT & Infrastructure,Data Warehouse,99.667,33.6,99.5,,N
+2025-10-02,Corporate IT & Infrastructure,Email & Collaboration (O365),99.756,24.6,99.5,,N
+2025-10-02,Corporate IT & Infrastructure,Endpoint Fleet,99.719,28.3,99.5,,N
+2025-10-09,Retail Banking,Core Banking System,99.842,15.9,99.95,,N
+2025-10-09,Retail Banking,Teller Platform,99.768,23.4,99.5,,N
+2025-10-09,Retail Banking,ATM Network,99.851,15.0,99.9,,N
+2025-10-09,Commercial Banking,Commercial Loan Platform,99.698,30.4,99.5,,N
+2025-10-09,Commercial Banking,Treasury Management System,99.907,9.4,99.5,,N
+2025-10-09,Wealth Management,Wealth Management Platform,99.966,3.4,99.5,,N
+2025-10-09,Wealth Management,Trading Platform,99.916,8.5,99.5,,N
+2025-10-09,Payments & Cards,Payment Gateway,99.743,25.9,99.95,,N
+2025-10-09,Payments & Cards,Card Issuance System,99.779,22.3,99.5,,N
+2025-10-09,Payments & Cards,Wire Transfer System,99.916,8.5,99.9,,N
+2025-10-09,Mortgage & Lending,Loan Origination System,99.745,25.7,99.5,,N
+2025-10-09,Mortgage & Lending,Document Management System,99.738,26.4,99.5,,N
+2025-10-09,Digital Banking,Online Banking Portal,99.629,37.4,99.9,,N
+2025-10-09,Digital Banking,Mobile Banking App,99.926,7.5,99.9,,N
+2025-10-09,Digital Banking,Customer API Gateway,99.789,21.3,99.9,,N
+2025-10-09,Corporate IT & Infrastructure,Active Directory,99.949,5.1,99.5,,N
+2025-10-09,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.828,17.3,99.5,,N
+2025-10-09,Corporate IT & Infrastructure,Data Warehouse,99.876,12.5,99.5,,N
+2025-10-09,Corporate IT & Infrastructure,Email & Collaboration (O365),99.092,91.5,99.5,DDoS Attack,N
+2025-10-09,Corporate IT & Infrastructure,Endpoint Fleet,99.649,35.4,99.5,,N
+2025-10-16,Retail Banking,Core Banking System,99.871,13.0,99.95,,N
+2025-10-16,Retail Banking,Teller Platform,99.863,13.8,99.5,,N
+2025-10-16,Retail Banking,ATM Network,99.662,34.1,99.9,,N
+2025-10-16,Commercial Banking,Commercial Loan Platform,99.877,12.4,99.5,,N
+2025-10-16,Commercial Banking,Treasury Management System,99.989,1.1,99.5,,N
+2025-10-16,Wealth Management,Wealth Management Platform,99.79,21.2,99.5,,N
+2025-10-16,Wealth Management,Trading Platform,97.025,299.9,99.5,Maintenance Overrun,N
+2025-10-16,Payments & Cards,Payment Gateway,99.612,39.1,99.95,,N
+2025-10-16,Payments & Cards,Card Issuance System,99.656,34.7,99.5,,N
+2025-10-16,Payments & Cards,Wire Transfer System,99.904,9.7,99.9,,N
+2025-10-16,Mortgage & Lending,Loan Origination System,98.926,108.3,99.5,Software Bug / Deployment Issue,N
+2025-10-16,Mortgage & Lending,Document Management System,99.61,39.3,99.5,,N
+2025-10-16,Digital Banking,Online Banking Portal,99.904,9.7,99.9,,N
+2025-10-16,Digital Banking,Mobile Banking App,99.877,12.4,99.9,,N
+2025-10-16,Digital Banking,Customer API Gateway,99.857,14.4,99.9,,N
+2025-10-16,Corporate IT & Infrastructure,Active Directory,99.958,4.2,99.5,,N
+2025-10-16,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.757,24.5,99.5,,N
+2025-10-16,Corporate IT & Infrastructure,Data Warehouse,99.794,20.8,99.5,,N
+2025-10-16,Corporate IT & Infrastructure,Email & Collaboration (O365),99.761,24.1,99.5,,N
+2025-10-16,Corporate IT & Infrastructure,Endpoint Fleet,99.647,35.6,99.5,,N
+2025-10-23,Retail Banking,Core Banking System,99.885,11.6,99.95,,N
+2025-10-23,Retail Banking,Teller Platform,99.864,13.7,99.5,,N
+2025-10-23,Retail Banking,ATM Network,99.668,33.5,99.9,,N
+2025-10-23,Commercial Banking,Commercial Loan Platform,99.976,2.4,99.5,,N
+2025-10-23,Commercial Banking,Treasury Management System,99.707,29.5,99.5,,N
+2025-10-23,Wealth Management,Wealth Management Platform,99.758,24.4,99.5,,N
+2025-10-23,Wealth Management,Trading Platform,99.986,1.4,99.5,,N
+2025-10-23,Payments & Cards,Payment Gateway,99.933,6.8,99.95,,N
+2025-10-23,Payments & Cards,Card Issuance System,99.822,17.9,99.5,,N
+2025-10-23,Payments & Cards,Wire Transfer System,99.263,74.3,99.9,Security Incident - Containment,Y
+2025-10-23,Mortgage & Lending,Loan Origination System,99.953,4.7,99.5,,N
+2025-10-23,Mortgage & Lending,Document Management System,99.633,37.0,99.5,,N
+2025-10-23,Digital Banking,Online Banking Portal,99.05,95.8,99.9,Hardware Failure,Y
+2025-10-23,Digital Banking,Mobile Banking App,99.72,28.2,99.9,,N
+2025-10-23,Digital Banking,Customer API Gateway,99.652,35.1,99.9,,N
+2025-10-23,Corporate IT & Infrastructure,Active Directory,99.728,27.4,99.5,,N
+2025-10-23,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.944,5.6,99.5,,N
+2025-10-23,Corporate IT & Infrastructure,Data Warehouse,99.701,30.1,99.5,,N
+2025-10-23,Corporate IT & Infrastructure,Email & Collaboration (O365),99.614,38.9,99.5,,N
+2025-10-23,Corporate IT & Infrastructure,Endpoint Fleet,99.688,31.4,99.5,,N
+2025-10-30,Retail Banking,Core Banking System,99.664,33.9,99.95,,N
+2025-10-30,Retail Banking,Teller Platform,99.975,2.5,99.5,,N
+2025-10-30,Retail Banking,ATM Network,99.055,95.3,99.9,DDoS Attack,Y
+2025-10-30,Commercial Banking,Commercial Loan Platform,99.861,14.0,99.5,,N
+2025-10-30,Commercial Banking,Treasury Management System,99.821,18.0,99.5,,N
+2025-10-30,Wealth Management,Wealth Management Platform,99.888,11.3,99.5,,N
+2025-10-30,Wealth Management,Trading Platform,99.98,2.0,99.5,,N
+2025-10-30,Payments & Cards,Payment Gateway,99.987,1.3,99.95,,N
+2025-10-30,Payments & Cards,Card Issuance System,99.833,16.8,99.5,,N
+2025-10-30,Payments & Cards,Wire Transfer System,99.773,22.9,99.9,,N
+2025-10-30,Mortgage & Lending,Loan Origination System,99.63,37.3,99.5,,N
+2025-10-30,Mortgage & Lending,Document Management System,99.839,16.2,99.5,,N
+2025-10-30,Digital Banking,Online Banking Portal,99.86,14.1,99.9,,N
+2025-10-30,Digital Banking,Mobile Banking App,96.587,344.0,99.9,Hardware Failure,Y
+2025-10-30,Digital Banking,Customer API Gateway,99.817,18.4,99.9,,N
+2025-10-30,Corporate IT & Infrastructure,Active Directory,99.709,29.3,99.5,,N
+2025-10-30,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.794,20.8,99.5,,N
+2025-10-30,Corporate IT & Infrastructure,Data Warehouse,99.806,19.6,99.5,,N
+2025-10-30,Corporate IT & Infrastructure,Email & Collaboration (O365),99.952,4.8,99.5,,N
+2025-10-30,Corporate IT & Infrastructure,Endpoint Fleet,99.634,36.9,99.5,,N
+2025-11-06,Retail Banking,Core Banking System,99.639,36.4,99.95,,N
+2025-11-06,Retail Banking,Teller Platform,99.793,20.9,99.5,,N
+2025-11-06,Retail Banking,ATM Network,99.964,3.6,99.9,,N
+2025-11-06,Commercial Banking,Commercial Loan Platform,99.908,9.3,99.5,,N
+2025-11-06,Commercial Banking,Treasury Management System,99.697,30.5,99.5,,N
+2025-11-06,Wealth Management,Wealth Management Platform,99.681,32.2,99.5,,N
+2025-11-06,Wealth Management,Trading Platform,99.699,30.3,99.5,,N
+2025-11-06,Payments & Cards,Payment Gateway,99.61,39.3,99.95,,N
+2025-11-06,Payments & Cards,Card Issuance System,99.778,22.4,99.5,,N
+2025-11-06,Payments & Cards,Wire Transfer System,99.97,3.0,99.9,,N
+2025-11-06,Mortgage & Lending,Loan Origination System,99.881,12.0,99.5,,N
+2025-11-06,Mortgage & Lending,Document Management System,99.754,24.8,99.5,,N
+2025-11-06,Digital Banking,Online Banking Portal,99.964,3.6,99.9,,N
+2025-11-06,Digital Banking,Mobile Banking App,99.952,4.8,99.9,,N
+2025-11-06,Digital Banking,Customer API Gateway,99.92,8.1,99.9,,N
+2025-11-06,Corporate IT & Infrastructure,Active Directory,99.669,33.4,99.5,,N
+2025-11-06,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.641,36.2,99.5,,N
+2025-11-06,Corporate IT & Infrastructure,Data Warehouse,99.657,34.6,99.5,,N
+2025-11-06,Corporate IT & Infrastructure,Email & Collaboration (O365),99.743,25.9,99.5,,N
+2025-11-06,Corporate IT & Infrastructure,Endpoint Fleet,99.832,16.9,99.5,,N
+2025-11-13,Retail Banking,Core Banking System,99.815,18.6,99.95,,N
+2025-11-13,Retail Banking,Teller Platform,99.654,34.9,99.5,,N
+2025-11-13,Retail Banking,ATM Network,99.717,28.5,99.9,,N
+2025-11-13,Commercial Banking,Commercial Loan Platform,98.915,109.4,99.5,Network Failure,N
+2025-11-13,Commercial Banking,Treasury Management System,99.702,30.0,99.5,,N
+2025-11-13,Wealth Management,Wealth Management Platform,99.907,9.4,99.5,,N
+2025-11-13,Wealth Management,Trading Platform,99.764,23.8,99.5,,N
+2025-11-13,Payments & Cards,Payment Gateway,99.723,27.9,99.95,,N
+2025-11-13,Payments & Cards,Card Issuance System,99.684,31.9,99.5,,N
+2025-11-13,Payments & Cards,Wire Transfer System,99.963,3.7,99.9,,N
+2025-11-13,Mortgage & Lending,Loan Origination System,99.998,0.2,99.5,,N
+2025-11-13,Mortgage & Lending,Document Management System,99.946,5.4,99.5,,N
+2025-11-13,Digital Banking,Online Banking Portal,99.844,15.7,99.9,,N
+2025-11-13,Digital Banking,Mobile Banking App,98.227,178.7,99.9,Maintenance Overrun,Y
+2025-11-13,Digital Banking,Customer API Gateway,99.914,8.7,99.9,,N
+2025-11-13,Corporate IT & Infrastructure,Active Directory,99.756,24.6,99.5,,N
+2025-11-13,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.857,14.4,99.5,,N
+2025-11-13,Corporate IT & Infrastructure,Data Warehouse,99.896,10.5,99.5,,N
+2025-11-13,Corporate IT & Infrastructure,Email & Collaboration (O365),99.916,8.5,99.5,,N
+2025-11-13,Corporate IT & Infrastructure,Endpoint Fleet,99.735,26.7,99.5,,N
+2025-11-20,Retail Banking,Core Banking System,99.964,3.6,99.95,,N
+2025-11-20,Retail Banking,Teller Platform,99.609,39.4,99.5,,N
+2025-11-20,Retail Banking,ATM Network,99.805,19.7,99.9,,N
+2025-11-20,Commercial Banking,Commercial Loan Platform,99.741,26.1,99.5,,N
+2025-11-20,Commercial Banking,Treasury Management System,99.669,33.4,99.5,,N
+2025-11-20,Wealth Management,Wealth Management Platform,99.654,34.9,99.5,,N
+2025-11-20,Wealth Management,Trading Platform,99.705,29.7,99.5,,N
+2025-11-20,Payments & Cards,Payment Gateway,99.717,28.5,99.95,,N
+2025-11-20,Payments & Cards,Card Issuance System,99.661,34.2,99.5,,N
+2025-11-20,Payments & Cards,Wire Transfer System,99.758,24.4,99.9,,N
+2025-11-20,Mortgage & Lending,Loan Origination System,99.829,17.2,99.5,,N
+2025-11-20,Mortgage & Lending,Document Management System,99.902,9.9,99.5,,N
+2025-11-20,Digital Banking,Online Banking Portal,99.632,37.1,99.9,,N
+2025-11-20,Digital Banking,Mobile Banking App,99.691,31.1,99.9,,N
+2025-11-20,Digital Banking,Customer API Gateway,99.708,29.4,99.9,,N
+2025-11-20,Corporate IT & Infrastructure,Active Directory,99.777,22.5,99.5,,N
+2025-11-20,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.899,10.2,99.5,,N
+2025-11-20,Corporate IT & Infrastructure,Data Warehouse,99.882,11.9,99.5,,N
+2025-11-20,Corporate IT & Infrastructure,Email & Collaboration (O365),99.763,23.9,99.5,,N
+2025-11-20,Corporate IT & Infrastructure,Endpoint Fleet,99.82,18.1,99.5,,N
+2025-11-27,Retail Banking,Core Banking System,99.648,35.5,99.95,,N
+2025-11-27,Retail Banking,Teller Platform,99.602,40.1,99.5,,N
+2025-11-27,Retail Banking,ATM Network,99.741,26.1,99.9,,N
+2025-11-27,Commercial Banking,Commercial Loan Platform,99.799,20.3,99.5,,N
+2025-11-27,Commercial Banking,Treasury Management System,99.939,6.1,99.5,,N
+2025-11-27,Wealth Management,Wealth Management Platform,99.914,8.7,99.5,,N
+2025-11-27,Wealth Management,Trading Platform,98.297,171.7,99.5,Network Failure,N
+2025-11-27,Payments & Cards,Payment Gateway,98.786,122.4,99.95,Maintenance Overrun,Y
+2025-11-27,Payments & Cards,Card Issuance System,99.74,26.2,99.5,,N
+2025-11-27,Payments & Cards,Wire Transfer System,99.977,2.3,99.9,,N
+2025-11-27,Mortgage & Lending,Loan Origination System,99.973,2.7,99.5,,N
+2025-11-27,Mortgage & Lending,Document Management System,99.864,13.7,99.5,,N
+2025-11-27,Digital Banking,Online Banking Portal,99.988,1.2,99.9,,N
+2025-11-27,Digital Banking,Mobile Banking App,99.671,33.2,99.9,,N
+2025-11-27,Digital Banking,Customer API Gateway,99.782,22.0,99.9,,N
+2025-11-27,Corporate IT & Infrastructure,Active Directory,99.852,14.9,99.5,,N
+2025-11-27,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.703,29.9,99.5,,N
+2025-11-27,Corporate IT & Infrastructure,Data Warehouse,99.909,9.2,99.5,,N
+2025-11-27,Corporate IT & Infrastructure,Email & Collaboration (O365),99.793,20.9,99.5,,N
+2025-11-27,Corporate IT & Infrastructure,Endpoint Fleet,99.688,31.4,99.5,,N
+2025-12-04,Retail Banking,Core Banking System,99.695,30.7,99.95,,N
+2025-12-04,Retail Banking,Teller Platform,99.892,10.9,99.5,,N
+2025-12-04,Retail Banking,ATM Network,99.98,2.0,99.9,,N
+2025-12-04,Commercial Banking,Commercial Loan Platform,99.984,1.6,99.5,,N
+2025-12-04,Commercial Banking,Treasury Management System,99.87,13.1,99.5,,N
+2025-12-04,Wealth Management,Wealth Management Platform,99.938,6.2,99.5,,N
+2025-12-04,Wealth Management,Trading Platform,99.706,29.6,99.5,,N
+2025-12-04,Payments & Cards,Payment Gateway,99.727,27.5,99.95,,N
+2025-12-04,Payments & Cards,Card Issuance System,99.677,32.6,99.5,,N
+2025-12-04,Payments & Cards,Wire Transfer System,99.78,22.2,99.9,,N
+2025-12-04,Mortgage & Lending,Loan Origination System,99.725,27.7,99.5,,N
+2025-12-04,Mortgage & Lending,Document Management System,99.628,37.5,99.5,,N
+2025-12-04,Digital Banking,Online Banking Portal,99.113,89.4,99.9,Hardware Failure,Y
+2025-12-04,Digital Banking,Mobile Banking App,99.61,39.3,99.9,,N
+2025-12-04,Digital Banking,Customer API Gateway,99.795,20.7,99.9,,N
+2025-12-04,Corporate IT & Infrastructure,Active Directory,99.818,18.3,99.5,,N
+2025-12-04,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.694,30.8,99.5,,N
+2025-12-04,Corporate IT & Infrastructure,Data Warehouse,99.857,14.4,99.5,,N
+2025-12-04,Corporate IT & Infrastructure,Email & Collaboration (O365),99.99,1.0,99.5,,N
+2025-12-04,Corporate IT & Infrastructure,Endpoint Fleet,99.646,35.7,99.5,,N
+2025-12-11,Retail Banking,Core Banking System,99.894,10.7,99.95,,N
+2025-12-11,Retail Banking,Teller Platform,99.867,13.4,99.5,,N
+2025-12-11,Retail Banking,ATM Network,99.676,32.7,99.9,,N
+2025-12-11,Commercial Banking,Commercial Loan Platform,99.604,39.9,99.5,,N
+2025-12-11,Commercial Banking,Treasury Management System,99.63,37.3,99.5,,N
+2025-12-11,Wealth Management,Wealth Management Platform,98.958,105.0,99.5,Hardware Failure,N
+2025-12-11,Wealth Management,Trading Platform,99.608,39.5,99.5,,N
+2025-12-11,Payments & Cards,Payment Gateway,99.769,23.3,99.95,,N
+2025-12-11,Payments & Cards,Card Issuance System,99.809,19.3,99.5,,N
+2025-12-11,Payments & Cards,Wire Transfer System,99.641,36.2,99.9,,N
+2025-12-11,Mortgage & Lending,Loan Origination System,99.904,9.7,99.5,,N
+2025-12-11,Mortgage & Lending,Document Management System,99.741,26.1,99.5,,N
+2025-12-11,Digital Banking,Online Banking Portal,99.68,32.3,99.9,,N
+2025-12-11,Digital Banking,Mobile Banking App,99.649,35.4,99.9,,N
+2025-12-11,Digital Banking,Customer API Gateway,99.929,7.2,99.9,,N
+2025-12-11,Corporate IT & Infrastructure,Active Directory,99.775,22.7,99.5,,N
+2025-12-11,Corporate IT & Infrastructure,Cloud Workloads (AWS),97.06,296.4,99.5,Hardware Failure,N
+2025-12-11,Corporate IT & Infrastructure,Data Warehouse,99.783,21.9,99.5,,N
+2025-12-11,Corporate IT & Infrastructure,Email & Collaboration (O365),99.699,30.3,99.5,,N
+2025-12-11,Corporate IT & Infrastructure,Endpoint Fleet,99.705,29.7,99.5,,N
+2025-12-18,Retail Banking,Core Banking System,99.724,27.8,99.95,,N
+2025-12-18,Retail Banking,Teller Platform,99.916,8.5,99.5,,N
+2025-12-18,Retail Banking,ATM Network,99.927,7.4,99.9,,N
+2025-12-18,Commercial Banking,Commercial Loan Platform,99.821,18.0,99.5,,N
+2025-12-18,Commercial Banking,Treasury Management System,99.901,10.0,99.5,,N
+2025-12-18,Wealth Management,Wealth Management Platform,98.267,174.7,99.5,Maintenance Overrun,N
+2025-12-18,Wealth Management,Trading Platform,99.666,33.7,99.5,,N
+2025-12-18,Payments & Cards,Payment Gateway,99.662,34.1,99.95,,N
+2025-12-18,Payments & Cards,Card Issuance System,99.812,19.0,99.5,,N
+2025-12-18,Payments & Cards,Wire Transfer System,99.743,25.9,99.9,,N
+2025-12-18,Mortgage & Lending,Loan Origination System,99.899,10.2,99.5,,N
+2025-12-18,Mortgage & Lending,Document Management System,99.887,11.4,99.5,,N
+2025-12-18,Digital Banking,Online Banking Portal,97.876,214.1,99.9,Maintenance Overrun,Y
+2025-12-18,Digital Banking,Mobile Banking App,99.617,38.6,99.9,,N
+2025-12-18,Digital Banking,Customer API Gateway,99.998,0.2,99.9,,N
+2025-12-18,Corporate IT & Infrastructure,Active Directory,99.808,19.4,99.5,,N
+2025-12-18,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.784,21.8,99.5,,N
+2025-12-18,Corporate IT & Infrastructure,Data Warehouse,99.64,36.3,99.5,,N
+2025-12-18,Corporate IT & Infrastructure,Email & Collaboration (O365),99.648,35.5,99.5,,N
+2025-12-18,Corporate IT & Infrastructure,Endpoint Fleet,99.768,23.4,99.5,,N
+2025-12-25,Retail Banking,Core Banking System,96.526,350.2,99.95,DDoS Attack,Y
+2025-12-25,Retail Banking,Teller Platform,97.577,244.2,99.5,Software Bug / Deployment Issue,N
+2025-12-25,Retail Banking,ATM Network,99.87,13.1,99.9,,N
+2025-12-25,Commercial Banking,Commercial Loan Platform,99.915,8.6,99.5,,N
+2025-12-25,Commercial Banking,Treasury Management System,99.609,39.4,99.5,,N
+2025-12-25,Wealth Management,Wealth Management Platform,99.731,27.1,99.5,,N
+2025-12-25,Wealth Management,Trading Platform,99.804,19.8,99.5,,N
+2025-12-25,Payments & Cards,Payment Gateway,99.915,8.6,99.95,,N
+2025-12-25,Payments & Cards,Card Issuance System,99.92,8.1,99.5,,N
+2025-12-25,Payments & Cards,Wire Transfer System,99.984,1.6,99.9,,N
+2025-12-25,Mortgage & Lending,Loan Origination System,99.818,18.3,99.5,,N
+2025-12-25,Mortgage & Lending,Document Management System,99.924,7.7,99.5,,N
+2025-12-25,Digital Banking,Online Banking Portal,99.775,22.7,99.9,,N
+2025-12-25,Digital Banking,Mobile Banking App,99.612,39.1,99.9,,N
+2025-12-25,Digital Banking,Customer API Gateway,99.832,16.9,99.9,,N
+2025-12-25,Corporate IT & Infrastructure,Active Directory,99.865,13.6,99.5,,N
+2025-12-25,Corporate IT & Infrastructure,Cloud Workloads (AWS),98.073,194.2,99.5,Security Incident - Containment,N
+2025-12-25,Corporate IT & Infrastructure,Data Warehouse,99.766,23.6,99.5,,N
+2025-12-25,Corporate IT & Infrastructure,Email & Collaboration (O365),99.956,4.4,99.5,,N
+2025-12-25,Corporate IT & Infrastructure,Endpoint Fleet,99.842,15.9,99.5,,N
+2026-01-01,Retail Banking,Core Banking System,99.75,25.2,99.95,,N
+2026-01-01,Retail Banking,Teller Platform,99.645,35.8,99.5,,N
+2026-01-01,Retail Banking,ATM Network,99.786,21.6,99.9,,N
+2026-01-01,Commercial Banking,Commercial Loan Platform,99.761,24.1,99.5,,N
+2026-01-01,Commercial Banking,Treasury Management System,99.86,14.1,99.5,,N
+2026-01-01,Wealth Management,Wealth Management Platform,99.785,21.7,99.5,,N
+2026-01-01,Wealth Management,Trading Platform,99.907,9.4,99.5,,N
+2026-01-01,Payments & Cards,Payment Gateway,99.765,23.7,99.95,,N
+2026-01-01,Payments & Cards,Card Issuance System,99.943,5.7,99.5,,N
+2026-01-01,Payments & Cards,Wire Transfer System,99.878,12.3,99.9,,N
+2026-01-01,Mortgage & Lending,Loan Origination System,99.786,21.6,99.5,,N
+2026-01-01,Mortgage & Lending,Document Management System,99.935,6.6,99.5,,N
+2026-01-01,Digital Banking,Online Banking Portal,99.814,18.7,99.9,,N
+2026-01-01,Digital Banking,Mobile Banking App,99.892,10.9,99.9,,N
+2026-01-01,Digital Banking,Customer API Gateway,99.896,10.5,99.9,,N
+2026-01-01,Corporate IT & Infrastructure,Active Directory,99.996,0.4,99.5,,N
+2026-01-01,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.657,34.6,99.5,,N
+2026-01-01,Corporate IT & Infrastructure,Data Warehouse,99.942,5.8,99.5,,N
+2026-01-01,Corporate IT & Infrastructure,Email & Collaboration (O365),99.875,12.6,99.5,,N
+2026-01-01,Corporate IT & Infrastructure,Endpoint Fleet,99.81,19.2,99.5,,N
+2026-01-08,Retail Banking,Core Banking System,99.927,7.4,99.95,,N
+2026-01-08,Retail Banking,Teller Platform,100.0,0.0,99.5,,N
+2026-01-08,Retail Banking,ATM Network,99.809,19.3,99.9,,N
+2026-01-08,Commercial Banking,Commercial Loan Platform,99.732,27.0,99.5,,N
+2026-01-08,Commercial Banking,Treasury Management System,99.637,36.6,99.5,,N
+2026-01-08,Wealth Management,Wealth Management Platform,99.97,3.0,99.5,,N
+2026-01-08,Wealth Management,Trading Platform,99.922,7.9,99.5,,N
+2026-01-08,Payments & Cards,Payment Gateway,99.649,35.4,99.95,,N
+2026-01-08,Payments & Cards,Card Issuance System,96.925,310.0,99.5,Hardware Failure,N
+2026-01-08,Payments & Cards,Wire Transfer System,99.696,30.6,99.9,,N
+2026-01-08,Mortgage & Lending,Loan Origination System,99.994,0.6,99.5,,N
+2026-01-08,Mortgage & Lending,Document Management System,99.909,9.2,99.5,,N
+2026-01-08,Digital Banking,Online Banking Portal,99.878,12.3,99.9,,N
+2026-01-08,Digital Banking,Mobile Banking App,99.654,34.9,99.9,,N
+2026-01-08,Digital Banking,Customer API Gateway,99.891,11.0,99.9,,N
+2026-01-08,Corporate IT & Infrastructure,Active Directory,99.981,1.9,99.5,,N
+2026-01-08,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.816,18.5,99.5,,N
+2026-01-08,Corporate IT & Infrastructure,Data Warehouse,99.988,1.2,99.5,,N
+2026-01-08,Corporate IT & Infrastructure,Email & Collaboration (O365),98.559,145.3,99.5,Third-Party Outage,N
+2026-01-08,Corporate IT & Infrastructure,Endpoint Fleet,96.921,310.4,99.5,Hardware Failure,N
+2026-01-15,Retail Banking,Core Banking System,99.632,37.1,99.95,,N
+2026-01-15,Retail Banking,Teller Platform,99.892,10.9,99.5,,N
+2026-01-15,Retail Banking,ATM Network,99.949,5.1,99.9,,N
+2026-01-15,Commercial Banking,Commercial Loan Platform,99.638,36.5,99.5,,N
+2026-01-15,Commercial Banking,Treasury Management System,99.815,18.6,99.5,,N
+2026-01-15,Wealth Management,Wealth Management Platform,99.844,15.7,99.5,,N
+2026-01-15,Wealth Management,Trading Platform,99.775,22.7,99.5,,N
+2026-01-15,Payments & Cards,Payment Gateway,97.591,242.8,99.95,Security Incident - Containment,Y
+2026-01-15,Payments & Cards,Card Issuance System,99.89,11.1,99.5,,N
+2026-01-15,Payments & Cards,Wire Transfer System,99.894,10.7,99.9,,N
+2026-01-15,Mortgage & Lending,Loan Origination System,99.877,12.4,99.5,,N
+2026-01-15,Mortgage & Lending,Document Management System,99.878,12.3,99.5,,N
+2026-01-15,Digital Banking,Online Banking Portal,99.889,11.2,99.9,,N
+2026-01-15,Digital Banking,Mobile Banking App,99.633,37.0,99.9,,N
+2026-01-15,Digital Banking,Customer API Gateway,99.893,10.8,99.9,,N
+2026-01-15,Corporate IT & Infrastructure,Active Directory,99.628,37.5,99.5,,N
+2026-01-15,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.609,39.4,99.5,,N
+2026-01-15,Corporate IT & Infrastructure,Data Warehouse,99.949,5.1,99.5,,N
+2026-01-15,Corporate IT & Infrastructure,Email & Collaboration (O365),99.645,35.8,99.5,,N
+2026-01-15,Corporate IT & Infrastructure,Endpoint Fleet,99.627,37.6,99.5,,N
+2026-01-22,Retail Banking,Core Banking System,99.871,13.0,99.95,,N
+2026-01-22,Retail Banking,Teller Platform,99.838,16.3,99.5,,N
+2026-01-22,Retail Banking,ATM Network,99.819,18.2,99.9,,N
+2026-01-22,Commercial Banking,Commercial Loan Platform,99.78,22.2,99.5,,N
+2026-01-22,Commercial Banking,Treasury Management System,99.712,29.0,99.5,,N
+2026-01-22,Wealth Management,Wealth Management Platform,99.842,15.9,99.5,,N
+2026-01-22,Wealth Management,Trading Platform,99.758,24.4,99.5,,N
+2026-01-22,Payments & Cards,Payment Gateway,99.775,22.7,99.95,,N
+2026-01-22,Payments & Cards,Card Issuance System,99.913,8.8,99.5,,N
+2026-01-22,Payments & Cards,Wire Transfer System,99.919,8.2,99.9,,N
+2026-01-22,Mortgage & Lending,Loan Origination System,99.703,29.9,99.5,,N
+2026-01-22,Mortgage & Lending,Document Management System,99.837,16.4,99.5,,N
+2026-01-22,Digital Banking,Online Banking Portal,99.77,23.2,99.9,,N
+2026-01-22,Digital Banking,Mobile Banking App,99.751,25.1,99.9,,N
+2026-01-22,Digital Banking,Customer API Gateway,99.607,39.6,99.9,,N
+2026-01-22,Corporate IT & Infrastructure,Active Directory,99.711,29.1,99.5,,N
+2026-01-22,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.769,23.3,99.5,,N
+2026-01-22,Corporate IT & Infrastructure,Data Warehouse,99.971,2.9,99.5,,N
+2026-01-22,Corporate IT & Infrastructure,Email & Collaboration (O365),99.67,33.3,99.5,,N
+2026-01-22,Corporate IT & Infrastructure,Endpoint Fleet,99.999,0.1,99.5,,N
+2026-01-29,Retail Banking,Core Banking System,98.89,111.9,99.95,Maintenance Overrun,Y
+2026-01-29,Retail Banking,Teller Platform,99.853,14.8,99.5,,N
+2026-01-29,Retail Banking,ATM Network,99.871,13.0,99.9,,N
+2026-01-29,Commercial Banking,Commercial Loan Platform,99.609,39.4,99.5,,N
+2026-01-29,Commercial Banking,Treasury Management System,99.994,0.6,99.5,,N
+2026-01-29,Wealth Management,Wealth Management Platform,99.678,32.5,99.5,,N
+2026-01-29,Wealth Management,Trading Platform,99.783,21.9,99.5,,N
+2026-01-29,Payments & Cards,Payment Gateway,99.945,5.5,99.95,,N
+2026-01-29,Payments & Cards,Card Issuance System,99.664,33.9,99.5,,N
+2026-01-29,Payments & Cards,Wire Transfer System,99.681,32.2,99.9,,N
+2026-01-29,Mortgage & Lending,Loan Origination System,99.836,16.5,99.5,,N
+2026-01-29,Mortgage & Lending,Document Management System,99.853,14.8,99.5,,N
+2026-01-29,Digital Banking,Online Banking Portal,99.96,4.0,99.9,,N
+2026-01-29,Digital Banking,Mobile Banking App,99.741,26.1,99.9,,N
+2026-01-29,Digital Banking,Customer API Gateway,99.913,8.8,99.9,,N
+2026-01-29,Corporate IT & Infrastructure,Active Directory,99.663,34.0,99.5,,N
+2026-01-29,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.872,12.9,99.5,,N
+2026-01-29,Corporate IT & Infrastructure,Data Warehouse,99.776,22.6,99.5,,N
+2026-01-29,Corporate IT & Infrastructure,Email & Collaboration (O365),99.984,1.6,99.5,,N
+2026-01-29,Corporate IT & Infrastructure,Endpoint Fleet,99.753,24.9,99.5,,N
+2026-02-05,Retail Banking,Core Banking System,99.69,31.2,99.95,,N
+2026-02-05,Retail Banking,Teller Platform,99.873,12.8,99.5,,N
+2026-02-05,Retail Banking,ATM Network,99.927,7.4,99.9,,N
+2026-02-05,Commercial Banking,Commercial Loan Platform,99.984,1.6,99.5,,N
+2026-02-05,Commercial Banking,Treasury Management System,99.954,4.6,99.5,,N
+2026-02-05,Wealth Management,Wealth Management Platform,99.724,27.8,99.5,,N
+2026-02-05,Wealth Management,Trading Platform,99.717,28.5,99.5,,N
+2026-02-05,Payments & Cards,Payment Gateway,99.604,39.9,99.95,,N
+2026-02-05,Payments & Cards,Card Issuance System,99.87,13.1,99.5,,N
+2026-02-05,Payments & Cards,Wire Transfer System,99.831,17.0,99.9,,N
+2026-02-05,Mortgage & Lending,Loan Origination System,99.69,31.2,99.5,,N
+2026-02-05,Mortgage & Lending,Document Management System,99.676,32.7,99.5,,N
+2026-02-05,Digital Banking,Online Banking Portal,99.866,13.5,99.9,,N
+2026-02-05,Digital Banking,Mobile Banking App,99.929,7.2,99.9,,N
+2026-02-05,Digital Banking,Customer API Gateway,97.006,301.8,99.9,Security Incident - Containment,Y
+2026-02-05,Corporate IT & Infrastructure,Active Directory,97.394,262.7,99.5,Network Failure,N
+2026-02-05,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.689,31.3,99.5,,N
+2026-02-05,Corporate IT & Infrastructure,Data Warehouse,99.733,26.9,99.5,,N
+2026-02-05,Corporate IT & Infrastructure,Email & Collaboration (O365),99.625,37.8,99.5,,N
+2026-02-05,Corporate IT & Infrastructure,Endpoint Fleet,99.87,13.1,99.5,,N
+2026-02-12,Retail Banking,Core Banking System,99.755,24.7,99.95,,N
+2026-02-12,Retail Banking,Teller Platform,99.976,2.4,99.5,,N
+2026-02-12,Retail Banking,ATM Network,99.627,37.6,99.9,,N
+2026-02-12,Commercial Banking,Commercial Loan Platform,99.681,32.2,99.5,,N
+2026-02-12,Commercial Banking,Treasury Management System,99.895,10.6,99.5,,N
+2026-02-12,Wealth Management,Wealth Management Platform,99.92,8.1,99.5,,N
+2026-02-12,Wealth Management,Trading Platform,99.758,24.4,99.5,,N
+2026-02-12,Payments & Cards,Payment Gateway,99.869,13.2,99.95,,N
+2026-02-12,Payments & Cards,Card Issuance System,99.724,27.8,99.5,,N
+2026-02-12,Payments & Cards,Wire Transfer System,99.765,23.7,99.9,,N
+2026-02-12,Mortgage & Lending,Loan Origination System,99.722,28.0,99.5,,N
+2026-02-12,Mortgage & Lending,Document Management System,97.759,225.9,99.5,Security Incident - Containment,N
+2026-02-12,Digital Banking,Online Banking Portal,99.776,22.6,99.9,,N
+2026-02-12,Digital Banking,Mobile Banking App,99.91,9.1,99.9,,N
+2026-02-12,Digital Banking,Customer API Gateway,99.995,0.5,99.9,,N
+2026-02-12,Corporate IT & Infrastructure,Active Directory,99.767,23.5,99.5,,N
+2026-02-12,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.876,12.5,99.5,,N
+2026-02-12,Corporate IT & Infrastructure,Data Warehouse,99.995,0.5,99.5,,N
+2026-02-12,Corporate IT & Infrastructure,Email & Collaboration (O365),99.891,11.0,99.5,,N
+2026-02-12,Corporate IT & Infrastructure,Endpoint Fleet,99.65,35.3,99.5,,N
+2026-02-19,Retail Banking,Core Banking System,99.998,0.2,99.95,,N
+2026-02-19,Retail Banking,Teller Platform,99.804,19.8,99.5,,N
+2026-02-19,Retail Banking,ATM Network,99.682,32.1,99.9,,N
+2026-02-19,Commercial Banking,Commercial Loan Platform,99.968,3.2,99.5,,N
+2026-02-19,Commercial Banking,Treasury Management System,99.954,4.6,99.5,,N
+2026-02-19,Wealth Management,Wealth Management Platform,99.68,32.3,99.5,,N
+2026-02-19,Wealth Management,Trading Platform,99.978,2.2,99.5,,N
+2026-02-19,Payments & Cards,Payment Gateway,99.749,25.3,99.95,,N
+2026-02-19,Payments & Cards,Card Issuance System,99.721,28.1,99.5,,N
+2026-02-19,Payments & Cards,Wire Transfer System,99.969,3.1,99.9,,N
+2026-02-19,Mortgage & Lending,Loan Origination System,99.762,24.0,99.5,,N
+2026-02-19,Mortgage & Lending,Document Management System,97.824,219.3,99.5,Software Bug / Deployment Issue,N
+2026-02-19,Digital Banking,Online Banking Portal,99.669,33.4,99.9,,N
+2026-02-19,Digital Banking,Mobile Banking App,99.984,1.6,99.9,,N
+2026-02-19,Digital Banking,Customer API Gateway,99.671,33.2,99.9,,N
+2026-02-19,Corporate IT & Infrastructure,Active Directory,99.94,6.0,99.5,,N
+2026-02-19,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.816,18.5,99.5,,N
+2026-02-19,Corporate IT & Infrastructure,Data Warehouse,97.204,281.8,99.5,Hardware Failure,N
+2026-02-19,Corporate IT & Infrastructure,Email & Collaboration (O365),99.759,24.3,99.5,,N
+2026-02-19,Corporate IT & Infrastructure,Endpoint Fleet,96.548,348.0,99.5,Software Bug / Deployment Issue,N
+2026-02-26,Retail Banking,Core Banking System,99.976,2.4,99.95,,N
+2026-02-26,Retail Banking,Teller Platform,99.93,7.1,99.5,,N
+2026-02-26,Retail Banking,ATM Network,99.601,40.2,99.9,,N
+2026-02-26,Commercial Banking,Commercial Loan Platform,99.107,90.0,99.5,Maintenance Overrun,N
+2026-02-26,Commercial Banking,Treasury Management System,99.601,40.2,99.5,,N
+2026-02-26,Wealth Management,Wealth Management Platform,99.919,8.2,99.5,,N
+2026-02-26,Wealth Management,Trading Platform,99.668,33.5,99.5,,N
+2026-02-26,Payments & Cards,Payment Gateway,99.767,23.5,99.95,,N
+2026-02-26,Payments & Cards,Card Issuance System,99.767,23.5,99.5,,N
+2026-02-26,Payments & Cards,Wire Transfer System,99.92,8.1,99.9,,N
+2026-02-26,Mortgage & Lending,Loan Origination System,99.745,25.7,99.5,,N
+2026-02-26,Mortgage & Lending,Document Management System,99.905,9.6,99.5,,N
+2026-02-26,Digital Banking,Online Banking Portal,99.95,5.0,99.9,,N
+2026-02-26,Digital Banking,Mobile Banking App,99.631,37.2,99.9,,N
+2026-02-26,Digital Banking,Customer API Gateway,99.892,10.9,99.9,,N
+2026-02-26,Corporate IT & Infrastructure,Active Directory,99.798,20.4,99.5,,N
+2026-02-26,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.918,8.3,99.5,,N
+2026-02-26,Corporate IT & Infrastructure,Data Warehouse,99.66,34.3,99.5,,N
+2026-02-26,Corporate IT & Infrastructure,Email & Collaboration (O365),99.835,16.6,99.5,,N
+2026-02-26,Corporate IT & Infrastructure,Endpoint Fleet,99.832,16.9,99.5,,N
+2026-03-05,Retail Banking,Core Banking System,99.956,4.4,99.95,,N
+2026-03-05,Retail Banking,Teller Platform,99.724,27.8,99.5,,N
+2026-03-05,Retail Banking,ATM Network,99.636,36.7,99.9,,N
+2026-03-05,Commercial Banking,Commercial Loan Platform,99.769,23.3,99.5,,N
+2026-03-05,Commercial Banking,Treasury Management System,99.751,25.1,99.5,,N
+2026-03-05,Wealth Management,Wealth Management Platform,99.644,35.9,99.5,,N
+2026-03-05,Wealth Management,Trading Platform,99.917,8.4,99.5,,N
+2026-03-05,Payments & Cards,Payment Gateway,99.824,17.7,99.95,,N
+2026-03-05,Payments & Cards,Card Issuance System,99.836,16.5,99.5,,N
+2026-03-05,Payments & Cards,Wire Transfer System,99.814,18.7,99.9,,N
+2026-03-05,Mortgage & Lending,Loan Origination System,99.823,17.8,99.5,,N
+2026-03-05,Mortgage & Lending,Document Management System,99.721,28.1,99.5,,N
+2026-03-05,Digital Banking,Online Banking Portal,99.965,3.5,99.9,,N
+2026-03-05,Digital Banking,Mobile Banking App,99.906,9.5,99.9,,N
+2026-03-05,Digital Banking,Customer API Gateway,99.743,25.9,99.9,,N
+2026-03-05,Corporate IT & Infrastructure,Active Directory,99.655,34.8,99.5,,N
+2026-03-05,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.604,39.9,99.5,,N
+2026-03-05,Corporate IT & Infrastructure,Data Warehouse,99.664,33.9,99.5,,N
+2026-03-05,Corporate IT & Infrastructure,Email & Collaboration (O365),99.725,27.7,99.5,,N
+2026-03-05,Corporate IT & Infrastructure,Endpoint Fleet,99.949,5.1,99.5,,N
+2026-03-12,Retail Banking,Core Banking System,99.3,70.6,99.95,Software Bug / Deployment Issue,Y
+2026-03-12,Retail Banking,Teller Platform,99.605,39.8,99.5,,N
+2026-03-12,Retail Banking,ATM Network,99.982,1.8,99.9,,N
+2026-03-12,Commercial Banking,Commercial Loan Platform,99.939,6.1,99.5,,N
+2026-03-12,Commercial Banking,Treasury Management System,99.716,28.6,99.5,,N
+2026-03-12,Wealth Management,Wealth Management Platform,99.83,17.1,99.5,,N
+2026-03-12,Wealth Management,Trading Platform,99.817,18.4,99.5,,N
+2026-03-12,Payments & Cards,Payment Gateway,99.954,4.6,99.95,,N
+2026-03-12,Payments & Cards,Card Issuance System,99.751,25.1,99.5,,N
+2026-03-12,Payments & Cards,Wire Transfer System,99.835,16.6,99.9,,N
+2026-03-12,Mortgage & Lending,Loan Origination System,99.952,4.8,99.5,,N
+2026-03-12,Mortgage & Lending,Document Management System,99.732,27.0,99.5,,N
+2026-03-12,Digital Banking,Online Banking Portal,97.763,225.5,99.9,Third-Party Outage,Y
+2026-03-12,Digital Banking,Mobile Banking App,96.842,318.3,99.9,DDoS Attack,Y
+2026-03-12,Digital Banking,Customer API Gateway,99.784,21.8,99.9,,N
+2026-03-12,Corporate IT & Infrastructure,Active Directory,99.865,13.6,99.5,,N
+2026-03-12,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.887,11.4,99.5,,N
+2026-03-12,Corporate IT & Infrastructure,Data Warehouse,99.851,15.0,99.5,,N
+2026-03-12,Corporate IT & Infrastructure,Email & Collaboration (O365),99.674,32.9,99.5,,N
+2026-03-12,Corporate IT & Infrastructure,Endpoint Fleet,99.761,24.1,99.5,,N
+2026-03-19,Retail Banking,Core Banking System,99.707,29.5,99.95,,N
+2026-03-19,Retail Banking,Teller Platform,99.664,33.9,99.5,,N
+2026-03-19,Retail Banking,ATM Network,99.968,3.2,99.9,,N
+2026-03-19,Commercial Banking,Commercial Loan Platform,99.992,0.8,99.5,,N
+2026-03-19,Commercial Banking,Treasury Management System,99.989,1.1,99.5,,N
+2026-03-19,Wealth Management,Wealth Management Platform,99.725,27.7,99.5,,N
+2026-03-19,Wealth Management,Trading Platform,97.835,218.2,99.5,Maintenance Overrun,N
+2026-03-19,Payments & Cards,Payment Gateway,99.727,27.5,99.95,,N
+2026-03-19,Payments & Cards,Card Issuance System,99.747,25.5,99.5,,N
+2026-03-19,Payments & Cards,Wire Transfer System,99.927,7.4,99.9,,N
+2026-03-19,Mortgage & Lending,Loan Origination System,99.929,7.2,99.5,,N
+2026-03-19,Mortgage & Lending,Document Management System,99.604,39.9,99.5,,N
+2026-03-19,Digital Banking,Online Banking Portal,99.702,30.0,99.9,,N
+2026-03-19,Digital Banking,Mobile Banking App,99.86,14.1,99.9,,N
+2026-03-19,Digital Banking,Customer API Gateway,99.204,80.2,99.9,Third-Party Outage,Y
+2026-03-19,Corporate IT & Infrastructure,Active Directory,99.703,29.9,99.5,,N
+2026-03-19,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.875,12.6,99.5,,N
+2026-03-19,Corporate IT & Infrastructure,Data Warehouse,99.965,3.5,99.5,,N
+2026-03-19,Corporate IT & Infrastructure,Email & Collaboration (O365),99.901,10.0,99.5,,N
+2026-03-19,Corporate IT & Infrastructure,Endpoint Fleet,98.902,110.7,99.5,DDoS Attack,N
+2026-03-26,Retail Banking,Core Banking System,99.874,12.7,99.95,,N
+2026-03-26,Retail Banking,Teller Platform,99.751,25.1,99.5,,N
+2026-03-26,Retail Banking,ATM Network,99.616,38.7,99.9,,N
+2026-03-26,Commercial Banking,Commercial Loan Platform,99.642,36.1,99.5,,N
+2026-03-26,Commercial Banking,Treasury Management System,99.934,6.7,99.5,,N
+2026-03-26,Wealth Management,Wealth Management Platform,96.669,335.8,99.5,Third-Party Outage,N
+2026-03-26,Wealth Management,Trading Platform,99.625,37.8,99.5,,N
+2026-03-26,Payments & Cards,Payment Gateway,99.805,19.7,99.95,,N
+2026-03-26,Payments & Cards,Card Issuance System,99.628,37.5,99.5,,N
+2026-03-26,Payments & Cards,Wire Transfer System,99.716,28.6,99.9,,N
+2026-03-26,Mortgage & Lending,Loan Origination System,99.968,3.2,99.5,,N
+2026-03-26,Mortgage & Lending,Document Management System,99.77,23.2,99.5,,N
+2026-03-26,Digital Banking,Online Banking Portal,99.046,96.2,99.9,Software Bug / Deployment Issue,Y
+2026-03-26,Digital Banking,Mobile Banking App,99.968,3.2,99.9,,N
+2026-03-26,Digital Banking,Customer API Gateway,99.715,28.7,99.9,,N
+2026-03-26,Corporate IT & Infrastructure,Active Directory,99.641,36.2,99.5,,N
+2026-03-26,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.801,20.1,99.5,,N
+2026-03-26,Corporate IT & Infrastructure,Data Warehouse,99.793,20.9,99.5,,N
+2026-03-26,Corporate IT & Infrastructure,Email & Collaboration (O365),99.849,15.2,99.5,,N
+2026-03-26,Corporate IT & Infrastructure,Endpoint Fleet,99.957,4.3,99.5,,N
+2026-04-02,Retail Banking,Core Banking System,99.63,37.3,99.95,,N
+2026-04-02,Retail Banking,Teller Platform,99.976,2.4,99.5,,N
+2026-04-02,Retail Banking,ATM Network,99.905,9.6,99.9,,N
+2026-04-02,Commercial Banking,Commercial Loan Platform,99.839,16.2,99.5,,N
+2026-04-02,Commercial Banking,Treasury Management System,99.708,29.4,99.5,,N
+2026-04-02,Wealth Management,Wealth Management Platform,99.918,8.3,99.5,,N
+2026-04-02,Wealth Management,Trading Platform,99.84,16.1,99.5,,N
+2026-04-02,Payments & Cards,Payment Gateway,99.88,12.1,99.95,,N
+2026-04-02,Payments & Cards,Card Issuance System,99.643,36.0,99.5,,N
+2026-04-02,Payments & Cards,Wire Transfer System,99.688,31.4,99.9,,N
+2026-04-02,Mortgage & Lending,Loan Origination System,99.741,26.1,99.5,,N
+2026-04-02,Mortgage & Lending,Document Management System,99.679,32.4,99.5,,N
+2026-04-02,Digital Banking,Online Banking Portal,99.915,8.6,99.9,,N
+2026-04-02,Digital Banking,Mobile Banking App,99.989,1.1,99.9,,N
+2026-04-02,Digital Banking,Customer API Gateway,99.635,36.8,99.9,,N
+2026-04-02,Corporate IT & Infrastructure,Active Directory,99.759,24.3,99.5,,N
+2026-04-02,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.898,10.3,99.5,,N
+2026-04-02,Corporate IT & Infrastructure,Data Warehouse,99.773,22.9,99.5,,N
+2026-04-02,Corporate IT & Infrastructure,Email & Collaboration (O365),99.845,15.6,99.5,,N
+2026-04-02,Corporate IT & Infrastructure,Endpoint Fleet,99.9,10.1,99.5,,N
+2026-04-09,Retail Banking,Core Banking System,99.673,33.0,99.95,,N
+2026-04-09,Retail Banking,Teller Platform,99.782,22.0,99.5,,N
+2026-04-09,Retail Banking,ATM Network,99.789,21.3,99.9,,N
+2026-04-09,Commercial Banking,Commercial Loan Platform,99.865,13.6,99.5,,N
+2026-04-09,Commercial Banking,Treasury Management System,99.937,6.4,99.5,,N
+2026-04-09,Wealth Management,Wealth Management Platform,96.77,325.6,99.5,Maintenance Overrun,N
+2026-04-09,Wealth Management,Trading Platform,99.675,32.8,99.5,,N
+2026-04-09,Payments & Cards,Payment Gateway,99.769,23.3,99.95,,N
+2026-04-09,Payments & Cards,Card Issuance System,99.687,31.6,99.5,,N
+2026-04-09,Payments & Cards,Wire Transfer System,99.605,39.8,99.9,,N
+2026-04-09,Mortgage & Lending,Loan Origination System,99.714,28.8,99.5,,N
+2026-04-09,Mortgage & Lending,Document Management System,99.71,29.2,99.5,,N
+2026-04-09,Digital Banking,Online Banking Portal,99.851,15.0,99.9,,N
+2026-04-09,Digital Banking,Mobile Banking App,99.799,20.3,99.9,,N
+2026-04-09,Digital Banking,Customer API Gateway,99.729,27.3,99.9,,N
+2026-04-09,Corporate IT & Infrastructure,Active Directory,99.84,16.1,99.5,,N
+2026-04-09,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.909,9.2,99.5,,N
+2026-04-09,Corporate IT & Infrastructure,Data Warehouse,99.627,37.6,99.5,,N
+2026-04-09,Corporate IT & Infrastructure,Email & Collaboration (O365),99.811,19.1,99.5,,N
+2026-04-09,Corporate IT & Infrastructure,Endpoint Fleet,99.87,13.1,99.5,,N
+2026-04-16,Retail Banking,Core Banking System,99.759,24.3,99.95,,N
+2026-04-16,Retail Banking,Teller Platform,99.684,31.9,99.5,,N
+2026-04-16,Retail Banking,ATM Network,99.945,5.5,99.9,,N
+2026-04-16,Commercial Banking,Commercial Loan Platform,99.993,0.7,99.5,,N
+2026-04-16,Commercial Banking,Treasury Management System,99.709,29.3,99.5,,N
+2026-04-16,Wealth Management,Wealth Management Platform,99.981,1.9,99.5,,N
+2026-04-16,Wealth Management,Trading Platform,99.829,17.2,99.5,,N
+2026-04-16,Payments & Cards,Payment Gateway,99.863,13.8,99.95,,N
+2026-04-16,Payments & Cards,Card Issuance System,97.25,277.2,99.5,Maintenance Overrun,N
+2026-04-16,Payments & Cards,Wire Transfer System,99.849,15.2,99.9,,N
+2026-04-16,Mortgage & Lending,Loan Origination System,99.847,15.4,99.5,,N
+2026-04-16,Mortgage & Lending,Document Management System,96.612,341.5,99.5,Security Incident - Containment,N
+2026-04-16,Digital Banking,Online Banking Portal,99.782,22.0,99.9,,N
+2026-04-16,Digital Banking,Mobile Banking App,99.634,36.9,99.9,,N
+2026-04-16,Digital Banking,Customer API Gateway,99.641,36.2,99.9,,N
+2026-04-16,Corporate IT & Infrastructure,Active Directory,99.968,3.2,99.5,,N
+2026-04-16,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.612,39.1,99.5,,N
+2026-04-16,Corporate IT & Infrastructure,Data Warehouse,99.699,30.3,99.5,,N
+2026-04-16,Corporate IT & Infrastructure,Email & Collaboration (O365),99.992,0.8,99.5,,N
+2026-04-16,Corporate IT & Infrastructure,Endpoint Fleet,99.67,33.3,99.5,,N
+2026-04-23,Retail Banking,Core Banking System,99.762,24.0,99.95,,N
+2026-04-23,Retail Banking,Teller Platform,99.676,32.7,99.5,,N
+2026-04-23,Retail Banking,ATM Network,99.73,27.2,99.9,,N
+2026-04-23,Commercial Banking,Commercial Loan Platform,99.648,35.5,99.5,,N
+2026-04-23,Commercial Banking,Treasury Management System,99.735,26.7,99.5,,N
+2026-04-23,Wealth Management,Wealth Management Platform,99.872,12.9,99.5,,N
+2026-04-23,Wealth Management,Trading Platform,99.774,22.8,99.5,,N
+2026-04-23,Payments & Cards,Payment Gateway,99.847,15.4,99.95,,N
+2026-04-23,Payments & Cards,Card Issuance System,99.924,7.7,99.5,,N
+2026-04-23,Payments & Cards,Wire Transfer System,99.689,31.3,99.9,,N
+2026-04-23,Mortgage & Lending,Loan Origination System,99.711,29.1,99.5,,N
+2026-04-23,Mortgage & Lending,Document Management System,99.666,33.7,99.5,,N
+2026-04-23,Digital Banking,Online Banking Portal,99.837,16.4,99.9,,N
+2026-04-23,Digital Banking,Mobile Banking App,99.92,8.1,99.9,,N
+2026-04-23,Digital Banking,Customer API Gateway,99.914,8.7,99.9,,N
+2026-04-23,Corporate IT & Infrastructure,Active Directory,99.62,38.3,99.5,,N
+2026-04-23,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.766,23.6,99.5,,N
+2026-04-23,Corporate IT & Infrastructure,Data Warehouse,99.902,9.9,99.5,,N
+2026-04-23,Corporate IT & Infrastructure,Email & Collaboration (O365),99.985,1.5,99.5,,N
+2026-04-23,Corporate IT & Infrastructure,Endpoint Fleet,99.602,40.1,99.5,,N
+2026-04-30,Retail Banking,Core Banking System,99.825,17.6,99.95,,N
+2026-04-30,Retail Banking,Teller Platform,99.61,39.3,99.5,,N
+2026-04-30,Retail Banking,ATM Network,99.763,23.9,99.9,,N
+2026-04-30,Commercial Banking,Commercial Loan Platform,99.968,3.2,99.5,,N
+2026-04-30,Commercial Banking,Treasury Management System,99.619,38.4,99.5,,N
+2026-04-30,Wealth Management,Wealth Management Platform,99.763,23.9,99.5,,N
+2026-04-30,Wealth Management,Trading Platform,99.948,5.2,99.5,,N
+2026-04-30,Payments & Cards,Payment Gateway,99.97,3.0,99.95,,N
+2026-04-30,Payments & Cards,Card Issuance System,99.917,8.4,99.5,,N
+2026-04-30,Payments & Cards,Wire Transfer System,99.97,3.0,99.9,,N
+2026-04-30,Mortgage & Lending,Loan Origination System,99.764,23.8,99.5,,N
+2026-04-30,Mortgage & Lending,Document Management System,99.893,10.8,99.5,,N
+2026-04-30,Digital Banking,Online Banking Portal,99.818,18.3,99.9,,N
+2026-04-30,Digital Banking,Mobile Banking App,99.75,25.2,99.9,,N
+2026-04-30,Digital Banking,Customer API Gateway,99.619,38.4,99.9,,N
+2026-04-30,Corporate IT & Infrastructure,Active Directory,99.894,10.7,99.5,,N
+2026-04-30,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.939,6.1,99.5,,N
+2026-04-30,Corporate IT & Infrastructure,Data Warehouse,99.902,9.9,99.5,,N
+2026-04-30,Corporate IT & Infrastructure,Email & Collaboration (O365),99.05,95.8,99.5,Third-Party Outage,N
+2026-04-30,Corporate IT & Infrastructure,Endpoint Fleet,99.661,34.2,99.5,,N
+2026-05-07,Retail Banking,Core Banking System,97.126,289.7,99.95,Network Failure,Y
+2026-05-07,Retail Banking,Teller Platform,99.654,34.9,99.5,,N
+2026-05-07,Retail Banking,ATM Network,99.687,31.6,99.9,,N
+2026-05-07,Commercial Banking,Commercial Loan Platform,99.902,9.9,99.5,,N
+2026-05-07,Commercial Banking,Treasury Management System,99.951,4.9,99.5,,N
+2026-05-07,Wealth Management,Wealth Management Platform,99.667,33.6,99.5,,N
+2026-05-07,Wealth Management,Trading Platform,99.842,15.9,99.5,,N
+2026-05-07,Payments & Cards,Payment Gateway,99.706,29.6,99.95,,N
+2026-05-07,Payments & Cards,Card Issuance System,99.872,12.9,99.5,,N
+2026-05-07,Payments & Cards,Wire Transfer System,99.708,29.4,99.9,,N
+2026-05-07,Mortgage & Lending,Loan Origination System,99.8,20.2,99.5,,N
+2026-05-07,Mortgage & Lending,Document Management System,99.61,39.3,99.5,,N
+2026-05-07,Digital Banking,Online Banking Portal,99.933,6.8,99.9,,N
+2026-05-07,Digital Banking,Mobile Banking App,99.818,18.3,99.9,,N
+2026-05-07,Digital Banking,Customer API Gateway,99.972,2.8,99.9,,N
+2026-05-07,Corporate IT & Infrastructure,Active Directory,99.686,31.7,99.5,,N
+2026-05-07,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.719,28.3,99.5,,N
+2026-05-07,Corporate IT & Infrastructure,Data Warehouse,98.272,174.2,99.5,Maintenance Overrun,N
+2026-05-07,Corporate IT & Infrastructure,Email & Collaboration (O365),99.917,8.4,99.5,,N
+2026-05-07,Corporate IT & Infrastructure,Endpoint Fleet,99.786,21.6,99.5,,N
+2026-05-14,Retail Banking,Core Banking System,99.708,29.4,99.95,,N
+2026-05-14,Retail Banking,Teller Platform,99.853,14.8,99.5,,N
+2026-05-14,Retail Banking,ATM Network,99.672,33.1,99.9,,N
+2026-05-14,Commercial Banking,Commercial Loan Platform,99.738,26.4,99.5,,N
+2026-05-14,Commercial Banking,Treasury Management System,99.805,19.7,99.5,,N
+2026-05-14,Wealth Management,Wealth Management Platform,99.657,34.6,99.5,,N
+2026-05-14,Wealth Management,Trading Platform,99.81,19.2,99.5,,N
+2026-05-14,Payments & Cards,Payment Gateway,99.792,21.0,99.95,,N
+2026-05-14,Payments & Cards,Card Issuance System,99.981,1.9,99.5,,N
+2026-05-14,Payments & Cards,Wire Transfer System,99.657,34.6,99.9,,N
+2026-05-14,Mortgage & Lending,Loan Origination System,99.818,18.3,99.5,,N
+2026-05-14,Mortgage & Lending,Document Management System,99.622,38.1,99.5,,N
+2026-05-14,Digital Banking,Online Banking Portal,99.827,17.4,99.9,,N
+2026-05-14,Digital Banking,Mobile Banking App,99.743,25.9,99.9,,N
+2026-05-14,Digital Banking,Customer API Gateway,99.846,15.5,99.9,,N
+2026-05-14,Corporate IT & Infrastructure,Active Directory,99.684,31.9,99.5,,N
+2026-05-14,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.817,18.4,99.5,,N
+2026-05-14,Corporate IT & Infrastructure,Data Warehouse,99.82,18.1,99.5,,N
+2026-05-14,Corporate IT & Infrastructure,Email & Collaboration (O365),99.71,29.2,99.5,,N
+2026-05-14,Corporate IT & Infrastructure,Endpoint Fleet,98.078,193.7,99.5,Third-Party Outage,N
+2026-05-21,Retail Banking,Core Banking System,99.81,19.2,99.95,,N
+2026-05-21,Retail Banking,Teller Platform,99.87,13.1,99.5,,N
+2026-05-21,Retail Banking,ATM Network,99.9,10.1,99.9,,N
+2026-05-21,Commercial Banking,Commercial Loan Platform,99.642,36.1,99.5,,N
+2026-05-21,Commercial Banking,Treasury Management System,99.64,36.3,99.5,,N
+2026-05-21,Wealth Management,Wealth Management Platform,99.886,11.5,99.5,,N
+2026-05-21,Wealth Management,Trading Platform,99.759,24.3,99.5,,N
+2026-05-21,Payments & Cards,Payment Gateway,99.726,27.6,99.95,,N
+2026-05-21,Payments & Cards,Card Issuance System,99.943,5.7,99.5,,N
+2026-05-21,Payments & Cards,Wire Transfer System,99.697,30.5,99.9,,N
+2026-05-21,Mortgage & Lending,Loan Origination System,99.698,30.4,99.5,,N
+2026-05-21,Mortgage & Lending,Document Management System,99.96,4.0,99.5,,N
+2026-05-21,Digital Banking,Online Banking Portal,99.962,3.8,99.9,,N
+2026-05-21,Digital Banking,Mobile Banking App,99.779,22.3,99.9,,N
+2026-05-21,Digital Banking,Customer API Gateway,99.973,2.7,99.9,,N
+2026-05-21,Corporate IT & Infrastructure,Active Directory,99.832,16.9,99.5,,N
+2026-05-21,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.782,22.0,99.5,,N
+2026-05-21,Corporate IT & Infrastructure,Data Warehouse,99.813,18.8,99.5,,N
+2026-05-21,Corporate IT & Infrastructure,Email & Collaboration (O365),99.672,33.1,99.5,,N
+2026-05-21,Corporate IT & Infrastructure,Endpoint Fleet,99.725,27.7,99.5,,N
+2026-05-28,Retail Banking,Core Banking System,98.909,110.0,99.95,Hardware Failure,Y
+2026-05-28,Retail Banking,Teller Platform,99.685,31.8,99.5,,N
+2026-05-28,Retail Banking,ATM Network,99.869,13.2,99.9,,N
+2026-05-28,Commercial Banking,Commercial Loan Platform,99.704,29.8,99.5,,N
+2026-05-28,Commercial Banking,Treasury Management System,99.693,30.9,99.5,,N
+2026-05-28,Wealth Management,Wealth Management Platform,99.657,34.6,99.5,,N
+2026-05-28,Wealth Management,Trading Platform,99.07,93.7,99.5,Software Bug / Deployment Issue,N
+2026-05-28,Payments & Cards,Payment Gateway,99.75,25.2,99.95,,N
+2026-05-28,Payments & Cards,Card Issuance System,99.702,30.0,99.5,,N
+2026-05-28,Payments & Cards,Wire Transfer System,99.943,5.7,99.9,,N
+2026-05-28,Mortgage & Lending,Loan Origination System,99.67,33.3,99.5,,N
+2026-05-28,Mortgage & Lending,Document Management System,99.999,0.1,99.5,,N
+2026-05-28,Digital Banking,Online Banking Portal,99.871,13.0,99.9,,N
+2026-05-28,Digital Banking,Mobile Banking App,99.865,13.6,99.9,,N
+2026-05-28,Digital Banking,Customer API Gateway,99.648,35.5,99.9,,N
+2026-05-28,Corporate IT & Infrastructure,Active Directory,99.831,17.0,99.5,,N
+2026-05-28,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.83,17.1,99.5,,N
+2026-05-28,Corporate IT & Infrastructure,Data Warehouse,99.766,23.6,99.5,,N
+2026-05-28,Corporate IT & Infrastructure,Email & Collaboration (O365),99.728,27.4,99.5,,N
+2026-05-28,Corporate IT & Infrastructure,Endpoint Fleet,99.813,18.8,99.5,,N
+2026-06-04,Retail Banking,Core Banking System,99.983,1.7,99.95,,N
+2026-06-04,Retail Banking,Teller Platform,97.014,301.0,99.5,DDoS Attack,N
+2026-06-04,Retail Banking,ATM Network,99.637,36.6,99.9,,N
+2026-06-04,Commercial Banking,Commercial Loan Platform,99.858,14.3,99.5,,N
+2026-06-04,Commercial Banking,Treasury Management System,99.881,12.0,99.5,,N
+2026-06-04,Wealth Management,Wealth Management Platform,99.605,39.8,99.5,,N
+2026-06-04,Wealth Management,Trading Platform,99.628,37.5,99.5,,N
+2026-06-04,Payments & Cards,Payment Gateway,99.845,15.6,99.95,,N
+2026-06-04,Payments & Cards,Card Issuance System,96.825,320.0,99.5,Maintenance Overrun,N
+2026-06-04,Payments & Cards,Wire Transfer System,99.719,28.3,99.9,,N
+2026-06-04,Mortgage & Lending,Loan Origination System,99.894,10.7,99.5,,N
+2026-06-04,Mortgage & Lending,Document Management System,99.914,8.7,99.5,,N
+2026-06-04,Digital Banking,Online Banking Portal,98.299,171.5,99.9,Hardware Failure,Y
+2026-06-04,Digital Banking,Mobile Banking App,99.788,21.4,99.9,,N
+2026-06-04,Digital Banking,Customer API Gateway,99.675,32.8,99.9,,N
+2026-06-04,Corporate IT & Infrastructure,Active Directory,97.707,231.1,99.5,Software Bug / Deployment Issue,N
+2026-06-04,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.94,6.0,99.5,,N
+2026-06-04,Corporate IT & Infrastructure,Data Warehouse,99.673,33.0,99.5,,N
+2026-06-04,Corporate IT & Infrastructure,Email & Collaboration (O365),99.738,26.4,99.5,,N
+2026-06-04,Corporate IT & Infrastructure,Endpoint Fleet,99.895,10.6,99.5,,N
+2026-06-11,Retail Banking,Core Banking System,99.6,40.3,99.95,,N
+2026-06-11,Retail Banking,Teller Platform,99.803,19.9,99.5,,N
+2026-06-11,Retail Banking,ATM Network,99.704,29.8,99.9,,N
+2026-06-11,Commercial Banking,Commercial Loan Platform,98.244,177.0,99.5,Network Failure,N
+2026-06-11,Commercial Banking,Treasury Management System,99.663,34.0,99.5,,N
+2026-06-11,Wealth Management,Wealth Management Platform,99.789,21.3,99.5,,N
+2026-06-11,Wealth Management,Trading Platform,99.826,17.5,99.5,,N
+2026-06-11,Payments & Cards,Payment Gateway,99.66,34.3,99.95,,N
+2026-06-11,Payments & Cards,Card Issuance System,99.889,11.2,99.5,,N
+2026-06-11,Payments & Cards,Wire Transfer System,99.915,8.6,99.9,,N
+2026-06-11,Mortgage & Lending,Loan Origination System,99.816,18.5,99.5,,N
+2026-06-11,Mortgage & Lending,Document Management System,99.63,37.3,99.5,,N
+2026-06-11,Digital Banking,Online Banking Portal,99.656,34.7,99.9,,N
+2026-06-11,Digital Banking,Mobile Banking App,99.61,39.3,99.9,,N
+2026-06-11,Digital Banking,Customer API Gateway,99.89,11.1,99.9,,N
+2026-06-11,Corporate IT & Infrastructure,Active Directory,99.882,11.9,99.5,,N
+2026-06-11,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.862,13.9,99.5,,N
+2026-06-11,Corporate IT & Infrastructure,Data Warehouse,99.976,2.4,99.5,,N
+2026-06-11,Corporate IT & Infrastructure,Email & Collaboration (O365),99.808,19.4,99.5,,N
+2026-06-11,Corporate IT & Infrastructure,Endpoint Fleet,99.72,28.2,99.5,,N
+2026-06-18,Retail Banking,Core Banking System,99.949,5.1,99.95,,N
+2026-06-18,Retail Banking,Teller Platform,99.754,24.8,99.5,,N
+2026-06-18,Retail Banking,ATM Network,99.898,10.3,99.9,,N
+2026-06-18,Commercial Banking,Commercial Loan Platform,99.829,17.2,99.5,,N
+2026-06-18,Commercial Banking,Treasury Management System,99.286,72.0,99.5,DDoS Attack,N
+2026-06-18,Wealth Management,Wealth Management Platform,99.974,2.6,99.5,,N
+2026-06-18,Wealth Management,Trading Platform,99.82,18.1,99.5,,N
+2026-06-18,Payments & Cards,Payment Gateway,99.79,21.2,99.95,,N
+2026-06-18,Payments & Cards,Card Issuance System,99.662,34.1,99.5,,N
+2026-06-18,Payments & Cards,Wire Transfer System,98.459,155.3,99.9,Third-Party Outage,Y
+2026-06-18,Mortgage & Lending,Loan Origination System,99.875,12.6,99.5,,N
+2026-06-18,Mortgage & Lending,Document Management System,99.65,35.3,99.5,,N
+2026-06-18,Digital Banking,Online Banking Portal,99.316,68.9,99.9,Network Failure,Y
+2026-06-18,Digital Banking,Mobile Banking App,99.93,7.1,99.9,,N
+2026-06-18,Digital Banking,Customer API Gateway,99.936,6.5,99.9,,N
+2026-06-18,Corporate IT & Infrastructure,Active Directory,99.696,30.6,99.5,,N
+2026-06-18,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.961,3.9,99.5,,N
+2026-06-18,Corporate IT & Infrastructure,Data Warehouse,99.727,27.5,99.5,,N
+2026-06-18,Corporate IT & Infrastructure,Email & Collaboration (O365),99.752,25.0,99.5,,N
+2026-06-18,Corporate IT & Infrastructure,Endpoint Fleet,99.898,10.3,99.5,,N
+2026-06-25,Retail Banking,Core Banking System,99.61,39.3,99.95,,N
+2026-06-25,Retail Banking,Teller Platform,99.622,38.1,99.5,,N
+2026-06-25,Retail Banking,ATM Network,99.831,17.0,99.9,,N
+2026-06-25,Commercial Banking,Commercial Loan Platform,99.948,5.2,99.5,,N
+2026-06-25,Commercial Banking,Treasury Management System,99.925,7.6,99.5,,N
+2026-06-25,Wealth Management,Wealth Management Platform,99.604,39.9,99.5,,N
+2026-06-25,Wealth Management,Trading Platform,99.778,22.4,99.5,,N
+2026-06-25,Payments & Cards,Payment Gateway,99.8,20.2,99.95,,N
+2026-06-25,Payments & Cards,Card Issuance System,99.992,0.8,99.5,,N
+2026-06-25,Payments & Cards,Wire Transfer System,98.316,169.7,99.9,Third-Party Outage,Y
+2026-06-25,Mortgage & Lending,Loan Origination System,99.868,13.3,99.5,,N
+2026-06-25,Mortgage & Lending,Document Management System,99.944,5.6,99.5,,N
+2026-06-25,Digital Banking,Online Banking Portal,99.981,1.9,99.9,,N
+2026-06-25,Digital Banking,Mobile Banking App,99.938,6.2,99.9,,N
+2026-06-25,Digital Banking,Customer API Gateway,99.964,3.6,99.9,,N
+2026-06-25,Corporate IT & Infrastructure,Active Directory,99.685,31.8,99.5,,N
+2026-06-25,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.943,5.7,99.5,,N
+2026-06-25,Corporate IT & Infrastructure,Data Warehouse,99.695,30.7,99.5,,N
+2026-06-25,Corporate IT & Infrastructure,Email & Collaboration (O365),99.838,16.3,99.5,,N
+2026-06-25,Corporate IT & Infrastructure,Endpoint Fleet,99.774,22.8,99.5,,N
+2026-07-02,Retail Banking,Core Banking System,99.786,21.6,99.95,,N
+2026-07-02,Retail Banking,Teller Platform,99.931,7.0,99.5,,N
+2026-07-02,Retail Banking,ATM Network,99.89,11.1,99.9,,N
+2026-07-02,Commercial Banking,Commercial Loan Platform,99.702,30.0,99.5,,N
+2026-07-02,Commercial Banking,Treasury Management System,99.722,28.0,99.5,,N
+2026-07-02,Wealth Management,Wealth Management Platform,99.674,32.9,99.5,,N
+2026-07-02,Wealth Management,Trading Platform,99.695,30.7,99.5,,N
+2026-07-02,Payments & Cards,Payment Gateway,97.64,237.9,99.95,Network Failure,Y
+2026-07-02,Payments & Cards,Card Issuance System,99.913,8.8,99.5,,N
+2026-07-02,Payments & Cards,Wire Transfer System,99.763,23.9,99.9,,N
+2026-07-02,Mortgage & Lending,Loan Origination System,99.785,21.7,99.5,,N
+2026-07-02,Mortgage & Lending,Document Management System,99.951,4.9,99.5,,N
+2026-07-02,Digital Banking,Online Banking Portal,99.906,9.5,99.9,,N
+2026-07-02,Digital Banking,Mobile Banking App,96.859,316.6,99.9,Third-Party Outage,Y
+2026-07-02,Digital Banking,Customer API Gateway,99.063,94.4,99.9,Maintenance Overrun,Y
+2026-07-02,Corporate IT & Infrastructure,Active Directory,99.635,36.8,99.5,,N
+2026-07-02,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.963,3.7,99.5,,N
+2026-07-02,Corporate IT & Infrastructure,Data Warehouse,99.68,32.3,99.5,,N
+2026-07-02,Corporate IT & Infrastructure,Email & Collaboration (O365),99.807,19.5,99.5,,N
+2026-07-02,Corporate IT & Infrastructure,Endpoint Fleet,99.865,13.6,99.5,,N
+2026-07-09,Retail Banking,Core Banking System,99.84,16.1,99.95,,N
+2026-07-09,Retail Banking,Teller Platform,99.914,8.7,99.5,,N
+2026-07-09,Retail Banking,ATM Network,99.685,31.8,99.9,,N
+2026-07-09,Commercial Banking,Commercial Loan Platform,99.66,34.3,99.5,,N
+2026-07-09,Commercial Banking,Treasury Management System,99.976,2.4,99.5,,N
+2026-07-09,Wealth Management,Wealth Management Platform,99.963,3.7,99.5,,N
+2026-07-09,Wealth Management,Trading Platform,99.969,3.1,99.5,,N
+2026-07-09,Payments & Cards,Payment Gateway,99.738,26.4,99.95,,N
+2026-07-09,Payments & Cards,Card Issuance System,99.75,25.2,99.5,,N
+2026-07-09,Payments & Cards,Wire Transfer System,99.755,24.7,99.9,,N
+2026-07-09,Mortgage & Lending,Loan Origination System,99.61,39.3,99.5,,N
+2026-07-09,Mortgage & Lending,Document Management System,99.947,5.3,99.5,,N
+2026-07-09,Digital Banking,Online Banking Portal,99.792,21.0,99.9,,N
+2026-07-09,Digital Banking,Mobile Banking App,99.838,16.3,99.9,,N
+2026-07-09,Digital Banking,Customer API Gateway,99.976,2.4,99.9,,N
+2026-07-09,Corporate IT & Infrastructure,Active Directory,99.982,1.8,99.5,,N
+2026-07-09,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.927,7.4,99.5,,N
+2026-07-09,Corporate IT & Infrastructure,Data Warehouse,99.688,31.4,99.5,,N
+2026-07-09,Corporate IT & Infrastructure,Email & Collaboration (O365),99.85,15.1,99.5,,N
+2026-07-09,Corporate IT & Infrastructure,Endpoint Fleet,99.75,25.2,99.5,,N
+2026-07-16,Retail Banking,Core Banking System,99.988,1.2,99.95,,N
+2026-07-16,Retail Banking,Teller Platform,99.717,28.5,99.5,,N
+2026-07-16,Retail Banking,ATM Network,99.934,6.7,99.9,,N
+2026-07-16,Commercial Banking,Commercial Loan Platform,99.74,26.2,99.5,,N
+2026-07-16,Commercial Banking,Treasury Management System,99.854,14.7,99.5,,N
+2026-07-16,Wealth Management,Wealth Management Platform,99.806,19.6,99.5,,N
+2026-07-16,Wealth Management,Trading Platform,99.674,32.9,99.5,,N
+2026-07-16,Payments & Cards,Payment Gateway,99.696,30.6,99.95,,N
+2026-07-16,Payments & Cards,Card Issuance System,99.668,33.5,99.5,,N
+2026-07-16,Payments & Cards,Wire Transfer System,99.845,15.6,99.9,,N
+2026-07-16,Mortgage & Lending,Loan Origination System,99.616,38.7,99.5,,N
+2026-07-16,Mortgage & Lending,Document Management System,99.78,22.2,99.5,,N
+2026-07-16,Digital Banking,Online Banking Portal,99.78,22.2,99.9,,N
+2026-07-16,Digital Banking,Mobile Banking App,99.911,9.0,99.9,,N
+2026-07-16,Digital Banking,Customer API Gateway,99.699,30.3,99.9,,N
+2026-07-16,Corporate IT & Infrastructure,Active Directory,99.607,39.6,99.5,,N
+2026-07-16,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.986,1.4,99.5,,N
+2026-07-16,Corporate IT & Infrastructure,Data Warehouse,99.995,0.5,99.5,,N
+2026-07-16,Corporate IT & Infrastructure,Email & Collaboration (O365),99.71,29.2,99.5,,N
+2026-07-16,Corporate IT & Infrastructure,Endpoint Fleet,99.663,34.0,99.5,,N
+2026-07-23,Retail Banking,Core Banking System,99.837,16.4,99.95,,N
+2026-07-23,Retail Banking,Teller Platform,99.781,22.1,99.5,,N
+2026-07-23,Retail Banking,ATM Network,99.668,33.5,99.9,,N
+2026-07-23,Commercial Banking,Commercial Loan Platform,99.921,8.0,99.5,,N
+2026-07-23,Commercial Banking,Treasury Management System,99.836,16.5,99.5,,N
+2026-07-23,Wealth Management,Wealth Management Platform,99.75,25.2,99.5,,N
+2026-07-23,Wealth Management,Trading Platform,99.726,27.6,99.5,,N
+2026-07-23,Payments & Cards,Payment Gateway,99.852,14.9,99.95,,N
+2026-07-23,Payments & Cards,Card Issuance System,99.79,21.2,99.5,,N
+2026-07-23,Payments & Cards,Wire Transfer System,99.979,2.1,99.9,,N
+2026-07-23,Mortgage & Lending,Loan Origination System,97.082,294.1,99.5,Hardware Failure,N
+2026-07-23,Mortgage & Lending,Document Management System,99.612,39.1,99.5,,N
+2026-07-23,Digital Banking,Online Banking Portal,99.964,3.6,99.9,,N
+2026-07-23,Digital Banking,Mobile Banking App,99.621,38.2,99.9,,N
+2026-07-23,Digital Banking,Customer API Gateway,99.644,35.9,99.9,,N
+2026-07-23,Corporate IT & Infrastructure,Active Directory,98.827,118.2,99.5,Third-Party Outage,N
+2026-07-23,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.687,31.6,99.5,,N
+2026-07-23,Corporate IT & Infrastructure,Data Warehouse,99.661,34.2,99.5,,N
+2026-07-23,Corporate IT & Infrastructure,Email & Collaboration (O365),99.771,23.1,99.5,,N
+2026-07-23,Corporate IT & Infrastructure,Endpoint Fleet,99.732,27.0,99.5,,N
+2026-07-30,Retail Banking,Core Banking System,99.884,11.7,99.95,,N
+2026-07-30,Retail Banking,Teller Platform,99.737,26.5,99.5,,N
+2026-07-30,Retail Banking,ATM Network,99.853,14.8,99.9,,N
+2026-07-30,Commercial Banking,Commercial Loan Platform,99.653,35.0,99.5,,N
+2026-07-30,Commercial Banking,Treasury Management System,99.946,5.4,99.5,,N
+2026-07-30,Wealth Management,Wealth Management Platform,99.681,32.2,99.5,,N
+2026-07-30,Wealth Management,Trading Platform,99.851,15.0,99.5,,N
+2026-07-30,Payments & Cards,Payment Gateway,99.859,14.2,99.95,,N
+2026-07-30,Payments & Cards,Card Issuance System,99.653,35.0,99.5,,N
+2026-07-30,Payments & Cards,Wire Transfer System,97.319,270.2,99.9,Security Incident - Containment,Y
+2026-07-30,Mortgage & Lending,Loan Origination System,99.959,4.1,99.5,,N
+2026-07-30,Mortgage & Lending,Document Management System,99.986,1.4,99.5,,N
+2026-07-30,Digital Banking,Online Banking Portal,99.932,6.9,99.9,,N
+2026-07-30,Digital Banking,Mobile Banking App,99.871,13.0,99.9,,N
+2026-07-30,Digital Banking,Customer API Gateway,99.87,13.1,99.9,,N
+2026-07-30,Corporate IT & Infrastructure,Active Directory,99.764,23.8,99.5,,N
+2026-07-30,Corporate IT & Infrastructure,Cloud Workloads (AWS),99.603,40.0,99.5,,N
+2026-07-30,Corporate IT & Infrastructure,Data Warehouse,99.648,35.5,99.5,,N
+2026-07-30,Corporate IT & Infrastructure,Email & Collaboration (O365),99.761,24.1,99.5,,N
+2026-07-30,Corporate IT & Infrastructure,Endpoint Fleet,99.974,2.6,99.5,,N
