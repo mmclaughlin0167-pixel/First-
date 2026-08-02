@@ -1,30 +1,38 @@
-# Executive Security KPI Dashboard (Splunk / SPL)
+# Executive Security KPI Dashboard (Splunk Dashboard Studio / SPL)
 
-A set of four Splunk dashboards — **CEO, CFO, COO, CIO** — that connect a
-financial-services company's cyber security posture to the KPIs each
-executive is actually held to, with a drill-down path that goes all the way
-from a board-level number down to the single raw event that produced it.
+A set of four Splunk **Dashboard Studio** dashboards — **CEO, CFO, COO,
+CIO** — that connect a financial-services company's cyber security posture
+to the KPIs each executive is actually held to, including a direct
+security-to-P&L link (cyber cost as a % of revenue, fraud loss as a % of
+revenue, security spend as a % of IT budget). Every KPI has a drill-down
+path that goes all the way from a board-level number down to the single
+raw event that produced it.
 
 Sample data is synthetic but modeled on real financial-services risk data:
 security incidents, fraud transactions, vulnerability scans, SOC alerts,
-system uptime, regulatory findings, third-party/vendor risk, and security
-spend.
+system uptime, regulatory findings, third-party/vendor risk, security
+spend, and company financials (revenue/net income/IT budget).
 
 ## Contents
 
 ```
 splunk-exec-security-dashboard/
-├── data/                        # 8 sample CSV datasets (Splunk lookups)
-├── scripts/generate_sample_data.py  # regenerates the CSVs deterministically
-├── dashboards/                  # 4 persona dashboards + 1 landing page (Simple XML)
+├── data/                              # 9 sample CSV datasets (Splunk lookups)
+├── scripts/
+│   ├── generate_sample_data.py        # regenerates the CSVs deterministically
+│   └── build_studio_dashboards.py     # regenerates the Dashboard Studio JSON
+├── dashboards/                        # 4 persona dashboards + 1 landing page (Dashboard Studio JSON)
 └── README.md
 ```
 
 ## 1. The data model
 
-All 8 datasets share two dimensions — `business_unit` and `system` — which
-is what makes cross-dashboard drill-down possible. Business units and their
-systems:
+All 9 datasets share two dimensions — `business_unit` and `system` — which
+is what makes cross-dashboard drill-down possible. `company_financials.csv`
+is the one exception: it carries no `business_unit`/`system` since it's the
+enterprise-level P&L baseline every cyber cost gets measured against.
+
+Business units and their systems:
 
 | Business Unit | Systems |
 |---|---|
@@ -45,7 +53,8 @@ systems:
 | `uptime_availability.csv` | 2,100 | 1 row per system per week | COO |
 | `compliance_findings.csv` | 130 | 1 row per regulatory/audit finding | CEO, CFO |
 | `vendor_risk.csv` | 20 | 1 row per third-party vendor | CEO, COO |
-| `security_spend.csv` | 280 | 1 row per BU × spend category × quarter | CFO |
+| `security_spend.csv` | 280 | 1 row per BU × spend category × quarter | CFO, CIO |
+| `company_financials.csv` | 8 | 1 row per quarter (revenue, net income, IT budget, insurance premium, market cap) | CEO, CFO, CIO |
 
 Regenerate with fresh randomization (same shape, different values) by
 editing the seed in `scripts/generate_sample_data.py` and re-running:
@@ -61,7 +70,7 @@ required, so they work in Splunk Free, a personal instance, or a sandboxed
 Splunk Cloud app.
 
 1. In Splunk Web: **Settings → Lookups → Lookup table files → New Lookup
-   Table File**. Upload each of the 8 CSVs from `data/`, keeping the exact
+   Table File**. Upload each of the 9 CSVs from `data/`, keeping the exact
    filename (e.g. `security_incidents.csv`). Set the destination app to
    wherever you'll install the dashboards.
 2. Splunk auto-creates a matching lookup *definition* with the same name
@@ -72,56 +81,68 @@ Splunk Cloud app.
    point the Splunk **Add Data → Upload** wizard at each CSV, index them
    into a dedicated index (e.g. `fsi_security`), and swap each
    `| inputlookup X.csv` for `index=fsi_security sourcetype=X` in the
-   dashboard XML. The field names are already flat and CSV-header-friendly,
+   dashboard JSON. The field names are already flat and CSV-header-friendly,
    so this is a drop-in swap.
 
-## 3. Installing the dashboards
+## 3. Installing the dashboards (Dashboard Studio)
 
-Simplest path: **Settings → User Interface → Views → New View**, switch to
-the XML/source editor, and paste the contents of the desired file from
-`dashboards/`. Do this for all five:
+1. In Splunk Web: **Dashboards → Create New Dashboard → Dashboard Studio →
+   Grid → Create**.
+2. Switch to the **Source** editor (`</>` icon, top toolbar) and replace the
+   placeholder JSON with the contents of one file from `dashboards/`.
+3. Save, naming the view to match what the overview page links to:
+   `ceo_dashboard`, `cfo_dashboard`, `coo_dashboard`, `cio_dashboard`. Do this
+   for all five files (`security_kpi_overview.json` is the landing page).
 
-- `security_kpi_overview.xml` — landing page, links to the other four
-- `ceo_dashboard.xml`
-- `cfo_dashboard.xml`
-- `coo_dashboard.xml`
-- `cio_dashboard.xml`
+Each JSON file was generated by `scripts/build_studio_dashboards.py`
+against the documented Dashboard Studio schema (grid layout, `ds.search`
+data sources, `splunk.singlevalue` / `splunk.bar` / `splunk.column` /
+`splunk.line` / `splunk.pie` / `splunk.table` / `splunk.markdown`
+visualizations, `drilldown.setToken` event handlers, token-based panel
+`visibility`). Splunk versions occasionally shift a property name — if the
+Source editor flags anything, it's almost always a single option key;
+open that visualization's **Configure** panel in the visual editor
+(Interactions → Click → Set token, or General → Visibility) to re-wire it
+by hand. The underlying SPL in each `query` never needs to change.
 
-Make sure the dashboard's URL/view **name** matches what the overview
-page links to (`ceo_dashboard`, `cfo_dashboard`, `coo_dashboard`,
-`cio_dashboard`) — Splunk Web will prompt for this name when you save a new
-view.
-
-## 4. KPI → technical event mapping
+## 4. KPI → technical event mapping, with the financial-KPI link made explicit
 
 This is the core idea of the program: every executive-level number has a
-direct, traceable path down to a technical log record.
+direct, traceable path down to a technical log record, **and** a subset of
+KPIs on each dashboard are expressed directly against revenue, net income,
+or IT budget so the security-to-financial-performance link isn't implicit —
+it's a number on the screen.
 
-| Executive | Board-level KPI | Business/financial framing | Technical ground truth |
+| Executive | Board-level KPI | Financial-KPI linkage | Technical ground truth |
 |---|---|---|---|
-| **CEO** | Enterprise Cyber Risk Score | Severity-weighted composite of all incidents — the number the board asks about | `security_incidents.csv` severity + category |
+| **CEO** | Enterprise Cyber Risk Score | Severity-weighted composite — the number the board asks about | `security_incidents.csv` severity + category |
+| **CEO** | **Cyber Incident Cost as % of Revenue** | Direct security-posture-to-P&L metric | `security_incidents.csv.financial_impact_usd` ÷ `company_financials.csv.revenue_usd` |
 | **CEO** | Material (Critical/High) incidents | Board/SEC-disclosure-worthy events | `security_incidents.csv` filtered on severity |
-| **CEO** | Customers impacted | Brand/reputational exposure | `security_incidents.csv.customers_affected` |
 | **CEO** | Regulatory standing | Exam/audit risk, consent-order exposure | `compliance_findings.csv` by framework (SOX, GLBA, PCI-DSS, FFIEC, NYDFS-500) |
 | **CFO** | Net fraud loss / loss rate (bps) | Direct P&L hit, classic banking fraud metric | `fraud_transactions.csv` loss vs. recovered, by channel |
+| **CFO** | **Fraud Loss as % of Revenue** | Same fraud number, framed the way the CFO reports it upward | `fraud_transactions.csv` net loss ÷ `company_financials.csv.revenue_usd` |
 | **CFO** | Security spend vs. estimated loss avoided (ROI) | Justifies the security budget line to the board | `security_spend.csv` by category |
-| **CFO** | Regulatory fine exposure | Contingent liability | `compliance_findings.csv` open findings |
+| **CFO** | Revenue / Net Income / IT Budget trend | The financial baseline every other ratio is measured against | `company_financials.csv` |
 | **COO** | System availability vs. SLA | Customer experience, operational continuity | `uptime_availability.csv` uptime_pct vs. sla_target_pct |
+| **COO** | **Estimated Revenue at Risk from Downtime** | Converts outage minutes into a dollar figure | `uptime_availability.csv.downtime_minutes` (customer-impacting) × a per-minute revenue-at-risk assumption |
 | **COO** | MTTD / MTTR | How fast the org detects and contains a problem | `security_incidents.csv` mttd_hours / mttr_hours |
-| **COO** | Incident backlog | Operational capacity/staffing signal | `security_incidents.csv` status != Resolved |
 | **COO** | Vendor operational risk | Third-party concentration risk | `vendor_risk.csv` sla_breach_count, incident_count |
 | **CIO** | Open Critical/High vulnerabilities, patch compliance % | Attack surface and remediation discipline | `vulnerability_scans.csv` |
+| **CIO** | **Security Spend as % of IT Budget** | Sizes the security program against the budget the CIO actually owns | `security_spend.csv.actual_spend_usd` ÷ `company_financials.csv.it_budget_usd` |
 | **CIO** | SOC alert volume, true-positive rate, triage time | SOC efficiency and signal-to-noise | `soc_alerts.csv` |
 | **CIO** | MITRE ATT&CK tactic distribution | What kind of attacks are actually happening | `soc_alerts.csv.mitre_tactic` |
+| **Overview** | **Total Cyber Cost (incidents + fraud) as % of Annual Revenue** | The single number the whole program rolls up to | `security_incidents.csv` + `fraud_transactions.csv` ÷ `company_financials.csv.revenue_usd` |
 
 ## 5. The drill-down pattern (all four dashboards use the same shape)
 
-Each dashboard is a 5-layer progressive drill-down implemented with Simple
-XML tokens — click a chart, and dependent panels below it appear, filtered
-to your click:
+Each dashboard is a 5-layer progressive drill-down implemented with
+Dashboard Studio tokens — click a chart, and dependent panels below it
+appear, filtered to your click:
 
-1. **KPI tiles** (top row) — the number the executive actually reports upward.
-2. **Trend** — the same KPI over time, to show trajectory.
+1. **KPI tiles** (top row) — the number the executive actually reports
+   upward, several already expressed as % of revenue / IT budget.
+2. **Trend** — the same KPI over time, including a revenue/net-income/IT-budget
+   trend line, to show trajectory against the financial baseline.
 3. **Business Unit breakdown** — a bar/pie chart. Clicking a bar sets a
    token (`sel_bu`) and reveals layer 4.
 4. **System/Channel/Asset breakdown within that Business Unit** — clicking
@@ -130,25 +151,30 @@ to your click:
 5. **Raw event table** — the individual incident, transaction, vulnerability
    scan, or SOC alert record, filtered by everything selected above.
 
-This is implemented with Splunk's `depends="$token$"` panel visibility and
-`<drilldown><set token="...">` — no external scripting required. For
-example, in `ceo_dashboard.xml`:
+This is implemented with a `drilldown.setToken` event handler on the
+clickable visualization, and a `visibility` condition on the deeper panels.
+For example, in `ceo_dashboard.json`:
 
-```xml
-<chart>
-  ...
-  <drilldown>
-    <set token="sel_bu">$click.value2$</set>
-    <unset token="sel_sys"></unset>
-  </drilldown>
-</chart>
+```json
+"viz_bu_heatmap": {
+  "type": "splunk.bar",
+  "dataSources": { "primary": "ds_bu_heatmap" },
+  "eventHandlers": [
+    {
+      "type": "drilldown.setToken",
+      "options": {
+        "tokens": [
+          { "token": "sel_bu", "key": "row.business_unit" },
+          { "token": "sel_sys", "value": "" }
+        ]
+      }
+    }
+  ]
+}
 ```
 
-```xml
-<panel depends="$sel_bu$">
-  <title>Systems in "$sel_bu$" Ranked by Risk</title>
-  ...
-</panel>
+```json
+{ "item": "viz_bu_systems", "type": "block", "position": {...}, "visibility": "$sel_bu$" }
 ```
 
 ### Cross-dashboard drill-down
@@ -162,7 +188,11 @@ that shows up as one line in the CEO's enterprise risk score also:
   vulnerability that was likely exploited (`vulnerability_scans.csv`,
   matched on `system`),
 - and, if it involved fraud, the CFO's `fraud_transactions.csv` records
-  for that same `business_unit`/date range show the dollar impact.
+  for that same `business_unit`/date range show the dollar impact,
+- and every one of those dollar figures is measurable against
+  `company_financials.csv` — the same quarter's revenue, net income, or IT
+  budget — so a technical event and a board-level financial ratio are
+  always two clicks apart in either direction.
 
 In a production deployment you'd add a shared `incident_id` or
 `correlation_id` across all fact tables (via a lookup-based join table) to
@@ -173,9 +203,13 @@ noted here as the natural next step if you wire this up to real data.
 
 - Replace `| inputlookup` with real index searches once you have actual
   SIEM/EDR/ticketing data flowing in (CrowdStrike, Splunk ES notables,
-  ServiceNow incidents, core banking fraud engine exports, etc.).
+  ServiceNow incidents, core banking fraud engine exports, etc.), and pull
+  `company_financials.csv` from whatever system of record has actuals
+  (ERP/FP&A export) instead of a static lookup.
 - Add `savedsearches.conf` scheduled searches to pre-compute the heavier
-  aggregations (e.g. enterprise risk score) on a schedule and store to a
-  summary index, so dashboards load instantly at board-meeting time.
-- Swap Simple XML for Dashboard Studio if you want richer visual layout —
-  the SPL in each `<query>` block is portable as-is.
+  aggregations (e.g. enterprise risk score, cyber-cost-as-%-of-revenue) on a
+  schedule and store to a summary index, so dashboards load instantly at
+  board-meeting time.
+- Re-run `scripts/build_studio_dashboards.py` after editing it to add/adjust
+  KPIs — it's the source of truth for the JSON, so hand-edits to the
+  `.json` files will be overwritten the next time it runs.

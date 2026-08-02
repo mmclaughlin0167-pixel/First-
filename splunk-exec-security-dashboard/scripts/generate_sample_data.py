@@ -410,6 +410,31 @@ def gen_spend():
 
 
 # ---------------------------------------------------------------------------
+# 9. company_financials.csv (CEO / CFO) - ties security posture to the P&L
+# ---------------------------------------------------------------------------
+# Fictitious super-regional bank, ~$3.6B annual revenue, modest steady growth.
+
+def gen_financials():
+    rows = []
+    base_revenue = 870_000_000
+    for i, qtr in enumerate(quarters()):
+        revenue = base_revenue * (1 + 0.015 * i) * random.uniform(0.97, 1.03)
+        net_income = revenue * random.uniform(0.19, 0.23)
+        it_budget = revenue * random.uniform(0.045, 0.055)
+        cyber_insurance_premium = revenue * random.uniform(0.0009, 0.0013)
+        market_cap = net_income * random.uniform(11, 14) * 4  # rough P/E on annualized NI
+        rows.append({
+            "quarter": qtr,
+            "revenue_usd": round(revenue, 2),
+            "net_income_usd": round(net_income, 2),
+            "it_budget_usd": round(it_budget, 2),
+            "cyber_insurance_premium_usd": round(cyber_insurance_premium, 2),
+            "market_cap_usd": round(market_cap, 2),
+        })
+    return rows
+
+
+# ---------------------------------------------------------------------------
 # Write CSVs
 # ---------------------------------------------------------------------------
 
@@ -433,3 +458,4 @@ if __name__ == "__main__":
     write_csv("compliance_findings.csv", gen_compliance())
     write_csv("vendor_risk.csv", gen_vendors())
     write_csv("security_spend.csv", gen_spend())
+    write_csv("company_financials.csv", gen_financials())

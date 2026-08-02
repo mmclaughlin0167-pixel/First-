@@ -1,0 +1,556 @@
+{
+  "title": "CIO \u2014 Security Operations & Technical Risk Posture",
+  "description": "The technical foundation beneath the CEO/CFO/COO KPIs: vulnerability management, SOC alert triage, patch compliance, and MITRE ATT&CK activity, sized against the IT budget the CIO owns. Drill down: KPI -> Business Unit -> System/Asset -> Raw Alert or Scan Record.",
+  "visualizations": {
+    "viz_ds_open_vulns": {
+      "type": "splunk.singlevalue",
+      "title": "Open Critical/High Vulnerabilities",
+      "dataSources": {
+        "primary": "ds_open_vulns"
+      },
+      "options": {
+        "numberPrecision": "0",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          40,
+          100
+        ],
+        "rangeColors": [
+          "#53a051",
+          "#f8be34",
+          "#dc4e41"
+        ]
+      }
+    },
+    "viz_ds_patch_rate": {
+      "type": "splunk.singlevalue",
+      "title": "Patch Compliance Rate",
+      "dataSources": {
+        "primary": "ds_patch_rate"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "%",
+        "unitPosition": "after",
+        "useColors": true,
+        "colorMode": "block",
+        "rangeValues": [
+          60,
+          80
+        ],
+        "rangeColors": [
+          "#dc4e41",
+          "#f8be34",
+          "#53a051"
+        ]
+      }
+    },
+    "viz_ds_alerts_total": {
+      "type": "splunk.singlevalue",
+      "title": "SOC Alerts Triaged",
+      "dataSources": {
+        "primary": "ds_alerts_total"
+      },
+      "options": {
+        "numberPrecision": "0"
+      }
+    },
+    "viz_ds_tp_rate": {
+      "type": "splunk.singlevalue",
+      "title": "True Positive Rate",
+      "dataSources": {
+        "primary": "ds_tp_rate"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "%",
+        "unitPosition": "after"
+      }
+    },
+    "viz_ds_triage_time": {
+      "type": "splunk.singlevalue",
+      "title": "Avg Alert Triage Time (min)",
+      "dataSources": {
+        "primary": "ds_triage_time"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "min",
+        "unitPosition": "after"
+      }
+    },
+    "viz_ds_spend_pct_itbudget": {
+      "type": "splunk.singlevalue",
+      "title": "Security Spend as % of IT Budget",
+      "dataSources": {
+        "primary": "ds_spend_pct_itbudget"
+      },
+      "options": {
+        "numberPrecision": "0.0",
+        "unit": "%",
+        "unitPosition": "after"
+      }
+    },
+    "viz_alert_trend": {
+      "type": "splunk.column",
+      "title": "SOC Alert Volume by Severity Over Time",
+      "dataSources": {
+        "primary": "ds_alert_trend"
+      },
+      "options": {
+        "stackMode": "stacked"
+      }
+    },
+    "viz_mitre": {
+      "type": "splunk.bar",
+      "title": "True-Positive Alerts by MITRE ATT&CK Tactic",
+      "dataSources": {
+        "primary": "ds_mitre"
+      },
+      "options": {}
+    },
+    "viz_vulns_bu": {
+      "type": "splunk.bar",
+      "title": "Open Vulnerabilities by Business Unit (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_vulns_bu"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_bu",
+                "key": "row.business_unit"
+              },
+              {
+                "token": "sel_sys",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_alerts_bu": {
+      "type": "splunk.bar",
+      "title": "SOC Alerts by Business Unit (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_alerts_bu"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_bu",
+                "key": "row.business_unit"
+              },
+              {
+                "token": "sel_sys",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_vulns_sys": {
+      "type": "splunk.bar",
+      "title": "Systems in $sel_bu$ by Open Vulnerabilities (click a bar to drill in)",
+      "dataSources": {
+        "primary": "ds_vulns_sys"
+      },
+      "options": {},
+      "eventHandlers": [
+        {
+          "type": "drilldown.setToken",
+          "options": {
+            "tokens": [
+              {
+                "token": "sel_sys",
+                "key": "row.system"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "viz_raw_vulns": {
+      "type": "splunk.table",
+      "title": "Open Vulnerabilities \u2014 $sel_bu$ $sel_sys$ (deepest drill)",
+      "dataSources": {
+        "primary": "ds_raw_vulns"
+      },
+      "options": {}
+    },
+    "viz_raw_alerts": {
+      "type": "splunk.table",
+      "title": "SOC Alerts \u2014 $sel_bu$ $sel_sys$ (deepest drill)",
+      "dataSources": {
+        "primary": "ds_raw_alerts"
+      },
+      "options": {}
+    },
+    "viz_note": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "**Drill-down path:** Vulnerability / SOC KPI tiles (top row) -> Business Unit breakdown (click a bar) -> System/asset within that unit (click a bar) -> the individual CVE scan record or SOC alert (bottom tables) \u2014 the ground-truth technical events that ultimately roll up into the COO's MTTD/MTTR, the CFO's fraud/spend ROI, and the CEO's enterprise risk score and cost-of-revenue metric."
+      }
+    }
+  },
+  "dataSources": {
+    "ds_open_vulns": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vulnerability_scans.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND (severity=\"Critical\" OR severity=\"High\") AND patch_status!=\"Patched\" | stats count as open_vulns",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Open Critical/High Vulns"
+    },
+    "ds_patch_rate": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vulnerability_scans.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND (severity=\"Critical\" OR severity=\"High\") | stats count(eval(patch_status=\"Patched\")) as patched count as total | eval pct=round((patched/total)*100,1) | table pct",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Patch Compliance Rate"
+    },
+    "ds_alerts_total": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats count as total_alerts",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "SOC Alerts Triaged"
+    },
+    "ds_tp_rate": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats count(eval(disposition=\"True Positive\")) as tp count as total | eval pct=round((tp/total)*100,1) | table pct",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "True Positive Rate"
+    },
+    "ds_triage_time": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(triage_time_minutes) as avg_triage | eval avg_triage=round(avg_triage,1)",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Avg Triage Time"
+    },
+    "ds_spend_pct_itbudget": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup security_spend.csv | stats sum(actual_spend_usd) as spend | appendcols [ | inputlookup company_financials.csv | stats sum(it_budget_usd) as it_budget ] | eval pct=round((spend/it_budget)*100,1) | table pct"
+      },
+      "name": "Security Spend as % of IT Budget"
+    },
+    "ds_alert_trend": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(timestamp,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats count by month, severity | sort month",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "SOC Alert Volume Trend"
+    },
+    "ds_mitre": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND disposition=\"True Positive\" | stats count by mitre_tactic | sort -count",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "True Positives by MITRE Tactic"
+    },
+    "ds_vulns_bu": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vulnerability_scans.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND patch_status!=\"Patched\" | stats count as open_vulns count(eval(severity=\"Critical\" OR severity=\"High\")) as critical_high by business_unit | sort -open_vulns",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Open Vulnerabilities by Business Unit"
+    },
+    "ds_alerts_bu": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats count as alerts count(eval(disposition=\"True Positive\")) as true_positives by business_unit | sort -alerts",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "SOC Alerts by Business Unit"
+    },
+    "ds_vulns_sys": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vulnerability_scans.csv | where business_unit=\"$sel_bu$\" AND patch_status!=\"Patched\" | stats count as open_vulns avg(cvss_score) as avg_cvss by system | sort -open_vulns",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Systems by Open Vulnerabilities"
+    },
+    "ds_raw_vulns": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup vulnerability_scans.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") AND patch_status!=\"Patched\" | sort -cvss_score | table scan_id, date, asset, system, cve_id, cvss_score, severity, patch_status, days_open, exploit_available, asset_owner",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Raw Vulnerability Records"
+    },
+    "ds_raw_alerts": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup soc_alerts.csv | where business_unit=\"$sel_bu$\" AND (source_system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -timestamp | table alert_id, timestamp, severity, source_system, mitre_tactic, analyst, disposition, triage_time_minutes, status",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
+      },
+      "name": "Raw SOC Alert Records"
+    }
+  },
+  "inputs": {
+    "input_time": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "tok_time",
+        "defaultValue": "-12mon@mon,now"
+      }
+    },
+    "input_bu": {
+      "type": "input.dropdown",
+      "title": "Business Unit",
+      "options": {
+        "token": "tok_bu",
+        "defaultValue": "*",
+        "items": [
+          {
+            "label": "All Business Units",
+            "value": "*"
+          },
+          {
+            "label": "Retail Banking",
+            "value": "Retail Banking"
+          },
+          {
+            "label": "Commercial Banking",
+            "value": "Commercial Banking"
+          },
+          {
+            "label": "Wealth Management",
+            "value": "Wealth Management"
+          },
+          {
+            "label": "Payments & Cards",
+            "value": "Payments & Cards"
+          },
+          {
+            "label": "Mortgage & Lending",
+            "value": "Mortgage & Lending"
+          },
+          {
+            "label": "Digital Banking",
+            "value": "Digital Banking"
+          },
+          {
+            "label": "Corporate IT & Infrastructure",
+            "value": "Corporate IT & Infrastructure"
+          }
+        ]
+      }
+    }
+  },
+  "layout": {
+    "type": "grid",
+    "options": {
+      "width": 1440,
+      "height": 1558
+    },
+    "structure": [
+      {
+        "item": "viz_ds_open_vulns",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_patch_rate",
+        "type": "block",
+        "position": {
+          "x": 242,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_alerts_total",
+        "type": "block",
+        "position": {
+          "x": 484,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_tp_rate",
+        "type": "block",
+        "position": {
+          "x": 726,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_triage_time",
+        "type": "block",
+        "position": {
+          "x": 968,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_ds_spend_pct_itbudget",
+        "type": "block",
+        "position": {
+          "x": 1210,
+          "y": 0,
+          "w": 230,
+          "h": 150
+        }
+      },
+      {
+        "item": "viz_alert_trend",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 160,
+          "w": 710,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_mitre",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 160,
+          "w": 718,
+          "h": 280
+        }
+      },
+      {
+        "item": "viz_vulns_bu",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 452,
+          "w": 710,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_alerts_bu",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 452,
+          "w": 718,
+          "h": 300
+        }
+      },
+      {
+        "item": "viz_vulns_sys",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 764,
+          "w": 1440,
+          "h": 300
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_raw_vulns",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1076,
+          "w": 710,
+          "h": 320
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_raw_alerts",
+        "type": "block",
+        "position": {
+          "x": 722,
+          "y": 1076,
+          "w": 718,
+          "h": 320
+        },
+        "visibility": "$sel_bu$"
+      },
+      {
+        "item": "viz_note",
+        "type": "block",
+        "position": {
+          "x": 0,
+          "y": 1408,
+          "w": 1440,
+          "h": 110
+        }
+      }
+    ],
+    "globalInputs": [
+      "input_time",
+      "input_bu"
+    ]
+  }
+}
