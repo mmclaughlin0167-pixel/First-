@@ -1,0 +1,131 @@
+finding_id,date,framework,business_unit,control_area,severity,status,regulator,finding_description
+CF-3080,2024-08-02,SOX,Digital Banking,Logging & Monitoring,Medium,Remediated,FINRA,Access Control gap identified during targeted review
+CF-3097,2024-08-02,GLBA,Digital Banking,Change Management,Medium,Remediated,State AG,Data Retention gap identified during external audit
+CF-3023,2024-08-04,CCPA,Digital Banking,Access Control,Medium,Remediated,State AG,Data Retention gap identified during external audit
+CF-3047,2024-08-05,FFIEC,Retail Banking,Business Continuity,Medium,Remediated,OCC,Access Control gap identified during external audit
+CF-3101,2024-08-11,GDPR,Commercial Banking,Data Retention,Medium,Remediated,FINRA,Vendor Management gap identified during self-assessment
+CF-3066,2024-08-12,SOX,Wealth Management,Business Continuity,Medium,Overdue,State AG,Logging & Monitoring gap identified during targeted review
+CF-3079,2024-08-19,CCPA,Payments & Cards,Encryption,Critical,Remediated,State AG,Encryption gap identified during self-assessment
+CF-3081,2024-08-31,GDPR,Digital Banking,Logging & Monitoring,Medium,Remediated,OCC,Change Management gap identified during targeted review
+CF-3071,2024-09-05,SOX,Payments & Cards,Encryption,Low,Remediated,FDIC,Business Continuity gap identified during scheduled exam
+CF-3045,2024-09-13,PCI-DSS,Payments & Cards,Business Continuity,Medium,Remediated,SEC,Data Retention gap identified during targeted review
+CF-3069,2024-09-30,CCPA,Digital Banking,Access Control,Medium,Remediated,OCC,Encryption gap identified during targeted review
+CF-3048,2024-10-06,NYDFS-23-NYCRR-500,Retail Banking,Vendor Management,Critical,Open,SEC,Vendor Management gap identified during self-assessment
+CF-3099,2024-10-07,PCI-DSS,Retail Banking,Incident Response,Medium,Overdue,FDIC,Logging & Monitoring gap identified during scheduled exam
+CF-3064,2024-10-10,SOX,Payments & Cards,Logging & Monitoring,High,Remediated,Federal Reserve,Incident Response gap identified during self-assessment
+CF-3017,2024-10-25,PCI-DSS,Retail Banking,Access Control,Medium,Remediated,NYDFS,Access Control gap identified during targeted review
+CF-3109,2024-11-14,NYDFS-23-NYCRR-500,Digital Banking,Vendor Management,Medium,Remediated,FDIC,Access Control gap identified during scheduled exam
+CF-3026,2024-11-18,GLBA,Retail Banking,Incident Response,Medium,Overdue,SEC,Access Control gap identified during scheduled exam
+CF-3088,2024-12-06,FFIEC,Payments & Cards,Encryption,Critical,Remediated,State AG,Access Control gap identified during external audit
+CF-3022,2024-12-12,SOX,Mortgage & Lending,Business Continuity,Medium,Overdue,NYDFS,Encryption gap identified during scheduled exam
+CF-3128,2024-12-22,SOX,Corporate IT & Infrastructure,Business Continuity,Low,Open,NYDFS,Encryption gap identified during external audit
+CF-3011,2024-12-23,GLBA,Commercial Banking,Access Control,Medium,Remediated,SEC,Change Management gap identified during scheduled exam
+CF-3061,2024-12-25,SOX,Digital Banking,Incident Response,Medium,Open,FDIC,Logging & Monitoring gap identified during scheduled exam
+CF-3038,2024-12-31,CCPA,Wealth Management,Encryption,High,Remediated,State AG,Logging & Monitoring gap identified during self-assessment
+CF-3051,2025-02-01,GLBA,Mortgage & Lending,Access Control,Low,Remediated,State AG,Encryption gap identified during targeted review
+CF-3068,2025-02-03,GDPR,Payments & Cards,Vendor Management,High,Open,FDIC,Encryption gap identified during external audit
+CF-3021,2025-02-08,GLBA,Corporate IT & Infrastructure,Business Continuity,Medium,Remediated,Federal Reserve,Business Continuity gap identified during scheduled exam
+CF-3002,2025-02-09,PCI-DSS,Digital Banking,Incident Response,Critical,Remediated,OCC,Access Control gap identified during external audit
+CF-3040,2025-02-09,SOX,Commercial Banking,Data Retention,Low,Remediated,OCC,Logging & Monitoring gap identified during targeted review
+CF-3025,2025-03-04,GLBA,Digital Banking,Logging & Monitoring,High,Open,FINRA,Vendor Management gap identified during targeted review
+CF-3087,2025-03-09,GDPR,Digital Banking,Data Retention,Critical,Open,OCC,Business Continuity gap identified during external audit
+CF-3016,2025-03-13,SOX,Payments & Cards,Access Control,Critical,Remediated,SEC,Incident Response gap identified during external audit
+CF-3063,2025-03-13,PCI-DSS,Retail Banking,Change Management,High,Open,Federal Reserve,Access Control gap identified during self-assessment
+CF-3117,2025-03-14,GLBA,Payments & Cards,Business Continuity,High,Open,SEC,Business Continuity gap identified during self-assessment
+CF-3042,2025-03-21,GDPR,Corporate IT & Infrastructure,Vendor Management,Medium,Remediated,Federal Reserve,Logging & Monitoring gap identified during self-assessment
+CF-3041,2025-03-26,GDPR,Corporate IT & Infrastructure,Change Management,Medium,Remediated,OCC,Change Management gap identified during scheduled exam
+CF-3067,2025-03-26,CCPA,Digital Banking,Incident Response,Low,Remediated,Federal Reserve,Logging & Monitoring gap identified during targeted review
+CF-3121,2025-03-26,GDPR,Wealth Management,Access Control,Low,Remediated,NYDFS,Incident Response gap identified during targeted review
+CF-3012,2025-04-02,FFIEC,Digital Banking,Access Control,High,Remediated,FINRA,Business Continuity gap identified during self-assessment
+CF-3036,2025-04-04,NYDFS-23-NYCRR-500,Corporate IT & Infrastructure,Logging & Monitoring,Medium,Remediated,Federal Reserve,Logging & Monitoring gap identified during scheduled exam
+CF-3073,2025-04-04,PCI-DSS,Corporate IT & Infrastructure,Change Management,Medium,Open,NYDFS,Access Control gap identified during self-assessment
+CF-3089,2025-04-05,SOX,Digital Banking,Access Control,Medium,Overdue,OCC,Encryption gap identified during scheduled exam
+CF-3018,2025-04-07,CCPA,Retail Banking,Incident Response,High,Open,CFPB,Logging & Monitoring gap identified during self-assessment
+CF-3077,2025-04-07,FFIEC,Digital Banking,Change Management,High,Remediated,FINRA,Data Retention gap identified during self-assessment
+CF-3020,2025-04-08,FFIEC,Digital Banking,Access Control,Medium,Remediated,Federal Reserve,Business Continuity gap identified during targeted review
+CF-3003,2025-04-09,NYDFS-23-NYCRR-500,Retail Banking,Incident Response,Medium,Remediated,State AG,Encryption gap identified during scheduled exam
+CF-3035,2025-04-12,GLBA,Mortgage & Lending,Business Continuity,Low,Remediated,FINRA,Vendor Management gap identified during self-assessment
+CF-3100,2025-04-21,SOX,Payments & Cards,Incident Response,Low,Remediated,FDIC,Data Retention gap identified during scheduled exam
+CF-3113,2025-05-01,NYDFS-23-NYCRR-500,Payments & Cards,Access Control,Medium,Remediated,Federal Reserve,Change Management gap identified during targeted review
+CF-3006,2025-05-04,PCI-DSS,Payments & Cards,Access Control,High,Remediated,OCC,Incident Response gap identified during self-assessment
+CF-3062,2025-05-04,GLBA,Wealth Management,Logging & Monitoring,High,Remediated,NYDFS,Encryption gap identified during self-assessment
+CF-3034,2025-05-08,FFIEC,Payments & Cards,Change Management,Low,Remediated,FINRA,Encryption gap identified during self-assessment
+CF-3090,2025-05-13,SOX,Digital Banking,Data Retention,Medium,Remediated,OCC,Logging & Monitoring gap identified during external audit
+CF-3107,2025-05-14,GDPR,Wealth Management,Incident Response,Low,Remediated,FINRA,Vendor Management gap identified during self-assessment
+CF-3031,2025-05-16,SOX,Payments & Cards,Data Retention,High,Open,State AG,Vendor Management gap identified during external audit
+CF-3056,2025-05-17,FFIEC,Retail Banking,Change Management,Low,Remediated,SEC,Incident Response gap identified during external audit
+CF-3111,2025-05-21,GLBA,Wealth Management,Incident Response,Low,Remediated,OCC,Vendor Management gap identified during self-assessment
+CF-3013,2025-06-02,SOX,Digital Banking,Encryption,Low,Open,FDIC,Access Control gap identified during external audit
+CF-3098,2025-06-14,CCPA,Corporate IT & Infrastructure,Change Management,Low,Remediated,CFPB,Access Control gap identified during external audit
+CF-3125,2025-06-27,CCPA,Digital Banking,Incident Response,Medium,Remediated,Federal Reserve,Vendor Management gap identified during scheduled exam
+CF-3074,2025-06-28,GDPR,Payments & Cards,Vendor Management,Medium,Remediated,NYDFS,Incident Response gap identified during external audit
+CF-3102,2025-07-03,SOX,Corporate IT & Infrastructure,Business Continuity,High,Open,FINRA,Incident Response gap identified during external audit
+CF-3044,2025-07-13,GLBA,Payments & Cards,Logging & Monitoring,Low,Open,CFPB,Vendor Management gap identified during external audit
+CF-3015,2025-07-14,GDPR,Digital Banking,Incident Response,Low,Remediated,NYDFS,Business Continuity gap identified during self-assessment
+CF-3114,2025-08-19,GDPR,Corporate IT & Infrastructure,Incident Response,Medium,Remediated,NYDFS,Incident Response gap identified during self-assessment
+CF-3058,2025-08-30,PCI-DSS,Corporate IT & Infrastructure,Incident Response,High,Remediated,State AG,Logging & Monitoring gap identified during scheduled exam
+CF-3103,2025-09-04,GLBA,Commercial Banking,Data Retention,High,Remediated,CFPB,Encryption gap identified during external audit
+CF-3126,2025-09-05,CCPA,Retail Banking,Encryption,Medium,Remediated,CFPB,Business Continuity gap identified during external audit
+CF-3082,2025-09-06,NYDFS-23-NYCRR-500,Payments & Cards,Data Retention,Critical,Remediated,CFPB,Logging & Monitoring gap identified during scheduled exam
+CF-3085,2025-09-06,CCPA,Retail Banking,Change Management,Medium,Remediated,FDIC,Business Continuity gap identified during external audit
+CF-3000,2025-09-13,SOX,Commercial Banking,Data Retention,High,Remediated,NYDFS,Encryption gap identified during scheduled exam
+CF-3046,2025-09-16,PCI-DSS,Payments & Cards,Access Control,Medium,Remediated,State AG,Business Continuity gap identified during self-assessment
+CF-3095,2025-09-24,CCPA,Digital Banking,Business Continuity,Medium,Open,State AG,Business Continuity gap identified during external audit
+CF-3032,2025-09-28,FFIEC,Payments & Cards,Incident Response,Critical,Overdue,Federal Reserve,Data Retention gap identified during targeted review
+CF-3053,2025-10-15,CCPA,Corporate IT & Infrastructure,Change Management,Medium,Remediated,CFPB,Data Retention gap identified during external audit
+CF-3043,2025-10-18,FFIEC,Retail Banking,Business Continuity,Low,Remediated,CFPB,Vendor Management gap identified during targeted review
+CF-3116,2025-10-20,NYDFS-23-NYCRR-500,Mortgage & Lending,Incident Response,Medium,Overdue,CFPB,Incident Response gap identified during external audit
+CF-3029,2025-11-07,GDPR,Commercial Banking,Data Retention,High,Remediated,State AG,Incident Response gap identified during scheduled exam
+CF-3054,2025-11-09,GDPR,Corporate IT & Infrastructure,Change Management,Medium,Remediated,SEC,Business Continuity gap identified during external audit
+CF-3033,2025-11-12,FFIEC,Payments & Cards,Logging & Monitoring,High,Remediated,FDIC,Incident Response gap identified during scheduled exam
+CF-3094,2025-11-20,GDPR,Wealth Management,Encryption,Medium,Remediated,CFPB,Vendor Management gap identified during scheduled exam
+CF-3024,2025-11-23,FFIEC,Wealth Management,Data Retention,Medium,Remediated,FDIC,Business Continuity gap identified during scheduled exam
+CF-3070,2025-11-27,NYDFS-23-NYCRR-500,Digital Banking,Logging & Monitoring,Medium,Overdue,OCC,Vendor Management gap identified during external audit
+CF-3072,2025-11-27,PCI-DSS,Corporate IT & Infrastructure,Change Management,Low,Overdue,FDIC,Data Retention gap identified during external audit
+CF-3078,2025-12-05,CCPA,Mortgage & Lending,Access Control,Low,Remediated,FINRA,Business Continuity gap identified during scheduled exam
+CF-3059,2025-12-08,GDPR,Corporate IT & Infrastructure,Vendor Management,High,Remediated,OCC,Business Continuity gap identified during self-assessment
+CF-3007,2026-01-03,SOX,Corporate IT & Infrastructure,Access Control,Low,Remediated,OCC,Data Retention gap identified during self-assessment
+CF-3120,2026-01-05,SOX,Corporate IT & Infrastructure,Access Control,Medium,Remediated,Federal Reserve,Vendor Management gap identified during scheduled exam
+CF-3030,2026-01-06,GLBA,Corporate IT & Infrastructure,Encryption,Critical,Overdue,FINRA,Incident Response gap identified during external audit
+CF-3050,2026-01-20,FFIEC,Digital Banking,Data Retention,Medium,Remediated,FINRA,Encryption gap identified during scheduled exam
+CF-3084,2026-01-22,GDPR,Commercial Banking,Incident Response,Low,Remediated,NYDFS,Data Retention gap identified during targeted review
+CF-3037,2026-02-01,NYDFS-23-NYCRR-500,Payments & Cards,Incident Response,Medium,Overdue,OCC,Vendor Management gap identified during self-assessment
+CF-3118,2026-02-07,NYDFS-23-NYCRR-500,Payments & Cards,Access Control,High,Remediated,NYDFS,Vendor Management gap identified during scheduled exam
+CF-3119,2026-02-07,SOX,Corporate IT & Infrastructure,Vendor Management,High,Remediated,NYDFS,Data Retention gap identified during external audit
+CF-3096,2026-02-11,SOX,Mortgage & Lending,Logging & Monitoring,Medium,Remediated,SEC,Business Continuity gap identified during targeted review
+CF-3093,2026-02-17,PCI-DSS,Commercial Banking,Data Retention,Medium,Remediated,NYDFS,Business Continuity gap identified during targeted review
+CF-3052,2026-02-21,GDPR,Retail Banking,Data Retention,Low,Remediated,Federal Reserve,Encryption gap identified during external audit
+CF-3083,2026-02-22,FFIEC,Wealth Management,Logging & Monitoring,Low,Remediated,FINRA,Encryption gap identified during targeted review
+CF-3127,2026-03-01,FFIEC,Digital Banking,Access Control,Critical,Open,OCC,Change Management gap identified during targeted review
+CF-3065,2026-03-17,CCPA,Corporate IT & Infrastructure,Vendor Management,High,Remediated,CFPB,Access Control gap identified during external audit
+CF-3009,2026-03-27,GLBA,Payments & Cards,Logging & Monitoring,Low,Remediated,SEC,Incident Response gap identified during self-assessment
+CF-3108,2026-03-29,GLBA,Mortgage & Lending,Data Retention,Medium,Remediated,Federal Reserve,Incident Response gap identified during targeted review
+CF-3115,2026-04-02,FFIEC,Corporate IT & Infrastructure,Access Control,Medium,Overdue,CFPB,Access Control gap identified during targeted review
+CF-3028,2026-04-03,CCPA,Payments & Cards,Vendor Management,Medium,Remediated,OCC,Vendor Management gap identified during scheduled exam
+CF-3104,2026-04-03,GDPR,Corporate IT & Infrastructure,Vendor Management,Medium,Overdue,FINRA,Change Management gap identified during targeted review
+CF-3004,2026-04-10,NYDFS-23-NYCRR-500,Payments & Cards,Encryption,Medium,Remediated,FDIC,Change Management gap identified during targeted review
+CF-3010,2026-04-16,GDPR,Digital Banking,Vendor Management,Medium,Remediated,FINRA,Incident Response gap identified during scheduled exam
+CF-3106,2026-04-22,GDPR,Corporate IT & Infrastructure,Encryption,Low,Overdue,FINRA,Incident Response gap identified during targeted review
+CF-3112,2026-04-22,CCPA,Wealth Management,Business Continuity,Medium,Remediated,SEC,Incident Response gap identified during external audit
+CF-3086,2026-04-25,CCPA,Digital Banking,Encryption,Medium,Remediated,OCC,Access Control gap identified during external audit
+CF-3124,2026-04-28,PCI-DSS,Retail Banking,Vendor Management,Medium,Remediated,FDIC,Logging & Monitoring gap identified during external audit
+CF-3091,2026-04-30,GLBA,Digital Banking,Logging & Monitoring,Medium,Overdue,State AG,Access Control gap identified during external audit
+CF-3057,2026-05-07,FFIEC,Retail Banking,Change Management,Low,In Remediation,CFPB,Incident Response gap identified during targeted review
+CF-3060,2026-05-07,GDPR,Digital Banking,Vendor Management,Low,In Remediation,FINRA,Encryption gap identified during targeted review
+CF-3075,2026-05-09,GLBA,Mortgage & Lending,Encryption,Low,Remediated,CFPB,Encryption gap identified during scheduled exam
+CF-3092,2026-05-12,SOX,Commercial Banking,Incident Response,Critical,In Remediation,Federal Reserve,Vendor Management gap identified during targeted review
+CF-3014,2026-05-18,CCPA,Mortgage & Lending,Change Management,Critical,Remediated,State AG,Business Continuity gap identified during self-assessment
+CF-3055,2026-05-19,GDPR,Payments & Cards,Encryption,Medium,Remediated,FDIC,Business Continuity gap identified during targeted review
+CF-3027,2026-05-25,NYDFS-23-NYCRR-500,Wealth Management,Access Control,High,Open,SEC,Access Control gap identified during targeted review
+CF-3008,2026-06-08,GDPR,Mortgage & Lending,Access Control,Critical,Open,OCC,Data Retention gap identified during targeted review
+CF-3123,2026-06-12,SOX,Digital Banking,Incident Response,Low,In Remediation,SEC,Business Continuity gap identified during scheduled exam
+CF-3005,2026-06-17,SOX,Payments & Cards,Encryption,Medium,Remediated,State AG,Access Control gap identified during scheduled exam
+CF-3001,2026-06-21,SOX,Payments & Cards,Business Continuity,Medium,Remediated,CFPB,Vendor Management gap identified during scheduled exam
+CF-3049,2026-06-21,CCPA,Digital Banking,Access Control,Medium,Remediated,OCC,Encryption gap identified during self-assessment
+CF-3019,2026-06-28,FFIEC,Corporate IT & Infrastructure,Vendor Management,Medium,Open,NYDFS,Incident Response gap identified during scheduled exam
+CF-3122,2026-07-04,CCPA,Corporate IT & Infrastructure,Change Management,Low,Open,FINRA,Business Continuity gap identified during self-assessment
+CF-3129,2026-07-04,NYDFS-23-NYCRR-500,Corporate IT & Infrastructure,Incident Response,Low,Open,SEC,Change Management gap identified during scheduled exam
+CF-3105,2026-07-05,PCI-DSS,Mortgage & Lending,Access Control,High,Open,FINRA,Access Control gap identified during scheduled exam
+CF-3076,2026-07-13,GLBA,Payments & Cards,Logging & Monitoring,Low,In Remediation,SEC,Encryption gap identified during targeted review
+CF-3110,2026-07-22,SOX,Commercial Banking,Data Retention,High,Open,CFPB,Access Control gap identified during self-assessment
+CF-3039,2026-07-28,PCI-DSS,Mortgage & Lending,Change Management,Low,In Remediation,FINRA,Business Continuity gap identified during scheduled exam

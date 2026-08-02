@@ -1,0 +1,218 @@
+<form version="1.1" theme="light">
+  <label>CFO — Cyber Financial Exposure &amp; Security ROI</label>
+  <description>Links security posture to the P&amp;L: fraud losses, regulatory fines, security spend vs. estimated loss avoided, and cyber insurance exposure. Drill down: KPI -&gt; Channel/Business Unit -&gt; Flagged Transaction -&gt; Raw Record.</description>
+
+  <fieldset submitButtonLabel="Apply" autoRun="true">
+    <input type="time" token="tok_time">
+      <label>Time Range</label>
+      <default>
+        <earliest>-12mon@mon</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="tok_bu" searchWhenChanged="true">
+      <label>Business Unit</label>
+      <choice value="*">All Business Units</choice>
+      <fieldForLabel>business_unit</fieldForLabel>
+      <fieldForValue>business_unit</fieldForValue>
+      <search>
+        <query>| inputlookup fraud_transactions.csv | dedup business_unit | table business_unit | sort business_unit</query>
+      </search>
+      <default>*</default>
+    </input>
+  </fieldset>
+
+  <!-- Row 1: CFO headline KPIs -->
+  <row>
+    <panel>
+      <title>Total Fraud Loss (net of recoveries)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup fraud_transactions.csv
+            | where (business_unit=$tok_bu$ OR "$tok_bu$"="*") AND is_fraud="Y"
+            | eval net_loss=loss_amount_usd-recovered_amount_usd
+            | stats sum(net_loss) as net_loss
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="unit">$</option>
+        <option name="unitPosition">before</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Fraud Loss Rate (bps of flagged transaction volume)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup fraud_transactions.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | eval net_loss=if(is_fraud="Y", loss_amount_usd-recovered_amount_usd, 0)
+            | stats sum(net_loss) as loss sum(amount_usd) as volume
+            | eval bps=round((loss/volume)*10000,1)
+            | table bps
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="unit">bps</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Regulatory Fine Exposure (Open Compliance Findings)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup compliance_findings.csv
+            | where status!="Remediated"
+            | stats count as open_findings
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+      </single>
+    </panel>
+    <panel>
+      <title>Security Spend (Actual, period)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup security_spend.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats sum(actual_spend_usd) as actual_spend
+          </query>
+        </search>
+        <option name="unit">$</option>
+        <option name="unitPosition">before</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Estimated Security ROI (loss avoided / spend)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup security_spend.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats sum(actual_spend_usd) as spend sum(estimated_loss_avoided_usd) as avoided
+            | eval roi_x=round(avoided/spend,1)
+            | table roi_x
+          </query>
+        </search>
+        <option name="unit">x</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">true</option>
+        <option name="rangeColors">["0xdc4e41","0xf8be34","0x53a051"]</option>
+        <option name="rangeValues">[1,2]</option>
+      </single>
+    </panel>
+  </row>
+
+  <!-- Row 2: Trend -->
+  <row>
+    <panel>
+      <title>Fraud Loss Trend vs. Recoveries by Month</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup fraud_transactions.csv
+            | where (business_unit=$tok_bu$ OR "$tok_bu$"="*") AND is_fraud="Y"
+            | eval month=strftime(strptime(date,"%Y-%m-%d %H:%M:%S"),"%Y-%m")
+            | stats sum(loss_amount_usd) as gross_loss sum(recovered_amount_usd) as recovered by month
+            | sort month
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.stackMode">stacked</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Security Spend vs. Estimated Loss Avoided by Category</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup security_spend.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats sum(actual_spend_usd) as actual_spend sum(estimated_loss_avoided_usd) as loss_avoided by category
+            | sort -loss_avoided
+          </query>
+        </search>
+        <option name="charting.chart">bar</option>
+      </chart>
+    </panel>
+  </row>
+
+  <!-- Row 3: Drill layer 1 -> by channel (click sets sel_channel) -->
+  <row>
+    <panel>
+      <title>Fraud Loss by Channel (click a slice to drill into that channel)</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup fraud_transactions.csv
+            | where (business_unit=$tok_bu$ OR "$tok_bu$"="*") AND is_fraud="Y"
+            | eval net_loss=loss_amount_usd-recovered_amount_usd
+            | stats sum(net_loss) as net_loss count as fraud_cases by channel
+            | sort -net_loss
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <drilldown>
+          <set token="sel_channel">$click.value2$</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>Fraud Loss by Fraud Type (click to drill)</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup fraud_transactions.csv
+            | where (business_unit=$tok_bu$ OR "$tok_bu$"="*") AND is_fraud="Y"
+            | eval net_loss=loss_amount_usd-recovered_amount_usd
+            | stats sum(net_loss) as net_loss count as fraud_cases by fraud_type
+            | sort -net_loss
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <drilldown>
+          <set token="sel_fraud_type">$click.value2$</set>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+
+  <!-- Row 4: Drill layer 2 -> flagged transactions (deepest layer, filtered by drill tokens) -->
+  <row>
+    <panel depends="$sel_channel$">
+      <title>Flagged Transactions — Channel: $sel_channel$ $sel_fraud_type$ (deepest drill: raw transaction record)</title>
+      <table>
+        <search>
+          <query>
+            | inputlookup fraud_transactions.csv
+            | where is_fraud="Y" AND channel="$sel_channel$" AND (fraud_type="$sel_fraud_type$" OR "$sel_fraud_type$"="")
+            | sort -date
+            | table transaction_id, date, business_unit, channel, fraud_type, detection_method, amount_usd, loss_amount_usd, recovered_amount_usd, status
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="count">20</option>
+      </table>
+    </panel>
+  </row>
+
+  <row>
+    <panel>
+      <html>
+        <p><b>Drill-down path:</b> Fraud Loss / ROI tiles (Row 1) → Channel or Fraud Type breakdown (Row 3, click a slice/bar) → individual flagged transaction (Row 4). Each <code>transaction_id</code> corresponds to the SOC alert / incident record that first flagged it (cross-reference via <code>business_unit</code> and <code>date</code> in the CIO dashboard's SOC Alerts panel).</p>
+      </html>
+    </panel>
+  </row>
+</form>

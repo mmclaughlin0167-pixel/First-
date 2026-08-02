@@ -1,0 +1,21 @@
+vendor_id,vendor_name,business_unit,criticality,risk_score,last_assessment_date,open_findings,sla_breach_count,incident_count
+VEN-100,Core Processing Solutions Inc.,Corporate IT & Infrastructure,Medium,21,2026-05-08,6,3,0
+VEN-101,CloudCompute Partners,Wealth Management,Medium,44,2025-11-27,9,6,4
+VEN-102,PaySecure Gateway Corp,Corporate IT & Infrastructure,High,46,2026-03-30,2,1,0
+VEN-103,IdentityVerify Systems,Retail Banking,Medium,48,2025-10-17,10,2,2
+VEN-104,DataVault Storage Co.,Payments & Cards,High,65,2025-03-09,0,1,2
+VEN-105,TransactCore Systems,Mortgage & Lending,Critical,89,2025-03-19,5,5,0
+VEN-106,NetShield Managed Security,Wealth Management,Low,25,2026-02-28,9,5,0
+VEN-107,DocuFlow Technologies,Wealth Management,Low,13,2025-05-15,0,3,1
+VEN-108,CardNet Processing,Wealth Management,Critical,75,2026-05-12,0,3,1
+VEN-109,WireLink Global,Corporate IT & Infrastructure,High,52,2026-07-31,12,0,1
+VEN-110,CreditBureau Data Services,Retail Banking,Critical,81,2025-06-25,12,6,4
+VEN-111,MarketFeed Analytics,Commercial Banking,High,75,2025-11-23,5,6,3
+VEN-112,HR Outsourcing Partners,Payments & Cards,Low,17,2024-09-03,8,1,0
+VEN-113,PrintMail Statement Services,Wealth Management,Critical,81,2024-09-14,5,6,2
+VEN-114,CollectionsPro Servicing,Digital Banking,Critical,58,2025-01-24,4,1,3
+VEN-115,FraudGuard Analytics,Payments & Cards,High,71,2025-03-12,5,3,1
+VEN-116,CloudBackup Solutions,Corporate IT & Infrastructure,Critical,77,2025-01-04,6,4,0
+VEN-117,CallCenter Direct,Mortgage & Lending,Medium,42,2025-06-08,10,4,0
+VEN-118,KYC Verification Services,Wealth Management,High,76,2025-12-22,11,6,1
+VEN-119,ATM Fleet Services,Mortgage & Lending,Medium,59,2025-10-12,1,6,0

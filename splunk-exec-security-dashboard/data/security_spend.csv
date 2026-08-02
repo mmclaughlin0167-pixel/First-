@@ -1,0 +1,281 @@
+quarter,business_unit,category,budget_usd,actual_spend_usd,estimated_loss_avoided_usd
+2024Q3,Retail Banking,Prevention,786312.44,839087.63,2935349.36
+2024Q3,Retail Banking,Detection & Monitoring,98865.82,84365.9,228832.92
+2024Q3,Retail Banking,Incident Response,707003.43,698928.32,282979.77
+2024Q3,Retail Banking,Compliance & Audit,61386.51,53580.79,1056.68
+2024Q3,Retail Banking,Cyber Insurance,792261.25,854351.69,49069.37
+2024Q3,Commercial Banking,Prevention,364196.31,391545.64,1401114.47
+2024Q3,Commercial Banking,Detection & Monitoring,729867.07,654257.37,3878683.69
+2024Q3,Commercial Banking,Incident Response,399254.16,376042.16,150450.86
+2024Q3,Commercial Banking,Compliance & Audit,183733.21,167960.32,23535.88
+2024Q3,Commercial Banking,Cyber Insurance,874424.07,820943.99,389297.05
+2024Q3,Wealth Management,Prevention,432999.81,474491.35,1366308.33
+2024Q3,Wealth Management,Detection & Monitoring,498725.32,535568.36,2194955.25
+2024Q3,Wealth Management,Incident Response,727837.2,762962.98,237853.02
+2024Q3,Wealth Management,Compliance & Audit,579332.54,577142.94,141725.28
+2024Q3,Wealth Management,Cyber Insurance,358192.06,389981.22,174638.32
+2024Q3,Payments & Cards,Prevention,149904.9,138939.9,407931.74
+2024Q3,Payments & Cards,Detection & Monitoring,660016.83,564487.56,2735809.74
+2024Q3,Payments & Cards,Incident Response,173282.23,152235.8,95.8
+2024Q3,Payments & Cards,Compliance & Audit,213187.07,234179.0,54917.81
+2024Q3,Payments & Cards,Cyber Insurance,231475.65,220686.65,1221.01
+2024Q3,Mortgage & Lending,Prevention,306680.69,274987.31,711902.68
+2024Q3,Mortgage & Lending,Detection & Monitoring,257614.96,268029.26,533708.05
+2024Q3,Mortgage & Lending,Incident Response,294935.44,297712.35,5037.53
+2024Q3,Mortgage & Lending,Compliance & Audit,689624.94,670226.73,71106.05
+2024Q3,Mortgage & Lending,Cyber Insurance,536770.53,485725.33,70835.94
+2024Q3,Digital Banking,Prevention,62684.08,60857.66,280129.71
+2024Q3,Digital Banking,Detection & Monitoring,308226.91,295207.46,1248691.73
+2024Q3,Digital Banking,Incident Response,257159.74,239825.15,77841.43
+2024Q3,Digital Banking,Compliance & Audit,557756.73,565309.2,61734.39
+2024Q3,Digital Banking,Cyber Insurance,247745.85,216602.17,61643.73
+2024Q3,Corporate IT & Infrastructure,Prevention,803163.12,831148.36,4640460.5
+2024Q3,Corporate IT & Infrastructure,Detection & Monitoring,352369.24,341203.76,1634509.38
+2024Q3,Corporate IT & Infrastructure,Incident Response,94824.06,91284.29,4050.2
+2024Q3,Corporate IT & Infrastructure,Compliance & Audit,357032.7,363489.21,130427.5
+2024Q3,Corporate IT & Infrastructure,Cyber Insurance,466179.51,509057.09,174008.62
+2024Q4,Retail Banking,Prevention,843284.88,822799.84,2816841.19
+2024Q4,Retail Banking,Detection & Monitoring,502168.54,477696.17,2752149.42
+2024Q4,Retail Banking,Incident Response,719795.39,739167.26,318785.95
+2024Q4,Retail Banking,Compliance & Audit,478289.57,429135.63,209800.03
+2024Q4,Retail Banking,Cyber Insurance,620714.07,608875.99,246907.81
+2024Q4,Commercial Banking,Prevention,697331.24,640586.66,2107770.5
+2024Q4,Commercial Banking,Detection & Monitoring,623499.03,574027.73,2751988.54
+2024Q4,Commercial Banking,Incident Response,300627.96,292592.02,54492.75
+2024Q4,Commercial Banking,Compliance & Audit,332749.49,345864.76,69525.59
+2024Q4,Commercial Banking,Cyber Insurance,492104.22,541106.92,42372.53
+2024Q4,Wealth Management,Prevention,567674.42,564605.63,2630909.71
+2024Q4,Wealth Management,Detection & Monitoring,515320.47,446648.61,1688794.16
+2024Q4,Wealth Management,Incident Response,584061.85,585312.56,19935.67
+2024Q4,Wealth Management,Compliance & Audit,831998.3,915079.09,214292.04
+2024Q4,Wealth Management,Cyber Insurance,643023.99,559450.61,235914.93
+2024Q4,Payments & Cards,Prevention,497122.87,526615.97,1887254.77
+2024Q4,Payments & Cards,Detection & Monitoring,867156.83,762154.51,3169234.1
+2024Q4,Payments & Cards,Incident Response,393722.39,385725.1,184098.36
+2024Q4,Payments & Cards,Compliance & Audit,526838.48,555382.15,121309.27
+2024Q4,Payments & Cards,Cyber Insurance,181392.68,186437.23,45608.38
+2024Q4,Mortgage & Lending,Prevention,675760.31,622183.13,2969651.66
+2024Q4,Mortgage & Lending,Detection & Monitoring,314007.66,294031.91,940662.54
+2024Q4,Mortgage & Lending,Incident Response,432274.59,390596.46,173557.52
+2024Q4,Mortgage & Lending,Compliance & Audit,727540.18,705944.72,315626.23
+2024Q4,Mortgage & Lending,Cyber Insurance,895375.17,956078.03,252364.82
+2024Q4,Digital Banking,Prevention,299044.6,294030.15,726394.72
+2024Q4,Digital Banking,Detection & Monitoring,836539.17,875947.38,1772929.79
+2024Q4,Digital Banking,Incident Response,868922.23,908788.02,436467.82
+2024Q4,Digital Banking,Compliance & Audit,573546.05,540003.49,135545.82
+2024Q4,Digital Banking,Cyber Insurance,617388.29,573687.02,266309.51
+2024Q4,Corporate IT & Infrastructure,Prevention,326025.8,308952.59,511956.13
+2024Q4,Corporate IT & Infrastructure,Detection & Monitoring,430116.45,440648.81,2557787.03
+2024Q4,Corporate IT & Infrastructure,Incident Response,773036.98,836453.1,35048.35
+2024Q4,Corporate IT & Infrastructure,Compliance & Audit,141476.46,129617.05,59790.46
+2024Q4,Corporate IT & Infrastructure,Cyber Insurance,365883.35,356584.39,9874.07
+2025Q1,Retail Banking,Prevention,669196.16,628346.23,1653208.05
+2025Q1,Retail Banking,Detection & Monitoring,287848.39,259859.17,1130687.35
+2025Q1,Retail Banking,Incident Response,538739.43,489961.43,199331.97
+2025Q1,Retail Banking,Compliance & Audit,408953.75,357751.5,135354.98
+2025Q1,Retail Banking,Cyber Insurance,266974.78,239309.84,69668.96
+2025Q1,Commercial Banking,Prevention,394577.47,357496.66,1259360.95
+2025Q1,Commercial Banking,Detection & Monitoring,817294.81,890611.9,1470173.29
+2025Q1,Commercial Banking,Incident Response,346467.99,300513.41,124223.88
+2025Q1,Commercial Banking,Compliance & Audit,565637.09,596409.69,244743.67
+2025Q1,Commercial Banking,Cyber Insurance,627281.86,562121.14,40905.85
+2025Q1,Wealth Management,Prevention,424068.49,461230.71,1590858.57
+2025Q1,Wealth Management,Detection & Monitoring,348453.95,318353.57,694242.04
+2025Q1,Wealth Management,Incident Response,643340.37,560844.0,261729.64
+2025Q1,Wealth Management,Compliance & Audit,688516.02,666818.92,98682.13
+2025Q1,Wealth Management,Cyber Insurance,204049.55,185611.77,52004.27
+2025Q1,Payments & Cards,Prevention,481182.39,526546.34,3030362.37
+2025Q1,Payments & Cards,Detection & Monitoring,693021.76,618750.94,2271800.59
+2025Q1,Payments & Cards,Incident Response,467271.76,420523.98,193621.29
+2025Q1,Payments & Cards,Compliance & Audit,74480.06,71546.89,4195.26
+2025Q1,Payments & Cards,Cyber Insurance,861434.48,847531.2,113446.54
+2025Q1,Mortgage & Lending,Prevention,504592.33,467826.65,2700049.49
+2025Q1,Mortgage & Lending,Detection & Monitoring,173383.57,180950.27,1049739.58
+2025Q1,Mortgage & Lending,Incident Response,276714.78,293627.38,107147.02
+2025Q1,Mortgage & Lending,Compliance & Audit,527056.87,472973.42,113232.41
+2025Q1,Mortgage & Lending,Cyber Insurance,520493.73,542215.12,36554.46
+2025Q1,Digital Banking,Prevention,457215.75,421855.31,2182192.86
+2025Q1,Digital Banking,Detection & Monitoring,482156.33,488815.98,2385162.33
+2025Q1,Digital Banking,Incident Response,517453.67,455909.54,34892.28
+2025Q1,Digital Banking,Compliance & Audit,105909.71,108301.4,36032.48
+2025Q1,Digital Banking,Cyber Insurance,349332.78,344081.78,141869.44
+2025Q1,Corporate IT & Infrastructure,Prevention,757497.43,672024.17,3130465.05
+2025Q1,Corporate IT & Infrastructure,Detection & Monitoring,290829.17,295011.3,508884.98
+2025Q1,Corporate IT & Infrastructure,Incident Response,597196.54,541134.09,230145.89
+2025Q1,Corporate IT & Infrastructure,Compliance & Audit,383478.61,329935.31,84444.04
+2025Q1,Corporate IT & Infrastructure,Cyber Insurance,142045.94,124506.9,6316.13
+2025Q2,Retail Banking,Prevention,78531.72,67153.23,315693.29
+2025Q2,Retail Banking,Detection & Monitoring,471960.03,478548.51,2856152.47
+2025Q2,Retail Banking,Incident Response,449048.53,435134.78,111053.68
+2025Q2,Retail Banking,Compliance & Audit,367589.11,323296.29,111041.32
+2025Q2,Retail Banking,Cyber Insurance,668980.22,590108.0,147402.55
+2025Q2,Commercial Banking,Prevention,255672.13,271633.74,1346240.4
+2025Q2,Commercial Banking,Detection & Monitoring,97748.83,85038.23,387357.25
+2025Q2,Commercial Banking,Incident Response,871043.06,832486.72,240949.47
+2025Q2,Commercial Banking,Compliance & Audit,487284.13,422157.53,10931.44
+2025Q2,Commercial Banking,Cyber Insurance,819890.71,795027.97,231282.76
+2025Q2,Wealth Management,Prevention,608079.66,592234.57,2194640.23
+2025Q2,Wealth Management,Detection & Monitoring,685300.14,626397.12,2873565.47
+2025Q2,Wealth Management,Incident Response,377024.61,398586.24,80737.34
+2025Q2,Wealth Management,Compliance & Audit,515930.15,551257.86,270010.12
+2025Q2,Wealth Management,Cyber Insurance,746644.34,776927.4,210147.26
+2025Q2,Payments & Cards,Prevention,293922.96,296242.26,860357.21
+2025Q2,Payments & Cards,Detection & Monitoring,615888.03,567675.46,1000284.06
+2025Q2,Payments & Cards,Incident Response,281681.43,282851.47,71714.86
+2025Q2,Payments & Cards,Compliance & Audit,393429.6,418232.54,46454.38
+2025Q2,Payments & Cards,Cyber Insurance,409436.95,449246.68,167932.43
+2025Q2,Mortgage & Lending,Prevention,318748.21,284653.17,849557.72
+2025Q2,Mortgage & Lending,Detection & Monitoring,200883.74,215536.26,732210.14
+2025Q2,Mortgage & Lending,Incident Response,868805.98,942808.04,111919.16
+2025Q2,Mortgage & Lending,Compliance & Audit,142296.28,134073.38,21184.34
+2025Q2,Mortgage & Lending,Cyber Insurance,279390.44,286040.52,118674.46
+2025Q2,Digital Banking,Prevention,893559.58,962747.61,1828064.51
+2025Q2,Digital Banking,Detection & Monitoring,178614.44,194343.62,1124505.66
+2025Q2,Digital Banking,Incident Response,519875.96,509142.3,6080.41
+2025Q2,Digital Banking,Compliance & Audit,893348.57,807273.27,131514.04
+2025Q2,Digital Banking,Cyber Insurance,866574.19,882936.02,183968.16
+2025Q2,Corporate IT & Infrastructure,Prevention,634955.73,617746.79,2274386.87
+2025Q2,Corporate IT & Infrastructure,Detection & Monitoring,51100.06,48126.94,282451.03
+2025Q2,Corporate IT & Infrastructure,Incident Response,479132.73,507535.7,223983.58
+2025Q2,Corporate IT & Infrastructure,Compliance & Audit,206049.73,222382.82,26269.84
+2025Q2,Corporate IT & Infrastructure,Cyber Insurance,200091.6,185280.0,19084.08
+2025Q3,Retail Banking,Prevention,573842.08,563873.2,2165098.27
+2025Q3,Retail Banking,Detection & Monitoring,453346.6,488600.85,1462656.55
+2025Q3,Retail Banking,Incident Response,346848.06,363877.54,71745.72
+2025Q3,Retail Banking,Compliance & Audit,454684.9,495917.76,43618.34
+2025Q3,Retail Banking,Cyber Insurance,504040.74,538301.93,31602.19
+2025Q3,Commercial Banking,Prevention,206308.03,178722.73,474783.39
+2025Q3,Commercial Banking,Detection & Monitoring,652769.51,599445.94,3444563.38
+2025Q3,Commercial Banking,Incident Response,476252.92,435615.15,89927.42
+2025Q3,Commercial Banking,Compliance & Audit,344918.75,360716.03,84346.97
+2025Q3,Commercial Banking,Cyber Insurance,731521.09,634336.28,231309.53
+2025Q3,Wealth Management,Prevention,848145.56,821048.38,2911795.54
+2025Q3,Wealth Management,Detection & Monitoring,212834.24,228920.13,532997.63
+2025Q3,Wealth Management,Incident Response,78119.0,74603.62,4213.52
+2025Q3,Wealth Management,Compliance & Audit,598346.53,600205.42,66971.01
+2025Q3,Wealth Management,Cyber Insurance,520646.64,487507.09,37894.27
+2025Q3,Payments & Cards,Prevention,640403.12,672136.56,3361273.45
+2025Q3,Payments & Cards,Detection & Monitoring,883747.78,923293.13,1425654.55
+2025Q3,Payments & Cards,Incident Response,785138.16,705481.75,223988.94
+2025Q3,Payments & Cards,Compliance & Audit,354907.16,322954.8,139539.28
+2025Q3,Payments & Cards,Cyber Insurance,585488.8,597433.15,178476.09
+2025Q3,Mortgage & Lending,Prevention,250241.34,247645.81,1452867.77
+2025Q3,Mortgage & Lending,Detection & Monitoring,606884.78,562584.8,1001689.46
+2025Q3,Mortgage & Lending,Incident Response,295147.66,322509.58,63389.03
+2025Q3,Mortgage & Lending,Compliance & Audit,874168.38,857169.99,53096.86
+2025Q3,Mortgage & Lending,Cyber Insurance,327857.88,314385.55,30418.28
+2025Q3,Digital Banking,Prevention,567164.58,588814.59,1019327.69
+2025Q3,Digital Banking,Detection & Monitoring,620295.8,600519.39,1774549.39
+2025Q3,Digital Banking,Incident Response,699995.92,744468.22,2519.04
+2025Q3,Digital Banking,Compliance & Audit,206976.66,216933.19,34755.1
+2025Q3,Digital Banking,Cyber Insurance,523008.32,495993.53,128433.15
+2025Q3,Corporate IT & Infrastructure,Prevention,553492.54,499413.31,1298022.71
+2025Q3,Corporate IT & Infrastructure,Detection & Monitoring,729411.21,706956.72,2484999.66
+2025Q3,Corporate IT & Infrastructure,Incident Response,417835.82,436931.63,78679.21
+2025Q3,Corporate IT & Infrastructure,Compliance & Audit,481620.88,515029.11,69815.8
+2025Q3,Corporate IT & Infrastructure,Cyber Insurance,573371.12,526110.04,137648.39
+2025Q4,Retail Banking,Prevention,782848.47,810473.82,2910243.44
+2025Q4,Retail Banking,Detection & Monitoring,175510.54,176148.27,623158.56
+2025Q4,Retail Banking,Incident Response,484454.98,486983.98,33810.72
+2025Q4,Retail Banking,Compliance & Audit,880018.25,911942.04,33537.34
+2025Q4,Retail Banking,Cyber Insurance,50365.08,43117.0,18517.75
+2025Q4,Commercial Banking,Prevention,292178.6,275881.86,732340.5
+2025Q4,Commercial Banking,Detection & Monitoring,498563.73,498752.9,972882.95
+2025Q4,Commercial Banking,Incident Response,453238.14,434207.03,110495.6
+2025Q4,Commercial Banking,Compliance & Audit,878329.85,820599.32,306819.57
+2025Q4,Commercial Banking,Cyber Insurance,176523.17,189142.46,15256.7
+2025Q4,Wealth Management,Prevention,147245.14,135922.9,304734.61
+2025Q4,Wealth Management,Detection & Monitoring,79367.32,86734.58,166507.51
+2025Q4,Wealth Management,Incident Response,674873.2,582144.0,49149.34
+2025Q4,Wealth Management,Compliance & Audit,633696.23,642357.72,104704.36
+2025Q4,Wealth Management,Cyber Insurance,585850.42,635605.64,101262.27
+2025Q4,Payments & Cards,Prevention,121232.69,131586.18,245773.62
+2025Q4,Payments & Cards,Detection & Monitoring,166581.93,181670.4,839676.67
+2025Q4,Payments & Cards,Incident Response,540061.82,501064.62,105883.04
+2025Q4,Payments & Cards,Compliance & Audit,210020.85,208027.96,78070.7
+2025Q4,Payments & Cards,Cyber Insurance,683115.35,746011.87,250019.77
+2025Q4,Mortgage & Lending,Prevention,264525.56,253799.63,860522.0
+2025Q4,Mortgage & Lending,Detection & Monitoring,554092.12,477215.69,1718571.92
+2025Q4,Mortgage & Lending,Incident Response,72096.2,68048.5,21891.04
+2025Q4,Mortgage & Lending,Compliance & Audit,636877.22,593837.26,67990.31
+2025Q4,Mortgage & Lending,Cyber Insurance,217109.34,187878.73,11604.81
+2025Q4,Digital Banking,Prevention,588719.57,556216.57,2344200.5
+2025Q4,Digital Banking,Detection & Monitoring,677399.91,664329.41,3353597.91
+2025Q4,Digital Banking,Incident Response,395560.3,369769.65,11613.05
+2025Q4,Digital Banking,Compliance & Audit,270719.96,291111.96,135603.47
+2025Q4,Digital Banking,Cyber Insurance,396780.83,379892.19,107968.81
+2025Q4,Corporate IT & Infrastructure,Prevention,656091.36,651486.6,1988183.86
+2025Q4,Corporate IT & Infrastructure,Detection & Monitoring,660357.32,591045.72,2453291.93
+2025Q4,Corporate IT & Infrastructure,Incident Response,715002.31,637486.8,151147.91
+2025Q4,Corporate IT & Infrastructure,Compliance & Audit,208711.21,194050.96,76026.94
+2025Q4,Corporate IT & Infrastructure,Cyber Insurance,808746.06,689716.55,275758.51
+2026Q1,Retail Banking,Prevention,402528.44,348013.19,2044467.87
+2026Q1,Retail Banking,Detection & Monitoring,260331.16,269227.53,934222.36
+2026Q1,Retail Banking,Incident Response,330345.87,303846.85,7278.26
+2026Q1,Retail Banking,Compliance & Audit,682207.25,679009.82,239399.93
+2026Q1,Retail Banking,Cyber Insurance,100490.07,107007.28,25210.54
+2026Q1,Commercial Banking,Prevention,744248.18,728634.01,3579428.16
+2026Q1,Commercial Banking,Detection & Monitoring,279308.74,295836.43,1234885.39
+2026Q1,Commercial Banking,Incident Response,179182.42,187889.56,90937.1
+2026Q1,Commercial Banking,Compliance & Audit,246202.73,224867.83,100006.08
+2026Q1,Commercial Banking,Cyber Insurance,373895.95,347647.56,70666.09
+2026Q1,Wealth Management,Prevention,101280.68,89264.68,515986.0
+2026Q1,Wealth Management,Detection & Monitoring,615539.94,591420.48,1617554.3
+2026Q1,Wealth Management,Incident Response,358623.58,311003.59,113028.49
+2026Q1,Wealth Management,Compliance & Audit,813945.0,767920.16,341382.63
+2026Q1,Wealth Management,Cyber Insurance,337328.86,322057.92,110537.36
+2026Q1,Payments & Cards,Prevention,585485.5,536330.1,2794400.48
+2026Q1,Payments & Cards,Detection & Monitoring,246981.15,268083.73,549476.94
+2026Q1,Payments & Cards,Incident Response,766870.55,756465.48,90982.96
+2026Q1,Payments & Cards,Compliance & Audit,748259.43,680590.0,295823.83
+2026Q1,Payments & Cards,Cyber Insurance,69919.99,67495.06,6308.7
+2026Q1,Mortgage & Lending,Prevention,787329.17,828564.49,3154332.43
+2026Q1,Mortgage & Lending,Detection & Monitoring,455923.7,413534.88,1731462.77
+2026Q1,Mortgage & Lending,Incident Response,375352.07,376178.07,35511.6
+2026Q1,Mortgage & Lending,Compliance & Audit,273454.31,270093.23,82291.83
+2026Q1,Mortgage & Lending,Cyber Insurance,249858.62,242632.62,48131.01
+2026Q1,Digital Banking,Prevention,744079.56,702467.51,1741935.18
+2026Q1,Digital Banking,Detection & Monitoring,476621.25,467504.47,2356744.0
+2026Q1,Digital Banking,Incident Response,439757.86,458739.44,34122.57
+2026Q1,Digital Banking,Compliance & Audit,149823.32,157326.67,37830.28
+2026Q1,Digital Banking,Cyber Insurance,490540.2,522544.37,204705.93
+2026Q1,Corporate IT & Infrastructure,Prevention,202652.51,194189.75,336599.08
+2026Q1,Corporate IT & Infrastructure,Detection & Monitoring,370425.69,335872.55,1280217.02
+2026Q1,Corporate IT & Infrastructure,Incident Response,582038.92,495551.57,81972.83
+2026Q1,Corporate IT & Infrastructure,Compliance & Audit,280985.15,241304.26,47240.0
+2026Q1,Corporate IT & Infrastructure,Cyber Insurance,568881.52,569670.42,71169.08
+2026Q2,Retail Banking,Prevention,729661.42,777516.77,1352417.05
+2026Q2,Retail Banking,Detection & Monitoring,649591.96,641100.72,3108665.25
+2026Q2,Retail Banking,Incident Response,540174.34,561834.71,95136.95
+2026Q2,Retail Banking,Compliance & Audit,874059.59,830634.27,367556.39
+2026Q2,Retail Banking,Cyber Insurance,435166.5,472135.08,211576.61
+2026Q2,Commercial Banking,Prevention,163759.07,157862.72,288207.17
+2026Q2,Commercial Banking,Detection & Monitoring,253757.15,251187.38,863335.97
+2026Q2,Commercial Banking,Incident Response,883496.64,881530.96,311382.23
+2026Q2,Commercial Banking,Compliance & Audit,523368.94,446432.47,41604.15
+2026Q2,Commercial Banking,Cyber Insurance,166762.35,152548.99,7556.14
+2026Q2,Wealth Management,Prevention,239002.04,212721.2,398422.98
+2026Q2,Wealth Management,Detection & Monitoring,570859.63,610062.1,3425601.42
+2026Q2,Wealth Management,Incident Response,694236.73,643606.02,302206.62
+2026Q2,Wealth Management,Compliance & Audit,171257.55,172723.73,42189.16
+2026Q2,Wealth Management,Cyber Insurance,58024.69,49382.83,15257.66
+2026Q2,Payments & Cards,Prevention,55470.44,51320.19,180566.49
+2026Q2,Payments & Cards,Detection & Monitoring,135817.15,125111.0,253492.22
+2026Q2,Payments & Cards,Incident Response,368242.41,356005.43,165007.57
+2026Q2,Payments & Cards,Compliance & Audit,240574.74,258305.17,113307.93
+2026Q2,Payments & Cards,Cyber Insurance,400374.99,426662.69,49520.76
+2026Q2,Mortgage & Lending,Prevention,83998.46,91935.38,510712.24
+2026Q2,Mortgage & Lending,Detection & Monitoring,117616.81,105912.94,180863.37
+2026Q2,Mortgage & Lending,Incident Response,443416.46,402733.65,75239.15
+2026Q2,Mortgage & Lending,Compliance & Audit,209075.47,228732.61,13048.09
+2026Q2,Mortgage & Lending,Cyber Insurance,194891.5,176401.01,10877.87
+2026Q2,Digital Banking,Prevention,463303.79,442292.66,936129.35
+2026Q2,Digital Banking,Detection & Monitoring,797046.95,760215.3,4381154.78
+2026Q2,Digital Banking,Incident Response,820108.08,809963.54,266942.75
+2026Q2,Digital Banking,Compliance & Audit,708268.99,656519.95,318813.11
+2026Q2,Digital Banking,Cyber Insurance,294109.22,310078.67,100732.48
+2026Q2,Corporate IT & Infrastructure,Prevention,259246.06,242659.04,1346601.7
+2026Q2,Corporate IT & Infrastructure,Detection & Monitoring,182230.87,159388.78,529938.14
+2026Q2,Corporate IT & Infrastructure,Incident Response,169630.41,172656.28,85571.41
+2026Q2,Corporate IT & Infrastructure,Compliance & Audit,305799.63,321761.81,136540.9
+2026Q2,Corporate IT & Infrastructure,Cyber Insurance,743963.78,724579.13,333205.01

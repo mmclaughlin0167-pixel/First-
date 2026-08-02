@@ -1,0 +1,259 @@
+<form version="1.1" theme="light">
+  <label>COO — Operational Resilience &amp; Incident Response</label>
+  <description>Links security operations to business continuity: system availability vs. SLA, detection/response speed, incident backlog, and third-party operational risk. Drill down: KPI -&gt; Business Unit -&gt; System -&gt; Outage/Incident Event.</description>
+
+  <fieldset submitButtonLabel="Apply" autoRun="true">
+    <input type="time" token="tok_time">
+      <label>Time Range</label>
+      <default>
+        <earliest>-12mon@mon</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="tok_bu" searchWhenChanged="true">
+      <label>Business Unit</label>
+      <choice value="*">All Business Units</choice>
+      <fieldForLabel>business_unit</fieldForLabel>
+      <fieldForValue>business_unit</fieldForValue>
+      <search>
+        <query>| inputlookup uptime_availability.csv | dedup business_unit | table business_unit | sort business_unit</query>
+      </search>
+      <default>*</default>
+    </input>
+  </fieldset>
+
+  <!-- Row 1: COO headline KPIs -->
+  <row>
+    <panel>
+      <title>Average System Availability vs. SLA</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup uptime_availability.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats avg(uptime_pct) as avg_uptime
+            | eval avg_uptime=round(avg_uptime,3)
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="unit">%</option>
+        <option name="useColors">true</option>
+        <option name="rangeColors">["0xdc4e41","0xf8be34","0x53a051"]</option>
+        <option name="rangeValues">[99,99.8]</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Customer-Impacting Outages</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup uptime_availability.csv
+            | where (business_unit=$tok_bu$ OR "$tok_bu$"="*") AND customer_impact="Y"
+            | stats count as outages
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="useColors">true</option>
+        <option name="rangeColors">["0x53a051","0xf8be34","0xdc4e41"]</option>
+        <option name="rangeValues">[5,15]</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Mean Time to Detect (hrs)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup security_incidents.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats avg(mttd_hours) as mttd
+            | eval mttd=round(mttd,1)
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="unit">hrs</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Mean Time to Respond/Resolve (hrs)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup security_incidents.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats avg(mttr_hours) as mttr
+            | eval mttr=round(mttr,1)
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="unit">hrs</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Open / Unresolved Incidents (Backlog)</title>
+      <single>
+        <search>
+          <query>
+            | inputlookup security_incidents.csv
+            | where (business_unit=$tok_bu$ OR "$tok_bu$"="*") AND status!="Resolved"
+            | stats count as backlog
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="useColors">true</option>
+        <option name="rangeColors">["0x53a051","0xf8be34","0xdc4e41"]</option>
+        <option name="rangeValues">[10,25]</option>
+      </single>
+    </panel>
+  </row>
+
+  <!-- Row 2: Trend -->
+  <row>
+    <panel>
+      <title>Weekly Availability Trend vs. SLA Target</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup uptime_availability.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats avg(uptime_pct) as avg_uptime avg(sla_target_pct) as sla_target by week_start
+            | sort week_start
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY.minimumNumber">96</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Incident Backlog by Severity Over Time</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup security_incidents.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | eval month=strftime(strptime(date,"%Y-%m-%d %H:%M:%S"),"%Y-%m")
+            | stats count by month, severity
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.stackMode">stacked</option>
+      </chart>
+    </panel>
+  </row>
+
+  <!-- Row 3: Drill layer 1 -> Business Unit (click sets sel_bu) -->
+  <row>
+    <panel>
+      <title>Downtime Minutes by Business Unit (click a bar to drill in)</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup uptime_availability.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | stats sum(downtime_minutes) as downtime_minutes count(eval(customer_impact="Y")) as customer_impacting_events by business_unit
+            | sort -downtime_minutes
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <drilldown>
+          <set token="sel_bu">$click.value2$</set>
+          <unset token="sel_sys"></unset>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>Third-Party / Vendor Operational Risk (SLA breaches &amp; incidents)</title>
+      <table>
+        <search>
+          <query>
+            | inputlookup vendor_risk.csv
+            | where business_unit=$tok_bu$ OR "$tok_bu$"="*"
+            | sort -sla_breach_count
+            | table vendor_name, business_unit, criticality, sla_breach_count, incident_count, risk_score
+            | head 8
+          </query>
+        </search>
+        <drilldown>
+          <set token="sel_bu">$row.business_unit$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+
+  <!-- Row 4: Drill layer 2 -> System within BU (click sets sel_sys) -->
+  <row>
+    <panel depends="$sel_bu$">
+      <title>Systems in "$sel_bu$" by Downtime (click a bar to drill into that system's outage events)</title>
+      <chart>
+        <search>
+          <query>
+            | inputlookup uptime_availability.csv
+            | where business_unit="$sel_bu$"
+            | stats sum(downtime_minutes) as downtime_minutes avg(uptime_pct) as avg_uptime by system
+            | sort -downtime_minutes
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <drilldown>
+          <set token="sel_sys">$click.value2$</set>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+
+  <!-- Row 5: Drill layer 3 -> raw outage weeks + linked incident records (deepest layer) -->
+  <row>
+    <panel depends="$sel_bu$">
+      <title>Outage Weeks — "$sel_bu$" $sel_sys$ (raw availability record)</title>
+      <table>
+        <search>
+          <query>
+            | inputlookup uptime_availability.csv
+            | where business_unit="$sel_bu$" AND (system="$sel_sys$" OR "$sel_sys$"="") AND outage_cause!=""
+            | sort -week_start
+            | table week_start, system, uptime_pct, sla_target_pct, downtime_minutes, outage_cause, customer_impact
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="count">15</option>
+      </table>
+    </panel>
+    <panel depends="$sel_bu$">
+      <title>Related Security Incidents — "$sel_bu$" $sel_sys$ (deepest drill: raw incident record)</title>
+      <table>
+        <search>
+          <query>
+            | inputlookup security_incidents.csv
+            | where business_unit="$sel_bu$" AND (system="$sel_sys$" OR "$sel_sys$"="")
+            | sort -date
+            | table incident_id, date, severity, category, mttd_hours, mttr_hours, status, root_cause
+          </query>
+          <earliest>$tok_time.earliest$</earliest>
+          <latest>$tok_time.latest$</latest>
+        </search>
+        <option name="count">15</option>
+      </table>
+    </panel>
+  </row>
+
+  <row>
+    <panel>
+      <html>
+        <p><b>Drill-down path:</b> Availability / MTTD-MTTR tiles (Row 1) → Business Unit downtime (Row 3, click a bar) → System within that unit (Row 4, click a bar) → raw outage weeks and the specific incident records that caused them (Row 5). The same <code>system</code> and <code>business_unit</code> fields join directly to the CIO dashboard's SOC alert and vulnerability data for full technical root-cause detail.</p>
+      </html>
+    </panel>
+  </row>
+</form>
