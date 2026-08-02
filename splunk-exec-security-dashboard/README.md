@@ -53,19 +53,45 @@ at 100 given this dataset's incident volume (too-small divisor), and the
 CEO's "Cyber Cost as % of Revenue" KPI's color thresholds assumed a much
 smaller percentage than this dataset actually produces.
 
-**Known limitation carried by both the preview and the real dashboards:**
+### The Time Range picker vs. `inputlookup` (fixed)
+
 Splunk's dashboard Time Range picker only auto-filters searches against
 indexed events with a real `_time` field. Every panel here reads from
 `| inputlookup <file>.csv` instead, and the lookups' date/timestamp columns
-are plain fields, not `_time` — so in a live Splunk instance, the Time Range
-input will **not** actually narrow most of these panels to "trailing 12
-months"; they'll show the full ~2-year sample regardless of the range
-selected. The mobile preview computes its trailing-12-month figures
-correctly in Python since it isn't bound by that Splunk behavior, but the
-real dashboards would need each query updated to derive a real time field
-(e.g. `| eval _time=strptime(date, "%Y-%m-%d %H:%M:%S")`) before the Time
-Range input will do anything. Flagging this rather than silently patching
-every query, since it touches every panel across all four dashboards.
+are plain fields, not `_time` — so **the picker's `queryParameters` alone do
+nothing** for these panels; left as-is, every dashboard would always show
+the full ~2-year sample regardless of the range selected.
+
+Every time-scoped query now derives an explicit epoch field and filters on
+it, via two small helpers in `build_studio_dashboards.py`:
+
+- **`ev_time(field, fmt)`** — for event-grain lookups with a real per-row
+  date/timestamp (`security_incidents`, `fraud_transactions`,
+  `vulnerability_scans`, `soc_alerts`, `uptime_availability`,
+  `compliance_findings`). Injects
+  `| eval _tf=strptime(<field>, "<fmt>") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$`
+  right after the `inputlookup`.
+- **`qtr_time()`** — for quarter-grain lookups (`company_financials`,
+  `security_spend`), which have no per-row date at all. Derives each row's
+  quarter-*start* date from a label like `"2025Q3"` (→ `2025-07-01`) and
+  filters the same way, so a 12-month picker selection resolves to roughly
+  the trailing 4 quarters.
+
+A few panels are deliberately left unfiltered (full history, always) because
+they're meant as fixed context rather than a reactive KPI: the CEO/CFO
+quarterly revenue-baseline trend charts, the CIO/COO vendor-risk snapshot
+tables, and the point-in-time "open vulnerabilities" count on the Overview
+page (a current-state gauge, not a trailing-window sum). Each is labeled
+accordingly in its title/description.
+
+The Overview dashboard previously had no Time Range input at all even
+though its queries referenced `$tok_time.earliest$/latest$` — a dead
+reference, harmless only because `inputlookup` ignored it anyway. It now
+has a real `input.timerange` like the other four.
+
+This can't be executed against a live Splunk instance from here, so treat
+it as carefully reasoned SPL rather than test-verified — worth a spot check
+after pasting into Dashboard Studio.
 
 ## 1. The data model
 

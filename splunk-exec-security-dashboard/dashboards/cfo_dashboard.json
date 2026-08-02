@@ -173,7 +173,7 @@
     "viz_note": {
       "type": "splunk.markdown",
       "options": {
-        "markdown": "**Drill-down path:** Fraud Loss / ROI tiles (top row) -> Channel or Fraud Type breakdown (click a slice/bar) -> individual flagged transaction (bottom table). Each `transaction_id` corresponds to the SOC alert / incident record that first flagged it (cross-reference via `business_unit` and `date` on the CIO dashboard)."
+        "markdown": "**Drill-down path:** Fraud Loss / ROI tiles (top row) -> Channel or Fraud Type breakdown (click a slice/bar) -> individual flagged transaction (bottom table). Each `transaction_id` corresponds to the SOC alert / incident record that first flagged it (cross-reference via `business_unit` and `date` on the CIO dashboard). Every panel above respects the Time Range picker (transactions filtered on their own date, spend/ROI filtered on each quarter's start date) except the quarterly financial baseline, which intentionally always shows full history for context."
       }
     }
   },
@@ -181,7 +181,7 @@
     "ds_net_loss": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss",
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -192,7 +192,7 @@
     "ds_loss_bps": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval net_loss=if(is_fraud=\"Y\", loss_amount_usd-recovered_amount_usd, 0) | stats sum(net_loss) as loss sum(amount_usd) as volume | eval bps=round((loss/volume)*10000,1) | table bps",
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval net_loss=if(is_fraud=\"Y\", loss_amount_usd-recovered_amount_usd, 0) | stats sum(net_loss) as loss sum(amount_usd) as volume | eval bps=round((loss/volume)*10000,1) | table bps",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -203,14 +203,18 @@
     "ds_fraud_pct_revenue": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as loss | appendcols [ | inputlookup company_financials.csv | stats sum(revenue_usd) as revenue ] | eval pct_of_revenue=round((loss/revenue)*100,3) | table pct_of_revenue"
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as loss | appendcols [ | inputlookup company_financials.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | stats sum(revenue_usd) as revenue ] | eval pct_of_revenue=round((loss/revenue)*100,3) | table pct_of_revenue",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
       },
       "name": "Fraud Loss as % of Revenue"
     },
     "ds_open_findings": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup compliance_findings.csv | where status!=\"Remediated\" | stats count as open_findings",
+        "query": "| inputlookup compliance_findings.csv | eval _tf=strptime(date, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where status!=\"Remediated\" | stats count as open_findings",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -221,21 +225,29 @@
     "ds_spend": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_spend.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as actual_spend"
+        "query": "| inputlookup security_spend.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as actual_spend",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
       },
       "name": "Security Spend"
     },
     "ds_roi": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_spend.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as spend sum(estimated_loss_avoided_usd) as avoided | eval roi_x=round(avoided/spend,1) | table roi_x"
+        "query": "| inputlookup security_spend.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as spend sum(estimated_loss_avoided_usd) as avoided | eval roi_x=round(avoided/spend,1) | table roi_x",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
       },
       "name": "Security ROI"
     },
     "ds_loss_trend": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats sum(loss_amount_usd) as gross_loss sum(recovered_amount_usd) as recovered by month | sort month",
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats sum(loss_amount_usd) as gross_loss sum(recovered_amount_usd) as recovered by month | sort month",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -246,7 +258,11 @@
     "ds_spend_roi_cat": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_spend.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as actual_spend sum(estimated_loss_avoided_usd) as loss_avoided by category | sort -loss_avoided"
+        "query": "| inputlookup security_spend.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(actual_spend_usd) as actual_spend sum(estimated_loss_avoided_usd) as loss_avoided by category | sort -loss_avoided",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
       },
       "name": "Spend vs. Loss Avoided by Category"
     },
@@ -255,12 +271,12 @@
       "options": {
         "query": "| inputlookup company_financials.csv | table quarter, revenue_usd, net_income_usd, it_budget_usd, cyber_insurance_premium_usd | sort quarter"
       },
-      "name": "Revenue / Net Income / IT Budget Trend"
+      "name": "Revenue / Net Income / IT Budget Trend (full history, not time-picker scoped)"
     },
     "ds_channel": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by channel | sort -net_loss",
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by channel | sort -net_loss",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -271,7 +287,7 @@
     "ds_fraud_type": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by fraud_type | sort -net_loss",
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND is_fraud=\"Y\" | eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by fraud_type | sort -net_loss",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -282,7 +298,7 @@
     "ds_raw_txn": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup fraud_transactions.csv | where is_fraud=\"Y\" AND channel=\"$sel_channel$\" AND (fraud_type=\"$sel_fraud_type$\" OR \"$sel_fraud_type$\"=\"\") | sort -date | table transaction_id, date, business_unit, channel, fraud_type, detection_method, amount_usd, loss_amount_usd, recovered_amount_usd, status",
+        "query": "| inputlookup fraud_transactions.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where is_fraud=\"Y\" AND channel=\"$sel_channel$\" AND (fraud_type=\"$sel_fraud_type$\" OR \"$sel_fraud_type$\"=\"\") | sort -date | table transaction_id, date, business_unit, channel, fraud_type, detection_method, amount_usd, loss_amount_usd, recovered_amount_usd, status",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"

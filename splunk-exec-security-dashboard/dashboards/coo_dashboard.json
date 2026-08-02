@@ -207,7 +207,7 @@
     "viz_note": {
       "type": "splunk.markdown",
       "options": {
-        "markdown": "**Drill-down path:** Availability / MTTD-MTTR tiles (top row) -> Business Unit downtime (click a bar) -> System within that unit (click a bar) -> raw outage weeks and the incident records that caused them (bottom tables). `system` and `business_unit` join directly to the CIO dashboard's SOC alert and vulnerability data for full technical root-cause detail."
+        "markdown": "**Drill-down path:** Availability / MTTD-MTTR tiles (top row) -> Business Unit downtime (click a bar) -> System within that unit (click a bar) -> raw outage weeks and the incident records that caused them (bottom tables). `system` and `business_unit` join directly to the CIO dashboard's SOC alert and vulnerability data for full technical root-cause detail. Every panel above respects the Time Range picker (derived from each row's own week/date), except the vendor operational risk table, which is a point-in-time snapshot."
       }
     }
   },
@@ -215,7 +215,7 @@
     "ds_avg_uptime": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(uptime_pct) as avg_uptime | eval avg_uptime=round(avg_uptime,3)",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(uptime_pct) as avg_uptime | eval avg_uptime=round(avg_uptime,3)",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -226,7 +226,7 @@
     "ds_cust_outages": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND customer_impact=\"Y\" | stats count as outages",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND customer_impact=\"Y\" | stats count as outages",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -237,7 +237,7 @@
     "ds_mttd": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(mttd_hours) as mttd | eval mttd=round(mttd,1)",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(mttd_hours) as mttd | eval mttd=round(mttd,1)",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -248,7 +248,7 @@
     "ds_mttr": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(mttr_hours) as mttr | eval mttr=round(mttr,1)",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(mttr_hours) as mttr | eval mttr=round(mttr,1)",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -259,7 +259,7 @@
     "ds_backlog": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status!=\"Resolved\" | stats count as backlog",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status!=\"Resolved\" | stats count as backlog",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -270,7 +270,7 @@
     "ds_outage_cost": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where customer_impact=\"Y\" | stats sum(downtime_minutes) as downtime_minutes | eval estimated_revenue_at_risk=round(downtime_minutes*1850,0) | table estimated_revenue_at_risk",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where customer_impact=\"Y\" | stats sum(downtime_minutes) as downtime_minutes | eval estimated_revenue_at_risk=round(downtime_minutes*1850,0) | table estimated_revenue_at_risk",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -281,7 +281,7 @@
     "ds_uptime_trend": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(uptime_pct) as avg_uptime avg(sla_target_pct) as sla_target by week_start | sort week_start",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats avg(uptime_pct) as avg_uptime avg(sla_target_pct) as sla_target by week_start | sort week_start",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -292,7 +292,7 @@
     "ds_backlog_trend": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats count by month, severity",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats count by month, severity",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -303,7 +303,7 @@
     "ds_downtime_bu": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(downtime_minutes) as downtime_minutes count(eval(customer_impact=\"Y\")) as customer_impacting_events by business_unit | sort -downtime_minutes",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(downtime_minutes) as downtime_minutes count(eval(customer_impact=\"Y\")) as customer_impacting_events by business_unit | sort -downtime_minutes",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -321,7 +321,7 @@
     "ds_sys_downtime": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where business_unit=\"$sel_bu$\" | stats sum(downtime_minutes) as downtime_minutes avg(uptime_pct) as avg_uptime by system | sort -downtime_minutes",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" | stats sum(downtime_minutes) as downtime_minutes avg(uptime_pct) as avg_uptime by system | sort -downtime_minutes",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -332,7 +332,7 @@
     "ds_outage_weeks": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup uptime_availability.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") AND outage_cause!=\"\" | sort -week_start | table week_start, system, uptime_pct, sla_target_pct, downtime_minutes, outage_cause, customer_impact",
+        "query": "| inputlookup uptime_availability.csv | eval _tf=strptime(week_start, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") AND outage_cause!=\"\" | sort -week_start | table week_start, system, uptime_pct, sla_target_pct, downtime_minutes, outage_cause, customer_impact",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -343,7 +343,7 @@
     "ds_related_incidents": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -date | table incident_id, date, severity, category, mttd_hours, mttr_hours, status, root_cause",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -date | table incident_id, date, severity, category, mttd_hours, mttr_hours, status, root_cause",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"

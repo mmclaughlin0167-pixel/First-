@@ -51,6 +51,28 @@ def ds_search(query, name, use_time=True):
     return d
 
 
+def ev_time(field, fmt="%Y-%m-%d %H:%M:%S"):
+    """Time-filter snippet for event-grain lookups (a real per-row date/timestamp).
+
+    Splunk's Time Range picker does not auto-filter `| inputlookup` results — that
+    implicit filtering only applies to generating commands reading indexed events
+    with a real `_time` field. A lookup's date/timestamp column is a plain string
+    field, so every time-scoped panel here derives an epoch value and filters on it
+    explicitly instead of relying on queryParameters alone.
+    """
+    return (f'| eval _tf=strptime({field}, "{fmt}") '
+            '| where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf ')
+
+
+def qtr_time():
+    """Time-filter snippet for quarter-grain lookups (company_financials.csv,
+    security_spend.csv) — derives each row's quarter-start date (e.g. "2025Q3" ->
+    2025-07-01) so the same Time Range picker can scope them too."""
+    return ('| eval _tfq=strptime(substr(quarter,1,4)."-"'
+            '.printf("%02d",(tonumber(substr(quarter,6,1))-1)*3+1)."-01", "%Y-%m-%d") '
+            '| where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq ')
+
+
 def viz_singlevalue(title, ds_id, unit=None, unit_position="after",
                      range_values=None, range_colors=None, precision="0"):
     options = {"numberPrecision": precision}
@@ -182,29 +204,28 @@ def build_ceo():
     bu_filter = 'where business_unit=$tok_bu$ OR "$tok_bu$"="*"'
 
     d.add_ds("ds_risk_score", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} "
         "| eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) "
         "| stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/25), 1) | table risk_score",
         "Enterprise Cyber Risk Score"))
     d.add_ds("ds_material", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
         "| stats count as material_incidents", "Material Incidents"))
     d.add_ds("ds_customers", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} | stats sum(customers_affected) as customers_affected",
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} | stats sum(customers_affected) as customers_affected",
         "Customers Impacted"))
     d.add_ds("ds_impact", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} | stats sum(financial_impact_usd) as total_impact",
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} | stats sum(financial_impact_usd) as total_impact",
         "Financial Impact"))
     d.add_ds("ds_cost_pct_revenue", ds_search(
-        "| inputlookup security_incidents.csv "
-        "| eval quarter=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y\")+\"Q\"+"
-        "tostring(ceil(tonumber(strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%m\"))/3)) "
+        f"| inputlookup security_incidents.csv {ev_time('date')}"
         f"| {bu_filter} | stats sum(financial_impact_usd) as impact "
-        "| appendcols [ | inputlookup company_financials.csv | stats sum(revenue_usd) as revenue ] "
+        f"| appendcols [ | inputlookup company_financials.csv {qtr_time()}| stats sum(revenue_usd) as revenue ] "
         "| eval pct_of_revenue=round((impact/revenue)*100,3) | table pct_of_revenue",
-        "Cyber Incident Cost as % of Revenue", use_time=False))
+        "Cyber Incident Cost as % of Revenue"))
     d.add_ds("ds_overdue", ds_search(
-        f"| inputlookup compliance_findings.csv | {bu_filter} AND status=\"Overdue\" | stats count as overdue_findings",
+        f"| inputlookup compliance_findings.csv {ev_time('date', '%Y-%m-%d')}"
+        f"| {bu_filter} AND status=\"Overdue\" | stats count as overdue_findings",
         "Overdue Regulatory Findings"))
 
     row1 = [("ds_risk_score", "Enterprise Cyber Risk Score (0-100)", None, [35, 65], "0.0"),
@@ -221,7 +242,7 @@ def build_ceo():
     d.y = 160
 
     d.add_ds("ds_trend", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} "
         "| eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") "
         "| stats sum(financial_impact_usd) as financial_impact "
         "count(eval(severity=\"Critical\" OR severity=\"High\")) as material_incidents by month | sort month",
@@ -234,9 +255,10 @@ def build_ceo():
         "| stats sum(financial_impact_usd) as cyber_cost by quarter ] "
         "| eval cyber_cost=coalesce(cyber_cost,0), pct_of_revenue=round((cyber_cost/revenue_usd)*100,3) "
         "| table quarter, revenue_usd, cyber_cost, pct_of_revenue | sort quarter",
-        "Cyber Cost vs. Revenue by Quarter", use_time=False))
+        "Cyber Cost vs. Revenue by Quarter (full history, not time-picker scoped)", use_time=False))
     d.add_ds("ds_regfindings", ds_search(
-        f"| inputlookup compliance_findings.csv | {bu_filter} AND status!=\"Remediated\" | chart count by framework, severity",
+        f"| inputlookup compliance_findings.csv {ev_time('date', '%Y-%m-%d')}"
+        f"| {bu_filter} AND status!=\"Remediated\" | chart count by framework, severity",
         "Regulatory Findings by Framework"))
 
     d.add_viz("viz_trend", viz_chart("column", "Financial Impact & Material Incidents by Month", "ds_trend"), 0, d.y, 710, 280)
@@ -247,7 +269,7 @@ def build_ceo():
     d.y += 292
 
     d.add_ds("ds_bu_heatmap", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} "
         "| eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) "
         "| stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by business_unit "
         "| sort -risk_weight",
@@ -264,7 +286,7 @@ def build_ceo():
     d.y += 312
 
     d.add_ds("ds_bu_systems", ds_search(
-        "| inputlookup security_incidents.csv | where business_unit=\"$sel_bu$\" "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| where business_unit=\"$sel_bu$\" "
         "| eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) "
         "| stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by system "
         "| sort -risk_weight",
@@ -275,7 +297,8 @@ def build_ceo():
     d.y += 312
 
     d.add_ds("ds_raw_incidents", ds_search(
-        "| inputlookup security_incidents.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
+        f"| inputlookup security_incidents.csv {ev_time('date')}"
+        "| where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
         "| sort -date | table incident_id, date, severity, category, system, mitre_tactic, financial_impact_usd, "
         "records_exposed, regulatory_notification_required, status, root_cause",
         "Raw Incident Records"))
@@ -287,7 +310,9 @@ def build_ceo():
         "**Drill-down path:** Enterprise Risk Score / Cyber Cost % of Revenue (top row) -> Business Unit heatmap "
         "(click a bar) -> System within that unit (click a bar) -> individual incident record (bottom table). "
         "The same `incident_id` traces directly to the SOC alert and vulnerability that caused it on the CIO "
-        "dashboard, and to the fraud loss it produced on the CFO dashboard."
+        "dashboard, and to the fraud loss it produced on the CFO dashboard. Every panel above respects the Time "
+        "Range picker (derived from each row's own date, since `inputlookup` results aren't auto-filtered by it) "
+        "except the quarterly revenue trend, which intentionally always shows full history for context."
     ), 0, d.y, 1440, 110)
     d.y += 110
 
@@ -310,31 +335,32 @@ def build_cfo():
     bu_filter = 'where business_unit=$tok_bu$ OR "$tok_bu$"="*"'
 
     d.add_ds("ds_net_loss", ds_search(
-        f"| inputlookup fraud_transactions.csv | {bu_filter} AND is_fraud=\"Y\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| {bu_filter} AND is_fraud=\"Y\" "
         "| eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss",
         "Net Fraud Loss"))
     d.add_ds("ds_loss_bps", ds_search(
-        f"| inputlookup fraud_transactions.csv | {bu_filter} "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| {bu_filter} "
         "| eval net_loss=if(is_fraud=\"Y\", loss_amount_usd-recovered_amount_usd, 0) "
         "| stats sum(net_loss) as loss sum(amount_usd) as volume | eval bps=round((loss/volume)*10000,1) | table bps",
         "Fraud Loss Rate (bps)"))
     d.add_ds("ds_fraud_pct_revenue", ds_search(
-        "| inputlookup fraud_transactions.csv | where is_fraud=\"Y\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| where is_fraud=\"Y\" "
         "| eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as loss "
-        "| appendcols [ | inputlookup company_financials.csv | stats sum(revenue_usd) as revenue ] "
+        f"| appendcols [ | inputlookup company_financials.csv {qtr_time()}| stats sum(revenue_usd) as revenue ] "
         "| eval pct_of_revenue=round((loss/revenue)*100,3) | table pct_of_revenue",
-        "Fraud Loss as % of Revenue", use_time=False))
+        "Fraud Loss as % of Revenue"))
     d.add_ds("ds_open_findings", ds_search(
-        "| inputlookup compliance_findings.csv | where status!=\"Remediated\" | stats count as open_findings",
+        f"| inputlookup compliance_findings.csv {ev_time('date', '%Y-%m-%d')}"
+        "| where status!=\"Remediated\" | stats count as open_findings",
         "Open Regulatory Findings"))
     d.add_ds("ds_spend", ds_search(
-        f"| inputlookup security_spend.csv | {bu_filter} | stats sum(actual_spend_usd) as actual_spend",
-        "Security Spend", use_time=False))
+        f"| inputlookup security_spend.csv {qtr_time()}| {bu_filter} | stats sum(actual_spend_usd) as actual_spend",
+        "Security Spend"))
     d.add_ds("ds_roi", ds_search(
-        f"| inputlookup security_spend.csv | {bu_filter} "
+        f"| inputlookup security_spend.csv {qtr_time()}| {bu_filter} "
         "| stats sum(actual_spend_usd) as spend sum(estimated_loss_avoided_usd) as avoided "
         "| eval roi_x=round(avoided/spend,1) | table roi_x",
-        "Security ROI", use_time=False))
+        "Security ROI"))
 
     row1 = [("ds_net_loss", "Net Fraud Loss", "$", None, "0"),
             ("ds_loss_bps", "Fraud Loss Rate", "bps", None, "0.0"),
@@ -350,15 +376,15 @@ def build_cfo():
     d.y = 160
 
     d.add_ds("ds_loss_trend", ds_search(
-        f"| inputlookup fraud_transactions.csv | {bu_filter} AND is_fraud=\"Y\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| {bu_filter} AND is_fraud=\"Y\" "
         "| eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") "
         "| stats sum(loss_amount_usd) as gross_loss sum(recovered_amount_usd) as recovered by month | sort month",
         "Fraud Loss Trend"))
     d.add_ds("ds_spend_roi_cat", ds_search(
-        f"| inputlookup security_spend.csv | {bu_filter} "
+        f"| inputlookup security_spend.csv {qtr_time()}| {bu_filter} "
         "| stats sum(actual_spend_usd) as actual_spend sum(estimated_loss_avoided_usd) as loss_avoided by category "
         "| sort -loss_avoided",
-        "Spend vs. Loss Avoided by Category", use_time=False))
+        "Spend vs. Loss Avoided by Category"))
 
     d.add_viz("viz_loss_trend", viz_chart("column", "Fraud Loss vs. Recoveries by Month", "ds_loss_trend", stacked=True), 0, d.y, 710, 280)
     d.add_viz("viz_spend_roi_cat", viz_chart("bar", "Security Spend vs. Estimated Loss Avoided by Category", "ds_spend_roi_cat"), 722, d.y, 718, 280)
@@ -367,18 +393,18 @@ def build_cfo():
     d.add_ds("ds_financial_trend", ds_search(
         "| inputlookup company_financials.csv "
         "| table quarter, revenue_usd, net_income_usd, it_budget_usd, cyber_insurance_premium_usd | sort quarter",
-        "Revenue / Net Income / IT Budget Trend", use_time=False))
+        "Revenue / Net Income / IT Budget Trend (full history, not time-picker scoped)", use_time=False))
     d.add_viz("viz_financial_trend", viz_chart("line", "Revenue, Net Income & IT Budget by Quarter (financial-KPI baseline)", "ds_financial_trend"),
                0, d.y, 1440, 280)
     d.y += 292
 
     d.add_ds("ds_channel", ds_search(
-        f"| inputlookup fraud_transactions.csv | {bu_filter} AND is_fraud=\"Y\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| {bu_filter} AND is_fraud=\"Y\" "
         "| eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by channel "
         "| sort -net_loss",
         "Fraud Loss by Channel"))
     d.add_ds("ds_fraud_type", ds_search(
-        f"| inputlookup fraud_transactions.csv | {bu_filter} AND is_fraud=\"Y\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| {bu_filter} AND is_fraud=\"Y\" "
         "| eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss count as fraud_cases by fraud_type "
         "| sort -net_loss",
         "Fraud Loss by Fraud Type"))
@@ -391,7 +417,8 @@ def build_cfo():
     d.y += 312
 
     d.add_ds("ds_raw_txn", ds_search(
-        "| inputlookup fraud_transactions.csv | where is_fraud=\"Y\" AND channel=\"$sel_channel$\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}"
+        "| where is_fraud=\"Y\" AND channel=\"$sel_channel$\" "
         "AND (fraud_type=\"$sel_fraud_type$\" OR \"$sel_fraud_type$\"=\"\") "
         "| sort -date | table transaction_id, date, business_unit, channel, fraud_type, detection_method, "
         "amount_usd, loss_amount_usd, recovered_amount_usd, status",
@@ -404,7 +431,9 @@ def build_cfo():
         "**Drill-down path:** Fraud Loss / ROI tiles (top row) -> Channel or Fraud Type breakdown (click a "
         "slice/bar) -> individual flagged transaction (bottom table). Each `transaction_id` corresponds to the "
         "SOC alert / incident record that first flagged it (cross-reference via `business_unit` and `date` on "
-        "the CIO dashboard)."
+        "the CIO dashboard). Every panel above respects the Time Range picker (transactions filtered on their own "
+        "date, spend/ROI filtered on each quarter's start date) except the quarterly financial baseline, which "
+        "intentionally always shows full history for context."
     ), 0, d.y, 1440, 110)
     d.y += 110
 
@@ -427,22 +456,23 @@ def build_coo():
     bu_filter = 'where business_unit=$tok_bu$ OR "$tok_bu$"="*"'
 
     d.add_ds("ds_avg_uptime", ds_search(
-        f"| inputlookup uptime_availability.csv | {bu_filter} | stats avg(uptime_pct) as avg_uptime "
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}| {bu_filter} | stats avg(uptime_pct) as avg_uptime "
         "| eval avg_uptime=round(avg_uptime,3)", "Average Availability"))
     d.add_ds("ds_cust_outages", ds_search(
-        f"| inputlookup uptime_availability.csv | {bu_filter} AND customer_impact=\"Y\" | stats count as outages",
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}"
+        f"| {bu_filter} AND customer_impact=\"Y\" | stats count as outages",
         "Customer-Impacting Outages"))
     d.add_ds("ds_mttd", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} | stats avg(mttd_hours) as mttd | eval mttd=round(mttd,1)",
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} | stats avg(mttd_hours) as mttd | eval mttd=round(mttd,1)",
         "Mean Time to Detect"))
     d.add_ds("ds_mttr", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} | stats avg(mttr_hours) as mttr | eval mttr=round(mttr,1)",
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} | stats avg(mttr_hours) as mttr | eval mttr=round(mttr,1)",
         "Mean Time to Respond"))
     d.add_ds("ds_backlog", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} AND status!=\"Resolved\" | stats count as backlog",
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} AND status!=\"Resolved\" | stats count as backlog",
         "Open Incident Backlog"))
     d.add_ds("ds_outage_cost", ds_search(
-        "| inputlookup uptime_availability.csv | where customer_impact=\"Y\" "
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}| where customer_impact=\"Y\" "
         "| stats sum(downtime_minutes) as downtime_minutes "
         "| eval estimated_revenue_at_risk=round(downtime_minutes*1850,0) | table estimated_revenue_at_risk",
         "Estimated Revenue at Risk from Downtime"))
@@ -461,11 +491,11 @@ def build_coo():
     d.y = 160
 
     d.add_ds("ds_uptime_trend", ds_search(
-        f"| inputlookup uptime_availability.csv | {bu_filter} "
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}| {bu_filter} "
         "| stats avg(uptime_pct) as avg_uptime avg(sla_target_pct) as sla_target by week_start | sort week_start",
         "Weekly Availability Trend"))
     d.add_ds("ds_backlog_trend", ds_search(
-        f"| inputlookup security_incidents.csv | {bu_filter} "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| {bu_filter} "
         "| eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats count by month, severity",
         "Incident Backlog Trend"))
     d.add_viz("viz_uptime_trend", viz_chart("line", "Weekly Availability vs. SLA Target", "ds_uptime_trend"), 0, d.y, 710, 280)
@@ -473,7 +503,7 @@ def build_coo():
     d.y += 292
 
     d.add_ds("ds_downtime_bu", ds_search(
-        f"| inputlookup uptime_availability.csv | {bu_filter} "
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}| {bu_filter} "
         "| stats sum(downtime_minutes) as downtime_minutes count(eval(customer_impact=\"Y\")) as customer_impacting_events by business_unit "
         "| sort -downtime_minutes",
         "Downtime by Business Unit"))
@@ -488,7 +518,7 @@ def build_coo():
     d.y += 312
 
     d.add_ds("ds_sys_downtime", ds_search(
-        "| inputlookup uptime_availability.csv | where business_unit=\"$sel_bu$\" "
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}| where business_unit=\"$sel_bu$\" "
         "| stats sum(downtime_minutes) as downtime_minutes avg(uptime_pct) as avg_uptime by system | sort -downtime_minutes",
         "Systems by Downtime"))
     d.add_viz("viz_sys_downtime", viz_chart("bar", "Systems in $sel_bu$ by Downtime (click a bar to drill in)", "ds_sys_downtime",
@@ -497,12 +527,14 @@ def build_coo():
     d.y += 312
 
     d.add_ds("ds_outage_weeks", ds_search(
-        "| inputlookup uptime_availability.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}"
+        "| where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
         "AND outage_cause!=\"\" | sort -week_start | table week_start, system, uptime_pct, sla_target_pct, "
         "downtime_minutes, outage_cause, customer_impact",
         "Raw Outage Weeks"))
     d.add_ds("ds_related_incidents", ds_search(
-        "| inputlookup security_incidents.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
+        f"| inputlookup security_incidents.csv {ev_time('date')}"
+        "| where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
         "| sort -date | table incident_id, date, severity, category, mttd_hours, mttr_hours, status, root_cause",
         "Related Security Incidents"))
     d.add_viz("viz_outage_weeks", viz_table("Outage Weeks — $sel_bu$ $sel_sys$", "ds_outage_weeks"), 0, d.y, 710, 320, visibility="$sel_bu$")
@@ -514,7 +546,9 @@ def build_coo():
         "**Drill-down path:** Availability / MTTD-MTTR tiles (top row) -> Business Unit downtime (click a bar) "
         "-> System within that unit (click a bar) -> raw outage weeks and the incident records that caused them "
         "(bottom tables). `system` and `business_unit` join directly to the CIO dashboard's SOC alert and "
-        "vulnerability data for full technical root-cause detail."
+        "vulnerability data for full technical root-cause detail. Every panel above respects the Time Range "
+        "picker (derived from each row's own week/date), except the vendor operational risk table, which is a "
+        "point-in-time snapshot."
     ), 0, d.y, 1440, 110)
     d.y += 110
 
@@ -537,25 +571,27 @@ def build_cio():
     bu_filter = 'where business_unit=$tok_bu$ OR "$tok_bu$"="*"'
 
     d.add_ds("ds_open_vulns", ds_search(
-        f"| inputlookup vulnerability_scans.csv | {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
+        f"| inputlookup vulnerability_scans.csv {ev_time('date', '%Y-%m-%d')}"
+        f"| {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
         "AND patch_status!=\"Patched\" | stats count as open_vulns", "Open Critical/High Vulns"))
     d.add_ds("ds_patch_rate", ds_search(
-        f"| inputlookup vulnerability_scans.csv | {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
+        f"| inputlookup vulnerability_scans.csv {ev_time('date', '%Y-%m-%d')}"
+        f"| {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
         "| stats count(eval(patch_status=\"Patched\")) as patched count as total "
         "| eval pct=round((patched/total)*100,1) | table pct", "Patch Compliance Rate"))
     d.add_ds("ds_alerts_total", ds_search(
-        f"| inputlookup soc_alerts.csv | {bu_filter} | stats count as total_alerts", "SOC Alerts Triaged"))
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}| {bu_filter} | stats count as total_alerts", "SOC Alerts Triaged"))
     d.add_ds("ds_tp_rate", ds_search(
-        f"| inputlookup soc_alerts.csv | {bu_filter} | stats count(eval(disposition=\"True Positive\")) as tp count as total "
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}| {bu_filter} | stats count(eval(disposition=\"True Positive\")) as tp count as total "
         "| eval pct=round((tp/total)*100,1) | table pct", "True Positive Rate"))
     d.add_ds("ds_triage_time", ds_search(
-        f"| inputlookup soc_alerts.csv | {bu_filter} | stats avg(triage_time_minutes) as avg_triage "
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}| {bu_filter} | stats avg(triage_time_minutes) as avg_triage "
         "| eval avg_triage=round(avg_triage,1)", "Avg Triage Time"))
     d.add_ds("ds_spend_pct_itbudget", ds_search(
-        "| inputlookup security_spend.csv | stats sum(actual_spend_usd) as spend "
-        "| appendcols [ | inputlookup company_financials.csv | stats sum(it_budget_usd) as it_budget ] "
+        f"| inputlookup security_spend.csv {qtr_time()}| stats sum(actual_spend_usd) as spend "
+        f"| appendcols [ | inputlookup company_financials.csv {qtr_time()}| stats sum(it_budget_usd) as it_budget ] "
         "| eval pct=round((spend/it_budget)*100,1) | table pct",
-        "Security Spend as % of IT Budget", use_time=False))
+        "Security Spend as % of IT Budget"))
 
     row1 = [("ds_open_vulns", "Open Critical/High Vulnerabilities", None, [40, 100], "0"),
             ("ds_patch_rate", "Patch Compliance Rate", "%", [60, 80], "0.0"),
@@ -570,23 +606,24 @@ def build_cio():
     d.y = 160
 
     d.add_ds("ds_alert_trend", ds_search(
-        f"| inputlookup soc_alerts.csv | {bu_filter} "
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}| {bu_filter} "
         "| eval month=strftime(strptime(timestamp,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats count by month, severity | sort month",
         "SOC Alert Volume Trend"))
     d.add_ds("ds_mitre", ds_search(
-        f"| inputlookup soc_alerts.csv | {bu_filter} AND disposition=\"True Positive\" | stats count by mitre_tactic | sort -count",
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}| {bu_filter} AND disposition=\"True Positive\" | stats count by mitre_tactic | sort -count",
         "True Positives by MITRE Tactic"))
     d.add_viz("viz_alert_trend", viz_chart("column", "SOC Alert Volume by Severity Over Time", "ds_alert_trend", stacked=True), 0, d.y, 710, 280)
     d.add_viz("viz_mitre", viz_chart("bar", "True-Positive Alerts by MITRE ATT&CK Tactic", "ds_mitre"), 722, d.y, 718, 280)
     d.y += 292
 
     d.add_ds("ds_vulns_bu", ds_search(
-        f"| inputlookup vulnerability_scans.csv | {bu_filter} AND patch_status!=\"Patched\" "
+        f"| inputlookup vulnerability_scans.csv {ev_time('date', '%Y-%m-%d')}"
+        f"| {bu_filter} AND patch_status!=\"Patched\" "
         "| stats count as open_vulns count(eval(severity=\"Critical\" OR severity=\"High\")) as critical_high by business_unit "
         "| sort -open_vulns",
         "Open Vulnerabilities by Business Unit"))
     d.add_ds("ds_alerts_bu", ds_search(
-        f"| inputlookup soc_alerts.csv | {bu_filter} "
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}| {bu_filter} "
         "| stats count as alerts count(eval(disposition=\"True Positive\")) as true_positives by business_unit | sort -alerts",
         "SOC Alerts by Business Unit"))
     d.add_viz("viz_vulns_bu", viz_chart("bar", "Open Vulnerabilities by Business Unit (click a bar to drill in)", "ds_vulns_bu",
@@ -596,7 +633,8 @@ def build_cio():
     d.y += 312
 
     d.add_ds("ds_vulns_sys", ds_search(
-        "| inputlookup vulnerability_scans.csv | where business_unit=\"$sel_bu$\" AND patch_status!=\"Patched\" "
+        f"| inputlookup vulnerability_scans.csv {ev_time('date', '%Y-%m-%d')}"
+        "| where business_unit=\"$sel_bu$\" AND patch_status!=\"Patched\" "
         "| stats count as open_vulns avg(cvss_score) as avg_cvss by system | sort -open_vulns",
         "Systems by Open Vulnerabilities"))
     d.add_viz("viz_vulns_sys", viz_chart("bar", "Systems in $sel_bu$ by Open Vulnerabilities (click a bar to drill in)", "ds_vulns_sys",
@@ -605,12 +643,14 @@ def build_cio():
     d.y += 312
 
     d.add_ds("ds_raw_vulns", ds_search(
-        "| inputlookup vulnerability_scans.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
+        f"| inputlookup vulnerability_scans.csv {ev_time('date', '%Y-%m-%d')}"
+        "| where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
         "AND patch_status!=\"Patched\" | sort -cvss_score | table scan_id, date, asset, system, cve_id, cvss_score, "
         "severity, patch_status, days_open, exploit_available, asset_owner",
         "Raw Vulnerability Records"))
     d.add_ds("ds_raw_alerts", ds_search(
-        "| inputlookup soc_alerts.csv | where business_unit=\"$sel_bu$\" AND (source_system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
+        f"| inputlookup soc_alerts.csv {ev_time('timestamp')}"
+        "| where business_unit=\"$sel_bu$\" AND (source_system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") "
         "| sort -timestamp | table alert_id, timestamp, severity, source_system, mitre_tactic, analyst, disposition, "
         "triage_time_minutes, status",
         "Raw SOC Alert Records"))
@@ -624,7 +664,9 @@ def build_cio():
         "**Drill-down path:** Vulnerability / SOC KPI tiles (top row) -> Business Unit breakdown (click a bar) "
         "-> System/asset within that unit (click a bar) -> the individual CVE scan record or SOC alert (bottom "
         "tables) — the ground-truth technical events that ultimately roll up into the COO's MTTD/MTTR, the "
-        "CFO's fraud/spend ROI, and the CEO's enterprise risk score and cost-of-revenue metric."
+        "CFO's fraud/spend ROI, and the CEO's enterprise risk score and cost-of-revenue metric. Every panel "
+        "above respects the Time Range picker (vulns/alerts on their own date; spend and IT budget on each "
+        "quarter's start date)."
     ), 0, d.y, 1440, 110)
     d.y += 110
 
@@ -639,32 +681,35 @@ def build_overview():
     d = DashboardBuilder(
         "Executive Security KPI Program — Overview",
         "Landing page for the executive security KPI program. Every persona dashboard is built on the "
-        "same 8-table data model, so a KPI on any one of them can be traced down to the same raw event, "
+        "same 9-table data model, so a KPI on any one of them can be traced down to the same raw event, "
         "and every dashboard ties cyber posture back to revenue, net income, or IT budget.",
     )
+    d.add_input("input_time", input_time())
+
     d.add_ds("ds_impact_12mo", ds_search(
-        "| inputlookup security_incidents.csv | stats sum(financial_impact_usd) as total_impact",
-        "Financial Impact (12mo)"))
+        f"| inputlookup security_incidents.csv {ev_time('date')}| stats sum(financial_impact_usd) as total_impact",
+        "Financial Impact (selected period)"))
     d.add_ds("ds_fraud_12mo", ds_search(
-        "| inputlookup fraud_transactions.csv | where is_fraud=\"Y\" "
+        f"| inputlookup fraud_transactions.csv {ev_time('date')}| where is_fraud=\"Y\" "
         "| eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as net_loss",
-        "Net Fraud Loss (12mo)"))
+        "Net Fraud Loss (selected period)"))
     d.add_ds("ds_uptime_12mo", ds_search(
-        "| inputlookup uptime_availability.csv | stats avg(uptime_pct) as avg_uptime | eval avg_uptime=round(avg_uptime,3)",
-        "Avg Availability (12mo)"))
+        f"| inputlookup uptime_availability.csv {ev_time('week_start', '%Y-%m-%d')}"
+        "| stats avg(uptime_pct) as avg_uptime | eval avg_uptime=round(avg_uptime,3)",
+        "Avg Availability (selected period)"))
     d.add_ds("ds_vulns_12mo", ds_search(
         "| inputlookup vulnerability_scans.csv | where (severity=\"Critical\" OR severity=\"High\") AND patch_status!=\"Patched\" "
-        "| stats count as open_vulns", "Open Critical/High Vulns", use_time=False))
+        "| stats count as open_vulns", "Open Critical/High Vulns (current, not time-picker scoped)", use_time=False))
     d.add_ds("ds_cyber_cost_pct_rev", ds_search(
-        "| inputlookup security_incidents.csv | stats sum(financial_impact_usd) as impact "
-        "| appendcols [ | inputlookup fraud_transactions.csv | where is_fraud=\"Y\" "
+        f"| inputlookup security_incidents.csv {ev_time('date')}| stats sum(financial_impact_usd) as impact "
+        f"| appendcols [ | inputlookup fraud_transactions.csv {ev_time('date')}| where is_fraud=\"Y\" "
         "| eval net_loss=loss_amount_usd-recovered_amount_usd | stats sum(net_loss) as fraud_loss ] "
-        "| appendcols [ | inputlookup company_financials.csv | stats sum(revenue_usd) as revenue ] "
+        f"| appendcols [ | inputlookup company_financials.csv {qtr_time()}| stats sum(revenue_usd) as revenue ] "
         "| eval total_cyber_cost=impact+fraud_loss, pct_of_revenue=round((total_cyber_cost/revenue)*100,2) "
-        "| table total_cyber_cost, pct_of_revenue", "Total Cyber Cost as % of Revenue", use_time=False))
+        "| table total_cyber_cost, pct_of_revenue", "Total Cyber Cost as % of Revenue"))
 
-    row1 = [("ds_impact_12mo", "Financial Impact of Security Incidents (12mo)", "$"),
-            ("ds_fraud_12mo", "Net Fraud Loss (12mo)", "$"),
+    row1 = [("ds_impact_12mo", "Financial Impact of Security Incidents (selected period)", "$"),
+            ("ds_fraud_12mo", "Net Fraud Loss (selected period)", "$"),
             ("ds_uptime_12mo", "Avg. Customer-Facing System Availability", "%"),
             ("ds_vulns_12mo", "Open Critical/High Vulnerabilities", None)]
     xs = d.row_of(row1, 0, 150)
@@ -672,7 +717,7 @@ def build_overview():
         d.add_viz(f"viz_{ds_id}", viz_singlevalue(title, ds_id, unit=unit, unit_position="before" if unit == "$" else "after"), x, 0, w, 150)
     d.y = 160
 
-    d.add_viz("viz_cyber_cost_pct_rev", viz_table("Total Cyber Cost (incidents + fraud) as % of Annual Revenue — "
+    d.add_viz("viz_cyber_cost_pct_rev", viz_table("Total Cyber Cost (incidents + fraud) as % of Revenue, Selected Period — "
                                                     "the single number that ties this whole program to the P&L",
                                                     "ds_cyber_cost_pct_rev"), 0, d.y, 1440, 150)
     d.y += 162
@@ -700,7 +745,9 @@ def build_overview():
         "5. **Cross-dashboard join** — `business_unit` and `system` are shared keys across all 9 datasets, so a "
         "CEO-level incident can be traced to the CIO's SOC alert and vulnerability scan that caused it, or the "
         "CFO's fraud loss it produced — and `company_financials.csv` ties the whole chain back to revenue, net "
-        "income, and IT budget."
+        "income, and IT budget. Every KPI here reacts to the Time Range picker above (each row's own date is "
+        "filtered explicitly, since `inputlookup` results have no `_time` field for Splunk to auto-filter), "
+        "except the point-in-time open-vulnerability count."
     ), 0, d.y, 1440, 260)
     d.y += 260
 

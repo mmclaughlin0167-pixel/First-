@@ -214,7 +214,7 @@
     "viz_note": {
       "type": "splunk.markdown",
       "options": {
-        "markdown": "**Drill-down path:** Enterprise Risk Score / Cyber Cost % of Revenue (top row) -> Business Unit heatmap (click a bar) -> System within that unit (click a bar) -> individual incident record (bottom table). The same `incident_id` traces directly to the SOC alert and vulnerability that caused it on the CIO dashboard, and to the fraud loss it produced on the CFO dashboard."
+        "markdown": "**Drill-down path:** Enterprise Risk Score / Cyber Cost % of Revenue (top row) -> Business Unit heatmap (click a bar) -> System within that unit (click a bar) -> individual incident record (bottom table). The same `incident_id` traces directly to the SOC alert and vulnerability that caused it on the CIO dashboard, and to the fraud loss it produced on the CFO dashboard. Every panel above respects the Time Range picker (derived from each row's own date, since `inputlookup` results aren't auto-filtered by it) except the quarterly revenue trend, which intentionally always shows full history for context."
       }
     }
   },
@@ -222,7 +222,7 @@
     "ds_risk_score": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/25), 1) | table risk_score",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/25), 1) | table risk_score",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -233,7 +233,7 @@
     "ds_material": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND (severity=\"Critical\" OR severity=\"High\") | stats count as material_incidents",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND (severity=\"Critical\" OR severity=\"High\") | stats count as material_incidents",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -244,7 +244,7 @@
     "ds_customers": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(customers_affected) as customers_affected",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(customers_affected) as customers_affected",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -255,7 +255,7 @@
     "ds_impact": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(financial_impact_usd) as total_impact",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(financial_impact_usd) as total_impact",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -266,14 +266,18 @@
     "ds_cost_pct_revenue": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | eval quarter=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y\")+\"Q\"+tostring(ceil(tonumber(strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%m\"))/3)) | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(financial_impact_usd) as impact | appendcols [ | inputlookup company_financials.csv | stats sum(revenue_usd) as revenue ] | eval pct_of_revenue=round((impact/revenue)*100,3) | table pct_of_revenue"
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | stats sum(financial_impact_usd) as impact | appendcols [ | inputlookup company_financials.csv | eval _tfq=strptime(substr(quarter,1,4).\"-\".printf(\"%02d\",(tonumber(substr(quarter,6,1))-1)*3+1).\"-01\", \"%Y-%m-%d\") | where _tfq>=$tok_time.earliest$ AND _tfq<=$tok_time.latest$ | fields - _tfq | stats sum(revenue_usd) as revenue ] | eval pct_of_revenue=round((impact/revenue)*100,3) | table pct_of_revenue",
+        "queryParameters": {
+          "earliest": "$tok_time.earliest$",
+          "latest": "$tok_time.latest$"
+        }
       },
       "name": "Cyber Incident Cost as % of Revenue"
     },
     "ds_overdue": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup compliance_findings.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status=\"Overdue\" | stats count as overdue_findings",
+        "query": "| inputlookup compliance_findings.csv | eval _tf=strptime(date, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status=\"Overdue\" | stats count as overdue_findings",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -284,7 +288,7 @@
     "ds_trend": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats sum(financial_impact_usd) as financial_impact count(eval(severity=\"Critical\" OR severity=\"High\")) as material_incidents by month | sort month",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval month=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y-%m\") | stats sum(financial_impact_usd) as financial_impact count(eval(severity=\"Critical\" OR severity=\"High\")) as material_incidents by month | sort month",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -297,12 +301,12 @@
       "options": {
         "query": "| inputlookup company_financials.csv | join type=left quarter [ | inputlookup security_incidents.csv | eval quarter=strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%Y\")+\"Q\"+tostring(ceil(tonumber(strftime(strptime(date,\"%Y-%m-%d %H:%M:%S\"),\"%m\"))/3)) | stats sum(financial_impact_usd) as cyber_cost by quarter ] | eval cyber_cost=coalesce(cyber_cost,0), pct_of_revenue=round((cyber_cost/revenue_usd)*100,3) | table quarter, revenue_usd, cyber_cost, pct_of_revenue | sort quarter"
       },
-      "name": "Cyber Cost vs. Revenue by Quarter"
+      "name": "Cyber Cost vs. Revenue by Quarter (full history, not time-picker scoped)"
     },
     "ds_regfindings": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup compliance_findings.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status!=\"Remediated\" | chart count by framework, severity",
+        "query": "| inputlookup compliance_findings.csv | eval _tf=strptime(date, \"%Y-%m-%d\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" AND status!=\"Remediated\" | chart count by framework, severity",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -313,7 +317,7 @@
     "ds_bu_heatmap": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by business_unit | sort -risk_weight",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by business_unit | sort -risk_weight",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -331,7 +335,7 @@
     "ds_bu_systems": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=\"$sel_bu$\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by system | sort -risk_weight",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as risk_weight sum(financial_impact_usd) as financial_impact count as incidents by system | sort -risk_weight",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
@@ -342,7 +346,7 @@
     "ds_raw_incidents": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -date | table incident_id, date, severity, category, system, mitre_tactic, financial_impact_usd, records_exposed, regulatory_notification_required, status, root_cause",
+        "query": "| inputlookup security_incidents.csv | eval _tf=strptime(date, \"%Y-%m-%d %H:%M:%S\") | where _tf>=$tok_time.earliest$ AND _tf<=$tok_time.latest$ | fields - _tf | where business_unit=\"$sel_bu$\" AND (system=\"$sel_sys$\" OR \"$sel_sys$\"=\"\") | sort -date | table incident_id, date, severity, category, system, mitre_tactic, financial_impact_usd, records_exposed, regulatory_notification_required, status, root_cause",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"
