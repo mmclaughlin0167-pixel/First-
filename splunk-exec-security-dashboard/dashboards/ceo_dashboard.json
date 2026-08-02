@@ -79,8 +79,8 @@
         "useColors": true,
         "colorMode": "block",
         "rangeValues": [
-          0.3,
-          0.8
+          1,
+          3
         ],
         "rangeColors": [
           "#53a051",
@@ -222,7 +222,7 @@
     "ds_risk_score": {
       "type": "ds.search",
       "options": {
-        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/8), 1) | table risk_score",
+        "query": "| inputlookup security_incidents.csv | where business_unit=$tok_bu$ OR \"$tok_bu$\"=\"*\" | eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) | stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/25), 1) | table risk_score",
         "queryParameters": {
           "earliest": "$tok_time.earliest$",
           "latest": "$tok_time.latest$"

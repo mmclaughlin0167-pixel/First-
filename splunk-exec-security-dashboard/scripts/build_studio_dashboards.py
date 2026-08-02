@@ -184,7 +184,7 @@ def build_ceo():
     d.add_ds("ds_risk_score", ds_search(
         f"| inputlookup security_incidents.csv | {bu_filter} "
         "| eval sev_weight=case(severity=\"Critical\",40, severity=\"High\",15, severity=\"Medium\",4, severity=\"Low\",1) "
-        "| stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/8), 1) | table risk_score",
+        "| stats sum(sev_weight) as raw_score | eval risk_score=round(min(100, raw_score/25), 1) | table risk_score",
         "Enterprise Cyber Risk Score"))
     d.add_ds("ds_material", ds_search(
         f"| inputlookup security_incidents.csv | {bu_filter} AND (severity=\"Critical\" OR severity=\"High\") "
@@ -211,7 +211,7 @@ def build_ceo():
             ("ds_material", "Material Incidents (Critical+High)", None, [5, 15], "0"),
             ("ds_customers", "Customers Impacted", None, None, "0"),
             ("ds_impact", "Total Financial Impact", "$", None, "0"),
-            ("ds_cost_pct_revenue", "Cyber Cost as % of Revenue", "%", [0.3, 0.8], "0.00"),
+            ("ds_cost_pct_revenue", "Cyber Cost as % of Revenue", "%", [1, 3], "0.00"),
             ("ds_overdue", "Overdue Regulatory Findings", None, [1, 5], "0")]
     xs = d.row_of(row1, 0, 150)
     for (ds_id, title, unit, rng, prec), (x, w) in zip(row1, xs):

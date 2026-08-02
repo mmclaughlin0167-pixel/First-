@@ -20,10 +20,52 @@ splunk-exec-security-dashboard/
 ├── data/                              # 9 sample CSV datasets (Splunk lookups)
 ├── scripts/
 │   ├── generate_sample_data.py        # regenerates the CSVs deterministically
-│   └── build_studio_dashboards.py     # regenerates the Dashboard Studio JSON
+│   ├── build_studio_dashboards.py     # regenerates the Dashboard Studio JSON
+│   ├── build_preview_data.py          # precomputes KPI/trend/drill-down data for the mobile preview
+│   └── preview_template.html          # source template for mobile_preview.html (has a data placeholder)
 ├── dashboards/                        # 4 persona dashboards + 1 landing page (Dashboard Studio JSON)
+├── mobile_preview.html                # standalone, click-through preview — no Splunk required, open in any browser
 └── README.md
 ```
+
+### Mobile / no-Splunk preview
+
+`mobile_preview.html` is a self-contained page (data embedded inline, no
+build step, no server) that mirrors what the four dashboards show and
+let you click through the same drill-down chain — useful for reviewing
+on a phone or sharing before anyone touches Splunk. Regenerate it after
+changing the data or the KPI logic:
+
+```bash
+cd scripts
+python3 build_preview_data.py          # writes ../dashboards/preview_data.json
+python3 - <<'EOF'
+template = open('preview_template.html').read()
+data = open('../dashboards/preview_data.json').read()
+open('../mobile_preview.html', 'w').write(template.replace('__PREVIEW_DATA_JSON__', data))
+EOF
+```
+
+Two scaling issues were caught while validating this preview's numbers
+against realistic magnitudes, and are fixed in both `build_preview_data.py`
+and `build_studio_dashboards.py`: the CEO risk-score formula was saturating
+at 100 given this dataset's incident volume (too-small divisor), and the
+CEO's "Cyber Cost as % of Revenue" KPI's color thresholds assumed a much
+smaller percentage than this dataset actually produces.
+
+**Known limitation carried by both the preview and the real dashboards:**
+Splunk's dashboard Time Range picker only auto-filters searches against
+indexed events with a real `_time` field. Every panel here reads from
+`| inputlookup <file>.csv` instead, and the lookups' date/timestamp columns
+are plain fields, not `_time` — so in a live Splunk instance, the Time Range
+input will **not** actually narrow most of these panels to "trailing 12
+months"; they'll show the full ~2-year sample regardless of the range
+selected. The mobile preview computes its trailing-12-month figures
+correctly in Python since it isn't bound by that Splunk behavior, but the
+real dashboards would need each query updated to derive a real time field
+(e.g. `| eval _time=strptime(date, "%Y-%m-%d %H:%M:%S")`) before the Time
+Range input will do anything. Flagging this rather than silently patching
+every query, since it touches every panel across all four dashboards.
 
 ## 1. The data model
 
