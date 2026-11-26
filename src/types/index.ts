@@ -8,11 +8,27 @@ export type MuscleGroup =
   | 'Cardio'
   | 'Full Body'
 
+export type Equipment =
+  | 'bodyweight'
+  | 'dumbbell'
+  | 'band'
+  | 'bench'
+  | 'barbell'
+  | 'kettlebell'
+  | 'cable'
+  | 'machine'
+  | 'plate'
+  | 'cardio-machine'
+  | 'other'
+
+export type WorkoutLocation = 'home' | 'gym'
+
 export interface Exercise {
   id: string
   name: string
   muscleGroup: MuscleGroup
   isCustom: boolean
+  equipment: Equipment[]
 }
 
 export interface SetEntry {

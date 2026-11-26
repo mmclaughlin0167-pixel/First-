@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import {
@@ -12,6 +12,8 @@ import {
   FolderOpen,
   X,
   Trophy,
+  Home,
+  Dumbbell,
 } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card } from '../components/ui'
@@ -19,7 +21,10 @@ import { ConfirmDialog } from '../components/ConfirmDialog'
 import { RestTimer } from '../components/RestTimer'
 import { formatDuration } from '../lib/time'
 import { checkForNewPR } from '../lib/prs'
-import type { SetEntry, WorkoutExercise } from '../types'
+import { LOCATION_LABEL, matchesLocation } from '../lib/equipment'
+import type { SetEntry, WorkoutExercise, WorkoutLocation } from '../types'
+
+const LOCATIONS: WorkoutLocation[] = ['home', 'gym']
 
 function todayISO() {
   return new Date().toISOString().slice(0, 10)
@@ -35,8 +40,16 @@ function blankSet(seed?: Partial<SetEntry>): SetEntry {
 }
 
 export function LogWorkout() {
-  const { exercises, sessions, templates, addSession, updateSession, addTemplate } =
-    useWorkoutData()
+  const {
+    exercises,
+    sessions,
+    templates,
+    addSession,
+    updateSession,
+    addTemplate,
+    workoutLocation,
+    setWorkoutLocation,
+  } = useWorkoutData()
   const navigate = useNavigate()
   const { sessionId } = useParams<{ sessionId?: string }>()
   const editingSession = sessionId ? sessions.find((s) => s.id === sessionId) : undefined
@@ -61,6 +74,18 @@ export function LogWorkout() {
     null,
   )
   const prTimeoutRef = useRef<number | null>(null)
+
+  const availableExercises = useMemo(
+    () => exercises.filter((ex) => matchesLocation(ex, workoutLocation)),
+    [exercises, workoutLocation],
+  )
+
+  useEffect(() => {
+    if (availableExercises.length === 0) return
+    if (!availableExercises.some((ex) => ex.id === selectedExerciseId)) {
+      setSelectedExerciseId(availableExercises[0].id)
+    }
+  }, [availableExercises, selectedExerciseId])
 
   useEffect(() => {
     if (!timerRunning) return
@@ -338,22 +363,52 @@ export function LogWorkout() {
       )}
 
       <Card>
+        <div className="mb-3 flex items-center justify-between">
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400">Add exercise</label>
+          <div className="flex gap-1 rounded-lg bg-slate-200 p-1 dark:bg-slate-800">
+            {LOCATIONS.map((loc) => (
+              <button
+                key={loc}
+                type="button"
+                onClick={() => setWorkoutLocation(loc)}
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
+                  workoutLocation === loc
+                    ? 'bg-emerald-500 text-slate-950'
+                    : 'text-slate-600 hover:bg-slate-300 dark:text-slate-300 dark:hover:bg-slate-700'
+                }`}
+              >
+                {loc === 'home' ? <Home size={14} /> : <Dumbbell size={14} />}
+                {LOCATION_LABEL[loc]}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Add exercise</label>
-            <select
-              value={selectedExerciseId}
-              onChange={(e) => setSelectedExerciseId(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
-            >
-              {exercises.map((ex) => (
-                <option key={ex.id} value={ex.id}>
-                  {ex.name} ({ex.muscleGroup})
-                </option>
-              ))}
-            </select>
+            {availableExercises.length === 0 ? (
+              <p className="rounded-lg border border-dashed border-slate-300 px-3 py-2 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
+                No exercises match {LOCATION_LABEL[workoutLocation]} equipment yet.
+              </p>
+            ) : (
+              <select
+                value={selectedExerciseId}
+                onChange={(e) => setSelectedExerciseId(e.target.value)}
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
+              >
+                {availableExercises.map((ex) => (
+                  <option key={ex.id} value={ex.id}>
+                    {ex.name} ({ex.muscleGroup})
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
-          <Button type="button" onClick={addExerciseToWorkout} icon={<Plus size={16} />}>
+          <Button
+            type="button"
+            onClick={addExerciseToWorkout}
+            disabled={availableExercises.length === 0}
+            icon={<Plus size={16} />}
+          >
             Add to Workout
           </Button>
         </div>

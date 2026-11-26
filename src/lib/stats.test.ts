@@ -41,7 +41,7 @@ function makeSession(date: string, exercises: WorkoutExercise[] = [], overrides:
 }
 
 function makeExerciseDef(id: string, muscleGroup: Exercise['muscleGroup']): Exercise {
-  return { id, name: id, muscleGroup, isCustom: false }
+  return { id, name: id, muscleGroup, isCustom: false, equipment: ['other'] }
 }
 
 describe('calculateAge', () => {

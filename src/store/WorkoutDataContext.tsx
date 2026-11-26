@@ -3,7 +3,9 @@ import { v4 as uuid } from 'uuid'
 import type {
   BodyLogEntry,
   BodyProfile,
+  Equipment,
   Exercise,
+  WorkoutLocation,
   WorkoutSession,
   WorkoutTemplate,
 } from '../types'
@@ -25,8 +27,10 @@ export interface BackupData {
 interface WorkoutDataContextValue {
   exercises: Exercise[]
   sessions: WorkoutSession[]
-  addExercise: (name: string, muscleGroup: Exercise['muscleGroup']) => Exercise
+  addExercise: (name: string, muscleGroup: Exercise['muscleGroup'], equipment: Equipment[]) => Exercise
   deleteExercise: (id: string) => void
+  workoutLocation: WorkoutLocation
+  setWorkoutLocation: (location: WorkoutLocation) => void
   addSession: (session: Omit<WorkoutSession, 'id'>) => WorkoutSession
   updateSession: (session: WorkoutSession) => void
   deleteSession: (id: string) => void
@@ -65,12 +69,22 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
     'workout-tracker:templates',
     [],
   )
+  const [workoutLocation, setWorkoutLocation] = useLocalStorageState<WorkoutLocation>(
+    'workout-tracker:location',
+    'gym',
+  )
 
   useEffect(() => {
     setExercises((prev) => {
+      const byName = new Map(DEFAULT_EXERCISES.map((e) => [e.name.toLowerCase(), e]))
       const existingNames = new Set(prev.map((e) => e.name.toLowerCase()))
       const missing = DEFAULT_EXERCISES.filter((e) => !existingNames.has(e.name.toLowerCase()))
-      return missing.length === 0 ? prev : [...prev, ...missing]
+      const backfilled = prev.map((e) =>
+        e.equipment && e.equipment.length > 0
+          ? e
+          : { ...e, equipment: byName.get(e.name.toLowerCase())?.equipment ?? (['other'] as Equipment[]) },
+      )
+      return missing.length === 0 ? backfilled : [...backfilled, ...missing]
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -79,14 +93,16 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
     () => ({
       exercises,
       sessions,
-      addExercise: (name, muscleGroup) => {
-        const exercise: Exercise = { id: uuid(), name, muscleGroup, isCustom: true }
+      addExercise: (name, muscleGroup, equipment) => {
+        const exercise: Exercise = { id: uuid(), name, muscleGroup, isCustom: true, equipment }
         setExercises((prev) => [...prev, exercise])
         return exercise
       },
       deleteExercise: (id) => {
         setExercises((prev) => prev.filter((e) => e.id !== id))
       },
+      workoutLocation,
+      setWorkoutLocation: (location) => setWorkoutLocation(location),
       addSession: (session) => {
         const newSession: WorkoutSession = { ...session, id: uuid() }
         setSessions((prev) =>
@@ -150,6 +166,8 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
       setBodyLogs,
       templates,
       setTemplates,
+      workoutLocation,
+      setWorkoutLocation,
     ],
   )
 
