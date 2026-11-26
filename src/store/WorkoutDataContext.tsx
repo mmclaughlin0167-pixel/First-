@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react'
 import { v4 as uuid } from 'uuid'
 import type {
   BodyLogEntry,
@@ -65,6 +65,15 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
     'workout-tracker:templates',
     [],
   )
+
+  useEffect(() => {
+    setExercises((prev) => {
+      const existingNames = new Set(prev.map((e) => e.name.toLowerCase()))
+      const missing = DEFAULT_EXERCISES.filter((e) => !existingNames.has(e.name.toLowerCase()))
+      return missing.length === 0 ? prev : [...prev, ...missing]
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const value = useMemo<WorkoutDataContextValue>(
     () => ({
