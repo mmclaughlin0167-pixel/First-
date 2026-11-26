@@ -55,27 +55,27 @@ export function ExercisesPage() {
       />
 
       <div>
-        <h2 className="text-2xl font-semibold text-slate-100">Exercise Library</h2>
-        <p className="text-sm text-slate-400">Manage the exercises you can log in your workouts.</p>
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Exercise Library</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Manage the exercises you can log in your workouts.</p>
       </div>
 
       <Card>
         <form onSubmit={handleAdd} className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="mb-1 block text-xs font-medium text-slate-400">Exercise name</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Exercise name</label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Cable Fly"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-400">Muscle group</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Muscle group</label>
             <select
               value={muscleGroup}
               onChange={(e) => setMuscleGroup(e.target.value as MuscleGroup)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
             >
               {MUSCLE_GROUPS.map((g) => (
                 <option key={g} value={g}>
@@ -98,7 +98,7 @@ export function ExercisesPage() {
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               filter === g
                 ? 'bg-emerald-500 text-slate-950'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700'
             }`}
           >
             {g}
@@ -110,8 +110,8 @@ export function ExercisesPage() {
         {filtered.map((exercise) => (
           <Card key={exercise.id} className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-slate-100">{exercise.name}</p>
-              <p className="text-xs text-slate-400">{exercise.muscleGroup}</p>
+              <p className="font-medium text-slate-900 dark:text-slate-100">{exercise.name}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{exercise.muscleGroup}</p>
             </div>
             {exercise.isCustom && (
               <button
@@ -122,7 +122,7 @@ export function ExercisesPage() {
                     ? 'Cannot delete — used in a logged workout'
                     : 'Delete exercise'
                 }
-                className="rounded-lg p-2 text-slate-500 hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
+                className="rounded-lg p-2 text-slate-600 dark:text-slate-500 hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
               >
                 <Trash2 size={16} />
               </button>

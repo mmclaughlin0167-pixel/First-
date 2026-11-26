@@ -82,7 +82,7 @@ export function RestTimer({ autoStart = false }: RestTimerProps) {
   return (
     <Card className="bg-emerald-500/5 ring-1 ring-emerald-500/30">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-slate-300">Rest Timer</h3>
+        <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">Rest Timer</h3>
         <div className="flex gap-1">
           {PRESETS.map((p) => (
             <button
@@ -91,7 +91,7 @@ export function RestTimer({ autoStart = false }: RestTimerProps) {
               className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors ${
                 duration === p
                   ? 'bg-emerald-500 text-slate-950'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700'
               }`}
             >
               {p}s
@@ -102,21 +102,21 @@ export function RestTimer({ autoStart = false }: RestTimerProps) {
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={() => adjust(-ADJUST_STEP)}
-          className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+          className="rounded-lg p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
           aria-label="Decrease rest duration"
         >
           <Minus size={18} />
         </button>
         <div
           className={`w-28 text-center text-4xl font-bold tabular-nums ${
-            remaining === 0 ? 'text-red-400' : 'text-slate-100'
+            remaining === 0 ? 'text-red-600 dark:text-red-400' : 'text-slate-900 dark:text-slate-100'
           }`}
         >
           {formatDuration(remaining)}
         </div>
         <button
           onClick={() => adjust(ADJUST_STEP)}
-          className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+          className="rounded-lg p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
           aria-label="Increase rest duration"
         >
           <Plus size={18} />

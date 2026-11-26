@@ -249,19 +249,19 @@ export function LogWorkout() {
       {prCelebration && (
         <div className="flex items-center justify-between rounded-xl bg-amber-500/10 px-4 py-3 ring-1 ring-amber-500/30">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-amber-500/20 p-2 text-amber-400">
+            <div className="rounded-lg bg-amber-500/20 p-2 text-amber-600 dark:text-amber-400">
               <Trophy size={18} />
             </div>
             <div>
-              <p className="font-semibold text-slate-100">
+              <p className="font-semibold text-slate-900 dark:text-slate-100">
                 Personal Record! {prCelebration.exerciseName}
               </p>
-              <p className="text-xs text-slate-400">{prCelebration.messages.join(' · ')}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{prCelebration.messages.join(' · ')}</p>
             </div>
           </div>
           <button
             onClick={() => setPrCelebration(null)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-800 hover:text-slate-100"
+            className="rounded-lg p-1.5 text-slate-600 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
           >
             <X size={16} />
           </button>
@@ -270,22 +270,22 @@ export function LogWorkout() {
 
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold text-slate-100">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
             {isEditing ? 'Edit Workout' : 'Log Workout'}
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             {isEditing ? 'Update a previously logged session.' : "Record today's session, set by set."}
           </p>
         </div>
         {!isEditing && (
-          <div className="flex items-center gap-3 rounded-lg bg-slate-900/60 px-4 py-2 ring-1 ring-slate-800">
-            <Timer size={18} className="text-emerald-400" />
-            <span className="text-lg font-semibold tabular-nums text-slate-100">
+          <div className="flex items-center gap-3 rounded-lg bg-white dark:bg-slate-900/60 px-4 py-2 ring-1 ring-slate-200 dark:ring-slate-800">
+            <Timer size={18} className="text-emerald-600 dark:text-emerald-400" />
+            <span className="text-lg font-semibold tabular-nums text-slate-900 dark:text-slate-100">
               {formatDuration(elapsedSec)}
             </span>
             <button
               onClick={() => setTimerRunning((r) => !r)}
-              className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+              className="rounded-lg p-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
               aria-label={timerRunning ? 'Pause workout timer' : 'Resume workout timer'}
             >
               {timerRunning ? <Pause size={16} /> : <Play size={16} />}
@@ -296,21 +296,21 @@ export function LogWorkout() {
 
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
-          <label className="mb-1 block text-xs font-medium text-slate-400">Workout name</label>
+          <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Workout name</label>
           <input
             value={workoutName}
             onChange={(e) => setWorkoutName(e.target.value)}
             placeholder="e.g. Push Day"
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-slate-400">Date</label>
+          <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Date</label>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
           />
         </div>
       </Card>
@@ -318,11 +318,11 @@ export function LogWorkout() {
       {!isEditing && templates.length > 0 && (
         <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="mb-1 block text-xs font-medium text-slate-400">Start from template</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Start from template</label>
             <select
               value={selectedTemplateId}
               onChange={(e) => setSelectedTemplateId(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
             >
               {templates.map((t) => (
                 <option key={t.id} value={t.id}>
@@ -340,11 +340,11 @@ export function LogWorkout() {
       <Card>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="mb-1 block text-xs font-medium text-slate-400">Add exercise</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Add exercise</label>
             <select
               value={selectedExerciseId}
               onChange={(e) => setSelectedExerciseId(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
             >
               {exercises.map((ex) => (
                 <option key={ex.id} value={ex.id}>
@@ -360,7 +360,7 @@ export function LogWorkout() {
       </Card>
 
       {entries.length === 0 ? (
-        <Card className="text-center text-sm text-slate-400">
+        <Card className="text-center text-sm text-slate-500 dark:text-slate-400">
           No exercises added yet. Pick one above to get started.
         </Card>
       ) : (
@@ -371,19 +371,19 @@ export function LogWorkout() {
               <Card key={entry.id}>
                 <div className="mb-3 flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-slate-100">{exercise?.name}</p>
-                    <p className="text-xs text-slate-400">{exercise?.muscleGroup}</p>
+                    <p className="font-semibold text-slate-900 dark:text-slate-100">{exercise?.name}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{exercise?.muscleGroup}</p>
                   </div>
                   <button
                     onClick={() => removeExercise(entry.id)}
-                    className="rounded-lg p-2 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
+                    className="rounded-lg p-2 text-slate-600 dark:text-slate-500 hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400"
                   >
                     <Trash2 size={16} />
                   </button>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="grid grid-cols-[2rem_1fr_1fr_4rem_2.25rem_2rem] gap-2 px-1 text-xs font-medium text-slate-500">
+                  <div className="grid grid-cols-[2rem_1fr_1fr_4rem_2.25rem_2rem] gap-2 px-1 text-xs font-medium text-slate-600 dark:text-slate-500">
                     <span>#</span>
                     <span>Reps</span>
                     <span>Weight</span>
@@ -398,7 +398,7 @@ export function LogWorkout() {
                           set.completed ? 'bg-emerald-500/5' : ''
                         }`}
                       >
-                        <span className="text-sm text-slate-400">{idx + 1}</span>
+                        <span className="text-sm text-slate-500 dark:text-slate-400">{idx + 1}</span>
                         <input
                           type="number"
                           min={0}
@@ -406,7 +406,7 @@ export function LogWorkout() {
                           onChange={(e) =>
                             updateSet(entry.id, set.id, { reps: Number(e.target.value) })
                           }
-                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                          className="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-2 py-1.5 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                         />
                         <input
                           type="number"
@@ -416,14 +416,14 @@ export function LogWorkout() {
                           onChange={(e) =>
                             updateSet(entry.id, set.id, { weight: Number(e.target.value) })
                           }
-                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                          className="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-2 py-1.5 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                         />
                         <select
                           value={set.unit}
                           onChange={(e) =>
                             updateSet(entry.id, set.id, { unit: e.target.value as 'lb' | 'kg' })
                           }
-                          className="rounded-lg border border-slate-700 bg-slate-950 px-1 py-1.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                          className="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-1 py-1.5 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                         >
                           <option value="lb">lb</option>
                           <option value="kg">kg</option>
@@ -444,7 +444,7 @@ export function LogWorkout() {
                         </div>
                         <button
                           onClick={() => removeSet(entry.id, set.id)}
-                          className="rounded-lg p-1.5 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
+                          className="rounded-lg p-1.5 text-slate-600 dark:text-slate-500 hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400"
                         >
                           <Trash2 size={14} />
                         </button>
@@ -473,12 +473,12 @@ export function LogWorkout() {
           {showSaveTemplate ? (
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
               <div className="flex-1">
-                <label className="mb-1 block text-xs font-medium text-slate-400">Template name</label>
+                <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Template name</label>
                 <input
                   value={templateNameDraft}
                   onChange={(e) => setTemplateNameDraft(e.target.value)}
                   placeholder="e.g. Push Day A"
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                  className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                 />
               </div>
               <div className="flex gap-2">

@@ -18,10 +18,10 @@ import { toCm, toIn, toKg } from '../lib/units'
 import type { BodyMeasurements } from '../types'
 
 const BMI_CATEGORY_COLOR: Record<ReturnType<typeof bmiCategory>, string> = {
-  Underweight: 'text-sky-400',
-  Normal: 'text-emerald-400',
-  Overweight: 'text-amber-400',
-  Obese: 'text-red-400',
+  Underweight: 'text-sky-600 dark:text-sky-400',
+  Normal: 'text-emerald-600 dark:text-emerald-400',
+  Overweight: 'text-amber-600 dark:text-amber-400',
+  Obese: 'text-red-600 dark:text-red-400',
 }
 
 function todayISO() {
@@ -164,24 +164,24 @@ export function BodyStatsPage() {
       />
 
       <div>
-        <h2 className="text-2xl font-semibold text-slate-100">Body Stats</h2>
-        <p className="text-sm text-slate-400">Track weight, height, measurements, and age over time.</p>
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Body Stats</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Track weight, height, measurements, and age over time.</p>
       </div>
 
       <Card>
-        <h3 className="mb-3 text-sm font-semibold text-slate-300">Profile</h3>
+        <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Profile</h3>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-400">Birth date</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Birth date</label>
             <input
               type="date"
               value={profile.birthDate ?? ''}
               onChange={(e) => updateProfile({ ...profile, birthDate: e.target.value || undefined })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-400">Height</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Height</label>
             <div className="flex gap-2">
               {profile.heightUnit === 'in' ? (
                 <>
@@ -194,7 +194,7 @@ export function BodyStatsPage() {
                       updateHeightFeetInches(e.target.value, String(heightInches ?? ''))
                     }
                     placeholder="ft"
-                    className="w-16 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                    className="w-16 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                   />
                   <input
                     type="number"
@@ -206,7 +206,7 @@ export function BodyStatsPage() {
                       updateHeightFeetInches(String(heightFeet ?? ''), e.target.value)
                     }
                     placeholder="in"
-                    className="w-20 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                    className="w-20 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                   />
                 </>
               ) : (
@@ -222,13 +222,13 @@ export function BodyStatsPage() {
                     })
                   }
                   placeholder="Height"
-                  className="w-28 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                  className="w-28 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                 />
               )}
               <select
                 value={profile.heightUnit}
                 onChange={(e) => updateHeightUnit(e.target.value as 'cm' | 'in')}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                className="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-2 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
               >
                 <option value="in">ft/in</option>
                 <option value="cm">cm</option>
@@ -236,13 +236,13 @@ export function BodyStatsPage() {
             </div>
           </div>
           {age !== null && (
-            <div className="rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-200">
-              Age: <span className="font-semibold text-emerald-400">{age}</span>
+            <div className="rounded-lg bg-slate-200 dark:bg-slate-800 px-4 py-2 text-sm text-slate-800 dark:text-slate-200">
+              Age: <span className="font-semibold text-emerald-600 dark:text-emerald-400">{age}</span>
             </div>
           )}
           {currentBMI !== undefined && (
-            <div className="rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-200">
-              BMI: <span className="font-semibold text-slate-100">{currentBMI.toFixed(1)}</span>{' '}
+            <div className="rounded-lg bg-slate-200 dark:bg-slate-800 px-4 py-2 text-sm text-slate-800 dark:text-slate-200">
+              BMI: <span className="font-semibold text-slate-900 dark:text-slate-100">{currentBMI.toFixed(1)}</span>{' '}
               <span className={`font-semibold ${BMI_CATEGORY_COLOR[bmiCategory(currentBMI)]}`}>
                 {bmiCategory(currentBMI)}
               </span>
@@ -250,28 +250,28 @@ export function BodyStatsPage() {
           )}
         </div>
         {profile.height !== undefined && currentBMI === undefined && (
-          <p className="mt-2 text-xs text-slate-500">Log a weight entry below to see your BMI.</p>
+          <p className="mt-2 text-xs text-slate-600 dark:text-slate-500">Log a weight entry below to see your BMI.</p>
         )}
         {profile.height === undefined && (
-          <p className="mt-2 text-xs text-slate-500">Add your height to see your BMI.</p>
+          <p className="mt-2 text-xs text-slate-600 dark:text-slate-500">Add your height to see your BMI.</p>
         )}
       </Card>
 
       <Card>
-        <h3 className="mb-3 text-sm font-semibold text-slate-300">Log an entry</h3>
+        <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Log an entry</h3>
         <form onSubmit={handleAddEntry} className="flex flex-col gap-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-400">Date</label>
+              <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Date</label>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500 sm:w-44"
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-400">Weight</label>
+              <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Weight</label>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -280,12 +280,12 @@ export function BodyStatsPage() {
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   placeholder="Weight"
-                  className="w-28 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                  className="w-28 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                 />
                 <select
                   value={weightUnit}
                   onChange={(e) => setWeightUnit(e.target.value as 'lb' | 'kg')}
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                  className="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-2 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                 >
                   <option value="lb">lb</option>
                   <option value="kg">kg</option>
@@ -293,11 +293,11 @@ export function BodyStatsPage() {
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-400">Measurement unit</label>
+              <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Measurement unit</label>
               <select
                 value={measurementUnit}
                 onChange={(e) => setMeasurementUnit(e.target.value as 'in' | 'cm')}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                className="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-2 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
               >
                 <option value="in">in</option>
                 <option value="cm">cm</option>
@@ -306,18 +306,18 @@ export function BodyStatsPage() {
           </div>
 
           <div>
-            <p className="mb-2 text-xs font-medium text-slate-400">Measurements (optional)</p>
+            <p className="mb-2 text-xs font-medium text-slate-500 dark:text-slate-400">Measurements (optional)</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {MEASUREMENT_FIELDS.map(({ key, label }) => (
                 <div key={key}>
-                  <label className="mb-1 block text-xs text-slate-500">{label}</label>
+                  <label className="mb-1 block text-xs text-slate-600 dark:text-slate-500">{label}</label>
                   <input
                     type="number"
                     min={0}
                     step={0.1}
                     value={measurements[key] ?? ''}
                     onChange={(e) => updateMeasurement(key, e.target.value)}
-                    className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                    className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-emerald-500"
                   />
                 </div>
               ))}
@@ -341,7 +341,7 @@ export function BodyStatsPage() {
         <>
           <Card>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-sm font-semibold text-slate-300">Trend</h3>
+              <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">Trend</h3>
               <div className="flex flex-wrap gap-2">
                 {(['weight', 'bmi', ...MEASUREMENT_FIELDS.map((f) => f.key)] as const).map(
                   (metric) => (
@@ -351,7 +351,7 @@ export function BodyStatsPage() {
                       className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                         chartMetric === metric
                           ? 'bg-emerald-500 text-slate-950'
-                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                          : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700'
                       }`}
                     >
                       {metric === 'weight'
@@ -394,27 +394,27 @@ export function BodyStatsPage() {
               return (
                 <Card key={entry.id} className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-slate-100">
+                    <p className="font-medium text-slate-900 dark:text-slate-100">
                       {format(parseISO(entry.date), 'EEE, MMM d yyyy')}
                       {entry.weight !== undefined && (
-                        <span className="ml-2 text-emerald-400">
+                        <span className="ml-2 text-emerald-600 dark:text-emerald-400">
                           {entry.weight}
                           {entry.weightUnit}
                         </span>
                       )}
                       {bmi !== undefined && (
-                        <span className="ml-2 text-xs font-normal text-slate-400">
+                        <span className="ml-2 text-xs font-normal text-slate-500 dark:text-slate-400">
                           BMI {bmi.toFixed(1)}
                         </span>
                       )}
                     </p>
                     {measurementSummary && (
-                      <p className="text-xs text-slate-400">{measurementSummary}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{measurementSummary}</p>
                     )}
                   </div>
                   <button
                     onClick={() => setPendingDeleteId(entry.id)}
-                    className="rounded-lg p-2 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
+                    className="rounded-lg p-2 text-slate-600 dark:text-slate-500 hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400"
                   >
                     <Trash2 size={16} />
                   </button>

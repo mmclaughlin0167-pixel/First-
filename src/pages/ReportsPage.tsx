@@ -30,7 +30,7 @@ const PREVIOUS_REFERENCE: Record<ReportPeriod, (d: Date) => Date> = {
 function DeltaBadge({ current, previous }: { current: number; previous: number }) {
   if (previous === 0) {
     return current > 0 ? (
-      <span className="text-xs font-medium text-emerald-400">New</span>
+      <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">New</span>
     ) : null
   }
   const change = ((current - previous) / previous) * 100
@@ -38,7 +38,7 @@ function DeltaBadge({ current, previous }: { current: number; previous: number }
   return (
     <span
       className={`inline-flex items-center gap-1 text-xs font-medium ${
-        isUp ? 'text-emerald-400' : 'text-red-400'
+        isUp ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
       }`}
     >
       {isUp ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
@@ -87,8 +87,8 @@ export function ReportsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold text-slate-100">Reports</h2>
-          <p className="text-sm text-slate-400">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Reports</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Weekly, monthly, and quarterly progress recaps.
           </p>
         </div>
@@ -111,7 +111,7 @@ export function ReportsPage() {
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               period === p
                 ? 'bg-emerald-500 text-slate-950'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700'
             }`}
           >
             {PERIOD_LABELS[p]}
@@ -121,41 +121,41 @@ export function ReportsPage() {
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
         <Card className="flex flex-col gap-1">
-          <div className="flex items-center gap-2 text-slate-400">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
             <Dumbbell size={16} />
             <span className="text-xs font-medium">Workouts</span>
           </div>
           <div className="flex items-baseline gap-2">
-            <p className="text-2xl font-semibold text-slate-100">{current.workoutCount}</p>
+            <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{current.workoutCount}</p>
             <DeltaBadge current={current.workoutCount} previous={previous.workoutCount} />
           </div>
         </Card>
         <Card className="flex flex-col gap-1">
-          <div className="flex items-center gap-2 text-slate-400">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
             <TrendingUp size={16} />
             <span className="text-xs font-medium">Total Weight</span>
           </div>
           <div className="flex items-baseline gap-2">
-            <p className="text-2xl font-semibold text-slate-100">
+            <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
               {current.totalWeight.toLocaleString()}
             </p>
             <DeltaBadge current={current.totalWeight} previous={previous.totalWeight} />
           </div>
         </Card>
         <Card className="flex flex-col gap-1">
-          <div className="flex items-center gap-2 text-slate-400">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
             <ListChecks size={16} />
             <span className="text-xs font-medium">Sets</span>
           </div>
           <div className="flex items-baseline gap-2">
-            <p className="text-2xl font-semibold text-slate-100">{current.totalSets}</p>
+            <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{current.totalSets}</p>
             <DeltaBadge current={current.totalSets} previous={previous.totalSets} />
           </div>
         </Card>
       </div>
 
       <Card>
-        <h3 className="mb-4 text-sm font-semibold text-slate-300">Muscle Groups Worked</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Muscle Groups Worked</h3>
         {muscleGroupData.length === 0 ? (
           <EmptyState
             title="No workouts in this period"

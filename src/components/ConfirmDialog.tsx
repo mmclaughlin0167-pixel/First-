@@ -26,20 +26,20 @@ export function ConfirmDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 dark:bg-slate-950/70 p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="confirm-dialog-title"
       onClick={onCancel}
     >
       <div
-        className="w-full max-w-sm rounded-xl border border-slate-800 bg-slate-900 p-5 shadow-xl"
+        className="w-full max-w-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 id="confirm-dialog-title" className="text-base font-semibold text-slate-100">
+        <h3 id="confirm-dialog-title" className="text-base font-semibold text-slate-900 dark:text-slate-100">
           {title}
         </h3>
-        <p className="mt-1.5 text-sm text-slate-400">{description}</p>
+        <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400">{description}</p>
         <div className="mt-5 flex justify-end gap-2">
           <Button variant="secondary" onClick={onCancel}>
             {cancelLabel}

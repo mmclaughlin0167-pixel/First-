@@ -45,7 +45,7 @@ export function ProgressPage() {
   if (exercisesWithData.length === 0) {
     return (
       <div className="flex flex-col gap-6">
-        <h2 className="text-2xl font-semibold text-slate-100">Progress</h2>
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Progress</h2>
         <EmptyState
           title="Nothing to chart yet"
           description="Log a few workouts for the same exercise to see your progress over time."
@@ -57,8 +57,8 @@ export function ProgressPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-semibold text-slate-100">Progress</h2>
-        <p className="text-sm text-slate-400">Track strength gains over time, exercise by exercise.</p>
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Progress</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Track strength gains over time, exercise by exercise.</p>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -69,7 +69,7 @@ export function ProgressPage() {
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               activeId === ex.id
                 ? 'bg-emerald-500 text-slate-950'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700'
             }`}
           >
             {ex.name}
@@ -78,7 +78,7 @@ export function ProgressPage() {
       </div>
 
       <Card>
-        <h3 className="mb-4 text-sm font-semibold text-slate-300">Max Weight per Session</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Max Weight per Session</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
@@ -96,7 +96,7 @@ export function ProgressPage() {
       </Card>
 
       <Card>
-        <h3 className="mb-4 text-sm font-semibold text-slate-300">Total Volume per Session</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Total Volume per Session</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
