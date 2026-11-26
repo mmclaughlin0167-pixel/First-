@@ -64,3 +64,17 @@ export interface BodyLogEntry {
   measurementUnit: 'in' | 'cm'
   measurements: BodyMeasurements
 }
+
+export interface TemplateExercise {
+  id: string
+  exerciseId: string
+  targetSets: number
+  targetReps?: number
+}
+
+export interface WorkoutTemplate {
+  id: string
+  name: string
+  exercises: TemplateExercise[]
+}
+

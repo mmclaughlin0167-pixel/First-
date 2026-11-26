@@ -1,10 +1,26 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react'
 import { v4 as uuid } from 'uuid'
-import type { BodyLogEntry, BodyProfile, Exercise, WorkoutSession } from '../types'
+import type {
+  BodyLogEntry,
+  BodyProfile,
+  Exercise,
+  WorkoutSession,
+  WorkoutTemplate,
+} from '../types'
 import { DEFAULT_EXERCISES } from '../lib/defaultExercises'
 import { useLocalStorageState } from './useLocalStorageState'
 
 const DEFAULT_PROFILE: BodyProfile = { heightUnit: 'in' }
+
+export interface BackupData {
+  version: 1
+  exportedAt: string
+  exercises: Exercise[]
+  sessions: WorkoutSession[]
+  profile: BodyProfile
+  bodyLogs: BodyLogEntry[]
+  templates: WorkoutTemplate[]
+}
 
 interface WorkoutDataContextValue {
   exercises: Exercise[]
@@ -19,6 +35,11 @@ interface WorkoutDataContextValue {
   bodyLogs: BodyLogEntry[]
   addBodyLog: (entry: Omit<BodyLogEntry, 'id'>) => BodyLogEntry
   deleteBodyLog: (id: string) => void
+  templates: WorkoutTemplate[]
+  addTemplate: (template: Omit<WorkoutTemplate, 'id'>) => WorkoutTemplate
+  deleteTemplate: (id: string) => void
+  exportAllData: () => BackupData
+  importAllData: (data: BackupData) => void
 }
 
 const WorkoutDataContext = createContext<WorkoutDataContextValue | null>(null)
@@ -38,6 +59,10 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
   )
   const [bodyLogs, setBodyLogs] = useLocalStorageState<BodyLogEntry[]>(
     'workout-tracker:body-logs',
+    [],
+  )
+  const [templates, setTemplates] = useLocalStorageState<WorkoutTemplate[]>(
+    'workout-tracker:templates',
     [],
   )
 
@@ -79,8 +104,44 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
       deleteBodyLog: (id) => {
         setBodyLogs((prev) => prev.filter((e) => e.id !== id))
       },
+      templates,
+      addTemplate: (template) => {
+        const newTemplate: WorkoutTemplate = { ...template, id: uuid() }
+        setTemplates((prev) => [...prev, newTemplate])
+        return newTemplate
+      },
+      deleteTemplate: (id) => {
+        setTemplates((prev) => prev.filter((t) => t.id !== id))
+      },
+      exportAllData: () => ({
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        exercises,
+        sessions,
+        profile,
+        bodyLogs,
+        templates,
+      }),
+      importAllData: (data) => {
+        setExercises(data.exercises)
+        setSessions(data.sessions)
+        setProfile(data.profile)
+        setBodyLogs(data.bodyLogs)
+        setTemplates(data.templates)
+      },
     }),
-    [exercises, sessions, setExercises, setSessions, profile, setProfile, bodyLogs, setBodyLogs],
+    [
+      exercises,
+      sessions,
+      setExercises,
+      setSessions,
+      profile,
+      setProfile,
+      bodyLogs,
+      setBodyLogs,
+      templates,
+      setTemplates,
+    ],
   )
 
   return <WorkoutDataContext.Provider value={value}>{children}</WorkoutDataContext.Provider>

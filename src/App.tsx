@@ -17,6 +17,7 @@ function App() {
           <Route element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="log" element={<LogWorkout />} />
+            <Route path="log/:sessionId" element={<LogWorkout />} />
             <Route path="history" element={<HistoryPage />} />
             <Route path="progress" element={<ProgressPage />} />
             <Route path="reports" element={<ReportsPage />} />

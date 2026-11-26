@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { format, parseISO } from 'date-fns'
-import { Trash2, Dumbbell } from 'lucide-react'
+import { Trash2, Dumbbell, Pencil } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Card, EmptyState, Button } from '../components/ui'
+import { ConfirmDialog } from '../components/ConfirmDialog'
 import { totalSets, totalVolume } from '../lib/stats'
 
 export function HistoryPage() {
   const { sessions, exercises, deleteSession } = useWorkoutData()
   const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null)
   const exerciseById = Object.fromEntries(exercises.map((e) => [e.id, e]))
 
   if (sessions.length === 0) {
@@ -30,6 +32,19 @@ export function HistoryPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <ConfirmDialog
+        open={pendingDeleteId !== null}
+        title="Delete this workout?"
+        description="This permanently removes the session and all its logged sets. This can't be undone."
+        confirmLabel="Delete"
+        danger
+        onConfirm={() => {
+          if (pendingDeleteId) deleteSession(pendingDeleteId)
+          setPendingDeleteId(null)
+        }}
+        onCancel={() => setPendingDeleteId(null)}
+      />
+
       <div>
         <h2 className="text-2xl font-semibold text-slate-100">History</h2>
         <p className="text-sm text-slate-400">{sessions.length} workout{sessions.length === 1 ? '' : 's'} logged</p>
@@ -60,8 +75,14 @@ export function HistoryPage() {
                     </p>
                   </div>
                 </button>
+                <Link
+                  to={`/log/${session.id}`}
+                  className="rounded-lg p-2 text-slate-500 hover:bg-slate-800 hover:text-slate-100"
+                >
+                  <Pencil size={16} />
+                </Link>
                 <button
-                  onClick={() => deleteSession(session.id)}
+                  onClick={() => setPendingDeleteId(session.id)}
                   className="rounded-lg p-2 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
                 >
                   <Trash2 size={16} />

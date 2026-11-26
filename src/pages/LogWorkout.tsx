@@ -1,30 +1,66 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import { Plus, Trash2, Check, Pause, Play, Timer } from 'lucide-react'
+import {
+  Plus,
+  Trash2,
+  Check,
+  Pause,
+  Play,
+  Timer,
+  BookmarkPlus,
+  FolderOpen,
+  X,
+  Trophy,
+} from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card } from '../components/ui'
+import { ConfirmDialog } from '../components/ConfirmDialog'
 import { RestTimer } from '../components/RestTimer'
 import { formatDuration } from '../lib/time'
+import { checkForNewPR } from '../lib/prs'
 import type { SetEntry, WorkoutExercise } from '../types'
 
 function todayISO() {
   return new Date().toISOString().slice(0, 10)
 }
 
-export function LogWorkout() {
-  const { exercises, addSession } = useWorkoutData()
-  const navigate = useNavigate()
+function blankSet(seed?: Partial<SetEntry>): SetEntry {
+  return {
+    id: uuid(),
+    reps: seed?.reps ?? 8,
+    weight: seed?.weight ?? 0,
+    unit: seed?.unit ?? 'lb',
+  }
+}
 
-  const [workoutName, setWorkoutName] = useState('')
-  const [date, setDate] = useState(todayISO())
+export function LogWorkout() {
+  const { exercises, sessions, templates, addSession, updateSession, addTemplate } =
+    useWorkoutData()
+  const navigate = useNavigate()
+  const { sessionId } = useParams<{ sessionId?: string }>()
+  const editingSession = sessionId ? sessions.find((s) => s.id === sessionId) : undefined
+  const isEditing = !!sessionId
+
+  const [workoutName, setWorkoutName] = useState(editingSession?.name ?? '')
+  const [date, setDate] = useState(editingSession?.date ?? todayISO())
   const [selectedExerciseId, setSelectedExerciseId] = useState(exercises[0]?.id ?? '')
-  const [entries, setEntries] = useState<WorkoutExercise[]>([])
+  const [entries, setEntries] = useState<WorkoutExercise[]>(editingSession?.exercises ?? [])
 
   const [elapsedSec, setElapsedSec] = useState(0)
-  const [timerRunning, setTimerRunning] = useState(true)
+  const [timerRunning, setTimerRunning] = useState(!isEditing)
   const intervalRef = useRef<number | null>(null)
   const [activeRestSetId, setActiveRestSetId] = useState<string | null>(null)
+
+  const [selectedTemplateId, setSelectedTemplateId] = useState(templates[0]?.id ?? '')
+  const [templateNameDraft, setTemplateNameDraft] = useState('')
+  const [showSaveTemplate, setShowSaveTemplate] = useState(false)
+  const [confirmLoadTemplate, setConfirmLoadTemplate] = useState(false)
+
+  const [prCelebration, setPrCelebration] = useState<{ exerciseName: string; messages: string[] } | null>(
+    null,
+  )
+  const prTimeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (!timerRunning) return
@@ -34,6 +70,12 @@ export function LogWorkout() {
     }
   }, [timerRunning])
 
+  useEffect(() => {
+    return () => {
+      if (prTimeoutRef.current !== null) window.clearTimeout(prTimeoutRef.current)
+    }
+  }, [])
+
   function addExerciseToWorkout() {
     if (!selectedExerciseId) return
     if (entries.some((e) => e.exerciseId === selectedExerciseId)) return
@@ -42,7 +84,7 @@ export function LogWorkout() {
       {
         id: uuid(),
         exerciseId: selectedExerciseId,
-        sets: [{ id: uuid(), reps: 8, weight: 0, unit: 'lb' }],
+        sets: [blankSet()],
       },
     ])
   }
@@ -59,12 +101,11 @@ export function LogWorkout() {
               ...e,
               sets: [
                 ...e.sets,
-                {
-                  id: uuid(),
-                  reps: e.sets.at(-1)?.reps ?? 8,
-                  weight: e.sets.at(-1)?.weight ?? 0,
-                  unit: e.sets.at(-1)?.unit ?? 'lb',
-                },
+                blankSet({
+                  reps: e.sets.at(-1)?.reps,
+                  weight: e.sets.at(-1)?.weight,
+                  unit: e.sets.at(-1)?.unit,
+                }),
               ],
             }
           : e,
@@ -82,10 +123,15 @@ export function LogWorkout() {
     )
   }
 
+  function showPRCelebration(exerciseName: string, messages: string[]) {
+    if (prTimeoutRef.current !== null) window.clearTimeout(prTimeoutRef.current)
+    setPrCelebration({ exerciseName, messages })
+    prTimeoutRef.current = window.setTimeout(() => setPrCelebration(null), 5000)
+  }
+
   function toggleSetComplete(exerciseEntryId: string, setId: string) {
-    const currentSet = entries
-      .find((e) => e.id === exerciseEntryId)
-      ?.sets.find((s) => s.id === setId)
+    const entry = entries.find((e) => e.id === exerciseEntryId)
+    const currentSet = entry?.sets.find((s) => s.id === setId)
     const nextCompleted = !currentSet?.completed
 
     setEntries((prev) =>
@@ -101,6 +147,18 @@ export function LogWorkout() {
 
     if (nextCompleted) {
       setActiveRestSetId(setId)
+
+      if (entry && currentSet) {
+        const result = checkForNewPR(sessions, entry.exerciseId, currentSet)
+        const messages: string[] = []
+        if (result.isWeightPR) messages.push('New max weight')
+        if (result.isEstimated1RMPR) messages.push('New estimated 1RM')
+        if (result.isVolumePR) messages.push('New best single-set volume')
+        if (messages.length > 0) {
+          const exerciseName = exercises.find((ex) => ex.id === entry.exerciseId)?.name ?? 'Exercise'
+          showPRCelebration(exerciseName, messages)
+        }
+      }
     } else if (activeRestSetId === setId) {
       setActiveRestSetId(null)
     }
@@ -116,13 +174,62 @@ export function LogWorkout() {
 
   function handleSave() {
     if (entries.length === 0) return
-    addSession({
-      name: workoutName.trim() || 'Workout',
-      date,
-      exercises: entries,
-      durationMinutes: Math.round(elapsedSec / 60),
-    })
+    if (isEditing && editingSession) {
+      updateSession({
+        ...editingSession,
+        name: workoutName.trim() || 'Workout',
+        date,
+        exercises: entries,
+      })
+    } else {
+      addSession({
+        name: workoutName.trim() || 'Workout',
+        date,
+        exercises: entries,
+        durationMinutes: Math.round(elapsedSec / 60),
+      })
+    }
     navigate('/history')
+  }
+
+  function handleSaveAsTemplate() {
+    const name = templateNameDraft.trim()
+    if (!name || entries.length === 0) return
+    addTemplate({
+      name,
+      exercises: entries.map((e) => ({
+        id: uuid(),
+        exerciseId: e.exerciseId,
+        targetSets: e.sets.length,
+        targetReps: e.sets[0]?.reps,
+      })),
+    })
+    setTemplateNameDraft('')
+    setShowSaveTemplate(false)
+  }
+
+  function loadTemplate() {
+    const template = templates.find((t) => t.id === selectedTemplateId)
+    if (!template) return
+    setEntries(
+      template.exercises.map((te) => ({
+        id: uuid(),
+        exerciseId: te.exerciseId,
+        sets: Array.from({ length: Math.max(1, te.targetSets) }, () =>
+          blankSet({ reps: te.targetReps }),
+        ),
+      })),
+    )
+    setConfirmLoadTemplate(false)
+  }
+
+  function handleLoadTemplateClick() {
+    if (!selectedTemplateId) return
+    if (entries.length > 0) {
+      setConfirmLoadTemplate(true)
+    } else {
+      loadTemplate()
+    }
   }
 
   const exerciseById = Object.fromEntries(exercises.map((e) => [e.id, e]))
@@ -130,24 +237,61 @@ export function LogWorkout() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold text-slate-100">Log Workout</h2>
-          <p className="text-sm text-slate-400">Record today's session, set by set.</p>
-        </div>
-        <div className="flex items-center gap-3 rounded-lg bg-slate-900/60 px-4 py-2 ring-1 ring-slate-800">
-          <Timer size={18} className="text-emerald-400" />
-          <span className="text-lg font-semibold tabular-nums text-slate-100">
-            {formatDuration(elapsedSec)}
-          </span>
+      <ConfirmDialog
+        open={confirmLoadTemplate}
+        title="Replace current workout?"
+        description="Loading a template will replace the exercises you've already added. This can't be undone."
+        confirmLabel="Load Template"
+        onConfirm={loadTemplate}
+        onCancel={() => setConfirmLoadTemplate(false)}
+      />
+
+      {prCelebration && (
+        <div className="flex items-center justify-between rounded-xl bg-amber-500/10 px-4 py-3 ring-1 ring-amber-500/30">
+          <div className="flex items-center gap-3">
+            <div className="rounded-lg bg-amber-500/20 p-2 text-amber-400">
+              <Trophy size={18} />
+            </div>
+            <div>
+              <p className="font-semibold text-slate-100">
+                Personal Record! {prCelebration.exerciseName}
+              </p>
+              <p className="text-xs text-slate-400">{prCelebration.messages.join(' · ')}</p>
+            </div>
+          </div>
           <button
-            onClick={() => setTimerRunning((r) => !r)}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
-            aria-label={timerRunning ? 'Pause workout timer' : 'Resume workout timer'}
+            onClick={() => setPrCelebration(null)}
+            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-800 hover:text-slate-100"
           >
-            {timerRunning ? <Pause size={16} /> : <Play size={16} />}
+            <X size={16} />
           </button>
         </div>
+      )}
+
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold text-slate-100">
+            {isEditing ? 'Edit Workout' : 'Log Workout'}
+          </h2>
+          <p className="text-sm text-slate-400">
+            {isEditing ? 'Update a previously logged session.' : "Record today's session, set by set."}
+          </p>
+        </div>
+        {!isEditing && (
+          <div className="flex items-center gap-3 rounded-lg bg-slate-900/60 px-4 py-2 ring-1 ring-slate-800">
+            <Timer size={18} className="text-emerald-400" />
+            <span className="text-lg font-semibold tabular-nums text-slate-100">
+              {formatDuration(elapsedSec)}
+            </span>
+            <button
+              onClick={() => setTimerRunning((r) => !r)}
+              className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+              aria-label={timerRunning ? 'Pause workout timer' : 'Resume workout timer'}
+            >
+              {timerRunning ? <Pause size={16} /> : <Play size={16} />}
+            </button>
+          </div>
+        )}
       </div>
 
       <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -170,6 +314,28 @@ export function LogWorkout() {
           />
         </div>
       </Card>
+
+      {!isEditing && templates.length > 0 && (
+        <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <div className="flex-1">
+            <label className="mb-1 block text-xs font-medium text-slate-400">Start from template</label>
+            <select
+              value={selectedTemplateId}
+              onChange={(e) => setSelectedTemplateId(e.target.value)}
+              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+            >
+              {templates.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.name} ({t.exercises.length} exercise{t.exercises.length === 1 ? '' : 's'})
+                </option>
+              ))}
+            </select>
+          </div>
+          <Button type="button" variant="secondary" onClick={handleLoadTemplateClick} icon={<FolderOpen size={16} />}>
+            Load Template
+          </Button>
+        </Card>
+      )}
 
       <Card>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -302,9 +468,39 @@ export function LogWorkout() {
         </div>
       )}
 
+      {!isEditing && entries.length > 0 && (
+        <Card>
+          {showSaveTemplate ? (
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+              <div className="flex-1">
+                <label className="mb-1 block text-xs font-medium text-slate-400">Template name</label>
+                <input
+                  value={templateNameDraft}
+                  onChange={(e) => setTemplateNameDraft(e.target.value)}
+                  placeholder="e.g. Push Day A"
+                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-emerald-500"
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button onClick={handleSaveAsTemplate} disabled={!templateNameDraft.trim()}>
+                  Save
+                </Button>
+                <Button variant="secondary" onClick={() => setShowSaveTemplate(false)}>
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <Button variant="secondary" onClick={() => setShowSaveTemplate(true)} icon={<BookmarkPlus size={16} />}>
+              Save as Template
+            </Button>
+          )}
+        </Card>
+      )}
+
       <div className="flex justify-end">
         <Button onClick={handleSave} disabled={!canSave} icon={<Check size={16} />}>
-          Save Workout
+          {isEditing ? 'Update Workout' : 'Save Workout'}
         </Button>
       </div>
     </div>

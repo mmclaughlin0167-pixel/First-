@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card } from '../components/ui'
-import type { MuscleGroup } from '../types'
+import { ConfirmDialog } from '../components/ConfirmDialog'
+import type { Exercise, MuscleGroup } from '../types'
 
 const MUSCLE_GROUPS: MuscleGroup[] = [
   'Chest',
@@ -20,6 +21,7 @@ export function ExercisesPage() {
   const [name, setName] = useState('')
   const [muscleGroup, setMuscleGroup] = useState<MuscleGroup>('Chest')
   const [filter, setFilter] = useState<MuscleGroup | 'All'>('All')
+  const [pendingDelete, setPendingDelete] = useState<Exercise | null>(null)
 
   const usedExerciseIds = useMemo(() => {
     const ids = new Set<string>()
@@ -39,6 +41,19 @@ export function ExercisesPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        title="Delete this exercise?"
+        description={`"${pendingDelete?.name}" will be removed from your exercise library. This can't be undone.`}
+        confirmLabel="Delete"
+        danger
+        onConfirm={() => {
+          if (pendingDelete) deleteExercise(pendingDelete.id)
+          setPendingDelete(null)
+        }}
+        onCancel={() => setPendingDelete(null)}
+      />
+
       <div>
         <h2 className="text-2xl font-semibold text-slate-100">Exercise Library</h2>
         <p className="text-sm text-slate-400">Manage the exercises you can log in your workouts.</p>
@@ -100,7 +115,7 @@ export function ExercisesPage() {
             </div>
             {exercise.isCustom && (
               <button
-                onClick={() => deleteExercise(exercise.id)}
+                onClick={() => setPendingDelete(exercise)}
                 disabled={usedExerciseIds.has(exercise.id)}
                 title={
                   usedExerciseIds.has(exercise.id)

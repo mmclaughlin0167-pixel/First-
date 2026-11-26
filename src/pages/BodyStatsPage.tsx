@@ -12,6 +12,7 @@ import {
 import { Plus, Trash2 } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card, EmptyState } from '../components/ui'
+import { ConfirmDialog } from '../components/ConfirmDialog'
 import { bmiCategory, calculateAge, calculateBMI } from '../lib/stats'
 import { toCm, toIn, toKg } from '../lib/units'
 import type { BodyMeasurements } from '../types'
@@ -59,6 +60,7 @@ export function BodyStatsPage() {
   const [chartMetric, setChartMetric] = useState<keyof BodyMeasurements | 'weight' | 'bmi'>(
     'weight',
   )
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null)
 
   const age = profile.birthDate ? calculateAge(profile.birthDate) : null
 
@@ -148,6 +150,19 @@ export function BodyStatsPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <ConfirmDialog
+        open={pendingDeleteId !== null}
+        title="Delete this entry?"
+        description="This removes the logged weight and measurements for this date. This can't be undone."
+        confirmLabel="Delete"
+        danger
+        onConfirm={() => {
+          if (pendingDeleteId) deleteBodyLog(pendingDeleteId)
+          setPendingDeleteId(null)
+        }}
+        onCancel={() => setPendingDeleteId(null)}
+      />
+
       <div>
         <h2 className="text-2xl font-semibold text-slate-100">Body Stats</h2>
         <p className="text-sm text-slate-400">Track weight, height, measurements, and age over time.</p>
@@ -398,7 +413,7 @@ export function BodyStatsPage() {
                     )}
                   </div>
                   <button
-                    onClick={() => deleteBodyLog(entry.id)}
+                    onClick={() => setPendingDeleteId(entry.id)}
                     className="rounded-lg p-2 text-slate-500 hover:bg-red-500/10 hover:text-red-400"
                   >
                     <Trash2 size={16} />
