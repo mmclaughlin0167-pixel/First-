@@ -28,7 +28,7 @@ const CYCLE: Record<ThemePreference, ThemePreference> = {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useLocalStorageState<ThemePreference>('ironlog-theme', 'dark')
+  const [theme, setTheme] = useLocalStorageState<ThemePreference>('workout-tracker:theme', 'dark')
 
   const resolvedTheme = resolve(theme)
 

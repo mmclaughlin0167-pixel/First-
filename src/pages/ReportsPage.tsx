@@ -14,6 +14,7 @@ import { useWorkoutData } from '../store/WorkoutDataContext'
 import { useProgressRecap } from '../hooks/useProgressRecap'
 import { Button, Card, EmptyState } from '../components/ui'
 import { statsForPeriod, type ReportPeriod } from '../lib/stats'
+import { useChartColors } from '../lib/chartTheme'
 
 const PERIOD_LABELS: Record<ReportPeriod, string> = {
   week: 'This Week',
@@ -56,6 +57,7 @@ export function ReportsPage() {
     disableNotifications,
   } = useProgressRecap()
   const [period, setPeriod] = useState<ReportPeriod>('week')
+  const chartColors = useChartColors()
 
   const now = useMemo(() => new Date(), [])
   const current = useMemo(
@@ -165,13 +167,17 @@ export function ReportsPage() {
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={muscleGroupData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="muscleGroup" stroke="#64748b" fontSize={12} />
-                <YAxis stroke="#64748b" fontSize={12} />
+                <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
+                <XAxis dataKey="muscleGroup" stroke={chartColors.axis} fontSize={12} />
+                <YAxis stroke={chartColors.axis} fontSize={12} />
                 <Tooltip
-                  contentStyle={{ background: '#0f172a', border: '1px solid #1e293b', borderRadius: 8 }}
-                  labelStyle={{ color: '#e2e8f0' }}
-                  cursor={{ fill: 'rgba(255,255,255,0.04)' }}
+                  contentStyle={{
+                    background: chartColors.tooltipBg,
+                    border: `1px solid ${chartColors.tooltipBorder}`,
+                    borderRadius: 8,
+                  }}
+                  labelStyle={{ color: chartColors.tooltipLabel }}
+                  cursor={{ fill: 'rgba(100,116,139,0.1)' }}
                 />
                 <Bar dataKey="volume" fill="#34d399" radius={[4, 4, 0, 0]} />
               </BarChart>

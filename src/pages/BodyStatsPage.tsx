@@ -15,6 +15,7 @@ import { Button, Card, EmptyState } from '../components/ui'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { bmiCategory, calculateAge, calculateBMI } from '../lib/stats'
 import { toCm, toIn, toKg } from '../lib/units'
+import { useChartColors } from '../lib/chartTheme'
 import type { BodyMeasurements } from '../types'
 
 const BMI_CATEGORY_COLOR: Record<ReturnType<typeof bmiCategory>, string> = {
@@ -51,6 +52,7 @@ const MEASUREMENT_FIELDS: { key: keyof BodyMeasurements; label: string }[] = [
 
 export function BodyStatsPage() {
   const { profile, updateProfile, bodyLogs, addBodyLog, deleteBodyLog } = useWorkoutData()
+  const chartColors = useChartColors()
 
   const [date, setDate] = useState(todayISO())
   const [weight, setWeight] = useState('')
@@ -367,12 +369,16 @@ export function BodyStatsPage() {
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                  <XAxis dataKey="label" stroke="#64748b" fontSize={12} />
-                  <YAxis stroke="#64748b" fontSize={12} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
+                  <XAxis dataKey="label" stroke={chartColors.axis} fontSize={12} />
+                  <YAxis stroke={chartColors.axis} fontSize={12} />
                   <Tooltip
-                    contentStyle={{ background: '#0f172a', border: '1px solid #1e293b', borderRadius: 8 }}
-                    labelStyle={{ color: '#e2e8f0' }}
+                    contentStyle={{
+                      background: chartColors.tooltipBg,
+                      border: `1px solid ${chartColors.tooltipBorder}`,
+                      borderRadius: 8,
+                    }}
+                    labelStyle={{ color: chartColors.tooltipLabel }}
                   />
                   <Line type="monotone" dataKey="value" stroke="#34d399" strokeWidth={2} dot={{ r: 3 }} />
                 </LineChart>
