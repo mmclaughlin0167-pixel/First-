@@ -8,6 +8,7 @@ import {
   ListChecks,
   Ruler,
   PieChart,
+  Settings,
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -18,7 +19,10 @@ const NAV_ITEMS = [
   { to: '/reports', label: 'Reports', shortLabel: 'Reports', icon: PieChart, end: false },
   { to: '/body-stats', label: 'Body Stats', shortLabel: 'Body', icon: Ruler, end: false },
   { to: '/exercises', label: 'Exercises', shortLabel: 'Moves', icon: ListChecks, end: false },
+  { to: '/settings', label: 'Settings', shortLabel: 'Settings', icon: Settings, end: false },
 ]
+
+const MOBILE_TAB_ITEMS = NAV_ITEMS.filter((item) => item.to !== '/settings')
 
 export function Layout() {
   return (
@@ -54,14 +58,27 @@ export function Layout() {
         </nav>
       </aside>
 
-      <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/60 px-5 py-4 backdrop-blur md:hidden">
-        <div className="rounded-lg bg-emerald-500/20 p-2 text-emerald-400">
-          <Dumbbell size={20} />
+      <div className="flex items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/60 px-5 py-4 backdrop-blur md:hidden">
+        <div className="flex items-center gap-2">
+          <div className="rounded-lg bg-emerald-500/20 p-2 text-emerald-400">
+            <Dumbbell size={20} />
+          </div>
+          <div>
+            <h1 className="text-base font-semibold leading-tight">IronLog</h1>
+            <p className="text-xs text-slate-400">Workout Tracker</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-base font-semibold leading-tight">IronLog</h1>
-          <p className="text-xs text-slate-400">Workout Tracker</p>
-        </div>
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            `rounded-lg p-2 transition-colors ${
+              isActive ? 'bg-emerald-500/15 text-emerald-400' : 'text-slate-400 hover:bg-slate-800'
+            }`
+          }
+          aria-label="Settings"
+        >
+          <Settings size={20} />
+        </NavLink>
       </div>
 
       <main className="flex-1 px-4 py-6 pb-24 md:px-8 md:py-8 md:pb-8 max-w-5xl w-full mx-auto">
@@ -69,7 +86,7 @@ export function Layout() {
       </main>
 
       <nav className="fixed inset-x-0 bottom-0 z-10 flex border-t border-slate-800 bg-slate-900/95 backdrop-blur pb-[env(safe-area-inset-bottom)] md:hidden">
-        {NAV_ITEMS.map(({ to, shortLabel, icon: Icon, end }) => (
+        {MOBILE_TAB_ITEMS.map(({ to, shortLabel, icon: Icon, end }) => (
           <NavLink
             key={to}
             to={to}
