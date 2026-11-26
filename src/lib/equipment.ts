@@ -31,3 +31,14 @@ export function isHomeFriendly(exercise: Exercise): boolean {
 export function matchesLocation(exercise: Exercise, location: WorkoutLocation): boolean {
   return location === 'home' ? isHomeFriendly(exercise) : true
 }
+
+export function isPlanHomeFriendly(
+  exerciseIds: string[],
+  exerciseById: Record<string, Exercise | undefined>,
+): boolean {
+  if (exerciseIds.length === 0) return false
+  return exerciseIds.every((id) => {
+    const exercise = exerciseById[id]
+    return exercise ? isHomeFriendly(exercise) : false
+  })
+}

@@ -5,8 +5,10 @@ import { Plus, Trash2, Pencil, Play, X, Home, Dumbbell } from 'lucide-react'
 import { useWorkoutData } from '../store/WorkoutDataContext'
 import { Button, Card, EmptyState } from '../components/ui'
 import { ConfirmDialog } from '../components/ConfirmDialog'
-import { matchesLocation, LOCATION_LABEL } from '../lib/equipment'
+import { matchesLocation, isPlanHomeFriendly, LOCATION_LABEL } from '../lib/equipment'
 import type { DayOfWeek, TemplateExercise, WorkoutLocation } from '../types'
+
+type PlanFilter = 'all' | WorkoutLocation
 
 const DAYS: DayOfWeek[] = [
   'Monday',
@@ -37,6 +39,7 @@ export function PlansPage() {
   const [draftEntries, setDraftEntries] = useState<DraftEntry[]>([])
   const [selectedExerciseId, setSelectedExerciseId] = useState('')
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null)
+  const [planFilter, setPlanFilter] = useState<PlanFilter>('all')
 
   const exerciseById = useMemo(() => Object.fromEntries(exercises.map((e) => [e.id, e])), [exercises])
 
@@ -53,6 +56,19 @@ export function PlansPage() {
     const order = (d?: DayOfWeek) => (d ? DAYS.indexOf(d) : DAYS.length)
     return [...templates].sort((a, b) => order(a.dayOfWeek) - order(b.dayOfWeek))
   }, [templates])
+
+  function planIsHome(plan: { exercises: TemplateExercise[] }): boolean {
+    return isPlanHomeFriendly(
+      plan.exercises.map((e) => e.exerciseId),
+      exerciseById,
+    )
+  }
+
+  const visiblePlans = useMemo(() => {
+    if (planFilter === 'all') return sortedPlans
+    return sortedPlans.filter((plan) => (planFilter === 'home' ? planIsHome(plan) : !planIsHome(plan)))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortedPlans, planFilter, exerciseById])
 
   function resetDraft() {
     setEditingPlanId(null)
@@ -296,7 +312,42 @@ export function PlansPage() {
         />
       ) : (
         <div className="flex flex-col gap-3">
-          {sortedPlans.map((plan) => (
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+              Your Plans
+            </h3>
+            <div className="flex gap-1 rounded-lg bg-slate-200 p-1 dark:bg-slate-800">
+              {(['all', 'home', 'gym'] as const).map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setPlanFilter(f)}
+                  className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
+                    planFilter === f
+                      ? 'bg-emerald-500 text-slate-950'
+                      : 'text-slate-600 hover:bg-slate-300 dark:text-slate-300 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  {f === 'home' && <Home size={14} />}
+                  {f === 'gym' && <Dumbbell size={14} />}
+                  {f === 'all' ? 'All' : LOCATION_LABEL[f]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {visiblePlans.length === 0 && (
+            <EmptyState
+              title={`No ${LOCATION_LABEL[planFilter as WorkoutLocation]} plans yet`}
+              description={
+                planFilter === 'home'
+                  ? 'None of your saved plans are fully doable with just dumbbells, a band, a bench, or bodyweight. Switch to "All" to see everything, or build a new home-friendly plan above.'
+                  : 'All of your saved plans are home-friendly. Switch to "All" to see everything.'
+              }
+            />
+          )}
+
+          {visiblePlans.map((plan) => (
             <Card key={plan.id}>
               <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
                 <div>
@@ -307,6 +358,16 @@ export function PlansPage() {
                         {plan.dayOfWeek}
                       </span>
                     )}
+                    <span
+                      className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
+                        planIsHome(plan)
+                          ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400'
+                          : 'bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+                      }`}
+                    >
+                      {planIsHome(plan) ? <Home size={11} /> : <Dumbbell size={11} />}
+                      {planIsHome(plan) ? 'Home' : 'Gym'}
+                    </span>
                   </div>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
                     {plan.exercises.length} exercise{plan.exercises.length === 1 ? '' : 's'}
