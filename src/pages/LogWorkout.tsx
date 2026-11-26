@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import {
   Plus,
@@ -52,6 +52,8 @@ export function LogWorkout() {
   } = useWorkoutData()
   const navigate = useNavigate()
   const { sessionId } = useParams<{ sessionId?: string }>()
+  const [searchParams] = useSearchParams()
+  const deepLinkTemplateId = searchParams.get('templateId')
   const editingSession = sessionId ? sessions.find((s) => s.id === sessionId) : undefined
   const isEditing = !!sessionId
 
@@ -99,6 +101,24 @@ export function LogWorkout() {
     return () => {
       if (prTimeoutRef.current !== null) window.clearTimeout(prTimeoutRef.current)
     }
+  }, [])
+
+  useEffect(() => {
+    if (!deepLinkTemplateId || isEditing) return
+    const template = templates.find((t) => t.id === deepLinkTemplateId)
+    if (!template) return
+    setSelectedTemplateId(template.id)
+    setWorkoutName(template.name)
+    setEntries(
+      template.exercises.map((te) => ({
+        id: uuid(),
+        exerciseId: te.exerciseId,
+        sets: Array.from({ length: Math.max(1, te.targetSets) }, () =>
+          blankSet({ reps: te.targetReps }),
+        ),
+      })),
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function addExerciseToWorkout() {
@@ -265,8 +285,8 @@ export function LogWorkout() {
       <ConfirmDialog
         open={confirmLoadTemplate}
         title="Replace current workout?"
-        description="Loading a template will replace the exercises you've already added. This can't be undone."
-        confirmLabel="Load Template"
+        description="Loading a plan will replace the exercises you've already added. This can't be undone."
+        confirmLabel="Load Plan"
         onConfirm={loadTemplate}
         onCancel={() => setConfirmLoadTemplate(false)}
       />
@@ -343,7 +363,7 @@ export function LogWorkout() {
       {!isEditing && templates.length > 0 && (
         <Card className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Start from template</label>
+            <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Start from a saved plan</label>
             <select
               value={selectedTemplateId}
               onChange={(e) => setSelectedTemplateId(e.target.value)}
@@ -357,7 +377,7 @@ export function LogWorkout() {
             </select>
           </div>
           <Button type="button" variant="secondary" onClick={handleLoadTemplateClick} icon={<FolderOpen size={16} />}>
-            Load Template
+            Load Plan
           </Button>
         </Card>
       )}
@@ -528,7 +548,7 @@ export function LogWorkout() {
           {showSaveTemplate ? (
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
               <div className="flex-1">
-                <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Template name</label>
+                <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400">Plan name</label>
                 <input
                   value={templateNameDraft}
                   onChange={(e) => setTemplateNameDraft(e.target.value)}
@@ -547,7 +567,7 @@ export function LogWorkout() {
             </div>
           ) : (
             <Button variant="secondary" onClick={() => setShowSaveTemplate(true)} icon={<BookmarkPlus size={16} />}>
-              Save as Template
+              Save as Plan
             </Button>
           )}
         </Card>

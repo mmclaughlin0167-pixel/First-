@@ -88,9 +88,19 @@ export interface TemplateExercise {
   targetReps?: number
 }
 
+export type DayOfWeek =
+  | 'Monday'
+  | 'Tuesday'
+  | 'Wednesday'
+  | 'Thursday'
+  | 'Friday'
+  | 'Saturday'
+  | 'Sunday'
+
 export interface WorkoutTemplate {
   id: string
   name: string
+  dayOfWeek?: DayOfWeek
   exercises: TemplateExercise[]
 }
 

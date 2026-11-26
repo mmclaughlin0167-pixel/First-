@@ -41,6 +41,7 @@ interface WorkoutDataContextValue {
   deleteBodyLog: (id: string) => void
   templates: WorkoutTemplate[]
   addTemplate: (template: Omit<WorkoutTemplate, 'id'>) => WorkoutTemplate
+  updateTemplate: (template: WorkoutTemplate) => void
   deleteTemplate: (id: string) => void
   exportAllData: () => BackupData
   importAllData: (data: BackupData) => void
@@ -134,6 +135,9 @@ export function WorkoutDataProvider({ children }: { children: ReactNode }) {
         const newTemplate: WorkoutTemplate = { ...template, id: uuid() }
         setTemplates((prev) => [...prev, newTemplate])
         return newTemplate
+      },
+      updateTemplate: (template) => {
+        setTemplates((prev) => prev.map((t) => (t.id === template.id ? template : t)))
       },
       deleteTemplate: (id) => {
         setTemplates((prev) => prev.filter((t) => t.id !== id))

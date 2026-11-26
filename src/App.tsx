@@ -15,6 +15,7 @@ const BodyStatsPage = lazy(() =>
 const ExercisesPage = lazy(() =>
   import('./pages/ExercisesPage').then((m) => ({ default: m.ExercisesPage })),
 )
+const PlansPage = lazy(() => import('./pages/PlansPage').then((m) => ({ default: m.PlansPage })))
 const SettingsPage = lazy(() =>
   import('./pages/SettingsPage').then((m) => ({ default: m.SettingsPage })),
 )
@@ -39,6 +40,7 @@ function App() {
                 <Route path="reports" element={<ReportsPage />} />
                 <Route path="body-stats" element={<BodyStatsPage />} />
                 <Route path="exercises" element={<ExercisesPage />} />
+                <Route path="plans" element={<PlansPage />} />
                 <Route path="settings" element={<SettingsPage />} />
               </Route>
             </Routes>

@@ -12,6 +12,7 @@ import {
   Sun,
   Moon,
   Monitor,
+  CalendarDays,
 } from 'lucide-react'
 import { useTheme, type ThemePreference } from '../store/ThemeContext'
 
@@ -46,6 +47,7 @@ function ThemeToggleButton({ className = '' }: { className?: string }) {
 const NAV_ITEMS = [
   { to: '/', label: 'Dashboard', shortLabel: 'Home', icon: LayoutDashboard, end: true },
   { to: '/log', label: 'Log Workout', shortLabel: 'Log', icon: ListPlus, end: false },
+  { to: '/plans', label: 'Plans', shortLabel: 'Plans', icon: CalendarDays, end: false },
   { to: '/history', label: 'History', shortLabel: 'History', icon: History, end: false },
   { to: '/progress', label: 'Progress', shortLabel: 'Progress', icon: TrendingUp, end: false },
   { to: '/reports', label: 'Reports', shortLabel: 'Reports', icon: PieChart, end: false },
